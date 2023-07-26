@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/navhomeFragment"
+        android:icon="@drawable/baseline_home_24"
+        android:title="Home" />
+    <item
+        android:id="@+id/navcommunityFragment"
+        android:icon="@drawable/baseline_group_24"
+
+        android:title="Community" />
+    <item
+        android:id="@+id/navprofileFragment"
+        android:icon="@drawable/baseline_person_24"
+        android:title="Profile" />
+
+</menu>

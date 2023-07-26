@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "546035071552",
+    "project_id": "challapp-74aaa",
+    "storage_bucket": "challapp-74aaa.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:546035071552:android:3e165178b770c645007da5",
+        "android_client_info": {
+          "package_name": "com.example.challapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "546035071552-rv5rt5t98tg93ehk4p44pkmss8icaeq2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBPixPQ_LX4iJWqp7bgY-2V3czQOWfp0gU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "546035071552-rv5rt5t98tg93ehk4p44pkmss8icaeq2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

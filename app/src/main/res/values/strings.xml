@@ -1,0 +1,43 @@
+<resources>
+    <string name="app_name">ChallApp</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="log_in_now">Log In Now</string>
+    <string name="login_prompt">Please login and continue using the app</string>
+    <string name="email_textfield">Email</string>
+    <string name="password_logintext">Password</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="log_in_textbutton">Log In</string>
+    <string name="don_t_have_an_account">Don\'t have an account?</string>
+    <string name="sign_up_loginpagetext">Sign Up</string>
+    <string name="loginpageimage">loginpageImage</string>
+    <string name="registerpageimage">registerpageImage</string>
+    <string name="sign_up_now">Sign Up Now</string>
+    <string name="signup_prompt">Please fill the details and create the account</string>
+    <string name="full_name">Full Name</string>
+    <string name="you_agree_to_our">You agree to our</string>
+    <string name="and">and</string>
+    <string name="terms_of_service">Terms of Service</string>
+    <string name="sign_up_registerpagebutton">Sign Up</string>
+    <string name="already_have_an_account">Already have an account?</string>
+    <string name="forgotpageimage">forgotpageimage</string>
+    <string name="forgot_your_password">Forgot Your Password?</string>
+    <string name="forgotbottomPrompt">Please enter your e-mail to recover password</string>
+    <string name="recoverButtonText">Recover</string>
+    <string name="verify_now">Verify Your Mail Now</string>
+    <string name="verifynowpromtbottomtext">Verify your account and start your journey</string>
+    <string name="verifypageimage">verifyPageImage</string>
+    <string name="verifynowbottomPrompt">You can start using the application after</string>
+    <string name="verifying_your_mail">verifying your mail.</string>
+    <string name="wish_great_exp">We wish you will enjoy the experience</string>
+    <string name="back_to_login">Back to Login</string>
+    <string name="profilePageNamePromt">Name</string>
+    <string name="profilePageMailPrompt">Mail</string>
+    <string name="apply_changes_button">Apply Changes</string>
+    <string name="account_information">Account Information</string>
+    <string name="change_password_text">Change Password</string>
+    <string name="delete_account_text">Delete Account</string>
+    <string name="current_password">Current Password</string>
+    <string name="new_password">New Password</string>
+    <string name="confirm_password">Confirm Password</string>
+</resources>

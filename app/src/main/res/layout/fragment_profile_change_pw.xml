@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.profile.profileaccountinfo.ProfileFragment">
+
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="wrap_content"
+            android:layout_height="200dp"
+            android:background="@color/primaryApplicationColor"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/shapeableImageView"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_marginTop="90dp"
+            android:background="#FFFFFF"
+            android:padding="5dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearanceOverlay="@style/circleImageView"
+            app:strokeColor="@color/white"
+            app:strokeWidth="2dp" />
+
+        <TextView
+            android:id="@+id/textview_username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/intersemibold"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/shapeableImageView" />
+
+        <View
+            android:id="@+id/splitterView"
+            android:layout_width="250dp"
+            android:layout_height="2dp"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="50dp"
+            android:background="@color/splitterViewColor"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textview_username" />
+
+        <TextView
+            android:id="@+id/currentPasswordText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="48dp"
+            android:layout_marginTop="12dp"
+            android:fontFamily="@font/interextrabold"
+            android:text="@string/current_password"
+            android:textColor="@color/loginPageTextColor"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/splitterView" />
+
+        <EditText
+            android:id="@+id/currentPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="40dp"
+            android:background="@drawable/custom_edittext_border"
+            android:fontFamily="@font/intersemibold"
+            android:paddingStart="16dp"
+            android:inputType="textPassword"
+            android:paddingTop="8dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="8dp"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="@+id/currentPasswordText"
+            app:layout_constraintTop_toBottomOf="@+id/currentPasswordText" />
+
+
+        <TextView
+            android:id="@+id/newPassword1Text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="48dp"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/interextrabold"
+            android:text="@string/new_password"
+            android:textColor="@color/loginPageTextColor"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/currentPassword" />
+
+        <EditText
+            android:id="@+id/newPassword1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="40dp"
+            android:background="@drawable/custom_edittext_border"
+            android:fontFamily="@font/intersemibold"
+            android:inputType="textPassword"
+            android:paddingStart="16dp"
+            android:paddingTop="8dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="8dp"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="@+id/newPassword1Text"
+            app:layout_constraintTop_toBottomOf="@+id/newPassword1Text" />
+
+        <TextView
+            android:id="@+id/newPassword2Text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="48dp"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/interextrabold"
+            android:text="@string/confirm_password"
+            android:textColor="@color/loginPageTextColor"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/newPassword1" />
+
+        <EditText
+            android:id="@+id/newPassword2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="8dp"
+            android:inputType="textPassword"
+            android:layout_marginEnd="40dp"
+            android:background="@drawable/custom_edittext_border"
+            android:fontFamily="@font/intersemibold"
+            android:paddingStart="16dp"
+            android:paddingTop="8dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="8dp"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="@+id/newPassword2Text"
+            app:layout_constraintTop_toBottomOf="@+id/newPassword2Text" />
+
+        <Button
+            android:id="@+id/applyChangesButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="@color/primaryApplicationColor"
+
+            android:fontFamily="@font/intersemibold"
+            android:layout_marginStart="80dp"
+            android:layout_marginEnd="80dp"
+            android:text="@string/apply_changes_button"
+            android:textSize="20sp"
+
+            app:layout_constraintEnd_toEndOf="@+id/newPassword2"
+            app:layout_constraintStart_toStartOf="@+id/newPassword2"
+            app:layout_constraintTop_toBottomOf="@+id/newPassword2" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

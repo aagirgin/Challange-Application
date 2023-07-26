@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="primaryApplicationColor">#95BEFE</color>
+    <color name="loginPageTextColor">#7C7979</color>
+    <color name="splitterViewColor">#FFE4E2E2</color>
+    <color name="profileTextColor">#7A7878</color>
+</resources>

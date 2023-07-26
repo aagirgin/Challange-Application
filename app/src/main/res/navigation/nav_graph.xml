@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/splashScreenFragment">
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.challapp.ui.login.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment_to_registerFragment"
+            app:destination="@id/registerFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_loginFragment_to_challangeFragment"
+            app:destination="@id/challangeFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_loginFragment_to_forgotpasswordFragment"
+            app:destination="@id/forgotpasswordFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="com.example.challapp.ui.login.RegisterFragment"
+        android:label="fragment_register"
+        tools:layout="@layout/fragment_register" >
+        <action
+            android:id="@+id/action_registerFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_registerFragment_to_mailVerificationFragment"
+            app:destination="@id/mailVerificationFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
+    <fragment
+        android:id="@+id/challangeFragment"
+        android:name="com.example.challapp.ui.feed.ChallangeFragment"
+        android:label="fragment_challange"
+        tools:layout="@layout/fragment_challange" >
+        <action
+            android:id="@+id/action_challangeFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_challangeFragment_to_profileFragment"
+            app:destination="@id/profileFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_challangeFragment_to_profileNavFragment"
+            app:destination="@id/profileNavFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/forgotpasswordFragment"
+        android:name="com.example.challapp.ui.login.ForgotpasswordFragment"
+        android:label="fragment_forgotpassword"
+        tools:layout="@layout/fragment_forgotpassword" >
+        <action
+            android:id="@+id/action_forgotpasswordFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/mailVerificationFragment"
+        android:name="com.example.challapp.ui.login.MailVerificationFragment"
+        android:label="fragment_mail_verification"
+        tools:layout="@layout/fragment_mail_verification" >
+        <action
+            android:id="@+id/action_mailVerificationFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/splashScreenFragment"
+        android:name="com.example.challapp.ui.login.SplashScreenFragment"
+        android:label="fragment_splash_screen"
+        tools:layout="@layout/fragment_splash_screen" >
+        <action
+            android:id="@+id/action_splashScreenFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_splashScreenFragment_to_challangeFragment"
+            app:destination="@id/challangeFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.challapp.ui.profile.profileaccountinfo.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_profileFragment_to_challangeFragment"
+            app:destination="@id/challangeFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            />
+        <action
+            android:id="@+id/action_profileFragment_to_profileNavFragment"
+            app:destination="@id/profileNavFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_profileChangePwFragment"
+            app:destination="@id/profileChangePwFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileChangePwFragment"
+        android:name="com.example.challapp.ui.profile.profilechangepassword.ProfileChangePwFragment"
+        android:label="fragment_profile_change_pw"
+        tools:layout="@layout/fragment_profile_change_pw" >
+        <action
+            android:id="@+id/action_profileChangePwFragment_to_profileNavFragment"
+            app:destination="@id/profileNavFragment" />
+        <action
+            android:id="@+id/action_profileChangePwFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileNavFragment"
+        android:name="com.example.challapp.ui.profile.profilenavigation.ProfileNavFragment"
+        android:label="fragment_profile_nav"
+        tools:layout="@layout/fragment_profile_nav" >
+        <action
+            android:id="@+id/action_profileNavFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_profileNavFragment_to_profileChangePwFragment"
+            app:destination="@id/profileChangePwFragment" />
+    </fragment>
+</navigation>
