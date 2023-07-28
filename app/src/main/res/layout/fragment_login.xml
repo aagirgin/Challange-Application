@@ -6,7 +6,7 @@
 
         <variable
             name="viewModel"
-            type="com.example.challapp.ui.login.LoginViewModel" />
+            type="com.example.challapp.ui.login.loginpg.LoginViewModel" />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

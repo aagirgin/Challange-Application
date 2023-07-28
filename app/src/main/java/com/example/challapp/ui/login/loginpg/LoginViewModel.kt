@@ -1,11 +1,9 @@
-package com.example.challapp.ui.login
+package com.example.challapp.ui.login.loginpg
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.challapp.repository.FirestoreUserRepository
-import com.example.challapp.services.AuthService
+import com.google.firebase.auth.FirebaseUser
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -25,6 +23,10 @@ class LoginViewModel @Inject constructor(
     private val _loginState = MutableStateFlow<LoginState?>(null)
     val loginState: StateFlow<LoginState?> get() = _loginState
 
+    val currentUser: MutableStateFlow<FirebaseUser?>
+        get() = _currentUser
+
+    private val _currentUser: MutableStateFlow<FirebaseUser?> = MutableStateFlow(null)
 
 
     fun resetLoginState() {
@@ -36,19 +38,14 @@ class LoginViewModel @Inject constructor(
     fun signIn(email: String, password: String) {
         viewModelScope.launch {
             _loginState.value = LoginState.Loading
-            AuthService.signIn(email, password) { user, exception ->
-                if (exception != null) {
-                    _loginState.value = LoginState.Error(exception.message ?: "Sign-in failed.")
-                } else {
-                    _loginState.value = LoginState.Success
-                    viewModelScope.launch {
-                        AuthService.getCurrentUser()
-                            ?.let { userRepository.giveInviteKeyIfNull(it.uid) }
-                    }
-
-                }
+            val user = userRepository.signIn(email, password)
+            if (user != null) {
+                _loginState.value = LoginState.Success
+                _currentUser.value = userRepository.getCurrentUser()
+                userRepository.giveInviteKeyIfNull(user.uid)
+            } else {
+                _loginState.value = LoginState.Error("Sign-in failed.")
             }
-
         }
     }
 }

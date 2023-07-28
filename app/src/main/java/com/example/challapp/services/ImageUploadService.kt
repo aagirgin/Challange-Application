@@ -45,8 +45,8 @@ object ImageUploadService {
             .into(imageView)
     }
 
-    fun loadProfileImage(imageView: ShapeableImageView) {
-        val imageUrl = "${AuthService.getCurrentUser()?.email}_avatar.jpg"
+    fun loadProfileImage(email: String, imageView: ShapeableImageView) {
+        val imageUrl = "${email}_avatar.jpg"
         val storageRef: StorageReference =
             FirebaseStorage.getInstance().reference.child("profileAvatars").child(imageUrl)
 

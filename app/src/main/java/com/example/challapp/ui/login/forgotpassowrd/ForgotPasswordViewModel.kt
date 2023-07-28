@@ -1,6 +1,5 @@
-package com.example.challapp.ui.login
+package com.example.challapp.ui.login.forgotpassowrd
 
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.FirebaseAuth

@@ -1,4 +1,4 @@
-package com.example.challapp.ui.login
+package com.example.challapp.ui.login.forgotpassowrd
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,8 +11,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.challapp.R
 import com.example.challapp.databinding.FragmentForgotpasswordBinding
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.launch
 
 

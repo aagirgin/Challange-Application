@@ -1,4 +1,4 @@
-package com.example.challapp.ui.login
+package com.example.challapp.ui.login.register
 
 import android.os.Bundle
 import android.view.LayoutInflater

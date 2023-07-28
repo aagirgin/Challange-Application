@@ -1,11 +1,6 @@
-package com.example.challapp.ui.login
+package com.example.challapp.ui.login.register
 
-import android.app.Application
-import android.content.ContentValues.TAG
-import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,22 +9,12 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import com.example.challapp.MainActivity
 import com.example.challapp.R
-import com.example.challapp.databinding.FragmentLoginBinding
 import com.example.challapp.databinding.FragmentRegisterBinding
-import com.example.challapp.domain.models.ApplicationUser
-import com.example.challapp.services.AuthService
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.api.Authentication
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ktx.database
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-
+@AndroidEntryPoint
 class RegisterFragment : Fragment() {
     private val registerViewModel: RegisterViewModel by viewModels()
     override fun onCreateView(

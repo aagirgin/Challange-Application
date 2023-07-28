@@ -2,6 +2,7 @@ package com.example.challapp.module
 
 import com.example.challapp.repository.FirestoreUserRepository
 import com.example.challapp.repository.FirestoreUserRepositoryImpl
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import dagger.Module
 import dagger.Provides
@@ -16,7 +17,10 @@ class FirestoreModule {
     fun provideFirestore(): FirebaseFirestore {
         return FirebaseFirestore.getInstance()
     }
-
+    @Provides
+    fun provideFirebaseAuth(): FirebaseAuth {
+        return FirebaseAuth.getInstance()
+    }
     @Provides
     fun provideFirestoreUserRepository(repository: FirestoreUserRepositoryImpl): FirestoreUserRepository {
         return repository

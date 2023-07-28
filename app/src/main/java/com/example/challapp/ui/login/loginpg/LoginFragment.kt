@@ -1,4 +1,4 @@
-package com.example.challapp.ui.login
+package com.example.challapp.ui.login.loginpg
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -11,11 +11,10 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.challapp.R
 import com.example.challapp.databinding.FragmentLoginBinding
-import com.example.challapp.services.AuthService
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.firebase.auth.FirebaseAuth
+import com.example.challapp.repository.FirestoreUserRepository
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class LoginFragment : Fragment() {
@@ -63,14 +62,17 @@ class LoginFragment : Fragment() {
                     }
 
                     is LoginState.Success -> {
-                        val user = AuthService.getCurrentUser()
-                        if (user != null && user.isEmailVerified) {
+                        loginViewModel.currentUser.collect{user->
 
-                            findNavController().navigate(R.id.action_loginFragment_to_challangeFragment)
-                        } else {
-                            Toast.makeText(requireContext(), "Please verify your Mail.", Toast.LENGTH_SHORT).show()
+                            if (user != null && user.isEmailVerified) {
+
+                                findNavController().navigate(R.id.action_loginFragment_to_challangeFragment)
+                            } else {
+                                Toast.makeText(requireContext(), "Please verify your Mail.", Toast.LENGTH_SHORT).show()
+                            }
+                            loginViewModel.resetLoginState()
                         }
-                        loginViewModel.resetLoginState()
+
                     }
                     else -> {}
                 }

@@ -7,48 +7,29 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import com.example.challapp.R
 import com.example.challapp.databinding.FragmentChallangeBinding
-import com.example.challapp.services.AuthService
+import com.example.challapp.ui.login.forgotpassowrd.ForgotPasswordViewModel
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class ChallangeFragment : Fragment() {
-    private lateinit var navController: NavController
-
+    private lateinit var binding:FragmentChallangeBinding
+    private val challangeViewModel: ChallangeViewModel by viewModels()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        val binding = FragmentChallangeBinding.inflate(inflater,container,false)
-        val db = Firebase.firestore
-
-
-        val docRef = AuthService.getCurrentUser()?.let { db.collection("Users").document(it.uid) }
-        if (docRef != null) {
-            docRef.get()
-                .addOnSuccessListener { document ->
-                    if (document != null) {
-                        val uname = document.getString("username")
-                        //binding.GreetingText.text = "Hello, ${uname}"
-                        Log.d(TAG, "DocumentSnapshot data: ${document.data}")
-                    } else {
-                        Log.d(TAG, "No such document")
-                    }
-                }
-                .addOnFailureListener { exception ->
-                    Log.d(TAG, "get failed with ", exception)
-                }
-        }
+    ): View {
+        binding = FragmentChallangeBinding.inflate(inflater,container,false)
 
         binding.buttonprs.setOnClickListener {
-            println(AuthService.getCurrentUser())
-            AuthService.signOut()
+            challangeViewModel.signOutFromSession()
             findNavController().navigate(R.id.action_challangeFragment_to_loginFragment)
-            println(AuthService.getCurrentUser())
         }
 
         return binding.root

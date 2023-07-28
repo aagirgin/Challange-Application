@@ -8,7 +8,6 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.challapp.R
 import com.example.challapp.databinding.FragmentCreateGroupBinding
-import com.example.challapp.services.AuthService
 
 class CreateGroupFragment : Fragment() {
 

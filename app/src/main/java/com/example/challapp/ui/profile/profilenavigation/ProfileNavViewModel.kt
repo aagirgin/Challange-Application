@@ -3,7 +3,7 @@ package com.example.challapp.ui.profile.profilenavigation
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.challapp.repository.FirestoreUserRepository
-import com.example.challapp.services.AuthService
+import com.google.firebase.auth.FirebaseUser
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -20,9 +20,15 @@ class ProfileNavViewModel @Inject constructor(
     val usernameFlow: Flow<String?>
         get() = _usernameFlow
 
+    val currentUser: MutableStateFlow<FirebaseUser?>
+        get() = _currentUser
+
+    private val _currentUser: MutableStateFlow<FirebaseUser?> = MutableStateFlow(null)
+
+
     init {
-        val currentUser = AuthService.getCurrentUser()
-        val userId = currentUser?.uid
+        _currentUser.value = firestoreUserRepository.getCurrentUser()
+        val userId = _currentUser.value?.uid
         viewModelScope.launch {
             fetchUsername(userId!!)
         }

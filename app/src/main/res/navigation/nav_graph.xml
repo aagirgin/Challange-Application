@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.example.challapp.ui.login.LoginFragment"
+        android:name="com.example.challapp.ui.login.loginpg.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" >
         <action
@@ -34,7 +34,7 @@
     </fragment>
     <fragment
         android:id="@+id/registerFragment"
-        android:name="com.example.challapp.ui.login.RegisterFragment"
+        android:name="com.example.challapp.ui.login.register.RegisterFragment"
         android:label="fragment_register"
         tools:layout="@layout/fragment_register" >
         <action
@@ -77,7 +77,7 @@
     </fragment>
     <fragment
         android:id="@+id/forgotpasswordFragment"
-        android:name="com.example.challapp.ui.login.ForgotpasswordFragment"
+        android:name="com.example.challapp.ui.login.forgotpassowrd.ForgotpasswordFragment"
         android:label="fragment_forgotpassword"
         tools:layout="@layout/fragment_forgotpassword" >
         <action
@@ -90,7 +90,7 @@
     </fragment>
     <fragment
         android:id="@+id/mailVerificationFragment"
-        android:name="com.example.challapp.ui.login.MailVerificationFragment"
+        android:name="com.example.challapp.ui.login.register.MailVerificationFragment"
         android:label="fragment_mail_verification"
         tools:layout="@layout/fragment_mail_verification" >
         <action
@@ -103,7 +103,7 @@
     </fragment>
     <fragment
         android:id="@+id/splashScreenFragment"
-        android:name="com.example.challapp.ui.login.SplashScreenFragment"
+        android:name="com.example.challapp.ui.login.splashscreen.SplashScreenFragment"
         android:label="fragment_splash_screen"
         tools:layout="@layout/fragment_splash_screen" >
         <action

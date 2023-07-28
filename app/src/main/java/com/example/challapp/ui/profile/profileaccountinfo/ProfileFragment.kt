@@ -9,15 +9,9 @@ import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import com.example.challapp.R
 import com.example.challapp.databinding.FragmentProfileBinding
-import com.example.challapp.services.AuthService
 import com.example.challapp.services.ImageUploadService
-import com.example.challapp.ui.profile.profilenavigation.ProfileNavViewModel
-import com.google.firebase.storage.FirebaseStorage
-import com.google.firebase.storage.StorageReference
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -31,7 +25,10 @@ class ProfileFragment : Fragment() {
     ): View {
         binding = FragmentProfileBinding.inflate(inflater, container, false)
 
-        loadProfileImage()
+        viewLifecycleOwner.lifecycleScope.launch {
+            loadProfileImage()
+        }
+
         displayMail()
         displayName()
         changeName()
@@ -54,16 +51,21 @@ class ProfileFragment : Fragment() {
         binding.buttonApplychanges.setOnClickListener {
             if (validationField()) {
                 viewLifecycleOwner.lifecycleScope.launch {
-                    AuthService.getCurrentUser()?.let { currentUser ->
-                        profileViewModel.changeUsername(currentUser.uid, binding.edittextName.text.toString())
-                        profileViewModel.changeUsernameFlow.collect { changeSuccess ->
-                            changeSuccess?.let {
-                                if (it) {
-                                    println("Change Completed.")
-                                    binding.edittextName.isEnabled = false
-                                    profileViewModel.fetchUsername(currentUser.uid)
+                    profileViewModel.currentUser.collect { currentUser ->
+                        if (currentUser != null) {
+                            val newUsername = binding.edittextName.text.toString()
+                            profileViewModel.changeUsername(currentUser.uid, newUsername)
+                            profileViewModel.changeUsernameFlow.collect { changeSuccess ->
+                                changeSuccess?.let {
+                                    if (it) {
+                                        println("Change Completed.")
+                                        binding.edittextName.isEnabled = false
+                                        profileViewModel.fetchUsername(currentUser.uid)
+                                    }
                                 }
                             }
+                        } else {
+                            println("Error: Current user is null.")
                         }
                     }
                 }
@@ -71,8 +73,12 @@ class ProfileFragment : Fragment() {
         }
     }
 
-    private fun loadProfileImage() {
-        ImageUploadService.loadProfileImage(binding.shapeableImageView)
+    private suspend fun loadProfileImage() {
+            profileViewModel.currentUser.collect{
+                if (it != null) {
+                    it.email?.let { it1 -> ImageUploadService.loadProfileImage(it1,binding.shapeableImageView) }
+                }
+            }
     }
 
     private fun displayMail(){

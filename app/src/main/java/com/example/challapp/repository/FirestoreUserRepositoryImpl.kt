@@ -2,18 +2,13 @@ package com.example.challapp.repository
 
 import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.Query
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
-import kotlin.random.Random
-import kotlinx.coroutines.suspendCancellableCoroutine
-import kotlinx.coroutines.withContext
-import kotlin.coroutines.resume
-import kotlin.coroutines.resumeWithException
 
 class FirestoreUserRepositoryImpl @Inject constructor(
     private val firestore: FirebaseFirestore,
@@ -104,5 +99,32 @@ class FirestoreUserRepositoryImpl @Inject constructor(
         }
     }
 
+    override suspend fun signUp(email: String, password: String): FirebaseUser? {
+        return try {
+            val authResult = auth.createUserWithEmailAndPassword(email, password).await()
+            authResult.user
+        } catch (e: Exception) {
+            Log.e("FirestoreUserRepo", "Error signing up: ${e.message}")
+            null
+        }
+    }
+
+    override suspend fun signIn(email: String, password: String): FirebaseUser? {
+        return try {
+            val authResult = auth.signInWithEmailAndPassword(email, password).await()
+            authResult.user
+        } catch (e: Exception) {
+            Log.e("FirestoreUserRepo", "Error signing in: ${e.message}")
+            null
+        }
+    }
+
+    override fun signOut() {
+        auth.signOut()
+    }
+
+    override fun getCurrentUser(): FirebaseUser? {
+        return auth.currentUser
+    }
 
 }

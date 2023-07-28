@@ -9,9 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.example.challapp.databinding.FragmentProfileChangePwBinding
-import com.example.challapp.services.AuthService
 import com.example.challapp.services.ImageUploadService
-import com.example.challapp.ui.profile.profileaccountinfo.ProfileViewModel
 import com.google.firebase.auth.EmailAuthProvider
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -26,15 +24,22 @@ class ProfileChangePwFragment : Fragment() {
     ): View {
         binding = FragmentProfileChangePwBinding.inflate(inflater, container, false)
 
-        loadProfileImage()
+        viewLifecycleOwner.lifecycleScope.launch {
+            loadProfileImage()
+        }
+
         displayName()
         onPressButtonValidation(binding)
 
         return binding.root
     }
 
-    private fun loadProfileImage() {
-        ImageUploadService.loadProfileImage(binding.shapeableImageView)
+    private suspend fun loadProfileImage() {
+        profileChangePwViewModel.currentUser.collect{
+            if (it != null) {
+                it.email?.let { it1 -> ImageUploadService.loadProfileImage(it1,binding.shapeableImageView) }
+            }
+        }
     }
 
 
@@ -59,24 +64,32 @@ class ProfileChangePwFragment : Fragment() {
     }
 
     private fun validateAccount(currentPw: String, callback: (Boolean) -> Unit) {
-        val currentUser = AuthService.getCurrentUser()
-        val credential = EmailAuthProvider.getCredential(currentUser?.email!!, currentPw)
-        currentUser.reauthenticate(credential).addOnCompleteListener { reauthTask ->
-            val isReauthenticationSuccessful = reauthTask.isSuccessful
-            callback.invoke(isReauthenticationSuccessful)
+        viewLifecycleOwner.lifecycleScope.launch {
+            val currentUser = profileChangePwViewModel.currentUser.value
+            if (currentUser != null) {
+                val credential = EmailAuthProvider.getCredential(currentUser.email!!, currentPw)
+                currentUser.reauthenticate(credential).addOnCompleteListener { reauthTask ->
+                    val isReauthenticationSuccessful = reauthTask.isSuccessful
+                    callback.invoke(isReauthenticationSuccessful)
+                }
+            } else {
+                callback.invoke(false)
+            }
         }
     }
 
-    private fun performPasswordChange(newPw: String){
-        val currentUser = AuthService.getCurrentUser()
-        currentUser?.updatePassword(newPw)
-            ?.addOnCompleteListener { passwordUpdateTask ->
-                if (passwordUpdateTask.isSuccessful) {
-                    Toast.makeText(requireContext(), "Password changed successfully", Toast.LENGTH_SHORT).show()
-                } else {
-                    Toast.makeText(requireContext(), "Failed to change password", Toast.LENGTH_SHORT).show()
+    private fun performPasswordChange(newPw: String) {
+        viewLifecycleOwner.lifecycleScope.launch {
+            val currentUser = profileChangePwViewModel.currentUser.value
+            currentUser?.updatePassword(newPw)
+                ?.addOnCompleteListener { passwordUpdateTask ->
+                    if (passwordUpdateTask.isSuccessful) {
+                        Toast.makeText(requireContext(), "Password changed successfully", Toast.LENGTH_SHORT).show()
+                    } else {
+                        Toast.makeText(requireContext(), "Failed to change password", Toast.LENGTH_SHORT).show()
+                    }
                 }
-            }
+        }
     }
 
     private fun onPressButtonValidation(binding: FragmentProfileChangePwBinding) {
