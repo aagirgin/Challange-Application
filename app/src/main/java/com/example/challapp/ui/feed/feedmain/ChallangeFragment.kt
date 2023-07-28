@@ -1,4 +1,4 @@
-package com.example.challapp.ui.feed
+package com.example.challapp.ui.feed.feedmain
 
 import android.content.ContentValues.TAG
 import android.os.Bundle
@@ -8,13 +8,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.NavController
-import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.ui.NavigationUI.setupWithNavController
 import com.example.challapp.R
 import com.example.challapp.databinding.FragmentChallangeBinding
 import com.example.challapp.services.AuthService
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 

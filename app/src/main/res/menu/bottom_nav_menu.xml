@@ -5,15 +5,15 @@
     <item
         android:id="@+id/navhomeFragment"
         android:icon="@drawable/baseline_home_24"
-        android:title="Home" />
+        android:title="@string/home" />
     <item
         android:id="@+id/navcommunityFragment"
         android:icon="@drawable/baseline_group_24"
 
-        android:title="Community" />
+        android:title="@string/community" />
     <item
         android:id="@+id/navprofileFragment"
         android:icon="@drawable/baseline_person_24"
-        android:title="Profile" />
+        android:title="@string/profile" />
 
 </menu>

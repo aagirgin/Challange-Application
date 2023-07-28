@@ -14,9 +14,10 @@ import com.example.challapp.databinding.FragmentLoginBinding
 import com.example.challapp.services.AuthService
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
-
+@AndroidEntryPoint
 class LoginFragment : Fragment() {
     private lateinit var loginViewModel: LoginViewModel
     override fun onCreateView(
@@ -64,6 +65,7 @@ class LoginFragment : Fragment() {
                     is LoginState.Success -> {
                         val user = AuthService.getCurrentUser()
                         if (user != null && user.isEmailVerified) {
+
                             findNavController().navigate(R.id.action_loginFragment_to_challangeFragment)
                         } else {
                             Toast.makeText(requireContext(), "Please verify your Mail.", Toast.LENGTH_SHORT).show()
@@ -75,6 +77,8 @@ class LoginFragment : Fragment() {
             }
         }
     }
+
+
     private fun validationFields(email:String?,password:String?): Boolean{
 
         if (!email.isNullOrBlank() && !password.isNullOrBlank()) {

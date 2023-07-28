@@ -4,10 +4,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.challapp.repository.FirestoreUserRepository
 import com.example.challapp.services.AuthService
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 
 sealed class LoginState {
@@ -15,10 +18,14 @@ sealed class LoginState {
     data class Error(val errorMessage: String) : LoginState()
     object Success : LoginState()
 }
-
-class LoginViewModel : ViewModel() {
+@HiltViewModel
+class LoginViewModel @Inject constructor(
+    private val userRepository: FirestoreUserRepository
+) : ViewModel() {
     private val _loginState = MutableStateFlow<LoginState?>(null)
     val loginState: StateFlow<LoginState?> get() = _loginState
+
+
 
     fun resetLoginState() {
         viewModelScope.launch {
@@ -34,9 +41,14 @@ class LoginViewModel : ViewModel() {
                     _loginState.value = LoginState.Error(exception.message ?: "Sign-in failed.")
                 } else {
                     _loginState.value = LoginState.Success
+                    viewModelScope.launch {
+                        AuthService.getCurrentUser()
+                            ?.let { userRepository.giveInviteKeyIfNull(it.uid) }
+                    }
+
                 }
             }
-        }
 
+        }
     }
 }

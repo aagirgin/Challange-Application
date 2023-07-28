@@ -50,7 +50,7 @@ class MainActivity : AppCompatActivity() {
                     true
                 }
                 R.id.navcommunityFragment -> {
-                    // Handle item 2 selection
+                    navController.navigate(R.id.groupFragment)
                     true
                 }
                 R.id.navprofileFragment -> {

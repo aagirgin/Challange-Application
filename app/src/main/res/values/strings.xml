@@ -40,4 +40,25 @@
     <string name="current_password">Current Password</string>
     <string name="new_password">New Password</string>
     <string name="confirm_password">Confirm Password</string>
+    <string name="notification_image">Notification Image</string>
+    <string name="days">Days</string>
+    <string name="daily_challenge">Daily Challenge</string>
+    <string name="daily_chall_history">Look to your daily challange history</string>
+    <string name="btn_see_your_daily_challenge">See your Daily Challenge</string>
+    <string name="share_and_compete_with_your_friends">Share and compete with your friends.</string>
+    <string name="complete_your_given_daily_challelenge">Complete your given daily challelenge</string>
+    <string name="current_groups">Current Groups</string>
+    <string name="create_your_group">Create Your Group</string>
+    <string name="add_image">Add Image</string>
+    <string name="profile">Profile</string>
+    <string name="community">Community</string>
+    <string name="home">Home</string>
+    <string name="group_details">Group Details</string>
+    <string name="group_owner">Group Owner</string>
+    <string name="create_group">Create Group</string>
+    <string name="group_name">Group Name</string>
+    <string name="group_description">Group Description</string>
+    <string name="invite_your_friends_and_share_your_challenges">Invite your friends and share your challenges</string>
+    <string name="create_your_group_in_under_a_minute">Create your group in under a minute</string>
+    <string name="back_navigation_arrow">Back Navigation Arrow</string>
 </resources>

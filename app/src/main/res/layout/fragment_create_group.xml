@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/frameLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.group.creategroup.CreateGroupFragment"
+        tools:layout_editor_absoluteX="-9dp"
+        tools:layout_editor_absoluteY="41dp">
+
+        <View
+            android:id="@+id/view2"
+            android:layout_width="wrap_content"
+            android:layout_height="55dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textview_createyourgroupback"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/loramedium"
+            android:text="@string/create_your_group"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@+id/imageview_backnavarrow"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/imageview_backnavarrow" />
+
+        <ImageView
+            android:id="@+id/imageview_backnavarrow"
+            android:layout_width="26dp"
+            android:layout_height="26dp"
+            android:layout_marginStart="20dp"
+            android:src="@drawable/baseline_arrow_back_ios_24"
+            app:layout_constraintBottom_toBottomOf="@+id/view2"
+            app:layout_constraintStart_toStartOf="@+id/view2"
+            app:layout_constraintTop_toTopOf="@+id/view2"
+            android:contentDescription="@string/back_navigation_arrow" />
+
+
+        <TextView
+            android:id="@+id/textview_createagroupprompt2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/loramedium"
+            android:text="@string/create_your_group_in_under_a_minute"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view2" />
+
+        <TextView
+            android:id="@+id/textview_createagroupprompt3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/loramedium"
+            android:text="@string/invite_your_friends_and_share_your_challenges"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textview_createagroupprompt2" />
+
+
+        <EditText
+            android:id="@+id/edittext_groupdescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/custom_edittext_border"
+            android:fontFamily="@font/intersemibold"
+            android:gravity="top|start"
+            android:minLines="4"
+            android:paddingStart="16dp"
+            android:inputType="text"
+            android:paddingTop="12dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="12dp"
+            android:textSize="16sp"
+            android:layout_marginStart="25dp"
+            android:layout_marginEnd="25dp"
+            app:layout_constraintBottom_toTopOf="@+id/button_creategroup"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textview_groupdecription" />
+
+        <TextView
+            android:id="@+id/textview_groupowner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/group_owner"
+            android:fontFamily="@font/loramedium"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="5dp"
+            app:layout_constraintBottom_toTopOf="@+id/edittext_groupowner"
+            app:layout_constraintStart_toStartOf="@+id/edittext_groupowner"
+            app:layout_constraintTop_toBottomOf="@+id/edittext_groupname" />
+
+        <TextView
+            android:id="@+id/textview_groupdetails"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:fontFamily="@font/lorabold"
+            app:layout_constraintVertical_bias="0.3"
+            android:text="@string/group_details"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toTopOf="@+id/textview_groupname"
+            app:layout_constraintStart_toStartOf="@+id/textview_groupname"
+            app:layout_constraintTop_toBottomOf="@+id/textview_createagroupprompt3"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <EditText
+            android:id="@+id/edittext_groupname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:background="@drawable/custom_edittext_border"
+            android:fontFamily="@font/intersemibold"
+            android:paddingStart="16dp"
+            android:paddingTop="12dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="12dp"
+            android:layout_marginStart="25dp"
+            android:layout_marginEnd="25dp"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toTopOf="@+id/textview_groupowner"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textview_groupname" />
+
+        <TextView
+            android:id="@+id/textview_groupname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:text="@string/group_name"
+            android:fontFamily="@font/loramedium"
+            app:layout_constraintBottom_toTopOf="@+id/edittext_groupname"
+            app:layout_constraintStart_toStartOf="@+id/edittext_groupname"
+            app:layout_constraintTop_toBottomOf="@+id/textview_groupdetails" />
+
+        <TextView
+            android:id="@+id/textview_groupdecription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/loramedium"
+            android:layout_marginBottom="5dp"
+            android:text="@string/group_description"
+            app:layout_constraintBottom_toTopOf="@+id/edittext_groupdescription"
+            app:layout_constraintStart_toStartOf="@+id/edittext_groupdescription"
+            app:layout_constraintTop_toBottomOf="@+id/edittext_groupowner" />
+
+        <EditText
+            android:id="@+id/edittext_groupowner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/custom_edittext_border"
+            android:enabled="false"
+            android:fontFamily="@font/intersemibold"
+            android:paddingStart="16dp"
+            android:paddingTop="12dp"
+            android:paddingEnd="16dp"
+            android:inputType="none"
+            android:paddingBottom="12dp"
+            android:layout_marginStart="25dp"
+            android:layout_marginEnd="25dp"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toTopOf="@+id/textview_groupdecription"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textview_groupowner" />
+
+        <Button
+            android:id="@+id/button_creategroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/create_group"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edittext_groupdescription"
+
+            android:fontFamily="@font/lorasemibold"
+            android:layout_marginStart="80dp"
+            android:layout_marginEnd="80dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+
+            android:textSize="20sp"/>
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
