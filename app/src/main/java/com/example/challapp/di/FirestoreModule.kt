@@ -1,4 +1,4 @@
-package com.example.challapp.module
+package com.example.challapp.di
 
 import com.example.challapp.repository.FirestoreUserRepository
 import com.example.challapp.repository.FirestoreUserRepositoryImpl

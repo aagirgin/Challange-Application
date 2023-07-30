@@ -1,6 +1,7 @@
 package com.example.challapp.repository
 
 import android.util.Log
+import com.example.challapp.domain.models.ApplicationGroup
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
@@ -24,6 +25,12 @@ class FirestoreUserRepositoryImpl @Inject constructor(
         } catch (e: Exception) {
             null
         }
+    }
+
+    override suspend fun addGroupToFirestore(appGroup: ApplicationGroup) {
+        val groupCollection = firestore.collection("Groups")
+        val groupDocument = getCurrentUser()?.let { groupCollection.document(it.uid) }
+        groupDocument?.set(appGroup)?.await()
     }
 
     override suspend fun changeUsername(userId: String, newUsername: String): Boolean {
