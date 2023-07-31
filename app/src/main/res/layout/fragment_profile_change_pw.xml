@@ -56,7 +56,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textview_username" />
 
         <TextView
-            android:id="@+id/currentPasswordText"
+            android:id="@+id/textview_currentPassword"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="48dp"
@@ -69,7 +69,7 @@
             app:layout_constraintTop_toBottomOf="@+id/splitterView" />
 
         <EditText
-            android:id="@+id/currentPassword"
+            android:id="@+id/edittext_currentPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="40dp"
@@ -83,12 +83,12 @@
             android:paddingEnd="16dp"
             android:paddingBottom="12dp"
             android:textSize="16sp"
-            app:layout_constraintStart_toStartOf="@+id/currentPasswordText"
-            app:layout_constraintTop_toBottomOf="@+id/currentPasswordText" />
+            app:layout_constraintStart_toStartOf="@+id/textview_currentPassword"
+            app:layout_constraintTop_toBottomOf="@+id/textview_currentPassword" />
 
 
         <TextView
-            android:id="@+id/newPassword1Text"
+            android:id="@+id/textview_newPassword1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="48dp"
@@ -98,10 +98,10 @@
             android:textColor="@color/loginPageTextColor"
             android:textSize="12sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/currentPassword" />
+            app:layout_constraintTop_toBottomOf="@+id/edittext_currentPassword" />
 
         <EditText
-            android:id="@+id/newPassword1"
+            android:id="@+id/edittext_newPassword1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="40dp"
@@ -115,11 +115,11 @@
             android:paddingEnd="16dp"
             android:paddingBottom="12dp"
             android:textSize="16sp"
-            app:layout_constraintStart_toStartOf="@+id/newPassword1Text"
-            app:layout_constraintTop_toBottomOf="@+id/newPassword1Text" />
+            app:layout_constraintStart_toStartOf="@+id/textview_newPassword1"
+            app:layout_constraintTop_toBottomOf="@+id/textview_newPassword1" />
 
         <TextView
-            android:id="@+id/newPassword2Text"
+            android:id="@+id/textview_newPassword2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="48dp"
@@ -129,10 +129,10 @@
             android:textColor="@color/loginPageTextColor"
             android:textSize="12sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/newPassword1" />
+            app:layout_constraintTop_toBottomOf="@+id/edittext_newPassword1" />
 
         <EditText
-            android:id="@+id/newPassword2"
+            android:id="@+id/edittext_newPassword2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="40dp"
@@ -146,27 +146,28 @@
             android:paddingEnd="16dp"
             android:paddingBottom="12dp"
             android:textSize="16sp"
-            app:layout_constraintStart_toStartOf="@+id/newPassword2Text"
-            app:layout_constraintTop_toBottomOf="@+id/newPassword2Text" />
+            app:layout_constraintStart_toStartOf="@+id/textview_newPassword2"
+            app:layout_constraintTop_toBottomOf="@+id/textview_newPassword2" />
 
         <Button
-            android:id="@+id/applyChangesButton"
+            android:id="@+id/button_applychanges"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:backgroundTint="@color/primaryApplicationColor"
-            android:paddingTop="8dp"
-
-            android:paddingBottom="8dp"
-            android:fontFamily="@font/intersemibold"
             android:layout_marginStart="80dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="80dp"
+
+            android:backgroundTint="@color/primaryApplicationColor"
+            android:fontFamily="@font/intersemibold"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
             android:text="@string/apply_changes_button"
             android:textSize="20sp"
-
-            app:layout_constraintEnd_toEndOf="@+id/newPassword2"
-            app:layout_constraintStart_toStartOf="@+id/newPassword2"
-            app:layout_constraintTop_toBottomOf="@+id/newPassword2" />
+            app:layout_constraintVertical_bias="0.05"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/edittext_newPassword2"
+            app:layout_constraintStart_toStartOf="@+id/edittext_newPassword2"
+            app:layout_constraintTop_toBottomOf="@+id/edittext_newPassword2" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

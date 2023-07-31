@@ -182,6 +182,16 @@ override suspend fun getUserIncludedGroupIds(userId: String): List<String>? {
         }
     }
 
+    override suspend fun sendPasswordResetEmail(email: String): Boolean {
+        return try {
+            auth.sendPasswordResetEmail(email).await()
+            true
+        } catch (e: Exception) {
+            Log.e("FirestoreUserRepo", "Error sending password reset email: ${e.message}")
+            false
+        }
+    }
+
     override fun signOut() {
         auth.signOut()
     }

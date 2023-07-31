@@ -28,15 +28,21 @@ class ProfileNavViewModel @Inject constructor(
 
     init {
         _currentUser.value = firestoreUserRepository.getCurrentUser()
+
         val userId = _currentUser.value?.uid
         viewModelScope.launch {
             fetchUsername(userId!!)
         }
+
     }
 
     private suspend fun fetchUsername(userId: String) {
             viewModelScope.launch {
                 _usernameFlow.value = firestoreUserRepository.getUsername(userId)
             }
+    }
+
+    fun signoutUser(){
+        firestoreUserRepository.signOut()
     }
 }

@@ -46,8 +46,8 @@ class ProfileNavFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
-        binding = FragmentProfileNavBinding.inflate(inflater,container,false)
 
+        binding = FragmentProfileNavBinding.inflate(inflater,container,false)
         displayName()
 
         viewLifecycleOwner.lifecycleScope.launch {
@@ -59,7 +59,6 @@ class ProfileNavFragment : Fragment() {
 
 
         addProfilePicture()
-        onPressedDeleteAccount()
         onNavigateInProfile()
 
         return binding.root
@@ -118,22 +117,33 @@ class ProfileNavFragment : Fragment() {
         }
     }
 
+    private fun isNotAuth(){
+        viewLifecycleOwner.lifecycleScope.launch {
+            if(profileNavViewModel.currentUser.value == null){
+                findNavController().navigate(R.id.action_profileNavFragment_to_loginFragment)
+            }
+        }
+    }
+
     private fun onNavigateInProfile(){
-        binding.navProfileInfo.setOnClickListener {
+        binding.viewNavProfileInfo.setOnClickListener {
             findNavController().navigate(R.id.action_profileNavFragment_to_profileFragment)
         }
 
-        binding.navChangePwInfo.setOnClickListener {
+        binding.viewNavChangePwInfo.setOnClickListener {
             findNavController().navigate(R.id.action_profileNavFragment_to_profileChangePwFragment)
         }
-    }
-
-
-    private fun onPressedDeleteAccount(){
-        binding.deleteAccInfo.setOnClickListener {
+        binding.viewDeleteAccInfo.setOnClickListener {
             showDeleteAccountDialog()
         }
+        binding.viewSignout.setOnClickListener {
+            showSignOutAccountDialog()
+        }
     }
+
+
+
+
 
     private fun showDeleteAccountDialog() {
         val alertDialogBuilder = AlertDialog.Builder(requireContext())
@@ -144,6 +154,22 @@ class ProfileNavFragment : Fragment() {
                 // Handle account deletion here
                 // You can call a function to delete the account or perform any other actions
                 // Example: profileViewModel.deleteAccount()
+            }
+            setNegativeButton("Cancel") { dialog, _ ->
+                dialog.dismiss()
+            }
+        }
+        alertDialogBuilder.create().show()
+    }
+
+    private fun showSignOutAccountDialog() {
+        val alertDialogBuilder = AlertDialog.Builder(requireContext())
+        alertDialogBuilder.apply {
+            setTitle("Sign Out")
+            setMessage("Are you sure you want to sign out your account?")
+            setPositiveButton("Sign out") { _, _ ->
+                profileNavViewModel.signoutUser()
+                findNavController().navigate(R.id.action_profileNavFragment_to_loginFragment)
             }
             setNegativeButton("Cancel") { dialog, _ ->
                 dialog.dismiss()

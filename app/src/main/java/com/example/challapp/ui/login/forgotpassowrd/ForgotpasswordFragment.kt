@@ -11,9 +11,11 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.challapp.R
 import com.example.challapp.databinding.FragmentForgotpasswordBinding
+import com.example.challapp.domain.state.UiState
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
-
+@AndroidEntryPoint
 class ForgotpasswordFragment : Fragment() {
     private val forgotpasswordViewModel: ForgotPasswordViewModel by viewModels()
     override fun onCreateView(
@@ -31,36 +33,36 @@ class ForgotpasswordFragment : Fragment() {
 
 
     private fun onPressedBackLoginPage(binding: FragmentForgotpasswordBinding) {
-        binding.backtologinButton.setOnClickListener {
+        binding.buttonBacktosignup.setOnClickListener {
             findNavController().navigate(R.id.action_forgotpasswordFragment_to_loginFragment)
         }
     }
 
 
     private fun setupForgotButton(binding: FragmentForgotpasswordBinding) {
-        binding.forgotButton.setOnClickListener {
-            val email = binding.forgotemailField.editText?.text.toString()
+        binding.buttonRecover.setOnClickListener {
+            val email = binding.inputtextForgotemail.editText?.text.toString()
             if (eMailFieldValidation(email)) {
                 forgotpasswordViewModel.sendPasswordResetEmail(email)
 
                 lifecycleScope.launch {
                     forgotpasswordViewModel.forgotPwState.collect { state ->
                         when (state) {
-                            is ForgotPwState.Loading -> {
+                            is UiState.Loading -> {
                                 //TODO
                             }
-                            is ForgotPwState.Error -> {
-                                Toast.makeText(requireContext(), state.errorMessage, Toast.LENGTH_SHORT).show()
+                            is UiState.Error -> {
+                                Toast.makeText(requireContext(), getString(R.string.email_Sent_unsuccesful), Toast.LENGTH_SHORT).show()
                             }
-                            is ForgotPwState.Success -> {
-                                Toast.makeText(requireContext(), "Email successfully sent to reset your password.", Toast.LENGTH_SHORT).show()
+                            is UiState.Success -> {
+                                Toast.makeText(requireContext(), getString(R.string.email_Sent_succesful), Toast.LENGTH_SHORT).show()
                             }
                             else -> {}
                         }
                     }
                 }
             } else {
-                Toast.makeText(requireContext(), "Please fill Email field.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), getString(R.string.fill_forms_error), Toast.LENGTH_SHORT).show()
             }
         }
     }

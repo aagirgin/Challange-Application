@@ -5,8 +5,10 @@ import androidx.lifecycle.viewModelScope
 import com.example.challapp.repository.FirestoreUserRepository
 import com.google.firebase.auth.FirebaseUser
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -16,6 +18,8 @@ sealed class LoginState {
     data class Error(val errorMessage: String) : LoginState()
     object Success : LoginState()
 }
+
+
 @HiltViewModel
 class LoginViewModel @Inject constructor(
     private val userRepository: FirestoreUserRepository
@@ -28,13 +32,11 @@ class LoginViewModel @Inject constructor(
 
     private val _currentUser: MutableStateFlow<FirebaseUser?> = MutableStateFlow(null)
 
-
-    fun resetLoginState() {
-        viewModelScope.launch {
-            _loginState.value = null
+    init {
+        if(_currentUser.value != null){
+            _loginState.value = LoginState.Success
         }
     }
-
     fun signIn(email: String, password: String) {
         viewModelScope.launch {
             _loginState.value = LoginState.Loading

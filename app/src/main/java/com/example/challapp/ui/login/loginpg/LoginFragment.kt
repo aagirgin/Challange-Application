@@ -37,16 +37,16 @@ class LoginFragment : Fragment() {
     }
 
     private fun setupLoginButton(binding: FragmentLoginBinding) {
-        binding.loginButton.setOnClickListener {
-            val email = binding.emailField.editText?.text.toString()
-            val password = binding.passwordField.editText?.text.toString()
+        binding.buttonLogin.setOnClickListener {
+            val email = binding.inputtextEmail.editText?.text.toString()
+            val password = binding.inputtextPassword.editText?.text.toString()
 
             val isValid = validationFields(email, password)
 
             if (isValid) {
                 loginViewModel.signIn(email, password)
             } else {
-                Toast.makeText(requireContext(), "Please fill all of the forms.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), getString(R.string.fill_forms_error), Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -56,21 +56,14 @@ class LoginFragment : Fragment() {
                     is LoginState.Loading -> {
                         // TODO: Show loading indicator or progress bar
                     }
-
                     is LoginState.Error -> {
                         Toast.makeText(requireContext(), state.errorMessage, Toast.LENGTH_SHORT).show()
                     }
-
                     is LoginState.Success -> {
                         loginViewModel.currentUser.collect{user->
-
                             if (user != null && user.isEmailVerified) {
-
                                 findNavController().navigate(R.id.action_loginFragment_to_challangeFragment)
-                            } else {
-                                Toast.makeText(requireContext(), getString(R.string.fill_forms_error), Toast.LENGTH_SHORT).show()
                             }
-                            loginViewModel.resetLoginState()
                         }
 
                     }
@@ -89,13 +82,13 @@ class LoginFragment : Fragment() {
         return false
     }
     private fun onPressedNavigateRegisterPage(binding: FragmentLoginBinding){
-        binding.signUpTextButton.setOnClickListener {
+        binding.buttonBacktosignup.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
         }
     }
 
     private fun onPressedNavigateForgotPassword(binding: FragmentLoginBinding){
-        binding.forgotpasswordTextButton.setOnClickListener {
+        binding.buttonForgotpassword.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment_to_forgotpasswordFragment)
         }
     }

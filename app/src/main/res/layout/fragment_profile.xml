@@ -58,7 +58,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textview_username" />
 
         <TextView
-            android:id="@+id/nameText"
+            android:id="@+id/textview_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="48dp"
@@ -86,8 +86,8 @@
             android:text="Here is My Name"
             android:enabled="false"
             android:textSize="16sp"
-            app:layout_constraintStart_toStartOf="@+id/nameText"
-            app:layout_constraintTop_toBottomOf="@+id/nameText" />
+            app:layout_constraintStart_toStartOf="@+id/textview_name"
+            app:layout_constraintTop_toBottomOf="@+id/textview_name" />
 
         <ImageView
             android:id="@+id/icon_changename"
@@ -101,7 +101,7 @@
             app:srcCompat="@drawable/baseline_edit_24" />
 
         <TextView
-            android:id="@+id/mailText"
+            android:id="@+id/textview_mail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="48dp"
@@ -129,24 +129,26 @@
             android:enabled="false"
             android:text="Here is My Mail"
             android:textSize="16sp"
-            app:layout_constraintStart_toStartOf="@+id/mailText"
-            app:layout_constraintTop_toBottomOf="@+id/mailText" />
+            app:layout_constraintStart_toStartOf="@+id/textview_mail"
+            app:layout_constraintTop_toBottomOf="@+id/textview_mail" />
 
         <Button
             android:id="@+id/button_applychanges"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:backgroundTint="@color/primaryApplicationColor"
-
-            android:fontFamily="@font/intersemibold"
             android:layout_marginStart="80dp"
+            android:layout_marginTop="16dp"
+
             android:layout_marginEnd="80dp"
+            android:backgroundTint="@color/primaryApplicationColor"
+            android:fontFamily="@font/intersemibold"
             android:paddingTop="8dp"
             android:paddingBottom="8dp"
             android:text="@string/apply_changes_button"
+            app:layout_constraintVertical_bias="0.05"
             android:textSize="20sp"
 
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/edittext_mail"
             app:layout_constraintStart_toStartOf="@+id/edittext_mail"
             app:layout_constraintTop_toBottomOf="@+id/edittext_mail" />

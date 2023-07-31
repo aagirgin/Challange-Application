@@ -8,12 +8,12 @@
         android:layout_height="match_parent">
 
         <ImageView
-            android:id="@+id/verifiImageJPG"
+            android:id="@+id/imageview_verify"
             android:layout_width="200dp"
             android:layout_height="200dp"
             android:contentDescription="@string/verifypageimage"
             android:src="@drawable/verfypic"
-            app:layout_constraintBottom_toTopOf="@+id/verifynowprompt"
+            app:layout_constraintBottom_toTopOf="@+id/textview_verifynow"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
@@ -21,63 +21,63 @@
             app:layout_constraintVertical_chainStyle="packed" />
 
         <TextView
-            android:id="@+id/verifynowprompt"
+            android:id="@+id/textview_verifynow"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:fontFamily="@font/intersemibold"
             android:text="@string/verify_now"
             android:textSize="24sp"
-            app:layout_constraintBottom_toTopOf="@+id/verifybottomprompt"
+            app:layout_constraintBottom_toTopOf="@+id/textview_verifybottom"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/verifiImageJPG" />
+            app:layout_constraintTop_toBottomOf="@+id/imageview_verify" />
 
         <TextView
-            android:id="@+id/verifybottomprompt"
+            android:id="@+id/textview_verifybottom"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:fontFamily="@font/interlight"
             android:text="@string/verifynowbottomPrompt"
             android:textSize="16sp"
-            app:layout_constraintBottom_toTopOf="@+id/verifybottomprompt2"
+            app:layout_constraintBottom_toTopOf="@+id/textview_verifybottom2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/verifynowprompt" />
+            app:layout_constraintTop_toBottomOf="@+id/textview_verifynow" />
 
         <TextView
-            android:id="@+id/verifybottomprompt2"
+            android:id="@+id/textview_verifybottom2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:fontFamily="@font/interlight"
             android:text="@string/verifying_your_mail"
             android:textSize="16sp"
-            app:layout_constraintBottom_toTopOf="@+id/verifybottomprompt3"
+            app:layout_constraintBottom_toTopOf="@+id/textview_verifybottom3"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/verifybottomprompt" />
+            app:layout_constraintTop_toBottomOf="@+id/textview_verifybottom" />
 
         <TextView
-            android:id="@+id/verifybottomprompt3"
+            android:id="@+id/textview_verifybottom3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:fontFamily="@font/interlight"
             android:text="@string/wish_great_exp"
             android:textSize="16sp"
-            app:layout_constraintBottom_toTopOf="@+id/backtologinButton"
+            app:layout_constraintBottom_toTopOf="@+id/button_backtosignup"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/verifybottomprompt2" />
+            app:layout_constraintTop_toBottomOf="@+id/textview_verifybottom2" />
 
         <TextView
-            android:id="@+id/backtologinButton"
+            android:id="@+id/button_backtosignup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -87,10 +87,10 @@
             android:textSize="24sp"
             android:layout_marginBottom="24dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/verifybottomprompt3"
+            app:layout_constraintEnd_toEndOf="@+id/textview_verifybottom3"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="@+id/verifybottomprompt3"
-            app:layout_constraintTop_toBottomOf="@+id/verifybottomprompt3" />
+            app:layout_constraintStart_toStartOf="@+id/textview_verifybottom3"
+            app:layout_constraintTop_toBottomOf="@+id/textview_verifybottom3" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

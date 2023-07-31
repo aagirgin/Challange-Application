@@ -24,10 +24,11 @@ class ProfileChangePwFragment : Fragment() {
     ): View {
         binding = FragmentProfileChangePwBinding.inflate(inflater, container, false)
 
+
+
         viewLifecycleOwner.lifecycleScope.launch {
             loadProfileImage()
         }
-
         displayName()
         onPressButtonValidation(binding)
 
@@ -93,10 +94,10 @@ class ProfileChangePwFragment : Fragment() {
     }
 
     private fun onPressButtonValidation(binding: FragmentProfileChangePwBinding) {
-        binding.applyChangesButton.setOnClickListener {
-            val currentPw = binding.currentPassword.text.toString()
-            val newPw = binding.newPassword1.text.toString()
-            val newPw2 = binding.newPassword2.text.toString()
+        binding.buttonApplychanges.setOnClickListener {
+            val currentPw = binding.edittextCurrentPassword.text.toString()
+            val newPw = binding.edittextNewPassword1.text.toString()
+            val newPw2 = binding.edittextNewPassword2.text.toString()
 
             if (valideEmpty(currentPw, newPw, newPw2)) {
                 if(validatePasswordLength(newPw, newPw2)){

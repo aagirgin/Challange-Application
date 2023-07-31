@@ -64,6 +64,7 @@
     <string name="member">Member</string>
     <string name="see_your_daily_challenge">See your Daily Challenge</string>
     <string name="fill_forms_error">"Please fill all of the forms."</string>
-
-
+    <string name="email_Sent_succesful">"Email successfully sent to reset your password."</string>
+    <string name="email_Sent_unsuccesful">"Reset mail could not be sent."</string>
+    <string name="sign_out">Sign Out</string>
 </resources>

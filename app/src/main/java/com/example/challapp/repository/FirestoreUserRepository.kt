@@ -5,6 +5,7 @@ import com.google.firebase.auth.FirebaseUser
 
 interface FirestoreUserRepository {
 
+    suspend fun sendPasswordResetEmail(email: String) : Boolean
     suspend fun getUserIncludedGroupIds(userId: String): List<String>?
     suspend fun addGroupToFirestore(appGroup:ApplicationGroup): String?
     suspend fun getUsername(userId: String): String?

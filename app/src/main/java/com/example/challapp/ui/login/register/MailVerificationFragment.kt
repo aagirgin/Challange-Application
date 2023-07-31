@@ -28,7 +28,7 @@ class MailVerificationFragment : Fragment() {
     }
 
     private fun onPressedBackLoginPage(binding: FragmentMailVerificationBinding) {
-        binding.backtologinButton.setOnClickListener {
+        binding.buttonBacktosignup.setOnClickListener {
             findNavController().navigate(R.id.action_mailVerificationFragment_to_loginFragment)
         }
     }

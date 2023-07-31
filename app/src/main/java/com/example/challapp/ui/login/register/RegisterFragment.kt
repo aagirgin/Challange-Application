@@ -32,7 +32,7 @@ class RegisterFragment : Fragment() {
     }
 
     private fun onPressedBackLoginPage(binding: FragmentRegisterBinding) {
-        binding.backLoginTextButton.setOnClickListener {
+        binding.buttonBacktologin.setOnClickListener {
             findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
         }
     }
@@ -48,12 +48,12 @@ class RegisterFragment : Fragment() {
     }
 
     private fun setupSignUpButton(binding: FragmentRegisterBinding) {
-        binding.signupButton.setOnClickListener {
-            binding.signupButton.isEnabled = false
+        binding.buttonSignup.setOnClickListener {
+            binding.buttonSignup.isEnabled = false
 
-            val email = binding.emailField.editText?.text.toString()
-            val password = binding.passwordField.editText?.text.toString()
-            val fullName = binding.fullNameField.editText?.text.toString()
+            val email = binding.textinputEmail.editText?.text.toString()
+            val password = binding.textinputPassword.editText?.text.toString()
+            val fullName = binding.textinputFullname.editText?.text.toString()
 
             val isValid = validationFields(email,password,fullName)
 
@@ -71,7 +71,7 @@ class RegisterFragment : Fragment() {
                             }
                             is RegisterState.Error -> {
                                 Toast.makeText(requireContext(), state.errorMessage, Toast.LENGTH_SHORT).show()
-                                binding.signupButton.isEnabled = true
+                                binding.buttonSignup.isEnabled = true
                             }
                             else -> {}
                         }
@@ -79,9 +79,9 @@ class RegisterFragment : Fragment() {
                 }
             }
             else{
-                Toast.makeText(requireContext(), "Please fill all forms.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), getString(R.string.fill_forms_error), Toast.LENGTH_SHORT).show()
             }
-            binding.signupButton.isEnabled = true
+            binding.buttonSignup.isEnabled = true
         }
     }
 

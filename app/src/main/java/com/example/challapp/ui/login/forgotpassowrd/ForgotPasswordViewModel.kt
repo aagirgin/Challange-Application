@@ -2,35 +2,33 @@ package com.example.challapp.ui.login.forgotpassowrd
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.google.firebase.auth.FirebaseAuth
+import com.example.challapp.R
+import com.example.challapp.domain.state.UiState
+import com.example.challapp.repository.FirestoreUserRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-sealed class ForgotPwState {
-    object empty : ForgotPwState()
-    object Loading : ForgotPwState()
-    data class Error(val errorMessage: String) : ForgotPwState()
-    object Success : ForgotPwState()
-}
 
-class ForgotPasswordViewModel:ViewModel() {
-    private val _forgotPwState = MutableStateFlow<ForgotPwState?>(ForgotPwState.empty)
-    val forgotPwState: StateFlow<ForgotPwState?> get() = _forgotPwState
+@HiltViewModel
+class ForgotPasswordViewModel @Inject constructor(
+    private val userRepository: FirestoreUserRepository
+):ViewModel() {
+    private val _forgotPwState = MutableStateFlow<UiState<*>>(UiState.Empty)
+    val forgotPwState: StateFlow<UiState<*>> get() = _forgotPwState
 
     fun sendPasswordResetEmail(email: String) {
         viewModelScope.launch {
-            _forgotPwState.value = ForgotPwState.Loading
+            _forgotPwState.value = UiState.Loading
 
-            FirebaseAuth.getInstance().sendPasswordResetEmail(email)
-                .addOnCompleteListener { task ->
-                    if (task.isSuccessful) {
-                        _forgotPwState.value = ForgotPwState.Success
-                    } else {
-                        val errorMessage = task.exception?.message ?: "An error occurred"
-                        _forgotPwState.value = ForgotPwState.Error(errorMessage)
-                    }
-                }
+            val isEmailSent = userRepository.sendPasswordResetEmail(email)
+            if (isEmailSent) {
+                _forgotPwState.value = UiState.Success(true)
+            } else {
+                _forgotPwState.value = UiState.Error("Reset mail could not be sent.")
+            }
         }
     }
 }

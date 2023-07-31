@@ -14,47 +14,51 @@
 
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="32dp">
+>
 
         <ImageView
-            android:id="@+id/registerImageJPG"
+            android:id="@+id/imageview_registerimage"
             android:layout_width="200dp"
             android:layout_height="200dp"
-            android:layout_marginTop="16dp"
-
             android:contentDescription="@string/registerpageimage"
             android:src="@drawable/registerpic"
+            app:layout_constraintBottom_toTopOf="@+id/textview_signupnow"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed" />
 
         <TextView
-            android:id="@+id/signupnowprompt"
+            android:id="@+id/textview_signupnow"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:fontFamily="@font/intersemibold"
             android:text="@string/sign_up_now"
             android:textSize="24sp"
+            app:layout_constraintBottom_toTopOf="@+id/textview_signupnowbottom"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/registerImageJPG" />
+            app:layout_constraintTop_toBottomOf="@+id/imageview_registerimage" />
 
         <TextView
-            android:id="@+id/signupnowbottomprompt"
+            android:id="@+id/textview_signupnowbottom"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:fontFamily="@font/interlight"
             android:text="@string/signup_prompt"
             android:textSize="16sp"
+            app:layout_constraintBottom_toTopOf="@+id/textinput_fullname"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/signupnowprompt" />
+            app:layout_constraintTop_toBottomOf="@+id/textview_signupnow" />
 
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/fullNameField"
+            android:id="@+id/textinput_fullname"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -67,9 +71,11 @@
             app:boxCornerRadiusTopEnd="10dp"
             app:boxCornerRadiusTopStart="10dp"
             app:boxStrokeWidth="2dp"
+            app:layout_constraintBottom_toTopOf="@+id/textinput_email"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/signupnowbottomprompt"
+            app:layout_constraintTop_toBottomOf="@+id/textview_signupnowbottom"
             app:startIconDrawable="@drawable/baseline_account_circle_24">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -79,7 +85,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/emailField"
+            android:id="@+id/textinput_email"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -92,9 +98,11 @@
             app:boxCornerRadiusTopEnd="10dp"
             app:boxCornerRadiusTopStart="10dp"
             app:boxStrokeWidth="2dp"
+            app:layout_constraintBottom_toTopOf="@+id/textinput_password"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/fullNameField"
+            app:layout_constraintTop_toBottomOf="@+id/textinput_fullname"
             app:startIconDrawable="@drawable/baseline_email_24">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -104,7 +112,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/passwordField"
+            android:id="@+id/textinput_password"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -117,9 +125,11 @@
             app:boxCornerRadiusTopEnd="10dp"
             app:boxCornerRadiusTopStart="10dp"
             app:boxStrokeWidth="2dp"
+            app:layout_constraintBottom_toTopOf="@+id/textview_tos1"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/emailField"
+            app:layout_constraintTop_toBottomOf="@+id/textinput_email"
             app:startIconDrawable="@drawable/baseline_password_24">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -131,111 +141,114 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/textview_tos1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="@string/you_agree_to_our"
             android:layout_marginEnd="3dp"
             android:fontFamily="@font/interextrabold"
+            android:text="@string/you_agree_to_our"
             android:textColor="@color/loginPageTextColor"
             android:textSize="14sp"
-            app:layout_constraintEnd_toStartOf="@+id/termsofservice"
+            app:layout_constraintBottom_toTopOf="@+id/button_signup"
+            app:layout_constraintEnd_toStartOf="@+id/textvirew_termsofservice"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/passwordField" />
+            app:layout_constraintTop_toBottomOf="@+id/textinput_password" />
 
         <TextView
-            android:id="@+id/termsofservice"
+            android:id="@+id/textvirew_termsofservice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/interextrabold"
-            android:textColor="@color/primaryApplicationColor"
             android:layout_marginEnd="3dp"
-            android:textSize="14sp"
+            android:fontFamily="@font/interextrabold"
             android:text="@string/terms_of_service"
-            app:layout_constraintEnd_toStartOf="@+id/textView3"
+            android:textColor="@color/primaryApplicationColor"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toStartOf="@+id/textview_and"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/textView"
-            app:layout_constraintTop_toTopOf="@+id/textView" />
+            app:layout_constraintStart_toEndOf="@+id/textview_tos1"
+            app:layout_constraintTop_toTopOf="@+id/textview_tos1" />
 
         <TextView
-            android:id="@+id/textView3"
+            android:id="@+id/textview_and"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/and"
             android:layout_marginEnd="3dp"
             android:fontFamily="@font/interextrabold"
+            android:text="@string/and"
             android:textColor="@color/loginPageTextColor"
             android:textSize="14sp"
-            app:layout_constraintEnd_toStartOf="@+id/privacypolicy"
+            app:layout_constraintEnd_toStartOf="@+id/textview_privacypolicy"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/termsofservice"
-            app:layout_constraintTop_toTopOf="@+id/textView" />
+            app:layout_constraintStart_toEndOf="@+id/textvirew_termsofservice"
+            app:layout_constraintTop_toTopOf="@+id/textview_tos1" />
 
         <TextView
-            android:id="@+id/privacypolicy"
+            android:id="@+id/textview_privacypolicy"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/interextrabold"
+            android:text="Privacy Policy"
             android:textColor="@color/primaryApplicationColor"
             android:textSize="14sp"
-            android:text="Privacy Policy"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/textView3"
-            app:layout_constraintTop_toTopOf="@+id/textView" />
+            app:layout_constraintStart_toEndOf="@+id/textview_and"
+            app:layout_constraintTop_toTopOf="@+id/textview_tos1" />
 
         <Button
-            android:id="@+id/signupButton"
+            android:id="@+id/button_signup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
+            android:backgroundTint="@color/primaryApplicationColor"
             android:fontFamily="@font/intersemibold"
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
-            android:backgroundTint="@color/primaryApplicationColor"
             android:text="@string/sign_up_registerpagebutton"
             android:textSize="24sp"
+            app:layout_constraintBottom_toTopOf="@+id/textview_alreadyhaveacc"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/privacypolicy" />
+            app:layout_constraintTop_toBottomOf="@+id/textview_tos1" />
 
         <TextView
-            android:layout_marginTop="16dp"
-            android:id="@+id/AlreadyHaveAccPrompt"
-            android:layout_marginEnd="1dp"
+            android:id="@+id/textview_alreadyhaveacc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/already_have_an_account"
-            app:layout_constraintEnd_toStartOf="@+id/backLoginTextButton"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="1dp"
             android:fontFamily="@font/interextrabold"
+            android:text="@string/already_have_an_account"
             android:textColor="@color/loginPageTextColor"
             android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/button_backtologin"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/signupButton" />
+            app:layout_constraintTop_toBottomOf="@+id/button_signup" />
 
         <TextView
-            android:layout_marginTop="16dp"
-            android:id="@+id/backLoginTextButton"
+            android:id="@+id/button_backtologin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginStart="1dp"
             android:clickable="true"
             android:focusable="true"
-            android:textSize="16sp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/log_in_textbutton"
             android:fontFamily="@font/interextrabold"
+            android:text="@string/log_in_textbutton"
             android:textColor="@color/primaryApplicationColor"
+            android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/AlreadyHaveAccPrompt"
-            app:layout_constraintTop_toBottomOf="@+id/signupButton" />
+            app:layout_constraintStart_toEndOf="@+id/textview_alreadyhaveacc"
+            app:layout_constraintTop_toTopOf="@+id/textview_alreadyhaveacc" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

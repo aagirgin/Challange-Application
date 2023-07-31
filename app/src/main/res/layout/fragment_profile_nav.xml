@@ -56,17 +56,19 @@
             app:layout_constraintTop_toBottomOf="@+id/textview_username" />
 
         <View
-            android:id="@+id/navProfileInfo"
+            android:id="@+id/view_navProfileInfo"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
             android:background="@drawable/custom_navtext_border"
-            app:layout_constraintTop_toBottomOf="@+id/splitterView"/>
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/splitterView" />
 
         <TextView
-            android:id="@+id/accountInfoText"
+            android:id="@+id/textview_accountInfo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/account_information"
@@ -74,33 +76,34 @@
             android:fontFamily="@font/interextrabold"
             android:textColor="@color/profileTextColor"
             android:layout_marginStart="16dp"
-            app:layout_constraintBottom_toBottomOf="@+id/navProfileInfo"
-            app:layout_constraintStart_toStartOf="@+id/navProfileInfo"
-            app:layout_constraintTop_toTopOf="@+id/navProfileInfo" />
+            app:layout_constraintBottom_toBottomOf="@+id/view_navProfileInfo"
+            app:layout_constraintStart_toStartOf="@+id/view_navProfileInfo"
+            app:layout_constraintTop_toTopOf="@+id/view_navProfileInfo" />
 
         <ImageView
-            android:id="@+id/navAccImg"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_marginEnd="8dp"
             android:src="@drawable/baseline_navigate_next_24"
-            app:layout_constraintBottom_toBottomOf="@+id/navProfileInfo"
-            app:layout_constraintEnd_toEndOf="@+id/navProfileInfo"
-            app:layout_constraintTop_toTopOf="@+id/navProfileInfo"
+            app:layout_constraintBottom_toBottomOf="@+id/view_navProfileInfo"
+            app:layout_constraintEnd_toEndOf="@+id/view_navProfileInfo"
+            app:layout_constraintTop_toTopOf="@+id/view_navProfileInfo"
             app:tint="@color/profileTextColor" />
 
         <View
-            android:id="@+id/navChangePwInfo"
+            android:id="@+id/view_navChangePwInfo"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="20dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginEnd="20dp"
             android:background="@drawable/custom_navtext_border"
-            app:layout_constraintTop_toBottomOf="@+id/navProfileInfo"/>
+            app:layout_constraintEnd_toEndOf="@+id/view_navProfileInfo"
+            app:layout_constraintStart_toStartOf="@+id/view_navProfileInfo"
+            app:layout_constraintTop_toBottomOf="@+id/view_navProfileInfo" />
 
         <TextView
-            android:id="@+id/chagePwInfoText"
+            android:id="@+id/textview_chagePwInfoText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/change_password_text"
@@ -108,33 +111,34 @@
             android:fontFamily="@font/interextrabold"
             android:textColor="@color/profileTextColor"
             android:layout_marginStart="16dp"
-            app:layout_constraintBottom_toBottomOf="@+id/navChangePwInfo"
-            app:layout_constraintStart_toStartOf="@+id/navChangePwInfo"
-            app:layout_constraintTop_toTopOf="@+id/navChangePwInfo" />
+            app:layout_constraintBottom_toBottomOf="@+id/view_navChangePwInfo"
+            app:layout_constraintStart_toStartOf="@+id/view_navChangePwInfo"
+            app:layout_constraintTop_toTopOf="@+id/view_navChangePwInfo" />
 
         <ImageView
-            android:id="@+id/changePwImg"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_marginEnd="8dp"
             android:src="@drawable/baseline_navigate_next_24"
-            app:layout_constraintBottom_toBottomOf="@+id/navChangePwInfo"
-            app:layout_constraintEnd_toEndOf="@+id/navChangePwInfo"
-            app:layout_constraintTop_toTopOf="@+id/navChangePwInfo"
+            app:layout_constraintBottom_toBottomOf="@+id/view_navChangePwInfo"
+            app:layout_constraintEnd_toEndOf="@+id/view_navChangePwInfo"
+            app:layout_constraintTop_toTopOf="@+id/view_navChangePwInfo"
             app:tint="@color/profileTextColor" />
 
         <View
-            android:id="@+id/deleteAccInfo"
+            android:id="@+id/view_deleteAccInfo"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="20dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginEnd="20dp"
             android:background="@drawable/custom_navtext_border"
-            app:layout_constraintTop_toBottomOf="@+id/navChangePwInfo"/>
+            app:layout_constraintEnd_toEndOf="@+id/view_navChangePwInfo"
+            app:layout_constraintStart_toStartOf="@+id/view_navChangePwInfo"
+            app:layout_constraintTop_toBottomOf="@+id/view_navChangePwInfo" />
 
         <TextView
-            android:id="@+id/deleteAccText"
+            android:id="@+id/textview_deleteAcc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/delete_account_text"
@@ -142,22 +146,56 @@
             android:fontFamily="@font/interextrabold"
             android:textColor="@color/profileTextColor"
             android:layout_marginStart="16dp"
-            app:layout_constraintBottom_toBottomOf="@+id/deleteAccInfo"
-            app:layout_constraintStart_toStartOf="@+id/deleteAccInfo"
-            app:layout_constraintTop_toTopOf="@+id/deleteAccInfo" />
+            app:layout_constraintBottom_toBottomOf="@+id/view_deleteAccInfo"
+            app:layout_constraintStart_toStartOf="@+id/view_deleteAccInfo"
+            app:layout_constraintTop_toTopOf="@+id/view_deleteAccInfo" />
 
         <ImageView
-            android:id="@+id/deleteAccImg"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_marginEnd="8dp"
             android:src="@drawable/baseline_navigate_next_24"
-            app:layout_constraintBottom_toBottomOf="@+id/deleteAccInfo"
-            app:layout_constraintEnd_toEndOf="@+id/deleteAccInfo"
-            app:layout_constraintTop_toTopOf="@+id/deleteAccInfo"
+            app:layout_constraintBottom_toBottomOf="@+id/view_deleteAccInfo"
+            app:layout_constraintEnd_toEndOf="@+id/view_deleteAccInfo"
+            app:layout_constraintTop_toTopOf="@+id/view_deleteAccInfo"
             app:tint="@color/profileTextColor" />
 
 
+        <View
+            android:id="@+id/view_signout"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/custom_navtext_border"
+            app:layout_constraintEnd_toEndOf="@+id/view_deleteAccInfo"
+            app:layout_constraintStart_toStartOf="@+id/view_deleteAccInfo"
+            app:layout_constraintTop_toBottomOf="@+id/view_deleteAccInfo" />
+
+        <TextView
+            android:id="@+id/textview_signout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/interextrabold"
+            android:text="@string/sign_out"
+            android:textColor="@color/profileTextColor"
+            android:textSize="16sp"
+            android:layout_marginStart="16dp"
+            app:layout_constraintBottom_toBottomOf="@+id/view_signout"
+            app:layout_constraintStart_toStartOf="@+id/view_signout"
+            app:layout_constraintTop_toTopOf="@+id/view_signout" />
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+
+            android:src="@drawable/baseline_navigate_next_24"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintBottom_toBottomOf="@+id/view_signout"
+            app:layout_constraintEnd_toEndOf="@+id/view_signout"
+            app:layout_constraintTop_toTopOf="@+id/view_signout"
+            app:tint="@color/profileTextColor" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

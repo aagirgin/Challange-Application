@@ -167,6 +167,9 @@
         <action
             android:id="@+id/action_profileNavFragment_to_profileChangePwFragment"
             app:destination="@id/profileChangePwFragment" />
+        <action
+            android:id="@+id/action_profileNavFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
     </fragment>
     <fragment
         android:id="@+id/groupFragment"

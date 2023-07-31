@@ -23,10 +23,6 @@ class ChallangeFragment : Fragment() {
 
 
         onClickNavigateDailyChallange()
-        binding.buttonprs.setOnClickListener {
-            challangeViewModel.signOutFromSession()
-            findNavController().navigate(R.id.action_challangeFragment_to_loginFragment)
-        }
 
         return binding.root
     }
