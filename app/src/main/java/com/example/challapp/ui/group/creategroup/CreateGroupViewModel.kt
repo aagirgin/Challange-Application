@@ -44,10 +44,14 @@ class CreateGroupViewModel @Inject constructor(
 
     private val _groupnameFlow: MutableStateFlow<String?> = MutableStateFlow(null)
 
+
+    private val _createGroupState = MutableStateFlow<UiState<*>>(UiState.Empty)
+    val createGroupState: StateFlow<UiState<*>> get() = _createGroupState
+
+
     init {
         viewModelScope.launch {
             _currentUserName.value = _currentUser.value?.uid?.let { userRepository.getUsername(it) }
-            println(_currentUserName.value)
         }
     }
 
@@ -56,18 +60,32 @@ class CreateGroupViewModel @Inject constructor(
         val currentUser = _currentUser.value
         val groupflow = _groupnameFlow.value
         val descriptionflow = _descriptionFlow.value
-        currentUser?.uid?.let { uid ->
-            val currentDate = LocalDate.now()
-            val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
-            val formattedDate = currentDate.format(formatter)
 
-            val group = ApplicationGroup(
-                groupName = groupflow!!,
-                creationDate = formattedDate,
-                groupDescription = descriptionflow!!,
-                groupMembers = mutableListOf(uid),
-            )
-            userRepository.addGroupToFirestore(group)
+        _createGroupState.value = UiState.Loading
+        try{
+            currentUser?.uid?.let { uid ->
+                val currentDate = LocalDate.now()
+                val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+                val formattedDate = currentDate.format(formatter)
+
+                val group = ApplicationGroup(
+                    groupName = groupflow!!,
+                    creationDate = formattedDate,
+                    groupDescription = descriptionflow!!,
+                    groupMembers = mutableListOf(uid),
+                    groupOwner = uid
+                )
+                val isAdded = userRepository.addGroupToFirestore(group)
+                val isUpdated = isAdded?.let { userRepository.updateIncludedGroupsForUser(uid, it) }
+                if (isAdded != null && isUpdated == true){
+                    _createGroupState.value = UiState.Success("Successfully Added")
+                }
+                else{
+                    _createGroupState.value = UiState.Error("Error occured while adding group.")
+                }
+            }
+        }catch (e:Exception){
+            _createGroupState.value = UiState.Error("Error occured while adding group.")
         }
     }
 }

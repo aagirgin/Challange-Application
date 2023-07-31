@@ -62,8 +62,7 @@
             app:cardCornerRadius="24dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/view2"
-            app:layout_constraintVertical_bias="0.01"
-            tools:layout_editor_absoluteX="12dp">
+            app:layout_constraintVertical_bias="0.1">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -145,7 +144,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/textview_dailychallangeprompt1" />
 
                 <Button
-                    android:id="@+id/forgotButton"
+                    android:id="@+id/button_seedailychallange"
                     android:layout_width="wrap_content"
                     android:layout_marginTop="20dp"
                     android:layout_marginBottom="20dp"
@@ -165,30 +164,7 @@
 
         </androidx.cardview.widget.CardView>
 
-        <TextView
-            android:id="@+id/textView9"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/loramedium"
-            android:text="@string/daily_chall_history"
-            android:textSize="18dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/imageView4"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintHorizontal_chainStyle="packed"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cardview_mainpage"
-            app:layout_constraintVertical_bias="0.1" />
 
-        <ImageView
-            android:id="@+id/imageView4"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            app:layout_constraintBottom_toBottomOf="@+id/textView9"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/textView9"
-            app:srcCompat="@drawable/baseline_keyboard_double_arrow_right_24" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

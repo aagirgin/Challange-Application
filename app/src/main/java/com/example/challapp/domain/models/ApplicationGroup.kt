@@ -7,5 +7,6 @@ data class ApplicationGroup(
     val creationDate: String,
     val groupDescription:String,
     val userCount: Int = 1,
-    val groupMembers: MutableList<String>
+    val groupMembers: MutableList<String>,
+    val groupOwner: String
     )

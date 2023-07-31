@@ -41,7 +41,7 @@ object ImageUploadService {
         Glide.with(imageView.context)
             .load(imageUrl)
             .centerCrop()
-            .error(R.drawable.baseline_person_24) // Set a placeholder image if loading fails
+            .error(R.drawable.baseline_person_24)
             .into(imageView)
     }
 

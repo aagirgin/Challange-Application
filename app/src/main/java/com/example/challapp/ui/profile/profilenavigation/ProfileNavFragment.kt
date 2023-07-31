@@ -29,7 +29,7 @@ class ProfileNavFragment : Fragment() {
     private val launcher: ActivityResultLauncher<Intent> =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == Activity.RESULT_OK) {
-                // Handle the selected image URI
+
                 val data: Intent? = result.data
                 val selectedImageUri: Uri? = data?.data
                 selectedImageUri?.let {

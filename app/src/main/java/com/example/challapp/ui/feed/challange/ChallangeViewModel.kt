@@ -1,4 +1,4 @@
-package com.example.challapp.ui.feed.feedmain
+package com.example.challapp.ui.feed.challange
 
 import androidx.lifecycle.ViewModel
 import com.example.challapp.repository.FirestoreUserRepository

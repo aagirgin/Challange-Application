@@ -54,7 +54,7 @@
     </fragment>
     <fragment
         android:id="@+id/challangeFragment"
-        android:name="com.example.challapp.ui.feed.feedmain.ChallangeFragment"
+        android:name="com.example.challapp.ui.feed.challange.ChallangeFragment"
         android:label="fragment_challange"
         tools:layout="@layout/fragment_challange" >
         <action
@@ -74,6 +74,9 @@
         <action
             android:id="@+id/action_challangeFragment_to_profileNavFragment"
             app:destination="@id/profileNavFragment" />
+        <action
+            android:id="@+id/action_challangeFragment_to_dailyChallangeFragment"
+            app:destination="@id/dailyChallangeFragment" />
     </fragment>
     <fragment
         android:id="@+id/forgotpasswordFragment"
@@ -182,5 +185,14 @@
         <action
             android:id="@+id/action_createGroupFragment_to_groupFragment"
             app:destination="@id/groupFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/dailyChallangeFragment"
+        android:name="com.example.challapp.ui.feed.dailychallange.DailyChallangeFragment"
+        android:label="fragment_daily_challange"
+        tools:layout="@layout/fragment_daily_challange" >
+        <action
+            android:id="@+id/action_dailyChallangeFragment_to_challangeFragment"
+            app:destination="@id/challangeFragment" />
     </fragment>
 </navigation>

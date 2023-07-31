@@ -46,7 +46,7 @@ class LoginFragment : Fragment() {
             if (isValid) {
                 loginViewModel.signIn(email, password)
             } else {
-                Toast.makeText(requireContext(), "Please fill all forms.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Please fill all of the forms.", Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -68,7 +68,7 @@ class LoginFragment : Fragment() {
 
                                 findNavController().navigate(R.id.action_loginFragment_to_challangeFragment)
                             } else {
-                                Toast.makeText(requireContext(), "Please verify your Mail.", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(requireContext(), getString(R.string.fill_forms_error), Toast.LENGTH_SHORT).show()
                             }
                             loginViewModel.resetLoginState()
                         }

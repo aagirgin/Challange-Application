@@ -13,8 +13,10 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.challapp.R
 import com.example.challapp.databinding.FragmentCreateGroupBinding
+import com.example.challapp.domain.state.UiState
 import com.example.challapp.ui.login.register.RegisterViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -54,11 +56,19 @@ class CreateGroupFragment : Fragment() {
             lifecycleScope.launch {
                 val groupName = binding.edittextGroupname.text.toString()
                 val groupDescription = binding.edittextGroupdescription.text.toString()
-                println(groupName)
                 if(validationFields(groupName,groupDescription)){
                     createGroupViewModel.descriptionFlow.value = groupDescription
                     createGroupViewModel.groupnameFlow.value = groupName
                     createGroupViewModel.addGroup()
+                    createGroupViewModel.createGroupState.collect{state->
+                        when (state) {
+                            is UiState.Success -> {
+                                findNavController().navigate(R.id.action_createGroupFragment_to_groupFragment)
+                            }
+                            is UiState.Error -> Toast.makeText(requireContext(),state.error,Toast.LENGTH_SHORT).show()
+                            else -> {}
+                        }
+                    }
                 } else{
                     Toast.makeText(requireContext() ,"Please fill all the fields.",Toast.LENGTH_SHORT).show()
                 }

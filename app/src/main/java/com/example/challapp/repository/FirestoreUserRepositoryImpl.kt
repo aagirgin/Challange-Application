@@ -4,6 +4,7 @@ import android.util.Log
 import com.example.challapp.domain.models.ApplicationGroup
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -27,10 +28,65 @@ class FirestoreUserRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun addGroupToFirestore(appGroup: ApplicationGroup) {
+    override suspend fun addGroupToFirestore(appGroup: ApplicationGroup):  String?  {
         val groupCollection = firestore.collection("Groups")
-        val groupDocument = getCurrentUser()?.let { groupCollection.document(it.uid) }
-        groupDocument?.set(appGroup)?.await()
+        return try {
+            val documentReference = groupCollection.add(appGroup).await()
+
+            documentReference.id
+        } catch (e: Exception) {
+            null
+        }
+    }
+
+    override suspend fun getGroupInformationByDocumentId(documentId: String): ApplicationGroup? {
+        val groupDocumentRef = firestore.collection("Groups").document(documentId)
+        return try {
+            val document = groupDocumentRef.get().await()
+            if (document.exists()) {
+                val groupData = document.data
+
+                val groupName = groupData?.get("groupName") as? String ?: ""
+                val creationDate = groupData?.get("creationDate") as? String ?: ""
+                val groupDescription = groupData?.get("groupDescription") as? String ?: ""
+                val userCount = groupData?.get("userCount") as? Long ?: 0
+                val groupMembers = (groupData?.get("groupMembers") as? List<String>)?.toMutableList()
+                    ?: mutableListOf()
+                val groupOwner = groupData?.get("groupOwner") as? String ?: ""
+
+                ApplicationGroup(
+                    groupName = groupName,
+                    creationDate = creationDate,
+                    groupDescription = groupDescription,
+                    userCount = userCount.toInt(),
+                    groupMembers = groupMembers,
+                    groupOwner = groupOwner
+                )
+            } else {
+                null
+            }
+        } catch (e: Exception) {
+            null
+        }
+    }
+
+
+
+
+override suspend fun getUserIncludedGroupIds(userId: String): List<String>? {
+        val userDocument = firestore.collection("Users").document(userId).get().await()
+        val includedGroups = userDocument.get("includedGroups") as? List<String>
+        return includedGroups
+    }
+    override suspend fun updateIncludedGroupsForUser(userId: String, groupId: String): Boolean {
+        val userCollection = firestore.collection("Users")
+        val userDocument = userCollection.document(userId)
+        return try {
+            userDocument.update("includedGroups", FieldValue.arrayUnion(groupId)).await()
+            true
+        } catch (e: Exception) {
+            false
+        }
     }
 
     override suspend fun changeUsername(userId: String, newUsername: String): Boolean {

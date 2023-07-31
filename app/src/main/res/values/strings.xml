@@ -61,4 +61,9 @@
     <string name="invite_your_friends_and_share_your_challenges">Invite your friends and share your challenges</string>
     <string name="create_your_group_in_under_a_minute">Create your group in under a minute</string>
     <string name="back_navigation_arrow">Back Navigation Arrow</string>
+    <string name="member">Member</string>
+    <string name="see_your_daily_challenge">See your Daily Challenge</string>
+    <string name="fill_forms_error">"Please fill all of the forms."</string>
+
+
 </resources>

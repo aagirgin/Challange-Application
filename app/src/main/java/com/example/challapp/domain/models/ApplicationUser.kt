@@ -5,5 +5,5 @@ data class ApplicationUser(
     val isAdmin: Boolean = false,
     val challangeStreak: Int = 0,
     val inviteKey: Int? = null,
-    val includedGroups: MutableList<Int> = mutableListOf()
+    val includedGroups: MutableList<String> = mutableListOf()
 )
