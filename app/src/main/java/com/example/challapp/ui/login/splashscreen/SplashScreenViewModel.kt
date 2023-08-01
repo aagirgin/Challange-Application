@@ -18,10 +18,10 @@ class SplashScreenViewModel @Inject constructor(
     val currUserState: StateFlow<Boolean> get() = _currUserState
 
     init {
-        currUserStatus()
+        getcurrentUserStatus()
     }
 
-    fun currUserStatus() {
+    fun getcurrentUserStatus() {
         viewModelScope.launch {
             val currentUser = userRepository.getCurrentUser()
             _currUserState.value = currentUser != null

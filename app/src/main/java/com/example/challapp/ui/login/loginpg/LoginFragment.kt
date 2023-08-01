@@ -20,24 +20,38 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class LoginFragment : Fragment() {
     private lateinit var loginViewModel: LoginViewModel
+
+    private val onBackPressedCallback = object : OnBackPressedCallback(true) {
+        override fun handleOnBackPressed() {
+            val previousDestination = findNavController().previousBackStackEntry?.destination
+            if (previousDestination?.id != R.id.splashScreenFragment && previousDestination?.id != R.id.profileNavFragment) {
+                isEnabled = false
+                requireActivity().onBackPressedDispatcher.onBackPressed()
+            }
+        }
+    }
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+
         val binding = FragmentLoginBinding.inflate(inflater,container,false)
         loginViewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
         binding.viewModel = loginViewModel
         binding.lifecycleOwner = this
 
-
         setupLoginButton(binding)
         onPressedNavigateRegisterPage(binding)
         onPressedNavigateForgotPassword(binding)
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, onBackPressedCallback)
 
         return binding.root
     }
-
+    override fun onDestroyView() {
+        onBackPressedCallback.remove()
+        super.onDestroyView()
+    }
     private fun setupLoginButton(binding: FragmentLoginBinding) {
         binding.buttonLogin.setOnClickListener {
             val email = binding.inputtextEmail.editText?.text.toString()

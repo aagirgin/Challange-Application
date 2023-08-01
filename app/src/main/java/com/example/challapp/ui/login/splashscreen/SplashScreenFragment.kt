@@ -39,7 +39,7 @@ class SplashScreenFragment : Fragment() {
             delay(2000)
 
             splashScreenViewModel.currUserState.collect{state ->
-                if (state == true){
+                if (state){
                     findNavController().navigate(R.id.action_splashScreenFragment_to_challangeFragment)
                 }
                 else{

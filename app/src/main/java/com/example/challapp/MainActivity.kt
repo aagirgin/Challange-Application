@@ -3,6 +3,7 @@ package com.example.challapp
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.activity.OnBackPressedCallback
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.example.challapp.databinding.ActivityMainBinding
@@ -22,15 +23,10 @@ class MainActivity : AppCompatActivity() {
 
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.activity_main_nav_host_fragment) as NavHostFragment
         navController = navHostFragment.navController
-
         setBottomNavigationBarDestination()
         hideBottomNavigationBar()
     }
 
-    @Deprecated("Deprecated in Java")
-    override fun onBackPressed() {
-        return
-    }
     private fun hideBottomNavigationBar() {
         navController.addOnDestinationChangedListener { _, destination, _ ->
             if (destination.id == R.id.splashScreenFragment ||

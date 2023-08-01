@@ -50,11 +50,9 @@ class DailyChallangeFragment : Fragment(), DailyChallengeAdapter.OnItemClickList
         binding = FragmentDailyChallangeBinding.inflate(inflater, container, false)
 
         onClickNavigateBack()
-
         dailyChallengeAdapter = DailyChallengeAdapter(downloadImageUrl)
         dailyChallengeAdapter.setOnItemClickListener(this)
         setupRecyclerView()
-
 
         return binding.root
     }

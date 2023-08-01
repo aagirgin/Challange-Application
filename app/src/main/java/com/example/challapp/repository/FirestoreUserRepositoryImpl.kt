@@ -73,7 +73,7 @@ class FirestoreUserRepositoryImpl @Inject constructor(
 
 
 
-override suspend fun getUserIncludedGroupIds(userId: String): List<String>? {
+    override suspend fun getUserIncludedGroupIds(userId: String): List<String>? {
         val userDocument = firestore.collection("Users").document(userId).get().await()
         val includedGroups = userDocument.get("includedGroups") as? List<String>
         return includedGroups
@@ -197,7 +197,10 @@ override suspend fun getUserIncludedGroupIds(userId: String): List<String>? {
     }
 
     override fun getCurrentUser(): FirebaseUser? {
-        return auth.currentUser
+        return if (auth.currentUser?.isEmailVerified == false){
+            null
+        }else{
+            auth.currentUser
+        }
     }
-
 }
