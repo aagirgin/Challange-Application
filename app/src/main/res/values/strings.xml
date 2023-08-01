@@ -67,4 +67,9 @@
     <string name="email_Sent_succesful">"Email successfully sent to reset your password."</string>
     <string name="email_Sent_unsuccesful">"Reset mail could not be sent."</string>
     <string name="sign_out">Sign Out</string>
+    <string name="challenge_date">Challenge Date</string>
+    <string name="automatic_group_msg">This challenge will be automatically shared with your groups.</string>
+    <string name="mark_challenge_as_complete">Mark Challenge as Complete</string>
+    <string name="challange_description">Challange Description</string>
+    <string name="add_photo_image">Add Photo Image</string>
 </resources>

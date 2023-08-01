@@ -48,26 +48,62 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="10dp"
             android:fontFamily="@font/lorasemibold"
-            android:text="@string/daily_challenge"
+            android:text="Lorem Ipsum Challenge"
             android:textColor="@color/profileTextColor"
             android:textSize="14sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/view2" />
 
         <TextView
-            android:id="@+id/textView4"
+            android:id="@+id/textview_dailychallange_give"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="20dp"
-            android:paddingStart="20dp"
-            android:layout_marginTop="10dp"
-            android:paddingEnd="20dp"
             android:fontFamily="@font/loramedium"
+            android:paddingStart="20dp"
+            android:layout_marginTop="8dp"
+            android:paddingEnd="20dp"
             android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc nec pulvinar sem. Sed laoreet turpis non est semper, sed suscipit ex semper. Nunc dui tellus, pharetra vitae sem in, volutpat euismod nulla. Proin tempus sapien eget vehicula luctus. Mauris eu dolor odio. Nam metus justo, venenatis id interdum nec, vehicula ac ex. Curabitur sem lacus, fermentum quis quam in, venenatis efficitur nibh. Maecenas malesuada ullamcorper pharetra."
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/textview_dailychallange"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/splitterView2" />
+
+        <View
+            android:id="@+id/splitterView"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="20dp"
+            android:background="@color/splitterViewColor"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.327"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textview_dailychallange_give" />
+
+        <View
+            android:id="@+id/splitterView2"
+            android:layout_marginTop="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:background="@color/splitterViewColor"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textview_dailychallange" />
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerview_dailypage"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/splitterView2"
+            app:layout_constraintStart_toStartOf="@+id/splitterView2"
+            app:layout_constraintTop_toBottomOf="@+id/splitterView" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -27,6 +27,10 @@ class MainActivity : AppCompatActivity() {
         hideBottomNavigationBar()
     }
 
+    @Deprecated("Deprecated in Java")
+    override fun onBackPressed() {
+        return
+    }
     private fun hideBottomNavigationBar() {
         navController.addOnDestinationChangedListener { _, destination, _ ->
             if (destination.id == R.id.splashScreenFragment ||

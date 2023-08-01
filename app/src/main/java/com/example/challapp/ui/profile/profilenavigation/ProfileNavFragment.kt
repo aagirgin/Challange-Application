@@ -21,7 +21,6 @@ import com.example.challapp.services.ImageUploadService
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -48,16 +47,9 @@ class ProfileNavFragment : Fragment() {
 
 
         binding = FragmentProfileNavBinding.inflate(inflater,container,false)
+
         displayName()
-
-        viewLifecycleOwner.lifecycleScope.launch {
-            profileNavViewModel.currentUser.collect{user->
-                val imageUrl = "${user?.email}_avatar.jpg"
-                loadProfileImage(imageUrl)
-            }
-        }
-
-
+        displayImage()
         addProfilePicture()
         onNavigateInProfile()
 
@@ -74,6 +66,14 @@ class ProfileNavFragment : Fragment() {
         }
     }
 
+    private fun displayImage(){
+        viewLifecycleOwner.lifecycleScope.launch {
+            profileNavViewModel.currentUser.collect{user->
+                val imageUrl = "${user?.email}_avatar.jpg"
+                loadProfileImage(imageUrl)
+            }
+        }
+    }
     private fun displayName(){
         viewLifecycleOwner.lifecycleScope.launch {
             profileNavViewModel.usernameFlow.collect{   username ->
@@ -86,15 +86,13 @@ class ProfileNavFragment : Fragment() {
 
     private fun loadProfileImage(imageUrl: String) {
         val storageRef: StorageReference =
-            FirebaseStorage.getInstance().reference.child("profileAvatars").child(imageUrl)
-
+            ImageUploadService.getStorageReference().child("profileAvatars").child(imageUrl)
         storageRef.downloadUrl.addOnSuccessListener { downloadUri ->
-
             ImageUploadService.loadImageIntoImageView(downloadUri.toString(), binding.shapeableImageView)
         }.addOnFailureListener { exception ->
-
         }
     }
+
 
     private fun uploadImageToFirebaseStorage(imageUri: Uri) {
         viewLifecycleOwner.lifecycleScope.launch {
@@ -105,25 +103,15 @@ class ProfileNavFragment : Fragment() {
                 imageUri,
                 email,
                 { downloadUrl ->
-                    // Image upload success
                     downloadImageUrl = downloadUrl
-                    ImageUploadService.loadImageIntoImageView(downloadImageUrl!!, binding.shapeableImageView)
                 },
                 { errorMessage ->
-                    // Image upload failure
                     Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_SHORT).show()
                 }
             )
         }
     }
 
-    private fun isNotAuth(){
-        viewLifecycleOwner.lifecycleScope.launch {
-            if(profileNavViewModel.currentUser.value == null){
-                findNavController().navigate(R.id.action_profileNavFragment_to_loginFragment)
-            }
-        }
-    }
 
     private fun onNavigateInProfile(){
         binding.viewNavProfileInfo.setOnClickListener {
@@ -170,6 +158,7 @@ class ProfileNavFragment : Fragment() {
             setPositiveButton("Sign out") { _, _ ->
                 profileNavViewModel.signoutUser()
                 findNavController().navigate(R.id.action_profileNavFragment_to_loginFragment)
+
             }
             setNegativeButton("Cancel") { dialog, _ ->
                 dialog.dismiss()

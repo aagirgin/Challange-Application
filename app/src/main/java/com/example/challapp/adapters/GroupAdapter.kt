@@ -10,7 +10,7 @@ import com.example.challapp.R
 import com.example.challapp.domain.models.ApplicationGroup
 
 class GroupAdapter(
-    private val groupList: MutableList<ApplicationGroup>,
+    private val groupList: MutableList<ApplicationGroup>
 ) : RecyclerView.Adapter<GroupAdapter.GroupViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GroupViewHolder {
@@ -38,5 +38,4 @@ class GroupAdapter(
             userCountTextView.text = "${group.userCount} Users"
         }
     }
-
 }

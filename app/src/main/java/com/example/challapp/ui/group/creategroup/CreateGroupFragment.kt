@@ -31,7 +31,7 @@ class CreateGroupFragment : Fragment() {
     ): View? {
         binding = FragmentCreateGroupBinding.inflate(inflater, container, false)
         binding.viewModel = createGroupViewModel
-
+        binding.lifecycleOwner = viewLifecycleOwner
         lifecycleScope.launch {
             println(addGroupToDatabase())
         }
