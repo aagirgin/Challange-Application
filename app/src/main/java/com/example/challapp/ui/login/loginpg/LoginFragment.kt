@@ -5,17 +5,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.challapp.R
 import com.example.challapp.databinding.FragmentLoginBinding
-import com.example.challapp.repository.FirestoreUserRepository
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class LoginFragment : Fragment() {
@@ -62,7 +60,7 @@ class LoginFragment : Fragment() {
             if (isValid) {
                 loginViewModel.signIn(email, password)
             } else {
-                Toast.makeText(requireContext(), getString(R.string.fill_forms_error), Toast.LENGTH_SHORT).show()
+                Snackbar.make(binding.root, getString(R.string.fill_forms_error), Snackbar.LENGTH_SHORT).show()
             }
         }
 
@@ -70,10 +68,10 @@ class LoginFragment : Fragment() {
             loginViewModel.loginState.collect { state ->
                 when (state) {
                     is LoginState.Loading -> {
-                        // TODO: Show loading indicator or progress bar
+                        // TODO: Show loading indicator or progress bar -> Shimmer
                     }
                     is LoginState.Error -> {
-                        Toast.makeText(requireContext(), state.errorMessage, Toast.LENGTH_SHORT).show()
+                        Snackbar.make(binding.root, getString(R.string.login_failed), Snackbar.LENGTH_SHORT).show()
                     }
                     is LoginState.Success -> {
                         loginViewModel.currentUser.collect{user->

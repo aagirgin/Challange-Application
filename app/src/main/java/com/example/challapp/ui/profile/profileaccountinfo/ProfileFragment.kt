@@ -9,8 +9,10 @@ import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import com.example.challapp.R
 import com.example.challapp.databinding.FragmentProfileBinding
 import com.example.challapp.services.ImageUploadService
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -58,17 +60,16 @@ class ProfileFragment : Fragment() {
                             profileViewModel.changeUsernameFlow.collect { changeSuccess ->
                                 changeSuccess?.let {
                                     if (it) {
-                                        println("Change Completed.")
                                         binding.edittextName.isEnabled = false
                                         profileViewModel.fetchUsername(currentUser.uid)
                                     }
                                 }
                             }
-                        } else {
-                            println("Error: Current user is null.")
                         }
                     }
                 }
+            }else{
+                Snackbar.make(binding.root, getString(R.string.fill_namefield), Snackbar.LENGTH_SHORT).show()
             }
         }
     }

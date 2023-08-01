@@ -43,7 +43,7 @@
     <string name="notification_image">Notification Image</string>
     <string name="days">Days</string>
     <string name="daily_challenge">Daily Challenge</string>
-    <string name="daily_chall_history">Look to your daily challange history</string>
+    <string name="daily_chall_history">Look to your daily challenge history</string>
     <string name="btn_see_your_daily_challenge">See your Daily Challenge</string>
     <string name="share_and_compete_with_your_friends">Share and compete with your friends.</string>
     <string name="complete_your_given_daily_challelenge">Complete your given daily challelenge</string>
@@ -70,6 +70,13 @@
     <string name="challenge_date">Challenge Date</string>
     <string name="automatic_group_msg">This challenge will be automatically shared with your groups.</string>
     <string name="mark_challenge_as_complete">Mark Challenge as Complete</string>
-    <string name="challange_description">Challange Description</string>
+    <string name="challange_description">Challenge Description</string>
     <string name="add_photo_image">Add Photo Image</string>
+    <string name="login_failed">Login failed: Please check you credentials.</string>
+    <string name="fill_namefield">Please fill the name form.</string>
+    <string name="password_didnot_match">Password did not match.</string>
+    <string name="check_current_password">Please check your current password.</string>
+    <string name="check_password_length">Password length should be longer than 6 characters.</string>
+    <string name="password_change_success">Password changed successfully</string>
+    <string name="password_change_fail">Failed to change password</string>
 </resources>

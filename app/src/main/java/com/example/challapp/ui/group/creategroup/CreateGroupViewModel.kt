@@ -1,9 +1,7 @@
 package com.example.challapp.ui.group.creategroup
 
 import android.os.Build
-import android.widget.EditText
 import androidx.annotation.RequiresApi
-import androidx.databinding.BindingAdapter
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.challapp.domain.models.ApplicationGroup
@@ -13,8 +11,6 @@ import com.google.firebase.auth.FirebaseUser
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 import java.time.LocalDate
@@ -78,7 +74,7 @@ class CreateGroupViewModel @Inject constructor(
                 val isAdded = userRepository.addGroupToFirestore(group)
                 val isUpdated = isAdded?.let { userRepository.updateIncludedGroupsForUser(uid, it) }
                 if (isAdded != null && isUpdated == true){
-                    _createGroupState.value = UiState.Success("Successfully Added")
+                    _createGroupState.value = UiState.Success(true )
                 }
                 else{
                     _createGroupState.value = UiState.Error("Error occured while adding group.")

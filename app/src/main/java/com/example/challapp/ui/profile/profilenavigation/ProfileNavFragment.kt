@@ -7,7 +7,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
@@ -18,7 +17,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.challapp.R
 import com.example.challapp.databinding.FragmentProfileNavBinding
 import com.example.challapp.services.ImageUploadService
-import com.google.firebase.storage.FirebaseStorage
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.storage.StorageReference
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -106,7 +105,7 @@ class ProfileNavFragment : Fragment() {
                     downloadImageUrl = downloadUrl
                 },
                 { errorMessage ->
-                    Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_SHORT).show()
+                    Snackbar.make(binding.root, errorMessage, Snackbar.LENGTH_SHORT).show()
                 }
             )
         }
@@ -158,7 +157,6 @@ class ProfileNavFragment : Fragment() {
             setPositiveButton("Sign out") { _, _ ->
                 profileNavViewModel.signoutUser()
                 findNavController().navigate(R.id.action_profileNavFragment_to_loginFragment)
-
             }
             setNegativeButton("Cancel") { dialog, _ ->
                 dialog.dismiss()

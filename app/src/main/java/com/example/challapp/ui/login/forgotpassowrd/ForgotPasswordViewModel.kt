@@ -2,7 +2,6 @@ package com.example.challapp.ui.login.forgotpassowrd
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.challapp.R
 import com.example.challapp.domain.state.UiState
 import com.example.challapp.repository.FirestoreUserRepository
 import dagger.hilt.android.lifecycle.HiltViewModel

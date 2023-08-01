@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -14,9 +13,8 @@ import androidx.navigation.fragment.findNavController
 import com.example.challapp.R
 import com.example.challapp.databinding.FragmentCreateGroupBinding
 import com.example.challapp.domain.state.UiState
-import com.example.challapp.ui.login.register.RegisterViewModel
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -28,7 +26,7 @@ class CreateGroupFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentCreateGroupBinding.inflate(inflater, container, false)
         binding.viewModel = createGroupViewModel
         binding.lifecycleOwner = viewLifecycleOwner
@@ -65,12 +63,12 @@ class CreateGroupFragment : Fragment() {
                             is UiState.Success -> {
                                 findNavController().navigate(R.id.action_createGroupFragment_to_groupFragment)
                             }
-                            is UiState.Error -> Toast.makeText(requireContext(),state.error,Toast.LENGTH_SHORT).show()
+                            is UiState.Error -> Snackbar.make(binding.root, state.error, Snackbar.LENGTH_SHORT).show()
                             else -> {}
                         }
                     }
                 } else{
-                    Toast.makeText(requireContext() ,"Please fill all the fields.",Toast.LENGTH_SHORT).show()
+                    Snackbar.make(binding.root, getString(R.string.fill_forms_error), Snackbar.LENGTH_SHORT).show()
                 }
             } }
         }

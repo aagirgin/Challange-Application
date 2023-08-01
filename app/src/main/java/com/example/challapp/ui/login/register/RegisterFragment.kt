@@ -4,13 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.challapp.R
 import com.example.challapp.databinding.FragmentRegisterBinding
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -70,7 +70,7 @@ class RegisterFragment : Fragment() {
                                 EmailVerification()
                             }
                             is RegisterState.Error -> {
-                                Toast.makeText(requireContext(), state.errorMessage, Toast.LENGTH_SHORT).show()
+                                Snackbar.make(binding.root, state.errorMessage, Snackbar.LENGTH_SHORT).show()
                                 binding.buttonSignup.isEnabled = true
                             }
                             else -> {}
@@ -79,7 +79,7 @@ class RegisterFragment : Fragment() {
                 }
             }
             else{
-                Toast.makeText(requireContext(), getString(R.string.fill_forms_error), Toast.LENGTH_SHORT).show()
+                Snackbar.make(binding.root, getString(R.string.fill_forms_error), Snackbar.LENGTH_SHORT).show()
             }
             binding.buttonSignup.isEnabled = true
         }

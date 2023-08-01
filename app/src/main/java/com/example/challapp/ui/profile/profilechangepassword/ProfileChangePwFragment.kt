@@ -4,12 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import com.example.challapp.R
 import com.example.challapp.databinding.FragmentProfileChangePwBinding
 import com.example.challapp.services.ImageUploadService
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.EmailAuthProvider
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -85,9 +86,9 @@ class ProfileChangePwFragment : Fragment() {
             currentUser?.updatePassword(newPw)
                 ?.addOnCompleteListener { passwordUpdateTask ->
                     if (passwordUpdateTask.isSuccessful) {
-                        Toast.makeText(requireContext(), "Password changed successfully", Toast.LENGTH_SHORT).show()
+                        Snackbar.make(binding.root, getString(R.string.password_change_success), Snackbar.LENGTH_SHORT).show()
                     } else {
-                        Toast.makeText(requireContext(), "Failed to change password", Toast.LENGTH_SHORT).show()
+                        Snackbar.make(binding.root, getString(R.string.password_change_fail), Snackbar.LENGTH_SHORT).show()
                     }
                 }
         }
@@ -107,18 +108,18 @@ class ProfileChangePwFragment : Fragment() {
                                 performPasswordChange(newPw)
                             }
                             else{
-                                Toast.makeText(requireContext(), "Password did not match.", Toast.LENGTH_SHORT).show()
+                                Snackbar.make(binding.root, getString(R.string.password_didnot_match), Snackbar.LENGTH_SHORT).show()
                             }
                         } else {
-                            Toast.makeText(requireContext(), "Please check your current password.", Toast.LENGTH_SHORT).show()
+                            Snackbar.make(binding.root, getString(R.string.check_current_password), Snackbar.LENGTH_SHORT).show()
                         }
                     }
                 }
                 else{
-                    Toast.makeText(requireContext(), "Password length should be longer than 6 characters.", Toast.LENGTH_SHORT).show()
+                    Snackbar.make(binding.root, getString(R.string.check_password_length), Snackbar.LENGTH_SHORT).show()
                 }
             } else {
-                Toast.makeText(requireContext(), "Please fill all forms.", Toast.LENGTH_SHORT).show()
+                Snackbar.make(binding.root, getString(R.string.fill_forms_error), Snackbar.LENGTH_SHORT).show()
             }
         }
     }
