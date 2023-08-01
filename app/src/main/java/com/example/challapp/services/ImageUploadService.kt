@@ -33,17 +33,14 @@ object ImageUploadService {
             }
     }
 
-    fun uploadImagetoUserDir(imageUri: Uri, challangeID: String,currentUserUid: String, onSuccess: (String) -> Unit, onFailure: (String) -> Unit) {
+    fun uploadImagetoUserDir(
+        imageUri: Uri, challangeID: String,
+        currentUserUid: String, onFailure: (String) -> Unit) {
 
         val storageRef: StorageReference =
             storageInstance.reference.child(currentUserUid).child(challangeID)
 
         storageRef.putFile(imageUri)
-            .addOnSuccessListener { taskSnapshot ->
-                storageRef.downloadUrl.addOnSuccessListener { downloadUri ->
-                    onSuccess(downloadUri.toString())
-                }
-            }
             .addOnFailureListener { exception ->
                 onFailure("Image upload failed: ${exception.message}")
             }

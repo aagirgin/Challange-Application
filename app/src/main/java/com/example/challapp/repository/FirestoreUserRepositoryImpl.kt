@@ -1,7 +1,10 @@
 package com.example.challapp.repository
 
 import android.util.Log
+import com.example.challapp.domain.models.ApplicationDailyChallenge
+import com.example.challapp.domain.models.ApplicationDailyQuestion
 import com.example.challapp.domain.models.ApplicationGroup
+import com.example.challapp.domain.models.ApplicationUser
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FieldValue
@@ -101,6 +104,35 @@ class FirestoreUserRepositoryImpl @Inject constructor(
         }
     }
 
+    override suspend fun addDailyChallangeToUser(userId: String, description: String, documentId: String):Boolean {
+        val userDocRef = firestore.collection("Users").document(userId)
+        return try {
+            userDocRef.update("allDailyQuestions", FieldValue.arrayUnion(
+                mapOf(
+                    "description" to description,
+                    "questionDocumentId" to documentId
+                )
+            )).await()
+            true
+
+        }catch (e: Exception) {
+            Log.e("FirestoreUserRepo", "Error updating daily questions: ${e.message}")
+            false
+        }
+
+
+    }
+    override suspend fun getDailyQuestionInformation(): ApplicationDailyQuestion{
+
+        val userDocRef = firestore.collection("Questions").document("2023-07-30").get().await()
+        val dailyQuestion = userDocRef.get("dailyQuestion") as? String
+        val dailyQuestionName = userDocRef.get("dailyQuestionName") as? String
+        return ApplicationDailyQuestion(
+            dailyQuestion = dailyQuestion,
+            dailyQuestionName = dailyQuestionName
+        )
+    }
+
     fun generateInviteKey(): String {
         val chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
         val random = java.util.Random()
@@ -191,6 +223,8 @@ class FirestoreUserRepositoryImpl @Inject constructor(
             false
         }
     }
+
+
 
     override fun signOut() {
         auth.signOut()

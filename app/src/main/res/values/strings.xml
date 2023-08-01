@@ -79,4 +79,6 @@
     <string name="check_password_length">Password length should be longer than 6 characters.</string>
     <string name="password_change_success">Password changed successfully</string>
     <string name="password_change_fail">Failed to change password</string>
+    <string name="picture_or_description">You should fill description or upload a picture.</string>
+
 </resources>

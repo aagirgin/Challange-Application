@@ -1,10 +1,12 @@
 package com.example.challapp.adapters
 import android.graphics.drawable.Drawable
-import android.media.Image
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
@@ -15,6 +17,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
 import com.example.challapp.services.ImageUploadService
+import com.example.challapp.ui.feed.dailychallange.DailyChallangeFragment
 import org.w3c.dom.Text
 
 
@@ -27,8 +30,17 @@ class DailyChallengeAdapter(
         fun onButtonClick()
     }
     private var itemClickListener: OnItemClickListener? = null
+    private var descriptionChangeListener: OnDescriptionChangeListener? = null
+
     fun setOnItemClickListener(listener: OnItemClickListener) {
         itemClickListener = listener
+    }
+    interface OnDescriptionChangeListener {
+        fun onDescriptionChanged(description: String)
+    }
+
+    fun setDescriptionChangeListener(listener: DailyChallangeFragment) {
+        descriptionChangeListener = listener
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChallengeViewHolder {
         val inflater = LayoutInflater.from(parent.context).inflate(R.layout.adapter_dailychallange_item, parent, false)
@@ -54,18 +66,28 @@ class DailyChallengeAdapter(
         private val imagePhotoText : TextView = itemView.findViewById(R.id.textview_addphotoprompt)
         private val button: Button = itemView.findViewById(R.id.button)
         private val constaintL: ConstraintLayout = itemView.findViewById(R.id.constraintlayout_backgroundChange)
+        private val edittextGroupDescription: EditText = itemView.findViewById(R.id.edittext_groupdescription)
 
         init {
-
             cardView.setOnClickListener {
                 itemClickListener?.onCardClick()
             }
 
-            // Set click listener for the Button
             button.setOnClickListener {
                 itemClickListener?.onButtonClick()
             }
+
+            edittextGroupDescription.addTextChangedListener(object : TextWatcher {
+                override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                    descriptionChangeListener?.onDescriptionChanged(s.toString())
+                }
+
+                override fun afterTextChanged(s: Editable?) {}
+            })
         }
+
         private var downloadImageUrl: String? = null
 
         fun loadImageToCard(imageUrl: String?) {
