@@ -20,6 +20,7 @@ import com.example.challapp.services.ImageUploadService
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.storage.StorageReference
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -31,13 +32,12 @@ class ProfileNavFragment : Fragment() {
                 val data: Intent? = result.data
                 val selectedImageUri: Uri? = data?.data
                 selectedImageUri?.let {
-                    uploadImageToFirebaseStorage(it)
+                    profileNavViewModel.insertImageForUserAvatar(it, profileNavViewModel.currentUser.value?.email ?: "")
                 }
             }
         }
 
     private val profileNavViewModel: ProfileNavViewModel by viewModels()
-    private var downloadImageUrl: String? = null
     private lateinit var binding : FragmentProfileNavBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -46,6 +46,8 @@ class ProfileNavFragment : Fragment() {
 
 
         binding = FragmentProfileNavBinding.inflate(inflater,container,false)
+
+
 
         displayName()
         displayImage()
@@ -66,14 +68,7 @@ class ProfileNavFragment : Fragment() {
         }
     }
 
-    private fun displayImage(){
-        viewLifecycleOwner.lifecycleScope.launch {
-            profileNavViewModel.currentUser.collect{user->
-                val imageUrl = "${user?.email}_avatar.jpg"
-                loadProfileImage(imageUrl)
-            }
-        }
-    }
+
     private fun displayName(){
         viewLifecycleOwner.lifecycleScope.launch {
             profileNavViewModel.usernameFlow.collect{   username ->
@@ -83,34 +78,30 @@ class ProfileNavFragment : Fragment() {
     }
 
 
-
-    private fun loadProfileImage(imageUrl: String) {
-        val storageRef: StorageReference =
-            ImageUploadService.getStorageReference().child("profileAvatars").child(imageUrl)
-        storageRef.downloadUrl.addOnSuccessListener { downloadUri ->
-            ImageUploadService.loadImageIntoImageView(downloadUri.toString(), binding.shapeableImageView)
-        }.addOnFailureListener { exception ->
-        }
-    }
-
-
-    private fun uploadImageToFirebaseStorage(imageUri: Uri) {
+    private fun displayImage() {
         viewLifecycleOwner.lifecycleScope.launch {
-            val currentUser = profileNavViewModel.currentUser.value
-            val email = currentUser?.email ?: return@launch
-
-            ImageUploadService.uploadImage(
-                imageUri,
-                email,
-                { downloadUrl ->
-                    downloadImageUrl = downloadUrl
-                },
-                { errorMessage ->
-                    Snackbar.make(binding.root, errorMessage, Snackbar.LENGTH_SHORT).show()
+            binding.shimmerShapableimage.startShimmer()
+            profileNavViewModel.currentUser.value?.email?.let { email ->
+                profileNavViewModel.loadProfileImage(email)
+                profileNavViewModel.profileImageUrl.collect { imageUrl ->
+                    binding.shimmerShapableimage.stopShimmer()
+                    if (imageUrl.isNullOrBlank()) {
+                        binding.shimmerShapableimage.startShimmer()
+                    }
+                    else if (imageUrl == "No Picture"){
+                        binding.shapeableImageView.setImageResource(R.drawable.baseline_person_24)
+                        binding.shimmerShapableimage.hideShimmer()
+                    }
+                    else {
+                        ImageUploadService.loadImageIntoImageView(imageUrl, binding.shapeableImageView)
+                        binding.shimmerShapableimage.hideShimmer()
+                    }
                 }
-            )
+            }
         }
     }
+
+
 
 
     private fun onNavigateInProfile(){

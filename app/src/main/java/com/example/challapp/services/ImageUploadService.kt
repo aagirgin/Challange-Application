@@ -7,6 +7,7 @@ import com.example.challapp.R
 import com.google.android.material.imageview.ShapeableImageView
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
+import kotlinx.coroutines.tasks.await
 
 
 object ImageUploadService {
@@ -14,31 +15,13 @@ object ImageUploadService {
     private val storageInstance: FirebaseStorage by lazy {
         FirebaseStorage.getInstance()
     }
-    fun getStorageReference(): StorageReference {
-        return storageInstance.reference
-    }
-    fun uploadImage(imageUri: Uri, email: String, onSuccess: (String) -> Unit, onFailure: (String) -> Unit) {
-        val imageName = "${email}_avatar.jpg"
-        val storageRef: StorageReference =
-            storageInstance.reference.child("profileAvatars").child(imageName)
-
-        storageRef.putFile(imageUri)
-            .addOnSuccessListener { taskSnapshot ->
-                storageRef.downloadUrl.addOnSuccessListener { downloadUri ->
-                    onSuccess(downloadUri.toString())
-                }
-            }
-            .addOnFailureListener { exception ->
-                onFailure("Image upload failed: ${exception.message}")
-            }
-    }
 
     fun uploadImagetoUserDir(
         imageUri: Uri, challangeID: String,
         currentUserUid: String, onFailure: (String) -> Unit) {
 
         val storageRef: StorageReference =
-            storageInstance.reference.child(currentUserUid).child(challangeID)
+            storageInstance.reference.child("Users").child(currentUserUid).child(challangeID)
 
         storageRef.putFile(imageUri)
             .addOnFailureListener { exception ->
@@ -50,20 +33,19 @@ object ImageUploadService {
         Glide.with(imageView.context)
             .load(imageUrl)
             .centerCrop()
-            .error(R.drawable.baseline_person_24)
             .into(imageView)
     }
 
-
-    fun loadProfileImage(email: String, imageView: ShapeableImageView) {
-        val imageUrl = "${email}_avatar.jpg"
+    suspend fun getImageWithDocumentId(userId: String, documentId: String): String? {
+        val imageUrl = "documentId"
         val storageRef: StorageReference =
-            storageInstance.reference.child("profileAvatars").child(imageUrl)
+            storageInstance.reference.child("Users").child(userId).child(documentId)
 
-        storageRef.downloadUrl.addOnSuccessListener { downloadUri ->
-            loadImageIntoImageView(downloadUri.toString(), imageView)
-        }.addOnFailureListener { exception ->
-            imageView.setImageResource(R.drawable.baseline_person_24)
+        return try {
+            val downloadUri = storageRef.downloadUrl.await()
+            downloadUri.toString()
+        } catch (e: Exception) {
+            "No Image"
         }
     }
 }

@@ -38,10 +38,19 @@ class ProfileChangePwFragment : Fragment() {
         return binding.root
     }
 
-    private suspend fun loadProfileImage() {
-        profileChangePwViewModel.currentUser.collect{
-            if (it != null) {
-                it.email?.let { it1 -> ImageUploadService.loadProfileImage(it1,binding.shapeableImageView) }
+    private fun loadProfileImage() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            profileChangePwViewModel.currentUser.value?.email?.let { profileChangePwViewModel.loadProfileImage(it) }
+            profileChangePwViewModel.profileImageUrl.collect { imageUrl ->
+                if (imageUrl == "No Picture"){
+                    binding.shapeableImageView.setImageResource(R.drawable.baseline_person_24)
+                }
+                else {
+                    if (imageUrl != null) {
+                        ImageUploadService.loadImageIntoImageView(imageUrl, binding.shapeableImageView)
+                    }
+
+                }
             }
         }
     }

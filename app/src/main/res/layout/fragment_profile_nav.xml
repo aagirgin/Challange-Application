@@ -19,20 +19,30 @@
             app:layout_constraintTop_toTopOf="parent" />
 
 
-
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/shapeableImageView"
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/shimmer_shapableimage"
             android:layout_width="200dp"
             android:layout_height="200dp"
             android:layout_marginTop="90dp"
-            android:background="#FFFFFF"
-            android:padding="5dp"
+            app:shimmer_clip_to_children="true"
+            app:shimmer_duration="1000"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:shapeAppearanceOverlay="@style/circleImageView"
-            app:strokeColor="@color/white"
-            app:strokeWidth="2dp" />
+            app:shapeAppearanceOverlay="@style/circleImageView">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/shapeableImageView"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:background="#FFFFFF"
+                android:padding="5dp"
+                app:shapeAppearanceOverlay="@style/circleImageView"
+                app:strokeColor="@color/white"
+                app:strokeWidth="2dp" />
+        </com.facebook.shimmer.ShimmerFrameLayout>
+
+
 
         <TextView
             android:id="@+id/textview_username"
@@ -43,7 +53,7 @@
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/shapeableImageView" />
+            app:layout_constraintTop_toBottomOf="@+id/shimmer_shapableimage" />
 
         <View
             android:id="@+id/splitterView"
@@ -61,8 +71,8 @@
             android:id="@+id/view_navProfileInfo"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:layout_marginTop="16dp"
             android:layout_marginStart="20dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="20dp"
             android:background="@drawable/custom_navtext_border"
             app:layout_constraintEnd_toEndOf="parent"
@@ -73,11 +83,11 @@
             android:id="@+id/textview_accountInfo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/account_information"
-            android:textSize="16sp"
-            android:fontFamily="@font/interextrabold"
-            android:textColor="@color/profileTextColor"
             android:layout_marginStart="16dp"
+            android:fontFamily="@font/interextrabold"
+            android:text="@string/account_information"
+            android:textColor="@color/profileTextColor"
+            android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="@+id/view_navProfileInfo"
             app:layout_constraintStart_toStartOf="@+id/view_navProfileInfo"
             app:layout_constraintTop_toTopOf="@+id/view_navProfileInfo" />
@@ -108,11 +118,11 @@
             android:id="@+id/textview_chagePwInfoText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/change_password_text"
-            android:textSize="16sp"
-            android:fontFamily="@font/interextrabold"
-            android:textColor="@color/profileTextColor"
             android:layout_marginStart="16dp"
+            android:fontFamily="@font/interextrabold"
+            android:text="@string/change_password_text"
+            android:textColor="@color/profileTextColor"
+            android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="@+id/view_navChangePwInfo"
             app:layout_constraintStart_toStartOf="@+id/view_navChangePwInfo"
             app:layout_constraintTop_toTopOf="@+id/view_navChangePwInfo" />
@@ -143,11 +153,11 @@
             android:id="@+id/textview_deleteAcc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/delete_account_text"
-            android:textSize="16sp"
-            android:fontFamily="@font/interextrabold"
-            android:textColor="@color/profileTextColor"
             android:layout_marginStart="16dp"
+            android:fontFamily="@font/interextrabold"
+            android:text="@string/delete_account_text"
+            android:textColor="@color/profileTextColor"
+            android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="@+id/view_deleteAccInfo"
             app:layout_constraintStart_toStartOf="@+id/view_deleteAccInfo"
             app:layout_constraintTop_toTopOf="@+id/view_deleteAccInfo" />
@@ -168,8 +178,8 @@
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
             android:layout_marginTop="8dp"
+            android:layout_marginEnd="20dp"
             android:background="@drawable/custom_navtext_border"
             app:layout_constraintEnd_toEndOf="@+id/view_deleteAccInfo"
             app:layout_constraintStart_toStartOf="@+id/view_deleteAccInfo"
@@ -179,11 +189,11 @@
             android:id="@+id/textview_signout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
             android:fontFamily="@font/interextrabold"
             android:text="@string/sign_out"
             android:textColor="@color/profileTextColor"
             android:textSize="16sp"
-            android:layout_marginStart="16dp"
             app:layout_constraintBottom_toBottomOf="@+id/view_signout"
             app:layout_constraintStart_toStartOf="@+id/view_signout"
             app:layout_constraintTop_toTopOf="@+id/view_signout" />
@@ -192,8 +202,8 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
 
-            android:src="@drawable/baseline_navigate_next_24"
             android:layout_marginEnd="8dp"
+            android:src="@drawable/baseline_navigate_next_24"
             app:layout_constraintBottom_toBottomOf="@+id/view_signout"
             app:layout_constraintEnd_toEndOf="@+id/view_signout"
             app:layout_constraintTop_toTopOf="@+id/view_signout"

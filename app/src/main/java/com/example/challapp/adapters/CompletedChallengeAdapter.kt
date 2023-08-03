@@ -9,9 +9,16 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.challapp.R
 import com.example.challapp.domain.models.ApplicationDailyChallenge
 import com.example.challapp.domain.models.ApplicationGroup
+import com.example.challapp.services.ImageUploadService
+import com.facebook.shimmer.Shimmer
+import com.facebook.shimmer.ShimmerFrameLayout
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class CompletedChallengeAdapter(
-    private var completedChallengesList: MutableList<ApplicationDailyChallenge>
+    private var completedChallengesList: MutableList<ApplicationDailyChallenge>,
+    private val currentUser: String
 ):
     RecyclerView.Adapter<CompletedChallengeAdapter.CompletedChallengeViewHolder>() {
 
@@ -19,6 +26,8 @@ class CompletedChallengeAdapter(
         val creationDate: TextView = itemView.findViewById(R.id.textview_creationdate)
         val desctiption: TextView = itemView.findViewById(R.id.textview_description)
         val completedImage: ImageView = itemView.findViewById(R.id.imageview_completechallange)
+        val shimmerLayout: ShimmerFrameLayout = itemView.findViewById(R.id.shimmer_image)
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CompletedChallengeViewHolder {
@@ -31,7 +40,25 @@ class CompletedChallengeAdapter(
         holder.creationDate.text = currentChallenge.questionDocumentId
         holder.desctiption.text = currentChallenge.description
 
+        holder.shimmerLayout.visibility = View.VISIBLE
+        holder.shimmerLayout.startShimmer()
+
+        if (currentChallenge.questionDocumentId.isNotBlank()) {
+            CoroutineScope(Dispatchers.Main).launch {
+                val imageUrl = ImageUploadService.getImageWithDocumentId(currentUser, currentChallenge.questionDocumentId)
+                println(imageUrl)
+                if (imageUrl != "No Image") {
+                    ImageUploadService.loadImageIntoImageView(imageUrl!!, holder.completedImage)
+                    holder.shimmerLayout.hideShimmer()
+                }
+                else{
+                    holder.completedImage.setImageResource(R.drawable.baseline_group_24)
+                    holder.shimmerLayout.hideShimmer()
+                }
+            }
+        }
     }
+
 
     override fun getItemCount(): Int {
         return completedChallengesList.size

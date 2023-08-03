@@ -32,7 +32,11 @@ class CompletedChallengeFragment : Fragment() {
     ): View{
         binding = FragmentCompletedChallengeBinding.inflate(inflater, container, false)
 
-        completedChallengeAdapter = CompletedChallengeAdapter(mutableListOf())
+        completedChallengeAdapter = completedChallangeViewModel.getCurrentUser.value?.uid?.let {
+            CompletedChallengeAdapter(mutableListOf(),
+                it
+            )
+        }!!
         setupRecyclerView()
         onNavigateBackChallengePage()
 

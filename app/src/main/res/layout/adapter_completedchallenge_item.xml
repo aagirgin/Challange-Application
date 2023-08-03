@@ -29,24 +29,30 @@
         android:layout_marginBottom="10dp"
         android:fontFamily="@font/loramedium"
         android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/imageview_completechallange"
+        app:layout_constraintBottom_toTopOf="@+id/shimmer_image"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textview_creationdate" />
 
-    <ImageView
-        android:id="@+id/imageview_completechallange"
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimmer_image"
         android:layout_width="match_parent"
-        android:layout_height="223dp"
-        android:layout_marginBottom="10dp"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toTopOf="@+id/textview_seedailyquestion"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textview_creationdate"
-        app:layout_constraintVertical_chainStyle="packed"
-        app:srcCompat="@drawable/baseline_group_24" />
+        app:layout_constraintVertical_chainStyle="packed">
+
+        <ImageView
+            android:id="@+id/imageview_completechallange"
+            android:layout_width="411dp"
+            android:layout_height="240dp"
+            android:layout_marginBottom="10dp"
+            app:srcCompat="@drawable/baseline_group_24" />
+    </com.facebook.shimmer.ShimmerFrameLayout>
 
     <TextView
         android:id="@+id/textview_seedailyquestion"
@@ -61,7 +67,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageview_completechallange" />
+        app:layout_constraintTop_toBottomOf="@+id/shimmer_image" />
 
     <TextView
         android:id="@+id/textview_descriptionprompt"

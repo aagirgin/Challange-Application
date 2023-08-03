@@ -28,9 +28,8 @@ class ProfileFragment : Fragment() {
     ): View {
         binding = FragmentProfileBinding.inflate(inflater, container, false)
 
-        viewLifecycleOwner.lifecycleScope.launch {
-            loadProfileImage()
-        }
+
+        loadProfileImage()
         onNavigateBack()
         displayMail()
         displayName()
@@ -81,12 +80,20 @@ class ProfileFragment : Fragment() {
         }
     }
 
-    private suspend fun loadProfileImage() {
-            profileViewModel.currentUser.collect{
-                if (it != null) {
-                    it.email?.let { it1 -> ImageUploadService.loadProfileImage(it1,binding.shapeableImageView) }
+    private fun loadProfileImage() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            profileViewModel.currentUser.value?.email?.let { profileViewModel.loadProfileImage(it) }
+            profileViewModel.profileImageUrl.collect { imageUrl ->
+                if (imageUrl == "No Picture"){
+                    binding.shapeableImageView.setImageResource(R.drawable.baseline_person_24)
+                }
+                else {
+                    if (imageUrl != null) {
+                        ImageUploadService.loadImageIntoImageView(imageUrl, binding.shapeableImageView)
+                    }
                 }
             }
+        }
     }
 
     private fun displayMail(){
