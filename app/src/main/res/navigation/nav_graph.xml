@@ -23,7 +23,9 @@
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
+            app:popExitAnim="@anim/slide_out_right"
+            app:popUpToInclusive="true"
+            app:popUpTo="@id/loginFragment"/>
         <action
             android:id="@+id/action_loginFragment_to_forgotpasswordFragment"
             app:destination="@id/forgotpasswordFragment"
@@ -31,9 +33,6 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
-        <action
-            android:id="@+id/action_loginFragment_to_splashScreenFragment2"
-            app:destination="@id/splashScreenFragment" />
     </fragment>
     <fragment
         android:id="@+id/registerFragment"
@@ -78,10 +77,15 @@
             app:popExitAnim="@anim/slide_out_right"/>
         <action
             android:id="@+id/action_challangeFragment_to_profileNavFragment"
-            app:destination="@id/profileNavFragment" />
+            app:destination="@id/profileNavFragment"/>
         <action
             android:id="@+id/action_challangeFragment_to_dailyChallangeFragment"
             app:destination="@id/dailyChallangeFragment" />
+        <action
+            android:id="@+id/action_challangeFragment_to_completedChallengeFragment"
+            app:destination="@id/completedChallengeFragment" />
+
+
     </fragment>
     <fragment
         android:id="@+id/forgotpasswordFragment"
@@ -94,9 +98,7 @@
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"
-            app:popUpToInclusive="true"
-            app:popUpTo="@id/loginFragment"/>
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/mailVerificationFragment"
@@ -123,15 +125,20 @@
             app:destination="@id/loginFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
+            app:launchSingleTop="false"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
+            app:popExitAnim="@anim/slide_out_right"
+            app:popUpTo="@id/splashScreenFragment"
+            app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_splashScreenFragment_to_challangeFragment"
             app:destination="@id/challangeFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
+            app:popExitAnim="@anim/slide_out_right"
+            app:popUpToInclusive="true"
+            app:popUpTo="@id/splashScreenFragment"/>
 
     </fragment>
     <fragment
@@ -179,7 +186,14 @@
             app:destination="@id/profileChangePwFragment" />
         <action
             android:id="@+id/action_profileNavFragment_to_loginFragment"
-            app:destination="@id/loginFragment" />
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/loginFragment"
+            app:popUpToInclusive="true"/>
+        <action
+            android:id="@+id/action_profileNavFragment_to_challangeFragment"
+            app:destination="@id/challangeFragment" />
+
+
     </fragment>
     <fragment
         android:id="@+id/groupFragment"
@@ -197,7 +211,9 @@
         tools:layout="@layout/fragment_create_group" >
         <action
             android:id="@+id/action_createGroupFragment_to_groupFragment"
-            app:destination="@id/groupFragment" />
+            app:destination="@id/groupFragment"
+            app:popUpTo="@id/groupFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/dailyChallangeFragment"
@@ -206,6 +222,21 @@
         tools:layout="@layout/fragment_daily_challange" >
         <action
             android:id="@+id/action_dailyChallangeFragment_to_challangeFragment"
-            app:destination="@id/challangeFragment" />
+            app:destination="@id/challangeFragment"
+            app:popUpTo="@id/dailyChallangeFragment"
+            app:popUpToInclusive="true" />
     </fragment>
+    <fragment
+        android:id="@+id/completedChallengeFragment"
+        android:name="com.example.challapp.ui.feed.completedchallenges.CompletedChallengeFragment"
+        android:label="fragment_completed_challenge"
+        tools:layout="@layout/fragment_completed_challenge" >
+        <action
+            android:id="@+id/action_completedChallengeFragment_to_challangeFragment"
+            app:destination="@id/challangeFragment"
+            app:popUpTo="@id/challangeFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+
 </navigation>

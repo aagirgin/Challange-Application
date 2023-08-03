@@ -80,5 +80,14 @@
     <string name="password_change_success">Password changed successfully</string>
     <string name="password_change_fail">Failed to change password</string>
     <string name="picture_or_description">You should fill description or upload a picture.</string>
+    <string name="change_password">Change Password</string>
+    <string name="start_premium">Start Premium</string>
+    <string name="premium_adventages_prompt">Explore the advanteges of the premium and enhance your experience further.</string>
+    <string name="completed_challenges">Completed Challenges</string>
+    <string name="completed_challenge_prompt">Press to display all the challenges you completed so far.</string>
+    <string name="all_challenges_you_completed">All challenges you completed</string>
+    <string name="creation_date">Creation Date</string>
+    <string name="ali_arda_girgin">Ali Arda Girgin</string>
+    <string name="see_daily_question_for_that_day">See Daily Question for that day</string>
 
 </resources>

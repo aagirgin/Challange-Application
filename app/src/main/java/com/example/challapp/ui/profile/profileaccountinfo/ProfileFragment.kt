@@ -9,6 +9,7 @@ import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.example.challapp.R
 import com.example.challapp.databinding.FragmentProfileBinding
 import com.example.challapp.services.ImageUploadService
@@ -30,7 +31,7 @@ class ProfileFragment : Fragment() {
         viewLifecycleOwner.lifecycleScope.launch {
             loadProfileImage()
         }
-
+        onNavigateBack()
         displayMail()
         displayName()
         changeName()
@@ -40,6 +41,12 @@ class ProfileFragment : Fragment() {
 
     private fun validationField(): Boolean{
         return binding.edittextName.text.isNotBlank() && binding.edittextName.text.toString() != "Here is My Name"
+    }
+
+    private fun onNavigateBack(){
+        binding.imageviewBacknavarrow.setOnClickListener {
+            findNavController().navigate(R.id.action_profileFragment_to_profileNavFragment)
+        }
     }
 
     private fun changeName() {

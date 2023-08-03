@@ -45,22 +45,23 @@
             android:id="@+id/cardview_mainpage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
+
+            android:layout_marginTop="8dp"
             android:backgroundTint="#E1F2F4"
             android:elevation="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
             android:shadowColor="#000000"
             android:shadowRadius="100"
             app:cardCornerRadius="24dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/view2"
-            app:layout_constraintVertical_bias="0.1">
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view2">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
-
                 <ImageView
                     android:id="@+id/imageview_circle"
                     android:layout_width="150dp"
@@ -114,8 +115,8 @@
                     android:id="@+id/textview_dailychallangeprompt1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:alpha="0.9"
                     android:layout_marginTop="5dp"
+                    android:alpha="0.9"
                     android:fontFamily="@font/loramedium"
                     android:text="@string/complete_your_given_daily_challelenge"
                     android:textSize="16sp"
@@ -139,9 +140,9 @@
                 <Button
                     android:id="@+id/button_seedailychallange"
                     android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     android:layout_marginBottom="20dp"
-                    android:layout_height="wrap_content"
                     android:backgroundTint="@color/primaryApplicationColor"
                     android:elevation="20dp"
                     android:fontFamily="@font/loramedium"
@@ -155,6 +156,155 @@
                     app:layout_constraintTop_toBottomOf="@+id/textview_dailychallangeprompt2" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardview_premium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="8dp"
+            android:backgroundTint="#F6E7BB"
+            android:elevation="20dp"
+            android:shadowColor="#000000"
+            android:shadowRadius="100"
+            app:cardCornerRadius="24dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cardview_mainpage">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingTop="16dp"
+                android:paddingBottom="16dp">
+
+                <TextView
+                    android:id="@+id/textview_startpremium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lorasemibold"
+
+                    android:text="@string/start_premium"
+                    android:textSize="20sp"
+                    app:layout_constraintBottom_toTopOf="@+id/textview_startpremiumprompt"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_chainStyle="packed" />
+
+                <ImageView
+                    android:id="@+id/imageview_premiumstart"
+                    android:layout_width="wrap_content"
+                    android:layout_marginStart="2dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="@+id/textview_startpremium"
+                    app:layout_constraintStart_toEndOf="@+id/textview_startpremium"
+                    app:layout_constraintTop_toTopOf="@+id/textview_startpremium"
+                    app:srcCompat="@drawable/baseline_star_rate_24_orange" />
+
+                <ImageView
+                    android:id="@+id/imageview_gotopremiumpage"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginEnd="8dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/baseline_navigate_next_24" />
+
+                <TextView
+                    android:id="@+id/textview_startpremiumprompt"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/loramedium"
+                    android:text="@string/premium_adventages_prompt"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/imageview_gotopremiumpage"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="@+id/textview_startpremium"
+                    app:layout_constraintTop_toBottomOf="@+id/textview_startpremium" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/cardview_completedchallenges"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="20dp"
+            android:backgroundTint="#E1F2F4"
+            android:elevation="20dp"
+            android:shadowColor="#000000"
+            android:shadowRadius="100"
+            app:cardCornerRadius="24dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintVertical_bias="0"
+            app:layout_constraintTop_toBottomOf="@+id/cardview_premium">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingTop="16dp"
+                android:paddingBottom="16dp">
+
+                <ImageView
+                    android:id="@+id/imageview_gotopremiumpage2"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginEnd="8dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/baseline_navigate_next_24" />
+
+                <TextView
+                    android:id="@+id/textview_completedchallenges"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lorasemibold"
+                    android:text="@string/completed_challenges"
+                    android:textSize="20sp"
+                    app:layout_constraintBottom_toTopOf="@+id/textview_completedchallangeprompt"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_chainStyle="packed" />
+
+                <ImageView
+                    android:id="@+id/imageview_completed"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="2dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/textview_completedchallenges"
+                    app:layout_constraintStart_toEndOf="@+id/textview_completedchallenges"
+
+                    app:layout_constraintTop_toTopOf="@+id/textview_completedchallenges"
+                    app:srcCompat="@drawable/baseline_check_24" />
+
+                <TextView
+                    android:id="@+id/textview_completedchallangeprompt"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/loramedium"
+                    android:text="@string/completed_challenge_prompt"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/imageview_gotopremiumpage2"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="@+id/textview_completedchallenges"
+                    app:layout_constraintTop_toBottomOf="@+id/textview_completedchallenges" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
 
 

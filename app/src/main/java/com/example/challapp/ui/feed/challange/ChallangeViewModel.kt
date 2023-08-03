@@ -9,7 +9,5 @@ import javax.inject.Inject
 class ChallangeViewModel @Inject constructor(
     private val userRepository: FirestoreUserRepository
 ):ViewModel() {
-    fun signOutFromSession(){
-        userRepository.signOut()
-    }
+
 }

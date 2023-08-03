@@ -1,5 +1,6 @@
 package com.example.challapp.repository
 
+import com.example.challapp.domain.models.ApplicationDailyChallenge
 import com.example.challapp.domain.models.ApplicationDailyQuestion
 import com.example.challapp.domain.models.ApplicationGroup
 import com.google.firebase.auth.FirebaseUser
@@ -19,6 +20,6 @@ interface FirestoreUserRepository {
     suspend fun updateIncludedGroupsForUser(userId: String, groupId: String): Boolean
     suspend fun getGroupInformationByDocumentId(documentId:String): ApplicationGroup?
     suspend fun getDailyQuestionInformation(): ApplicationDailyQuestion
-
     suspend fun addDailyChallangeToUser(userId: String, description: String, documentId: String): Boolean
+    suspend fun getAllDailyChallangesForUser(userId: String): MutableList<ApplicationDailyChallenge>?
 }

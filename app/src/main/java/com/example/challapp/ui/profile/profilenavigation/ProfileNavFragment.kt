@@ -51,6 +51,7 @@ class ProfileNavFragment : Fragment() {
         displayImage()
         addProfilePicture()
         onNavigateInProfile()
+        println(findNavController().previousBackStackEntry)
 
         return binding.root
     }

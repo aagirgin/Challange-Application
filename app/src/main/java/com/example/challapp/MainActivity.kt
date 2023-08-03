@@ -6,6 +6,7 @@ import android.view.View
 import androidx.activity.OnBackPressedCallback
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.setupWithNavController
 import com.example.challapp.databinding.ActivityMainBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
@@ -22,18 +23,17 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.activity_main_nav_host_fragment) as NavHostFragment
+        bottomNavigationView = findViewById(R.id.bottomNavigationView)
         navController = navHostFragment.navController
-        setBottomNavigationBarDestination()
+        bottomNavigationView.setupWithNavController(navController)
         hideBottomNavigationBar()
     }
 
     private fun hideBottomNavigationBar() {
         navController.addOnDestinationChangedListener { _, destination, _ ->
-            if (destination.id == R.id.splashScreenFragment ||
-                destination.id == R.id.registerFragment ||
-                destination.id == R.id.loginFragment ||
-                destination.id == R.id.forgotpasswordFragment ||
-                destination.id == R.id.mailVerificationFragment
+            if (destination.id != R.id.profileNavFragment &&
+                destination.id != R.id.challangeFragment &&
+                destination.id != R.id.groupFragment
             ) {
                 bottomNavigationView.visibility = View.GONE
             } else {
@@ -41,24 +41,5 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
-    private fun setBottomNavigationBarDestination(){
-        bottomNavigationView = findViewById(R.id.bottomNavigationView)
-        bottomNavigationView.setOnNavigationItemSelectedListener { item ->
-            when (item.itemId) {
-                R.id.navhomeFragment -> {
-                    navController.navigate(R.id.challangeFragment)
-                    true
-                }
-                R.id.navcommunityFragment -> {
-                    navController.navigate(R.id.groupFragment)
-                    true
-                }
-                R.id.navprofileFragment -> {
-                    navController.navigate(R.id.profileNavFragment)
-                    true
-                }
-                else -> false
-            }
-        }
-    }
+
 }

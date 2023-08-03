@@ -16,25 +16,15 @@ import dagger.hilt.android.AndroidEntryPoint
 class ChallangeFragment : Fragment() {
     private lateinit var binding:FragmentChallangeBinding
     private val challangeViewModel: ChallangeViewModel by viewModels()
-    private val onBackPressedCallback = object : OnBackPressedCallback(true) {
-        override fun handleOnBackPressed() {
-            val previousDestination = findNavController().previousBackStackEntry?.destination
-            if (previousDestination?.id != R.id.loginFragment && previousDestination?.id != R.id.splashScreenFragment) {
-                isEnabled = false
-                requireActivity().onBackPressedDispatcher.onBackPressed()
-            }
-        }
-    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentChallangeBinding.inflate(inflater,container,false)
 
-
+        onClickNavigatePreviousChallenges()
         onClickNavigateDailyChallange()
-        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, onBackPressedCallback)
-
         return binding.root
     }
 
@@ -43,4 +33,10 @@ class ChallangeFragment : Fragment() {
             findNavController().navigate(R.id.action_challangeFragment_to_dailyChallangeFragment)
         }
     }
+    private fun onClickNavigatePreviousChallenges(){
+        binding.cardviewCompletedchallenges.setOnClickListener {
+            findNavController().navigate(R.id.action_challangeFragment_to_completedChallengeFragment)
+        }
+    }
+
 }

@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.example.challapp.R
 import com.example.challapp.databinding.FragmentProfileChangePwBinding
 import com.example.challapp.services.ImageUploadService
@@ -30,6 +31,7 @@ class ProfileChangePwFragment : Fragment() {
         viewLifecycleOwner.lifecycleScope.launch {
             loadProfileImage()
         }
+        onNavigateBack()
         displayName()
         onPressButtonValidation(binding)
 
@@ -91,6 +93,12 @@ class ProfileChangePwFragment : Fragment() {
                         Snackbar.make(binding.root, getString(R.string.password_change_fail), Snackbar.LENGTH_SHORT).show()
                     }
                 }
+        }
+    }
+
+    private fun onNavigateBack(){
+        binding.imageviewBacknavarrow.setOnClickListener {
+            findNavController().navigate(R.id.action_profileChangePwFragment_to_profileNavFragment)
         }
     }
 

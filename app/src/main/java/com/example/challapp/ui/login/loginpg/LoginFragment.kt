@@ -1,11 +1,13 @@
 package com.example.challapp.ui.login.loginpg
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
+import androidx.core.app.ActivityCompat.finishAffinity
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -22,11 +24,14 @@ class LoginFragment : Fragment() {
     private val onBackPressedCallback = object : OnBackPressedCallback(true) {
         override fun handleOnBackPressed() {
             val previousDestination = findNavController().previousBackStackEntry?.destination
-            if (previousDestination?.id != R.id.splashScreenFragment && previousDestination?.id != R.id.profileNavFragment) {
+            if (previousDestination?.id == R.id.profileNavFragment) {
+                requireActivity().finish()
+             }else {
                 isEnabled = false
-                requireActivity().onBackPressedDispatcher.onBackPressed()
+                requireActivity().onBackPressed()
             }
         }
+
     }
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -43,7 +48,6 @@ class LoginFragment : Fragment() {
         onPressedNavigateRegisterPage(binding)
         onPressedNavigateForgotPassword(binding)
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, onBackPressedCallback)
-
         return binding.root
     }
     override fun onDestroyView() {

@@ -90,7 +90,7 @@ class DailyChallangeFragment : Fragment(), DailyChallengeAdapter.OnItemClickList
             if (currentUserUid != null) {
                 ImageUploadService.uploadImagetoUserDir(
                     imageUri,
-                    "1",
+                    "2023-07-30",
                     currentUserUid,
                 ) { errorMessage ->
                     Snackbar.make(binding.root, errorMessage, Snackbar.LENGTH_SHORT).show()

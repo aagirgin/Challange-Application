@@ -4,7 +4,6 @@ import android.util.Log
 import com.example.challapp.domain.models.ApplicationDailyChallenge
 import com.example.challapp.domain.models.ApplicationDailyQuestion
 import com.example.challapp.domain.models.ApplicationGroup
-import com.example.challapp.domain.models.ApplicationUser
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FieldValue
@@ -74,8 +73,16 @@ class FirestoreUserRepositoryImpl @Inject constructor(
     }
 
 
-
-
+    override suspend fun getAllDailyChallangesForUser(userId: String): MutableList<ApplicationDailyChallenge>? {
+        fun HashMap<String, Any>.toApplicationDailyChallenge(): ApplicationDailyChallenge {
+            val questionDocumentId = this["questionDocumentId"] as String
+            val description = this["description"] as String
+            return ApplicationDailyChallenge(questionDocumentId, description, /*other properties*/)
+        }
+        val groupDocumentRef = firestore.collection("Users").document(userId).get().await()
+        val data = groupDocumentRef.data?.get("allDailyQuestions") as? List<HashMap<String, Any>> // Fetch as List of HashMaps
+        return data?.map { it.toApplicationDailyChallenge() }?.toMutableList()
+    }
     override suspend fun getUserIncludedGroupIds(userId: String): List<String>? {
         val userDocument = firestore.collection("Users").document(userId).get().await()
         val includedGroups = userDocument.get("includedGroups") as? List<String>
