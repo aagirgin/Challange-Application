@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.challapp.domain.models.ApplicationUser
 import com.example.challapp.repository.FirestoreUserRepository
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -13,6 +14,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 sealed class RegisterState {
+    object Empty : RegisterState()
     object Loading : RegisterState()
     data class Error(val errorMessage: String) : RegisterState()
     object Success : RegisterState()
@@ -29,22 +31,37 @@ class RegisterViewModel @Inject constructor(
     fun signUp(email: String, password: String, fullName: String) {
         viewModelScope.launch {
             _registerState.value = RegisterState.Loading
-
             val user = userRepository.signUp(email, password)
+
             if (user != null) {
-                val db = Firebase.firestore
-                val applicationUser = ApplicationUser(username = fullName)
-                db.collection("Users").document(user.uid)
-                    .set(applicationUser)
-                    .addOnSuccessListener {
+                val emailVerificationResult = emailVerification(user)
+                if (emailVerificationResult) {
+                    val addUserResult = userRepository.addUserToFirestore(user.uid, email, fullName)
+                    if (addUserResult) {
                         _registerState.value = RegisterState.Success
+                    } else {
+                        _registerState.value = RegisterState.Error("Failed to add user to Firestore.")
                     }
-                    .addOnFailureListener { e ->
-                        _registerState.value = e.message?.let { RegisterState.Error(it) }
-                    }
+                } else {
+                    _registerState.value = RegisterState.Error("Failed to send email verification.")
+                }
             } else {
-                _registerState.value = RegisterState.Error("Sign-up failed.")
+                val errorMessage = userRepository.getFirebaseErrorMessage()
+                _registerState.value = RegisterState.Error(errorMessage ?: "Sign-up failed.")
             }
+        }
+    }
+
+    fun resetState(){
+        _registerState.value = RegisterState.Empty
+    }
+
+    private fun emailVerification(user: FirebaseUser): Boolean {
+        return try {
+            user.sendEmailVerification()
+            true
+        } catch (e: Exception) {
+            false
         }
     }
 

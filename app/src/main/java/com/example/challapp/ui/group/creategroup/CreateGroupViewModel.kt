@@ -1,7 +1,6 @@
 package com.example.challapp.ui.group.creategroup
 
-import android.os.Build
-import androidx.annotation.RequiresApi
+
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.challapp.domain.models.ApplicationGroup
@@ -13,8 +12,8 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
-import java.time.LocalDate
-import java.time.format.DateTimeFormatter
+import org.threeten.bp.LocalDate
+import org.threeten.bp.format.DateTimeFormatter
 @HiltViewModel
 class CreateGroupViewModel @Inject constructor(
     private val userRepository: FirestoreUserRepository
@@ -51,7 +50,7 @@ class CreateGroupViewModel @Inject constructor(
         }
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
+
     suspend fun addGroup(){
         val currentUser = _currentUser.value
         val groupflow = _groupnameFlow.value

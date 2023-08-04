@@ -37,9 +37,8 @@ class RegisterFragment : Fragment() {
         }
     }
 
-    private fun EmailVerification() {
+    private fun emailVerification() {
         val user = FirebaseAuth.getInstance().currentUser
-
         user?.sendEmailVerification()?.addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 findNavController().navigate(R.id.action_registerFragment_to_mailVerificationFragment)
@@ -55,30 +54,28 @@ class RegisterFragment : Fragment() {
             val password = binding.textinputPassword.editText?.text.toString()
             val fullName = binding.textinputFullname.editText?.text.toString()
 
-            val isValid = validationFields(email,password,fullName)
+            val isValid = validationFields(email, password, fullName)
 
-            if (isValid){
-                registerViewModel.signUp(email, password, fullName)
-
+            if (isValid) {
                 lifecycleScope.launch {
-                    registerViewModel.registerState.collect { state ->
+                    registerViewModel.signUp(email, password, fullName)
+                    registerViewModel.registerState.collect{
+                            state ->
                         when (state) {
-                            is RegisterState.Loading -> {
-                               //TODO
-                            }
                             is RegisterState.Success -> {
-                                EmailVerification()
+                                Snackbar.make(binding.root, "Registration successful.", Snackbar.LENGTH_SHORT).show()
+                                findNavController().navigate(R.id.action_registerFragment_to_mailVerificationFragment)
+                                registerViewModel.resetState()
                             }
                             is RegisterState.Error -> {
                                 Snackbar.make(binding.root, state.errorMessage, Snackbar.LENGTH_SHORT).show()
-                                binding.buttonSignup.isEnabled = true
+                                registerViewModel.resetState()
                             }
                             else -> {}
                         }
                     }
                 }
-            }
-            else{
+            } else {
                 Snackbar.make(binding.root, getString(R.string.fill_forms_error), Snackbar.LENGTH_SHORT).show()
             }
             binding.buttonSignup.isEnabled = true

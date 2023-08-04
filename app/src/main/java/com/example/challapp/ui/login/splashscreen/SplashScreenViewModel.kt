@@ -13,14 +13,14 @@ import javax.inject.Inject
 class SplashScreenViewModel @Inject constructor(
     private val userRepository: FirestoreUserRepository
 ) : ViewModel() {
-    private val _currUserState = MutableStateFlow<Boolean>(false)
+    private val _currUserState = MutableStateFlow(false)
     val currUserState: StateFlow<Boolean> get() = _currUserState
 
     init {
-        getcurrentUserStatus()
+        getCurrentUserStatus()
     }
 
-    fun getcurrentUserStatus() {
+    private fun getCurrentUserStatus() {
         viewModelScope.launch {
             val currentUser = userRepository.getCurrentUser()
             _currUserState.value = currentUser != null

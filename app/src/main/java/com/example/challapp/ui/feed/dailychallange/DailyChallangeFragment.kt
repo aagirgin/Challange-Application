@@ -61,7 +61,8 @@ class DailyChallangeFragment : Fragment(), DailyChallengeAdapter.OnItemClickList
         dailyChallengeAdapter = DailyChallengeAdapter(downloadImageUrl)
         dailyChallengeAdapter.setOnItemClickListener(this)
         dailyChallengeAdapter.setDescriptionChangeListener(this)
-        setupRecyclerView()
+        submissionExistsVisibilityRecyclerView()
+
 
         return binding.root
     }
@@ -102,14 +103,32 @@ class DailyChallangeFragment : Fragment(), DailyChallengeAdapter.OnItemClickList
     private fun setupRecyclerView() {
         val recyclerView: RecyclerView = binding.recyclerviewDailypage
         val layoutManager = LinearLayoutManager(requireContext())
-
         recyclerView.layoutManager = layoutManager
         recyclerView.adapter = dailyChallengeAdapter
     }
 
+    private fun submissionExistsVisibilityRecyclerView(){
+        viewLifecycleOwner.lifecycleScope.launch {
+            dailyChallangeViewModel.submissionExists.collect{submissionExists->
+                when(submissionExists){
+                    true -> {
+                        binding.recyclerviewDailypage.visibility = View.GONE
+                        binding.viewNoSubmissionView.visibility = View.VISIBLE
+                    }
+                    false -> {
+                        setupRecyclerView()
+                        binding.recyclerviewDailypage.visibility = View.VISIBLE
+                        binding.viewNoSubmissionView.visibility = View.GONE
+                    }
+                    else -> {
+                        binding.viewNoSubmissionView.visibility = View.VISIBLE
+                    }
+                }
+            }
+        }
+    }
+
     private fun validate(): Boolean {
-        println(descriptionField)
-        println(downloadImageUrl)
         return descriptionField.isNotBlank() || !(downloadImageUrl.isNullOrBlank())
     }
     override fun onCardClick() {

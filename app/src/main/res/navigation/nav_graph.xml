@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.example.challapp.ui.login.loginpg.LoginFragment"
+        android:name="com.example.challapp.ui.login.loginpage.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" >
         <action
@@ -46,15 +46,16 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"
-            app:popUpTo="@id/loginFragment"
-            app:popUpToInclusive="true"/>
+            app:popUpToInclusive="false" />
         <action
             android:id="@+id/action_registerFragment_to_mailVerificationFragment"
             app:destination="@id/mailVerificationFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
+            app:popExitAnim="@anim/slide_out_right"
+            app:popUpToInclusive="true"
+            app:popUpTo="@id/registerFragment"/>
     </fragment>
     <fragment
         android:id="@+id/challangeFragment"
@@ -89,7 +90,7 @@
     </fragment>
     <fragment
         android:id="@+id/forgotpasswordFragment"
-        android:name="com.example.challapp.ui.login.forgotpassowrd.ForgotpasswordFragment"
+        android:name="com.example.challapp.ui.login.forgotpassword.ForgotpasswordFragment"
         android:label="fragment_forgotpassword"
         tools:layout="@layout/fragment_forgotpassword" >
         <action
@@ -112,8 +113,7 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"
-            app:popUpTo="@id/loginFragment"
-            app:popUpToInclusive="true"/>
+            app:popUpToInclusive="false" />
     </fragment>
     <fragment
         android:id="@+id/splashScreenFragment"

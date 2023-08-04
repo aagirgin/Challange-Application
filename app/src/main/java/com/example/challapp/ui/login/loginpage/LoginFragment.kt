@@ -1,13 +1,11 @@
-package com.example.challapp.ui.login.loginpg
+package com.example.challapp.ui.login.loginpage
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
-import androidx.core.app.ActivityCompat.finishAffinity
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -71,15 +69,12 @@ class LoginFragment : Fragment() {
         viewLifecycleOwner.lifecycleScope.launch {
             loginViewModel.loginState.collect { state ->
                 when (state) {
-                    is LoginState.Loading -> {
-                        // TODO: Show loading indicator or progress bar -> Shimmer
-                    }
                     is LoginState.Error -> {
-                        Snackbar.make(binding.root, getString(R.string.login_failed), Snackbar.LENGTH_SHORT).show()
+                        Snackbar.make(binding.root, state.errorMessage, Snackbar.LENGTH_SHORT).show()
                     }
                     is LoginState.Success -> {
                         loginViewModel.currentUser.collect{user->
-                            if (user != null && user.isEmailVerified) {
+                            if (user != null) {
                                 findNavController().navigate(R.id.action_loginFragment_to_challangeFragment)
                             }
                         }

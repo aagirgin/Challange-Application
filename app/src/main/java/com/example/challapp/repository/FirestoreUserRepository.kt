@@ -7,12 +7,15 @@ import com.google.firebase.auth.FirebaseUser
 
 interface FirestoreUserRepository {
 
+    suspend fun checkUserAlreadyHaveSubmission(userId: String) : Boolean
     suspend fun sendPasswordResetEmail(email: String) : Boolean
     suspend fun getUserIncludedGroupIds(userId: String): List<String>?
+    suspend fun addUserToFirestore(userId: String, email: String, fullName: String): Boolean
     suspend fun addGroupToFirestore(appGroup:ApplicationGroup): String?
     suspend fun getUsername(userId: String): String?
     suspend fun changeUsername(userId: String,newUsername: String) :Boolean
     suspend fun giveInviteKeyIfNull(userId: String)
+    fun getFirebaseErrorMessage(): String?
     suspend fun signUp(email: String, password: String): FirebaseUser?
     suspend fun signIn(email: String, password: String): FirebaseUser?
     fun signOut()

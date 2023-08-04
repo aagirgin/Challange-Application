@@ -8,6 +8,7 @@ interface StorageRepository {
     suspend fun insertImageToUserDir(imageUri: Uri, challengeID: String, currentUserUid: String)
     suspend fun loadProfileImage(email: String): String?
     suspend fun getImageWithDocumentId(userId: String, documentId: String): String?
+
     class StorageException(message: String) : Exception(message)
 }
 

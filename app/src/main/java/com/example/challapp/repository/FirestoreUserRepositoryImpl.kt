@@ -4,6 +4,7 @@ import android.util.Log
 import com.example.challapp.domain.models.ApplicationDailyChallenge
 import com.example.challapp.domain.models.ApplicationDailyQuestion
 import com.example.challapp.domain.models.ApplicationGroup
+import com.example.challapp.domain.models.ApplicationUser
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FieldValue
@@ -27,6 +28,22 @@ class FirestoreUserRepositoryImpl @Inject constructor(
             userData?.get("username") as? String
         } catch (e: Exception) {
             null
+        }
+    }
+
+    override suspend fun addUserToFirestore(userId: String, email: String, fullName: String): Boolean {
+        val userCollection = firestore.collection("Users")
+        val userDocument = userCollection.document(userId)
+
+        return try {
+            val applicationUser = ApplicationUser(
+                username = fullName,
+            )
+            userDocument.set(applicationUser).await()
+            true
+        } catch (e: Exception) {
+            Log.e("FirestoreUserRepo", "Error adding user to Firestore: ${e.message}")
+            false
         }
     }
 
@@ -73,12 +90,17 @@ class FirestoreUserRepositoryImpl @Inject constructor(
     }
 
 
+    override suspend fun checkUserAlreadyHaveSubmission(userId: String): Boolean{
+        val groupDocumentRef = firestore.collection("Users").document(userId).get().await()
+        val userData = groupDocumentRef.data
+        val allDailyQuestions = userData?.get("allDailyQuestions") as? List<HashMap<String, Any>>
+
+        return allDailyQuestions?.any { dailyQuestion ->
+            dailyQuestion["questionDocumentId"] == "2023-07-30"
+        } ?: false
+    }
+
     override suspend fun getAllDailyChallangesForUser(userId: String): MutableList<ApplicationDailyChallenge>? {
-        fun HashMap<String, Any>.toApplicationDailyChallenge(): ApplicationDailyChallenge {
-            val questionDocumentId = this["questionDocumentId"] as String
-            val description = this["description"] as String
-            return ApplicationDailyChallenge(questionDocumentId, description, /*other properties*/)
-        }
         val groupDocumentRef = firestore.collection("Users").document(userId).get().await()
         val data = groupDocumentRef.data?.get("allDailyQuestions") as? List<HashMap<String, Any>> // Fetch as List of HashMaps
         return data?.map { it.toApplicationDailyChallenge() }?.toMutableList()
@@ -201,14 +223,18 @@ class FirestoreUserRepositoryImpl @Inject constructor(
         }
     }
 
+    private var _firebaseErrorMessage: String? = null
     override suspend fun signUp(email: String, password: String): FirebaseUser? {
         return try {
             val authResult = auth.createUserWithEmailAndPassword(email, password).await()
             authResult.user
         } catch (e: Exception) {
-            Log.e("FirestoreUserRepo", "Error signing up: ${e.message}")
+            _firebaseErrorMessage = e.message ?: "Unknown error occurred."
             null
         }
+    }
+    override fun getFirebaseErrorMessage(): String? {
+        return _firebaseErrorMessage
     }
 
     override suspend fun signIn(email: String, password: String): FirebaseUser? {
@@ -231,8 +257,6 @@ class FirestoreUserRepositoryImpl @Inject constructor(
         }
     }
 
-
-
     override fun signOut() {
         auth.signOut()
     }
@@ -244,4 +268,10 @@ class FirestoreUserRepositoryImpl @Inject constructor(
             auth.currentUser
         }
     }
+}
+
+fun HashMap<String, Any>.toApplicationDailyChallenge(): ApplicationDailyChallenge {
+    val questionDocumentId = this["questionDocumentId"] as String
+    val description = this["description"] as String
+    return ApplicationDailyChallenge(questionDocumentId, description, /*other properties*/)
 }

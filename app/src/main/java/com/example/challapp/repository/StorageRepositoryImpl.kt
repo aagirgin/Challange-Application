@@ -5,6 +5,7 @@ import com.example.challapp.R
 import com.example.challapp.services.ImageUploadService
 import com.google.android.material.imageview.ShapeableImageView
 import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.ListResult
 import com.google.firebase.storage.StorageReference
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
@@ -51,9 +52,8 @@ class StorageRepositoryImpl  @Inject constructor(
     }
 
     override suspend fun getImageWithDocumentId(userId: String, documentId: String): String? {
-        val imageUrl = "documentId"
         val storageRef: StorageReference =
-            storageInstance.reference.child("Users").child(userId).child(imageUrl)
+            storageInstance.reference.child("Users").child(userId).child(documentId)
 
         return try {
             val downloadUri = storageRef.downloadUrl.await()
@@ -62,4 +62,6 @@ class StorageRepositoryImpl  @Inject constructor(
             "No Picture"
         }
     }
+
+
 }

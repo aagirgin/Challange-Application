@@ -89,5 +89,7 @@
     <string name="creation_date">Creation Date</string>
     <string name="ali_arda_girgin">Ali Arda Girgin</string>
     <string name="see_daily_question_for_that_day">See Daily Question for that day</string>
+    <string name="register_succesful">Registration successful.</string>
+    Registration successful.
 
 </resources>

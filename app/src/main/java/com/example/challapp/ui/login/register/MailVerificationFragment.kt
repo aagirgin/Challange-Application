@@ -21,7 +21,6 @@ class MailVerificationFragment : Fragment() {
     ): View {
         val binding = FragmentMailVerificationBinding.inflate(inflater,container,false)
 
-
         onPressedBackLoginPage(binding)
 
         return binding.root

@@ -1,4 +1,4 @@
-package com.example.challapp.ui.login.loginpg
+package com.example.challapp.ui.login.loginpage
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -13,7 +13,7 @@ import javax.inject.Inject
 
 sealed class LoginState {
     object Loading : LoginState()
-    object Error : LoginState()
+    data class Error(val errorMessage: String) : LoginState()
     object Success : LoginState()
 }
 
@@ -30,21 +30,22 @@ class LoginViewModel @Inject constructor(
 
     private val _currentUser: MutableStateFlow<FirebaseUser?> = MutableStateFlow(null)
 
-    init {
-        if(_currentUser.value != null){
-            _loginState.value = LoginState.Success
-        }
-    }
     fun signIn(email: String, password: String) {
         viewModelScope.launch {
             _loginState.value = LoginState.Loading
             val user = userRepository.signIn(email, password)
             if (user != null) {
-                _loginState.value = LoginState.Success
-                _currentUser.value = userRepository.getCurrentUser()
-                userRepository.giveInviteKeyIfNull(user.uid)
+                if(user.isEmailVerified){
+                    _loginState.value = LoginState.Success
+                    _currentUser.value = userRepository.getCurrentUser()
+                    userRepository.giveInviteKeyIfNull(user.uid)
+                }
+                else{
+                    _loginState.value = LoginState.Error("Please verify your email and try again.")
+                    userRepository.signOut()
+                }
             } else {
-                _loginState.value = LoginState.Error
+                _loginState.value = LoginState.Error("Invalid credentials. Please try again.")
             }
         }
     }

@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.challapp.domain.models.ApplicationDailyQuestion
 import com.example.challapp.domain.state.UiState
 import com.example.challapp.repository.FirestoreUserRepository
+import com.example.challapp.repository.StorageRepository
 import com.google.firebase.auth.FirebaseUser
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -14,7 +15,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class DailyChallengeViewModel @Inject constructor(
-    private val userRepository: FirestoreUserRepository
+    private val userRepository: FirestoreUserRepository,
+    private val storageRepository: StorageRepository
 ):ViewModel() {
     val currentUser: MutableStateFlow<FirebaseUser?>
         get() = _currentUser
@@ -31,9 +33,16 @@ class DailyChallengeViewModel @Inject constructor(
 
         private val _addDailyChallenge: MutableStateFlow<UiState<*>> = MutableStateFlow(UiState.Empty)
     val addDailyChallenge: StateFlow<UiState<*>> get() = _addDailyChallenge
+
+    private val _submissionExists: MutableStateFlow<Boolean?> = MutableStateFlow(null)
+    val submissionExists: StateFlow<Boolean?> get() = _submissionExists
+
+
     init {
+
         viewModelScope.launch {
             _dailyQuestionFlow.value = UiState.Loading
+            _submissionExists.value =  checkIfSubmissionAlreadyExists()
             val daily = userRepository.getDailyQuestionInformation()
             if (daily.dailyQuestion != null) {
                 _dailyQuestionFlow.value = UiState.Success(daily)
@@ -55,6 +64,10 @@ class DailyChallengeViewModel @Inject constructor(
                 _addDailyChallenge.value = UiState.Error("Error occurred while adding items to Firestore.")
             }
         }
+    }
+
+    private suspend fun checkIfSubmissionAlreadyExists(): Boolean? {
+        return _currentUser.value?.let { userRepository.checkUserAlreadyHaveSubmission(it.uid) }
     }
 
 }

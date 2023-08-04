@@ -1,4 +1,4 @@
-package com.example.challapp.ui.login.forgotpassowrd
+package com.example.challapp.ui.login.forgotpassword
 
 import android.os.Bundle
 import android.view.LayoutInflater

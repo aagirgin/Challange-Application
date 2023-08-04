@@ -1,4 +1,4 @@
-package com.example.challapp.ui.login.forgotpassowrd
+package com.example.challapp.ui.login.forgotpassword
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
