@@ -1,5 +1,6 @@
 package com.example.challapp.adapters
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -52,6 +53,7 @@ class CompletedChallengeAdapter(
                     holder.shimmerLayout.hideShimmer()
                 }
                 else{
+                    holder.completedImage.setBackgroundColor(Color.WHITE)
                     holder.completedImage.setImageResource(R.drawable.baseline_group_24)
                     holder.shimmerLayout.hideShimmer()
                 }

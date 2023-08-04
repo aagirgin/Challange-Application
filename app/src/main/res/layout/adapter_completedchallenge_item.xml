@@ -49,9 +49,10 @@
         <ImageView
             android:id="@+id/imageview_completechallange"
             android:layout_width="411dp"
+
             android:layout_height="240dp"
             android:layout_marginBottom="10dp"
-            app:srcCompat="@drawable/baseline_group_24" />
+            android:background="#000000"/>
     </com.facebook.shimmer.ShimmerFrameLayout>
 
     <TextView

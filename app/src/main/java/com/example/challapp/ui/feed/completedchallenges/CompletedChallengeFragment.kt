@@ -64,7 +64,6 @@ class CompletedChallengeFragment : Fragment() {
                         val data = state.data as MutableList<ApplicationDailyChallenge>
                         println(data)
                         completedChallengeAdapter.setCompletedChallenges(data)
-                        println(completedChallengeAdapter.itemCount)
 
                     }
                     is UiState.Error -> Snackbar.make(binding.root, state.error, Snackbar.LENGTH_SHORT).show()
