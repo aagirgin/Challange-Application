@@ -1,124 +1,129 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-
-    <TextView
-        android:id="@+id/textview_creationdate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:fontFamily="@font/lorasemibold"
-
-        android:textColor="@color/loginPageTextColor"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@+id/textview_name"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_chainStyle="packed" />
-
-    <TextView
-        android:id="@+id/textview_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        android:fontFamily="@font/loramedium"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/shimmer_image"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textview_creationdate" />
-
-    <com.facebook.shimmer.ShimmerFrameLayout
-        android:id="@+id/shimmer_image"
+<layout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/textview_seedailyquestion"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textview_creationdate"
-        app:layout_constraintVertical_chainStyle="packed">
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/textview_creationdate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/lorasemibold"
+
+            android:textColor="@color/loginPageTextColor"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toTopOf="@+id/textview_name"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <TextView
+            android:id="@+id/textview_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:fontFamily="@font/loramedium"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toTopOf="@+id/shimmer_image"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textview_creationdate" />
+
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/shimmer_image"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@+id/textview_seedailyquestion"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textview_creationdate"
+            app:layout_constraintVertical_chainStyle="packed">
+
+            <ImageView
+                android:id="@+id/imageview_completechallange"
+                android:layout_width="411dp"
+
+                android:layout_height="240dp"
+                android:layout_marginBottom="10dp"
+                android:background="#000000"
+                android:contentDescription="@string/personal_challenge_image" />
+        </com.facebook.shimmer.ShimmerFrameLayout>
+
+        <TextView
+            android:id="@+id/textview_seedailyquestion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:fontFamily="@font/lorasemibold"
+            android:text="@string/see_daily_question_for_that_day"
+            android:textColor="@color/loginPageTextColor"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toTopOf="@+id/textview_descriptionprompt"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/shimmer_image" />
+
+        <TextView
+            android:id="@+id/textview_descriptionprompt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/lorasemibold"
+            android:text="@string/description"
+            android:textColor="@color/loginPageTextColor"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toTopOf="@+id/textview_description"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textview_seedailyquestion" />
+
+        <TextView
+            android:id="@+id/textview_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:fontFamily="@font/loramedium"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textview_descriptionprompt" />
+
+
+        <View
+            android:id="@+id/splitterView"
+            android:layout_width="0dp"
+            android:layout_height="2dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/splitterViewColor"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textview_description" />
 
         <ImageView
-            android:id="@+id/imageview_completechallange"
-            android:layout_width="411dp"
-
-            android:layout_height="240dp"
-            android:layout_marginBottom="10dp"
-            android:background="#000000"/>
-    </com.facebook.shimmer.ShimmerFrameLayout>
-
-    <TextView
-        android:id="@+id/textview_seedailyquestion"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:fontFamily="@font/lorasemibold"
-        android:text="@string/see_daily_question_for_that_day"
-        android:textColor="@color/loginPageTextColor"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/textview_descriptionprompt"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/shimmer_image" />
-
-    <TextView
-        android:id="@+id/textview_descriptionprompt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/lorasemibold"
-        android:text="Description"
-        android:textColor="@color/loginPageTextColor"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@+id/textview_description"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textview_seedailyquestion" />
-
-    <TextView
-        android:id="@+id/textview_description"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        android:fontFamily="@font/loramedium"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textview_descriptionprompt" />
+            android:id="@+id/imageview_arrownav"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            app:layout_constraintBottom_toBottomOf="@+id/textview_seedailyquestion"
+            app:layout_constraintStart_toEndOf="@+id/textview_seedailyquestion"
+            app:layout_constraintTop_toTopOf="@+id/textview_seedailyquestion"
+            app:srcCompat="@drawable/baseline_arrow_forward_ios_24_grey"
+            android:contentDescription="@string/back_navigation_arrow" />
 
 
-    <View
-        android:id="@+id/splitterView"
-        android:layout_width="0dp"
-        android:layout_height="2dp"
-        android:layout_marginTop="10dp"
-        android:background="@color/splitterViewColor"
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textview_description" />
-
-    <ImageView
-        android:id="@+id/imageview_arrownav"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        app:layout_constraintBottom_toBottomOf="@+id/textview_seedailyquestion"
-        app:layout_constraintStart_toEndOf="@+id/textview_seedailyquestion"
-        app:layout_constraintTop_toTopOf="@+id/textview_seedailyquestion"
-        app:srcCompat="@drawable/baseline_arrow_forward_ios_24_grey" />
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

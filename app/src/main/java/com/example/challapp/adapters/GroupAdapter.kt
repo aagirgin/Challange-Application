@@ -1,12 +1,10 @@
 package com.example.challapp.adapters
 
-import android.annotation.SuppressLint
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.challapp.R
+import com.example.challapp.databinding.AdapterGroupItemBinding
 import com.example.challapp.domain.models.ApplicationGroup
 
 class GroupAdapter(
@@ -14,9 +12,12 @@ class GroupAdapter(
 ) : RecyclerView.Adapter<GroupAdapter.GroupViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GroupViewHolder {
-        val itemView =
-            LayoutInflater.from(parent.context).inflate(R.layout.adapter_group_item, parent, false)
-        return GroupViewHolder(itemView)
+        val binding = AdapterGroupItemBinding.inflate(
+            LayoutInflater.from(parent.context),
+            parent,
+            false
+        )
+        return GroupViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: GroupViewHolder, position: Int) {
@@ -28,14 +29,12 @@ class GroupAdapter(
         return groupList.size
     }
 
-    inner class GroupViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val groupNameTextView: TextView = itemView.findViewById(R.id.textview_groupName)
-        private val userCountTextView: TextView = itemView.findViewById(R.id.textview_numberofusersingroup)
-
-        @SuppressLint("SetTextI18n")
+    inner class GroupViewHolder(private val binding: AdapterGroupItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         fun bind(group: ApplicationGroup) {
-            groupNameTextView.text = group.groupName
-            userCountTextView.text = "${group.userCount} Users"
+            binding.textviewGroupName.text = group.groupName
+            val userCountText = itemView.context.getString(R.string.user_count_format, group.userCount)
+            binding.textviewNumberofusersingroup.text = userCountText
         }
     }
 }

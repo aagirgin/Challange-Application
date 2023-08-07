@@ -8,6 +8,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.challapp.R
+import com.example.challapp.databinding.AdapterCompletedchallengeItemBinding
 import com.example.challapp.domain.models.ApplicationDailyChallenge
 import com.example.challapp.services.ImageUploadService
 import com.facebook.shimmer.ShimmerFrameLayout
@@ -18,46 +19,57 @@ import kotlinx.coroutines.launch
 class CompletedChallengeAdapter(
     private var completedChallengesList: MutableList<ApplicationDailyChallenge>,
     private val currentUser: String
-):
-    RecyclerView.Adapter<CompletedChallengeAdapter.CompletedChallengeViewHolder>() {
+) : RecyclerView.Adapter<CompletedChallengeAdapter.CompletedChallengeViewHolder>() {
 
-    inner class CompletedChallengeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val creationDate: TextView = itemView.findViewById(R.id.textview_creationdate)
-        val desctiption: TextView = itemView.findViewById(R.id.textview_description)
-        val completedImage: ImageView = itemView.findViewById(R.id.imageview_completechallange)
-        val shimmerLayout: ShimmerFrameLayout = itemView.findViewById(R.id.shimmer_image)
+    inner class CompletedChallengeViewHolder(private val binding: AdapterCompletedchallengeItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
 
-    }
+        private val creationDate: TextView = binding.textviewCreationdate
+        private val description: TextView = binding.textviewDescription
+        private val completedImage: ImageView = binding.imageviewCompletechallange
+        private val shimmerLayout: ShimmerFrameLayout = binding.shimmerImage
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CompletedChallengeViewHolder {
-        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.adapter_completedchallenge_item, parent, false)
-        return CompletedChallengeViewHolder(itemView)
-    }
+        fun bind(currentChallenge: ApplicationDailyChallenge) {
+            creationDate.text = currentChallenge.questionDocumentId
+            description.text = currentChallenge.description
+            shimmerLayout.visibility = View.VISIBLE
+            shimmerLayout.startShimmer()
 
-    override fun onBindViewHolder(holder: CompletedChallengeViewHolder, position: Int) {
-        val currentChallenge = completedChallengesList[position]
-        holder.creationDate.text = currentChallenge.questionDocumentId
-        holder.desctiption.text = currentChallenge.description
-
-        holder.shimmerLayout.visibility = View.VISIBLE
-        holder.shimmerLayout.startShimmer()
-
-        if (currentChallenge.questionDocumentId.isNotBlank()) {
-            CoroutineScope(Dispatchers.Main).launch {
-                val imageUrl = ImageUploadService.getImageWithDocumentId(currentUser, currentChallenge.questionDocumentId)
-                if (imageUrl != "No Image") {
-                    ImageUploadService.loadImageIntoImageView(imageUrl!!, holder.completedImage)
-                    holder.shimmerLayout.hideShimmer()
-                }
-                else{
-                    holder.completedImage.setBackgroundColor(Color.WHITE)
-                    holder.completedImage.setImageResource(R.drawable.baseline_group_24)
-                    holder.shimmerLayout.hideShimmer()
+            if (currentChallenge.questionDocumentId.isNotBlank()) {
+                CoroutineScope(Dispatchers.Main).launch {
+                    val imageUrl = ImageUploadService.getImageWithDocumentId(
+                        currentUser,
+                        currentChallenge.questionDocumentId
+                    )
+                    if (imageUrl != "No Image") {
+                        ImageUploadService.loadImageIntoImageView(imageUrl!!, completedImage)
+                        shimmerLayout.hideShimmer()
+                    } else {
+                        completedImage.setBackgroundColor(Color.WHITE)
+                        completedImage.setImageResource(R.drawable.baseline_group_24)
+                        shimmerLayout.hideShimmer()
+                    }
                 }
             }
         }
     }
 
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ): CompletedChallengeViewHolder {
+        val binding = AdapterCompletedchallengeItemBinding.inflate(
+            LayoutInflater.from(parent.context),
+            parent,
+            false
+        )
+        return CompletedChallengeViewHolder(binding)
+    }
+
+    override fun onBindViewHolder(holder: CompletedChallengeViewHolder, position: Int) {
+        val currentChallenge = completedChallengesList[position]
+        holder.bind(currentChallenge)
+    }
 
     override fun getItemCount(): Int {
         return completedChallengesList.size
@@ -67,5 +79,4 @@ class CompletedChallengeAdapter(
         completedChallengesList = challenges
         notifyDataSetChanged()
     }
-
 }

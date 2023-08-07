@@ -11,15 +11,12 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.constraintlayout.widget.ConstraintLayout
-import com.example.challapp.R
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
-import com.example.challapp.services.ImageUploadService
+import com.example.challapp.databinding.AdapterDailychallangeItemBinding
 import com.example.challapp.ui.feed.dailychallange.DailyChallangeFragment
-import org.w3c.dom.Text
-
 
 class DailyChallengeAdapter(
     private var downloadImageUrl: String?
@@ -43,8 +40,12 @@ class DailyChallengeAdapter(
         descriptionChangeListener = listener
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChallengeViewHolder {
-        val inflater = LayoutInflater.from(parent.context).inflate(R.layout.adapter_dailychallange_item, parent, false)
-        return ChallengeViewHolder(inflater)
+        val binding = AdapterDailychallangeItemBinding.inflate(
+            LayoutInflater.from(parent.context),
+            parent,
+            false
+        )
+        return ChallengeViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: ChallengeViewHolder, position: Int) {
@@ -60,13 +61,13 @@ class DailyChallengeAdapter(
         notifyDataSetChanged()
     }
 
-    inner class ChallengeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val cardView: CardView = itemView.findViewById(R.id.cardview_addphotocard)
-        private val imagePhoto : ImageView = itemView.findViewById(R.id.imageview_addphoto)
-        private val imagePhotoText : TextView = itemView.findViewById(R.id.textview_addphotoprompt)
-        private val button: Button = itemView.findViewById(R.id.button)
-        private val constaintL: ConstraintLayout = itemView.findViewById(R.id.constraintlayout_backgroundChange)
-        private val edittextGroupDescription: EditText = itemView.findViewById(R.id.edittext_groupdescription)
+    inner class ChallengeViewHolder(private val binding: AdapterDailychallangeItemBinding) : RecyclerView.ViewHolder(binding.root) {
+        private val cardView: CardView = binding.cardviewAddphotocard
+        private val imagePhoto: ImageView = binding.imageviewAddphoto
+        private val imagePhotoText: TextView = binding.textviewAddphotoprompt
+        private val button: Button = binding.button
+        private val constaintL: ConstraintLayout = binding.constraintlayoutBackgroundChange
+        private val edittextGroupDescription: EditText = binding.edittextGroupdescription
 
         init {
             cardView.setOnClickListener {

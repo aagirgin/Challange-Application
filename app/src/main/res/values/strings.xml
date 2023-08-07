@@ -90,6 +90,10 @@
     <string name="ali_arda_girgin">Ali Arda Girgin</string>
     <string name="see_daily_question_for_that_day">See Daily Question for that day</string>
     <string name="register_succesful">Registration successful.</string>
-    Registration successful.
+    <string name="user_count_format"> %d Users</string>
+    <string name="personal_challenge_image">Personal Challenge Image</string>
+    <string name="description">Description</string>
+    <string name="default_group_image">Default Group Image</string>
+    <string name="group_member_sign">Group Member Sign</string>
 
 </resources>
