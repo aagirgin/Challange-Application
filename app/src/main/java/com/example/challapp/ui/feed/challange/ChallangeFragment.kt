@@ -22,6 +22,8 @@ class ChallangeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentChallangeBinding.inflate(inflater,container,false)
+        binding.viewModel = challangeViewModel
+        binding.lifecycleOwner = viewLifecycleOwner
 
         onClickNavigatePreviousChallenges()
         onClickNavigateDailyChallange()

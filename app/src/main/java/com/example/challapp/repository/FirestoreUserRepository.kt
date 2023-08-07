@@ -6,7 +6,7 @@ import com.example.challapp.domain.models.ApplicationGroup
 import com.google.firebase.auth.FirebaseUser
 
 interface FirestoreUserRepository {
-
+    suspend fun getStreak(userId: String): Long
     suspend fun checkUserAlreadyHaveSubmission(userId: String) : Boolean
     suspend fun sendPasswordResetEmail(email: String) : Boolean
     suspend fun getUserIncludedGroupIds(userId: String): List<String>?

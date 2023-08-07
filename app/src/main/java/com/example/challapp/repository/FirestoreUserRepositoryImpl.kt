@@ -13,12 +13,19 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
+import org.threeten.bp.LocalDate
+import org.threeten.bp.format.DateTimeFormatter
 import javax.inject.Inject
 
 class FirestoreUserRepositoryImpl @Inject constructor(
     private val firestore: FirebaseFirestore,
     private val auth: FirebaseAuth
 ) : FirestoreUserRepository {
+
+
+    private val currentDate: LocalDate = LocalDate.now()
+    private val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+    private val formattedDate = currentDate.format(formatter)
 
 
     override suspend fun getUsername(userId: String): String? {
@@ -89,14 +96,21 @@ class FirestoreUserRepositoryImpl @Inject constructor(
         }
     }
 
+    override suspend fun getStreak(userId: String): Long {
+        val userDocRef = firestore.collection("Users").document(userId).get().await()
+        val userData = userDocRef.data
+        return userData?.get("challangeStreak") as Long? ?: 0
+    }
+
 
     override suspend fun checkUserAlreadyHaveSubmission(userId: String): Boolean{
         val groupDocumentRef = firestore.collection("Users").document(userId).get().await()
         val userData = groupDocumentRef.data
         val allDailyQuestions = userData?.get("allDailyQuestions") as? List<HashMap<String, Any>>
 
+
         return allDailyQuestions?.any { dailyQuestion ->
-            dailyQuestion["questionDocumentId"] == "2023-07-30"
+            dailyQuestion["questionDocumentId"] == formattedDate
         } ?: false
     }
 
@@ -153,7 +167,8 @@ class FirestoreUserRepositoryImpl @Inject constructor(
     }
     override suspend fun getDailyQuestionInformation(): ApplicationDailyQuestion{
 
-        val userDocRef = firestore.collection("Questions").document("2023-07-30").get().await()
+
+        val userDocRef = firestore.collection("Questions").document(formattedDate).get().await()
         val dailyQuestion = userDocRef.get("dailyQuestion") as? String
         val dailyQuestionName = userDocRef.get("dailyQuestionName") as? String
         return ApplicationDailyQuestion(

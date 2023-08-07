@@ -27,6 +27,8 @@ import com.example.challapp.services.ImageUploadService
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import org.threeten.bp.LocalDate
+import org.threeten.bp.format.DateTimeFormatter
 
 @AndroidEntryPoint
 class DailyChallangeFragment : Fragment(), DailyChallengeAdapter.OnItemClickListener, DailyChallengeAdapter.OnDescriptionChangeListener  {
@@ -84,14 +86,20 @@ class DailyChallangeFragment : Fragment(), DailyChallengeAdapter.OnItemClickList
         intent.type = "image/*"
         launcher.launch(intent)
     }
+
+
     private fun uploadImageToFirebaseStorage(imageUri: Uri) {
         viewLifecycleOwner.lifecycleScope.launch {
             val currentUserUid = dailyChallangeViewModel.currentUser.value?.uid
 
+            val currentDate = LocalDate.now()
+            val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+            val formattedDate = currentDate.format(formatter)
+
             if (currentUserUid != null) {
                 ImageUploadService.uploadImagetoUserDir(
                     imageUri,
-                    "2023-07-30",
+                    formattedDate,
                     currentUserUid,
                 ) { errorMessage ->
                     Snackbar.make(binding.root, errorMessage, Snackbar.LENGTH_SHORT).show()
