@@ -17,10 +17,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.challapp.R
 import com.example.challapp.databinding.FragmentProfileNavBinding
 import com.example.challapp.services.ImageUploadService
-import com.google.android.material.snackbar.Snackbar
-import com.google.firebase.storage.StorageReference
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -53,7 +50,6 @@ class ProfileNavFragment : Fragment() {
         displayImage()
         addProfilePicture()
         onNavigateInProfile()
-        println(findNavController().previousBackStackEntry)
 
         return binding.root
     }

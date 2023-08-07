@@ -26,7 +26,7 @@ class FirestoreUserRepositoryImpl @Inject constructor(
     private val currentDate: LocalDate = LocalDate.now()
     private val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
     private val formattedDate = currentDate.format(formatter)
-
+    private val previousDate = currentDate.minusDays(1).format(formatter)
 
     override suspend fun getUsername(userId: String): String? {
         return try {
@@ -41,7 +41,6 @@ class FirestoreUserRepositoryImpl @Inject constructor(
     override suspend fun addUserToFirestore(userId: String, email: String, fullName: String): Boolean {
         val userCollection = firestore.collection("Users")
         val userDocument = userCollection.document(userId)
-
         return try {
             val applicationUser = ApplicationUser(
                 username = fullName,
@@ -65,8 +64,8 @@ class FirestoreUserRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun getGroupInformationByDocumentId(documentId: String): ApplicationGroup? {
-        val groupDocumentRef = firestore.collection("Groups").document(documentId)
+    override suspend fun getGroupInformationByDocumentId(documentId: Any?): ApplicationGroup? {
+        val groupDocumentRef = firestore.collection("Groups").document(documentId.toString())
         return try {
             val document = groupDocumentRef.get().await()
             if (document.exists()) {
@@ -76,7 +75,7 @@ class FirestoreUserRepositoryImpl @Inject constructor(
                 val creationDate = groupData?.get("creationDate") as? String ?: ""
                 val groupDescription = groupData?.get("groupDescription") as? String ?: ""
                 val userCount = groupData?.get("userCount") as? Long ?: 0
-                val groupMembers = (groupData?.get("groupMembers") as? List<String>)?.toMutableList()
+                val groupMembers = (groupData?.get("groupMembers") as? List<*>)?.toMutableList()
                     ?: mutableListOf()
                 val groupOwner = groupData?.get("groupOwner") as? String ?: ""
 
@@ -99,29 +98,74 @@ class FirestoreUserRepositoryImpl @Inject constructor(
     override suspend fun getStreak(userId: String): Long {
         val userDocRef = firestore.collection("Users").document(userId).get().await()
         val userData = userDocRef.data
-        return userData?.get("challangeStreak") as Long? ?: 0
+        return userData?.get("challangeStreak") as Long
     }
 
+    override suspend fun incrementStreakCountByOne(userId: String) {
+        val groupDocumentRefStreak = firestore.collection("Users").document(userId)
+        val documentSnapshot = groupDocumentRefStreak.get().await()
+        val currentStreak = documentSnapshot.getLong("challangeStreak") ?: 0
+        val newStreak = currentStreak + 1
+        groupDocumentRefStreak.update("challangeStreak", newStreak).await()
+    }
 
-    override suspend fun checkUserAlreadyHaveSubmission(userId: String): Boolean{
+    override suspend fun updateStreakBasedOnDailyQuestions(userId: String) {
         val groupDocumentRef = firestore.collection("Users").document(userId).get().await()
         val userData = groupDocumentRef.data
-        val allDailyQuestions = userData?.get("allDailyQuestions") as? List<HashMap<String, Any>>
+        val allDailyQuestions = userData?.get("allDailyQuestions") as? List<*>
 
+        val groupDocumentRefStreak = firestore.collection("Users").document(userId)
 
-        return allDailyQuestions?.any { dailyQuestion ->
-            dailyQuestion["questionDocumentId"] == formattedDate
-        } ?: false
+        var consecutiveStreakCounter = 0L
+        var lastDate: LocalDate? = null
+
+        if (!allDailyQuestions.isNullOrEmpty()) {
+            if ((allDailyQuestions.last() as? HashMap<*, *>)?.get("questionDocumentId") == formattedDate || (allDailyQuestions.last() as? HashMap<*, *>)?.get("questionDocumentId") != previousDate) {
+                for (i in allDailyQuestions.size - 1 downTo 0) {
+                    val questionMap = allDailyQuestions[i] as? HashMap<*, *>
+                    val questionDateStr = questionMap?.get("questionDocumentId") as? String
+                    val questionDate = LocalDate.parse(questionDateStr)
+                    println("Last Date: $lastDate , Question Date $questionDate")
+                    if (lastDate == null || lastDate.minusDays(1) == questionDate) {
+                        consecutiveStreakCounter++
+                        lastDate = questionDate
+                    } else {
+                        break
+                    }
+                }
+
+                groupDocumentRefStreak.update("challangeStreak", consecutiveStreakCounter).await()
+            }
+        } else {
+            return
+        }
+    }
+    override suspend fun checkUserAlreadyHaveSubmission(userId: String): Boolean {
+        val groupDocumentRef = firestore.collection("Users").document(userId).get().await()
+        val userData = groupDocumentRef.data
+        val allDailyQuestions = userData?.get("allDailyQuestions") as? List<*>
+
+        if (allDailyQuestions != null) {
+            return allDailyQuestions.any { dailyQuestion ->
+                if (dailyQuestion is HashMap<*, *>) {
+                    val questionDocumentId = dailyQuestion["questionDocumentId"] as? String
+                    questionDocumentId == formattedDate
+                } else {
+                    false
+                }
+            }
+        }
+        return false
     }
 
     override suspend fun getAllDailyChallangesForUser(userId: String): MutableList<ApplicationDailyChallenge>? {
         val groupDocumentRef = firestore.collection("Users").document(userId).get().await()
-        val data = groupDocumentRef.data?.get("allDailyQuestions") as? List<HashMap<String, Any>> // Fetch as List of HashMaps
-        return data?.map { it.toApplicationDailyChallenge() }?.toMutableList()
+        val data = groupDocumentRef.data?.get("allDailyQuestions") as? List<*>
+        return data?.filterIsInstance<HashMap<String, Any>>()?.mapTo(mutableListOf()) { it.toApplicationDailyChallenge() }
     }
-    override suspend fun getUserIncludedGroupIds(userId: String): List<String>? {
+    override suspend fun getUserIncludedGroupIds(userId: String): List<*>? {
         val userDocument = firestore.collection("Users").document(userId).get().await()
-        val includedGroups = userDocument.get("includedGroups") as? List<String>
+        val includedGroups = userDocument.get("includedGroups") as? List<*>
         return includedGroups
     }
     override suspend fun updateIncludedGroupsForUser(userId: String, groupId: String): Boolean {
@@ -177,7 +221,7 @@ class FirestoreUserRepositoryImpl @Inject constructor(
         )
     }
 
-    fun generateInviteKey(): String {
+    private fun generateInviteKey(): String {
         val chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
         val random = java.util.Random()
         val sb = StringBuilder(8)
@@ -288,5 +332,5 @@ class FirestoreUserRepositoryImpl @Inject constructor(
 fun HashMap<String, Any>.toApplicationDailyChallenge(): ApplicationDailyChallenge {
     val questionDocumentId = this["questionDocumentId"] as String
     val description = this["description"] as String
-    return ApplicationDailyChallenge(questionDocumentId, description, /*other properties*/)
+    return ApplicationDailyChallenge(questionDocumentId, description)
 }

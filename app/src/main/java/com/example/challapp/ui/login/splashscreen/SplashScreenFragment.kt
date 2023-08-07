@@ -35,8 +35,9 @@ class SplashScreenFragment : Fragment() {
         viewLifecycleOwner.lifecycleScope.launch {
             delay(2000)
 
-            splashScreenViewModel.currUserState.collect{state ->
-                if (state){
+            splashScreenViewModel.getCurrentUser.collect{ state ->
+                if (state != null){
+                    splashScreenViewModel.updateStreakOnNavigate()
                     findNavController().navigate(R.id.action_splashScreenFragment_to_challangeFragment)
                 }
                 else{

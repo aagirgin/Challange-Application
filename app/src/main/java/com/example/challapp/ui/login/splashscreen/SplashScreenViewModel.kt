@@ -1,29 +1,22 @@
 package com.example.challapp.ui.login.splashscreen
 
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.example.challapp.repository.FirestoreUserRepository
+import com.google.firebase.auth.FirebaseUser
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class SplashScreenViewModel @Inject constructor(
     private val userRepository: FirestoreUserRepository
 ) : ViewModel() {
-    private val _currUserState = MutableStateFlow(false)
-    val currUserState: StateFlow<Boolean> get() = _currUserState
+    val getCurrentUser: MutableStateFlow<FirebaseUser?>
+        get() = _getCurrentUser
 
-    init {
-        getCurrentUserStatus()
-    }
+    private val _getCurrentUser: MutableStateFlow<FirebaseUser?> = MutableStateFlow(userRepository.getCurrentUser())
 
-    private fun getCurrentUserStatus() {
-        viewModelScope.launch {
-            val currentUser = userRepository.getCurrentUser()
-            _currUserState.value = currentUser != null
-        }
+    suspend fun updateStreakOnNavigate(){
+        _getCurrentUser.value?.let { userRepository.updateStreakBasedOnDailyQuestions(it.uid) }
     }
 }

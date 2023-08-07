@@ -4,7 +4,6 @@ import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,7 +20,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.challapp.R
 import com.example.challapp.adapters.DailyChallengeAdapter
 import com.example.challapp.databinding.FragmentDailyChallangeBinding
-import com.example.challapp.domain.models.ApplicationDailyQuestion
 import com.example.challapp.domain.state.UiState
 import com.example.challapp.services.ImageUploadService
 import com.google.android.material.snackbar.Snackbar
@@ -158,7 +156,6 @@ class DailyChallangeFragment : Fragment(), DailyChallengeAdapter.OnItemClickList
                             findNavController().navigate(R.id.action_dailyChallangeFragment_to_challangeFragment)
                         }
                         is UiState.Error -> {
-                            // Show error UI and display the error message
                             Snackbar.make(binding.root, state.error, Snackbar.LENGTH_SHORT).show()
                         }
                         else -> {}

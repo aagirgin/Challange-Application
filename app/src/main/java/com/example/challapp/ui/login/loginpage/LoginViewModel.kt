@@ -49,4 +49,7 @@ class LoginViewModel @Inject constructor(
             }
         }
     }
+    suspend fun updateStreakOnNavigate(){
+        _currentUser.value?.let { userRepository.updateStreakBasedOnDailyQuestions(it.uid) }
+    }
 }

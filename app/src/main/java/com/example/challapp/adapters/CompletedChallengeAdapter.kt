@@ -9,9 +9,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.challapp.R
 import com.example.challapp.domain.models.ApplicationDailyChallenge
-import com.example.challapp.domain.models.ApplicationGroup
 import com.example.challapp.services.ImageUploadService
-import com.facebook.shimmer.Shimmer
 import com.facebook.shimmer.ShimmerFrameLayout
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -47,7 +45,6 @@ class CompletedChallengeAdapter(
         if (currentChallenge.questionDocumentId.isNotBlank()) {
             CoroutineScope(Dispatchers.Main).launch {
                 val imageUrl = ImageUploadService.getImageWithDocumentId(currentUser, currentChallenge.questionDocumentId)
-                println(imageUrl)
                 if (imageUrl != "No Image") {
                     ImageUploadService.loadImageIntoImageView(imageUrl!!, holder.completedImage)
                     holder.shimmerLayout.hideShimmer()
