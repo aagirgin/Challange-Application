@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.challapp.R
 import com.example.challapp.adapters.CompletedChallengeAdapter
-import com.example.challapp.adapters.DailyChallengeAdapter
 import com.example.challapp.databinding.FragmentCompletedChallengeBinding
 import com.example.challapp.domain.models.ApplicationDailyChallenge
 import com.example.challapp.domain.state.UiState
@@ -21,7 +20,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class CompletedChallengeFragment : Fragment() {
+class CompletedChallengeFragment : Fragment(),CompletedChallengeAdapter.OnItemClickListener {
     private lateinit var binding: FragmentCompletedChallengeBinding
     private lateinit var completedChallengeAdapter: CompletedChallengeAdapter
     private val completedChallangeViewModel: CompletedChallengeViewModel by viewModels()
@@ -56,6 +55,7 @@ class CompletedChallengeFragment : Fragment() {
 
         recyclerView.layoutManager = layoutManager
         recyclerView.adapter = completedChallengeAdapter
+        completedChallengeAdapter.setOnItemClickListener(this)
 
         viewLifecycleOwner.lifecycleScope.launch {
             completedChallangeViewModel.getDailyChallenges.collect { state ->
@@ -73,5 +73,9 @@ class CompletedChallengeFragment : Fragment() {
         }
     }
 
+    override fun onItemClick(documentId: String) {
+        val bottomSheet = QuestionTaskSheet(documentId)
+        bottomSheet.show(parentFragmentManager, bottomSheet.tag)
+    }
 
 }

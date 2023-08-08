@@ -221,6 +221,17 @@ class FirestoreUserRepositoryImpl @Inject constructor(
         )
     }
 
+    override suspend fun getDailyQuestionInformationByDocumentId(documentId: String): ApplicationDailyQuestion{
+
+        val userDocRef = firestore.collection("Questions").document(documentId).get().await()
+        val dailyQuestion = userDocRef.get("dailyQuestion") as? String
+        val dailyQuestionName = userDocRef.get("dailyQuestionName") as? String
+        return ApplicationDailyQuestion(
+            dailyQuestion = dailyQuestion,
+            dailyQuestionName = dailyQuestionName
+        )
+    }
+
     private fun generateInviteKey(): String {
         val chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
         val random = java.util.Random()

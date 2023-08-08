@@ -2,7 +2,7 @@ package com.example.challapp.ui.feed.completedchallenges
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.challapp.domain.models.ApplicationDailyChallenge
+import com.example.challapp.domain.models.ApplicationDailyQuestion
 import com.example.challapp.domain.state.UiState
 import com.example.challapp.repository.FirestoreUserRepository
 import com.google.firebase.auth.FirebaseUser
@@ -22,16 +22,19 @@ class CompletedChallengeViewModel @Inject constructor(
 
     private val _getCurrentUser: MutableStateFlow<FirebaseUser?> = MutableStateFlow(userRepository.getCurrentUser())
 
-    val getCurrentUserName: MutableStateFlow<String>
-        get() = _getCurrentUserName
-
     private val _getCurrentUserName: MutableStateFlow<String> = MutableStateFlow("")
 
     private val _getDailyChallenges: MutableStateFlow<UiState<*>> = MutableStateFlow(UiState.Empty)
     val getDailyChallenges: StateFlow<UiState<*>> get() = _getDailyChallenges
 
+    val getSpecificDailyQuestion: MutableStateFlow<ApplicationDailyQuestion?>
+        get() = _getSpecificDailyQuestion
 
+    private val _getSpecificDailyQuestion: MutableStateFlow<ApplicationDailyQuestion?> = MutableStateFlow(null)
 
+    suspend fun getDailyQuestion(documentId: String) {
+        _getSpecificDailyQuestion.value = userRepository.getDailyQuestionInformationByDocumentId(documentId)
+    }
     init {
         viewModelScope.launch {
             _getDailyChallenges.value = UiState.Loading

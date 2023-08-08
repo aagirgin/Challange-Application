@@ -20,9 +20,30 @@ class CompletedChallengeAdapter(
     private var completedChallengesList: MutableList<ApplicationDailyChallenge>,
     private val currentUser: String
 ) : RecyclerView.Adapter<CompletedChallengeAdapter.CompletedChallengeViewHolder>() {
+    interface OnItemClickListener {
+        fun onItemClick(documentId: String)
+    }
 
-    inner class CompletedChallengeViewHolder(private val binding: AdapterCompletedchallengeItemBinding) :
+    private var listener: OnItemClickListener? = null
+    private lateinit var binding: AdapterCompletedchallengeItemBinding
+
+    fun setOnItemClickListener(listener: OnItemClickListener) {
+        this.listener = listener
+    }
+
+    inner class CompletedChallengeViewHolder(binding: AdapterCompletedchallengeItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
+
+        init {
+            binding.root.setOnClickListener {
+                val position = adapterPosition
+                if (position != RecyclerView.NO_POSITION) {
+                    val currentChallenge = completedChallengesList[position]
+                    val documentId = currentChallenge.questionDocumentId
+                    listener?.onItemClick(documentId)
+                }
+            }
+        }
 
         private val creationDate: TextView = binding.textviewCreationdate
         private val description: TextView = binding.textviewDescription
@@ -58,7 +79,7 @@ class CompletedChallengeAdapter(
         parent: ViewGroup,
         viewType: Int
     ): CompletedChallengeViewHolder {
-        val binding = AdapterCompletedchallengeItemBinding.inflate(
+        binding = AdapterCompletedchallengeItemBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
             false

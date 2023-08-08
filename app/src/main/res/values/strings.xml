@@ -95,5 +95,6 @@
     <string name="description">Description</string>
     <string name="default_group_image">Default Group Image</string>
     <string name="group_member_sign">Group Member Sign</string>
+    <string name="info_image">Info Image</string>
 
 </resources>

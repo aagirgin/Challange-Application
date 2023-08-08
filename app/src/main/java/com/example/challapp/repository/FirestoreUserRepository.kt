@@ -24,6 +24,7 @@ interface FirestoreUserRepository {
     fun getCurrentUser(): FirebaseUser?
     suspend fun updateIncludedGroupsForUser(userId: String, groupId: String): Boolean
     suspend fun getGroupInformationByDocumentId(documentId: Any?): ApplicationGroup?
+    suspend fun getDailyQuestionInformationByDocumentId(documentId: String): ApplicationDailyQuestion
     suspend fun getDailyQuestionInformation(): ApplicationDailyQuestion
     suspend fun addDailyChallangeToUser(userId: String, description: String, documentId: String): Boolean
     suspend fun getAllDailyChallangesForUser(userId: String): MutableList<ApplicationDailyChallenge>?
