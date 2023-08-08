@@ -49,14 +49,14 @@ class ProfileFragment : Fragment() {
     }
 
     private fun changeName() {
-        binding.iconChangename.setOnClickListener {
+        binding.iconChangeName.setOnClickListener {
             binding.edittextName.isEnabled = true
             binding.edittextName.text = null
             binding.edittextName.requestFocus()
             val inputMethodManager = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             inputMethodManager.showSoftInput(binding.edittextName, InputMethodManager.SHOW_IMPLICIT)
         }
-        binding.buttonApplychanges.setOnClickListener {
+        binding.buttonApplyChanges.setOnClickListener {
             if (validationField()) {
                 viewLifecycleOwner.lifecycleScope.launch {
                     profileViewModel.currentUser.collect { currentUser ->
@@ -85,11 +85,11 @@ class ProfileFragment : Fragment() {
             profileViewModel.currentUser.value?.email?.let { profileViewModel.loadProfileImage(it) }
             profileViewModel.profileImageUrl.collect { imageUrl ->
                 if (imageUrl == "No Picture"){
-                    binding.shapeableImageView.setImageResource(R.drawable.baseline_person_24)
+                    binding.imageviewProfilePicture.setImageResource(R.drawable.baseline_person_24)
                 }
                 else {
                     if (imageUrl != null) {
-                        ImageUploadService.loadImageIntoImageView(imageUrl, binding.shapeableImageView)
+                        ImageUploadService.loadImageIntoImageView(imageUrl, binding.imageviewProfilePicture)
                     }
                 }
             }

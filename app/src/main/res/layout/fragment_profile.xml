@@ -34,7 +34,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textview_createyourgroupback"
+            android:id="@+id/textview_createYourGroupBack"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/loramedium"
@@ -59,7 +59,7 @@
 
 
         <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/shapeableImageView"
+            android:id="@+id/imageview_profilePicture"
             android:layout_width="200dp"
             android:layout_height="200dp"
             android:layout_marginTop="90dp"
@@ -78,11 +78,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:fontFamily="@font/intersemibold"
+            android:fontFamily="@font/lorasemibold"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/shapeableImageView" />
+            app:layout_constraintTop_toBottomOf="@+id/imageview_profilePicture" />
 
         <View
             android:id="@+id/splitterView"
@@ -102,10 +102,10 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="48dp"
             android:layout_marginTop="12dp"
-            android:fontFamily="@font/interextrabold"
+            android:fontFamily="@font/lorabold"
             android:text="@string/profilePageNamePromt"
             android:textColor="@color/loginPageTextColor"
-            android:textSize="12sp"
+            android:textSize="14sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/splitterView" />
 
@@ -117,7 +117,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="40dp"
             android:background="@drawable/custom_edittext_border"
-            android:fontFamily="@font/intersemibold"
+            android:fontFamily="@font/lorasemibold"
             android:paddingStart="16dp"
             android:paddingTop="12dp"
             android:inputType="text"
@@ -132,7 +132,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textview_name" />
 
         <ImageView
-            android:id="@+id/icon_changename"
+            android:id="@+id/icon_changeName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="56dp"
@@ -148,10 +148,10 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="48dp"
             android:layout_marginTop="8dp"
-            android:fontFamily="@font/interextrabold"
+            android:fontFamily="@font/lorabold"
             android:text="@string/profilePageMailPrompt"
             android:textColor="@color/loginPageTextColor"
-            android:textSize="12sp"
+            android:textSize="14sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/edittext_name" />
 
@@ -177,7 +177,7 @@
             tools:ignore="LabelFor"/>
 
         <Button
-            android:id="@+id/button_applychanges"
+            android:id="@+id/button_applyChanges"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="80dp"
@@ -185,7 +185,7 @@
 
             android:layout_marginEnd="80dp"
             android:backgroundTint="@color/primaryApplicationColor"
-            android:fontFamily="@font/intersemibold"
+            android:fontFamily="@font/lorasemibold"
             android:paddingTop="8dp"
             android:paddingBottom="8dp"
             android:text="@string/apply_changes_button"

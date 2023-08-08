@@ -28,4 +28,6 @@ interface FirestoreUserRepository {
     suspend fun getDailyQuestionInformation(): ApplicationDailyQuestion
     suspend fun addDailyChallangeToUser(userId: String, description: String, documentId: String): Boolean
     suspend fun getAllDailyChallangesForUser(userId: String): MutableList<ApplicationDailyChallenge>?
+
+    suspend fun getInviteKey(userId: String): String
 }

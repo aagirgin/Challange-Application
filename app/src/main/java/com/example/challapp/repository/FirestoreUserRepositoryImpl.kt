@@ -163,6 +163,13 @@ class FirestoreUserRepositoryImpl @Inject constructor(
         val data = groupDocumentRef.data?.get("allDailyQuestions") as? List<*>
         return data?.filterIsInstance<HashMap<String, Any>>()?.mapTo(mutableListOf()) { it.toApplicationDailyChallenge() }
     }
+
+    override suspend fun getInviteKey(userId: String): String {
+        val groupDocumentRef = firestore.collection("Users").document(userId).get().await()
+        val data = groupDocumentRef.data
+        return data?.get("inviteKey") as String
+    }
+
     override suspend fun getUserIncludedGroupIds(userId: String): List<*>? {
         val userDocument = firestore.collection("Users").document(userId).get().await()
         val includedGroups = userDocument.get("includedGroups") as? List<*>

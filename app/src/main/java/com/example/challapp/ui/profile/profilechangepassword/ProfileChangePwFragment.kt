@@ -43,11 +43,11 @@ class ProfileChangePwFragment : Fragment() {
             profileChangePwViewModel.currentUser.value?.email?.let { profileChangePwViewModel.loadProfileImage(it) }
             profileChangePwViewModel.profileImageUrl.collect { imageUrl ->
                 if (imageUrl == "No Picture"){
-                    binding.shapeableImageView.setImageResource(R.drawable.baseline_person_24)
+                    binding.imageviewProfilePicture.setImageResource(R.drawable.baseline_person_24)
                 }
                 else {
                     if (imageUrl != null) {
-                        ImageUploadService.loadImageIntoImageView(imageUrl, binding.shapeableImageView)
+                        ImageUploadService.loadImageIntoImageView(imageUrl, binding.imageviewProfilePicture)
                     }
 
                 }
@@ -112,7 +112,7 @@ class ProfileChangePwFragment : Fragment() {
     }
 
     private fun onPressButtonValidation(binding: FragmentProfileChangePwBinding) {
-        binding.buttonApplychanges.setOnClickListener {
+        binding.buttonApplyChanges.setOnClickListener {
             val currentPw = binding.edittextCurrentPassword.text.toString()
             val newPw = binding.edittextNewPassword1.text.toString()
             val newPw2 = binding.edittextNewPassword2.text.toString()

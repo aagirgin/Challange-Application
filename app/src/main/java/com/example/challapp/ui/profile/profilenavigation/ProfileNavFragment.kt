@@ -43,10 +43,10 @@ class ProfileNavFragment : Fragment() {
 
 
         binding = FragmentProfileNavBinding.inflate(inflater,container,false)
+        binding.viewModel = profileNavViewModel
+        binding.lifecycleOwner = viewLifecycleOwner
 
 
-
-        displayName()
         displayImage()
         addProfilePicture()
         onNavigateInProfile()
@@ -57,7 +57,7 @@ class ProfileNavFragment : Fragment() {
 
     private fun addProfilePicture() {
 
-        binding.shapeableImageView.setOnClickListener {
+        binding.imageviewProfilePicture.setOnClickListener {
             val intent = Intent(Intent.ACTION_PICK)
             intent.type = "image/*"
             launcher.launch(intent)
@@ -65,13 +65,6 @@ class ProfileNavFragment : Fragment() {
     }
 
 
-    private fun displayName(){
-        viewLifecycleOwner.lifecycleScope.launch {
-            profileNavViewModel.usernameFlow.collect{   username ->
-                binding.textviewUsername.text = username
-            }
-        }
-    }
 
 
     private fun displayImage() {
@@ -85,11 +78,11 @@ class ProfileNavFragment : Fragment() {
                         binding.shimmerShapableimage.startShimmer()
                     }
                     else if (imageUrl == "No Picture"){
-                        binding.shapeableImageView.setImageResource(R.drawable.baseline_person_24)
+                        binding.imageviewProfilePicture.setImageResource(R.drawable.baseline_person_24)
                         binding.shimmerShapableimage.hideShimmer()
                     }
                     else {
-                        ImageUploadService.loadImageIntoImageView(imageUrl, binding.shapeableImageView)
+                        ImageUploadService.loadImageIntoImageView(imageUrl, binding.imageviewProfilePicture)
                         binding.shimmerShapableimage.hideShimmer()
                     }
                 }
