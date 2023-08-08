@@ -29,13 +29,13 @@
             android:fontFamily="@font/loramedium"
             android:text="@string/see_your_daily_challenge"
             android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="@+id/imageview_backnavarrow"
+            app:layout_constraintBottom_toBottomOf="@+id/imageview_backNavArrow"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/imageview_backnavarrow" />
+            app:layout_constraintTop_toTopOf="@+id/imageview_backNavArrow" />
 
         <ImageView
-            android:id="@+id/imageview_backnavarrow"
+            android:id="@+id/imageview_backNavArrow"
             android:layout_width="26dp"
             android:layout_height="26dp"
             android:layout_marginStart="20dp"

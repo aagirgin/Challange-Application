@@ -33,13 +33,13 @@
             android:fontFamily="@font/loramedium"
             android:text="@string/change_password"
             android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="@+id/imageview_backnavarrow"
+            app:layout_constraintBottom_toBottomOf="@+id/imageview_backNavArrow"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/imageview_backnavarrow" />
+            app:layout_constraintTop_toTopOf="@+id/imageview_backNavArrow" />
 
         <ImageView
-            android:id="@+id/imageview_backnavarrow"
+            android:id="@+id/imageview_backNavArrow"
             android:layout_width="26dp"
             android:layout_height="26dp"
             android:layout_marginStart="20dp"
@@ -115,7 +115,9 @@
             android:paddingBottom="12dp"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="@+id/textview_currentPassword"
-            app:layout_constraintTop_toBottomOf="@+id/textview_currentPassword" />
+            app:layout_constraintTop_toBottomOf="@+id/textview_currentPassword"
+            android:autofillHints="Current Password"
+            tools:ignore="LabelFor" />
 
 
         <TextView
@@ -146,6 +148,8 @@
             android:paddingEnd="16dp"
             android:paddingBottom="12dp"
             android:textSize="16sp"
+            android:autofillHints="New Password"
+            tools:ignore="LabelFor"
             app:layout_constraintStart_toStartOf="@+id/textview_newPassword1"
             app:layout_constraintTop_toBottomOf="@+id/textview_newPassword1" />
 
@@ -177,6 +181,8 @@
             android:paddingEnd="16dp"
             android:paddingBottom="12dp"
             android:textSize="16sp"
+            android:autofillHints="New Password2"
+            tools:ignore="LabelFor"
             app:layout_constraintStart_toStartOf="@+id/textview_newPassword2"
             app:layout_constraintTop_toBottomOf="@+id/textview_newPassword2" />
 

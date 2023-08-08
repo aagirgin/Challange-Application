@@ -69,7 +69,7 @@ class DailyChallangeFragment : Fragment(), DailyChallengeAdapter.OnItemClickList
 
 
     private fun onClickNavigateBack(){
-        binding.imageviewBacknavarrow.setOnClickListener {
+        binding.imageviewBackNavArrow.setOnClickListener {
             findNavController().navigate(R.id.action_dailyChallangeFragment_to_challangeFragment)
         }
     }

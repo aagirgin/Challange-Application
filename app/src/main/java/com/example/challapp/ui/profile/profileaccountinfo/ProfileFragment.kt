@@ -43,7 +43,7 @@ class ProfileFragment : Fragment() {
     }
 
     private fun onNavigateBack(){
-        binding.imageviewBacknavarrow.setOnClickListener {
+        binding.imageviewBackNavArrow.setOnClickListener {
             findNavController().navigate(R.id.action_profileFragment_to_profileNavFragment)
         }
     }

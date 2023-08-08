@@ -44,13 +44,13 @@ class CompletedChallengeFragment : Fragment(),CompletedChallengeAdapter.OnItemCl
     }
 
     private fun onNavigateBackChallengePage(){
-        binding.imageviewBacknavarrow.setOnClickListener {
+        binding.imageviewBackNavArrow.setOnClickListener {
             findNavController().navigate(R.id.action_completedChallengeFragment_to_challangeFragment)
         }
     }
 
     private fun setupRecyclerView() {
-        val recyclerView: RecyclerView = binding.recyclerviewCompletedchallenges
+        val recyclerView: RecyclerView = binding.recyclerviewCompletedChallenges
         val layoutManager = LinearLayoutManager(requireContext())
 
         recyclerView.layoutManager = layoutManager

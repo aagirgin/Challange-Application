@@ -40,13 +40,13 @@
             android:fontFamily="@font/loramedium"
             android:text="@string/account_information"
             android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="@+id/imageview_backnavarrow"
+            app:layout_constraintBottom_toBottomOf="@+id/imageview_backNavArrow"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/imageview_backnavarrow" />
+            app:layout_constraintTop_toTopOf="@+id/imageview_backNavArrow" />
 
         <ImageView
-            android:id="@+id/imageview_backnavarrow"
+            android:id="@+id/imageview_backNavArrow"
             android:layout_width="26dp"
             android:layout_height="26dp"
             android:layout_marginStart="20dp"
@@ -123,9 +123,11 @@
             android:inputType="text"
             android:paddingEnd="16dp"
             android:paddingBottom="12dp"
-            android:text="Here is My Name"
+            android:text="@string/here_is_my_name"
             android:enabled="false"
             android:textSize="16sp"
+            android:autofillHints="My Name"
+            tools:ignore="LabelFor"
             app:layout_constraintStart_toStartOf="@+id/textview_name"
             app:layout_constraintTop_toBottomOf="@+id/textview_name" />
 
@@ -137,8 +139,8 @@
             app:layout_constraintBottom_toBottomOf="@+id/edittext_name"
             app:layout_constraintEnd_toEndOf="@+id/edittext_name"
             app:layout_constraintTop_toTopOf="@+id/edittext_name"
-
-            app:srcCompat="@drawable/baseline_edit_24" />
+            app:srcCompat="@drawable/baseline_edit_24"
+            android:contentDescription="@string/change_name_icon" />
 
         <TextView
             android:id="@+id/textview_mail"
@@ -168,10 +170,11 @@
             android:paddingBottom="12dp"
             android:inputType="text"
             android:enabled="false"
-            android:text="Here is My Mail"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="@+id/textview_mail"
-            app:layout_constraintTop_toBottomOf="@+id/textview_mail" />
+            app:layout_constraintTop_toBottomOf="@+id/textview_mail"
+            android:autofillHints="My Mail"
+            tools:ignore="LabelFor"/>
 
         <Button
             android:id="@+id/button_applychanges"

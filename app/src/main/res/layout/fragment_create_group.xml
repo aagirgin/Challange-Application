@@ -1,19 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:tools="http://schemas.android.com/tools">
     <data>
         <variable
             name="viewModel"
             type="com.example.challapp.ui.group.creategroup.CreateGroupViewModel" />
     </data>
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+
         android:id="@+id/frameLayout2"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".ui.group.creategroup.CreateGroupFragment"
-        tools:layout_editor_absoluteX="-9dp"
-        tools:layout_editor_absoluteY="41dp">
+        android:layout_height="match_parent">
 
         <View
             android:id="@+id/view2"
@@ -31,13 +29,13 @@
             android:fontFamily="@font/loramedium"
             android:text="@string/create_your_group"
             android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="@+id/imageview_backnavarrow"
+            app:layout_constraintBottom_toBottomOf="@+id/imageview_backNavArrow"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/imageview_backnavarrow" />
+            app:layout_constraintTop_toTopOf="@+id/imageview_backNavArrow" />
 
         <ImageView
-            android:id="@+id/imageview_backnavarrow"
+            android:id="@+id/imageview_backNavArrow"
             android:layout_width="26dp"
             android:layout_height="26dp"
             android:layout_marginStart="20dp"
@@ -92,7 +90,9 @@
             app:layout_constraintBottom_toTopOf="@+id/button_creategroup"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textview_groupdecription" />
+            app:layout_constraintTop_toBottomOf="@+id/textview_groupdecription"
+            android:autofillHints="Group Description"
+            tools:ignore="LabelFor" />
 
         <TextView
             android:id="@+id/textview_groupowner"
@@ -137,7 +137,9 @@
             app:layout_constraintBottom_toTopOf="@+id/textview_groupowner"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textview_groupname" />
+            app:layout_constraintTop_toBottomOf="@+id/textview_groupname"
+            android:autofillHints="Group Name"
+            tools:ignore="LabelFor" />
 
         <TextView
             android:id="@+id/textview_groupname"
@@ -181,7 +183,9 @@
             app:layout_constraintBottom_toTopOf="@+id/textview_groupdecription"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textview_groupowner" />
+            app:layout_constraintTop_toBottomOf="@+id/textview_groupowner"
+            android:autofillHints="Group Owner"
+            tools:ignore="LabelFor" />
 
         <Button
             android:id="@+id/button_creategroup"

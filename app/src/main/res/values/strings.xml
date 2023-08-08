@@ -96,5 +96,8 @@
     <string name="default_group_image">Default Group Image</string>
     <string name="group_member_sign">Group Member Sign</string>
     <string name="info_image">Info Image</string>
+    <string name="info_onClickCompletedChallenge">You can see the daily questions for the specific completed challenges by clicking to view.</string>
+    <string name="here_is_my_name">Here is My Name</string>
+    <string name="change_name_icon">Change Name Icon</string>
 
 </resources>

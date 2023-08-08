@@ -19,19 +19,19 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textview_completedchallengesback"
+            android:id="@+id/textview_completedChallengesBack"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/loramedium"
             android:text="@string/completed_challenges"
             android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="@+id/imageview_backnavarrow"
+            app:layout_constraintBottom_toBottomOf="@+id/imageview_backNavArrow"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/imageview_backnavarrow" />
+            app:layout_constraintTop_toTopOf="@+id/imageview_backNavArrow" />
 
         <ImageView
-            android:id="@+id/imageview_backnavarrow"
+            android:id="@+id/imageview_backNavArrow"
             android:layout_width="26dp"
             android:layout_height="26dp"
             android:layout_marginStart="20dp"
@@ -41,32 +41,50 @@
             app:layout_constraintStart_toStartOf="@+id/view2"
             app:layout_constraintTop_toTopOf="@+id/view2" />
 
+
         <TextView
-            android:id="@+id/textview_attendedgroups"
+            android:id="@+id/textview_infoPrompt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="10dp"
-            android:fontFamily="@font/lorasemibold"
-            android:text="@string/all_challenges_you_completed"
+            android:fontFamily="@font/loramedium"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:text="@string/info_onClickCompletedChallenge"
+            android:textAlignment="center"
             android:textColor="@color/profileTextColor"
-            android:textSize="18sp"
+            android:textSize="15sp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/view2" />
 
+        <TextView
+            android:id="@+id/textview_attendedGroups"
+            android:layout_width="wrap_content"
+
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:fontFamily="@font/lorasemibold"
+            android:text="@string/all_challenges_you_completed"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/profileTextColor"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textview_infoPrompt" />
+
         <View
             android:id="@+id/splitterView"
-            android:layout_width="0dp"
+            android:layout_width="371dp"
             android:layout_height="2dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="20dp"
             android:background="@color/splitterViewColor"
+            android:layout_marginTop="10dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/textview_attendedgroups"
-            app:layout_constraintTop_toBottomOf="@+id/textview_attendedgroups" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textview_attendedGroups" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerview_completedchallenges"
+            android:id="@+id/recyclerview_completedChallenges"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginTop="8dp"
@@ -77,14 +95,6 @@
             app:layout_constraintStart_toStartOf="@+id/splitterView"
             app:layout_constraintTop_toBottomOf="@+id/splitterView" />
 
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="26dp"
-            android:layout_height="26dp"
-            app:layout_constraintBottom_toBottomOf="@+id/textview_attendedgroups"
-            app:layout_constraintEnd_toEndOf="@+id/recyclerview_completedchallenges"
-            app:srcCompat="@drawable/baseline_info_24"
-            android:contentDescription="@string/info_image" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

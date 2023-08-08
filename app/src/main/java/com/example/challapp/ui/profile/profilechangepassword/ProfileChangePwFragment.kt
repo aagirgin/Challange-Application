@@ -106,7 +106,7 @@ class ProfileChangePwFragment : Fragment() {
     }
 
     private fun onNavigateBack(){
-        binding.imageviewBacknavarrow.setOnClickListener {
+        binding.imageviewBackNavArrow.setOnClickListener {
             findNavController().navigate(R.id.action_profileChangePwFragment_to_profileNavFragment)
         }
     }
