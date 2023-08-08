@@ -18,19 +18,20 @@ class ProfileViewModel @Inject constructor(
     private val storageRepository: StorageRepository
 ):ViewModel() {
 
-    private val _usernameFlow: MutableStateFlow<String?> = MutableStateFlow(null)
+    private val _getUsernameFlow: MutableStateFlow<String?> = MutableStateFlow(null)
+    val usernameFlow: MutableStateFlow<String?>
+        get() = _getUsernameFlow
+    val inviteKey: MutableStateFlow<String?>
+        get() = _getInviteKeyFlow
 
-    val usernameFlow: Flow<String?>
-        get() = _usernameFlow
+    private val _getInviteKeyFlow: MutableStateFlow<String?> = MutableStateFlow(null)
 
-    private val _mailFlow: MutableStateFlow<String?> = MutableStateFlow(null)
-
-    val mailFlow: Flow<String?>
-        get() = _mailFlow
+    private val _getMailFlow: MutableStateFlow<String?> = MutableStateFlow(null)
+    val mailFlow: MutableStateFlow<String?>
+        get() = _getMailFlow
 
     private val _changeUsernameFlow: MutableStateFlow<Boolean?> = MutableStateFlow(null)
     val changeUsernameFlow: Flow<Boolean?> get() = _changeUsernameFlow.asStateFlow()
-
     val currentUser: MutableStateFlow<FirebaseUser?>
         get() = _currentUser
 
@@ -44,12 +45,10 @@ class ProfileViewModel @Inject constructor(
         _currentUser.value = firestoreUserRepository.getCurrentUser()
         val userId = _currentUser.value?.uid
         viewModelScope.launch {
-            fetchUsername(userId!!)
-            _mailFlow.value = currentUser.value?.email
+            fetchUsernameAndInviteKey(userId!!)
+            _getMailFlow.value = currentUser.value?.email
         }
     }
-
-
 
 
     fun loadProfileImage(email: String) {
@@ -59,9 +58,10 @@ class ProfileViewModel @Inject constructor(
         }
     }
 
-    suspend fun fetchUsername(userId: String) {
+    suspend fun fetchUsernameAndInviteKey(userId: String) {
         viewModelScope.launch {
-            _usernameFlow.value = firestoreUserRepository.getUsername(userId)
+            _getUsernameFlow.value = firestoreUserRepository.getUsername(userId)
+            _getInviteKeyFlow.value = firestoreUserRepository.getInviteKey(userId)
         }
     }
 

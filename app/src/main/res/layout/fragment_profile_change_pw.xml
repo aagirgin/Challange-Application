@@ -3,6 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.challapp.ui.profile.profilechangepassword.ProfileChangePwViewModel" />
+    </data>
+
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -11,7 +18,7 @@
         <View
             android:id="@+id/view"
             android:layout_width="wrap_content"
-            android:layout_height="200dp"
+            android:layout_height="55dp"
             android:background="@color/primaryApplicationColor"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -49,55 +56,18 @@
             app:layout_constraintStart_toStartOf="@+id/view2"
             app:layout_constraintTop_toTopOf="@+id/view2" />
 
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/imageview_profilePicture"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:layout_marginTop="90dp"
-            android:background="#FFFFFF"
-            android:padding="5dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:shapeAppearanceOverlay="@style/circleImageView"
-            app:strokeColor="@color/white"
-            app:strokeWidth="2dp" />
-
-        <TextView
-            android:id="@+id/textview_username"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:fontFamily="@font/lorasemibold"
-            android:textSize="20sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageview_profilePicture" />
-
-        <View
-            android:id="@+id/splitterView"
-            android:layout_width="250dp"
-            android:layout_height="2dp"
-            android:layout_marginStart="50dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="50dp"
-            android:background="@color/splitterViewColor"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textview_username" />
-
         <TextView
             android:id="@+id/textview_currentPassword"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="48dp"
-            android:layout_marginTop="12dp"
             android:fontFamily="@font/lorabold"
+            android:layout_marginTop="20dp"
             android:text="@string/current_password"
             android:textColor="@color/loginPageTextColor"
             android:textSize="14sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/splitterView" />
+            app:layout_constraintTop_toBottomOf="@+id/view" />
 
         <EditText
             android:id="@+id/edittext_currentPassword"

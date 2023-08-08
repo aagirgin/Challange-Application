@@ -99,5 +99,7 @@
     <string name="info_onClickCompletedChallenge">You can see the daily questions for the specific completed challenges by clicking to view.</string>
     <string name="here_is_my_name">Here is My Name</string>
     <string name="change_name_icon">Change Name Icon</string>
+    <string name="navigate_arrow">Navigate Arrow</string>
+    <string name="inviteKey_start">\@</string>
 
 </resources>

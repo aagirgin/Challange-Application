@@ -10,7 +10,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.challapp.R
 import com.example.challapp.databinding.FragmentProfileChangePwBinding
-import com.example.challapp.services.ImageUploadService
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.EmailAuthProvider
 import dagger.hilt.android.AndroidEntryPoint
@@ -25,46 +24,17 @@ class ProfileChangePwFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentProfileChangePwBinding.inflate(inflater, container, false)
+        binding.viewModel = profileChangePwViewModel
+        binding.lifecycleOwner = viewLifecycleOwner
 
-
-
-        viewLifecycleOwner.lifecycleScope.launch {
-            loadProfileImage()
-        }
         onNavigateBack()
-        displayName()
         onPressButtonValidation(binding)
 
         return binding.root
     }
 
-    private fun loadProfileImage() {
-        viewLifecycleOwner.lifecycleScope.launch {
-            profileChangePwViewModel.currentUser.value?.email?.let { profileChangePwViewModel.loadProfileImage(it) }
-            profileChangePwViewModel.profileImageUrl.collect { imageUrl ->
-                if (imageUrl == "No Picture"){
-                    binding.imageviewProfilePicture.setImageResource(R.drawable.baseline_person_24)
-                }
-                else {
-                    if (imageUrl != null) {
-                        ImageUploadService.loadImageIntoImageView(imageUrl, binding.imageviewProfilePicture)
-                    }
 
-                }
-            }
-        }
-    }
-
-
-    private fun displayName(){
-        viewLifecycleOwner.lifecycleScope.launch {
-            profileChangePwViewModel.usernameFlow.collect{   username ->
-                binding.textviewUsername.text = username
-            }
-        }
-    }
-
-    private fun valideEmpty(currentPw: String, newPw: String, newPw2: String): Boolean {
+    private fun validateEmpty(currentPw: String, newPw: String, newPw2: String): Boolean {
         return currentPw.isNotEmpty() && newPw.isNotEmpty() && newPw2.isNotEmpty()
     }
 
@@ -73,7 +43,7 @@ class ProfileChangePwFragment : Fragment() {
     }
 
     private fun validatePasswordLength(newPw: String, newPw2: String):Boolean{
-        return !(newPw.length < 6) && !(newPw2.length < 6)
+        return newPw.length >= 6 && newPw2.length >= 6
     }
 
     private fun validateAccount(currentPw: String, callback: (Boolean) -> Unit) {
@@ -117,7 +87,7 @@ class ProfileChangePwFragment : Fragment() {
             val newPw = binding.edittextNewPassword1.text.toString()
             val newPw2 = binding.edittextNewPassword2.text.toString()
 
-            if (valideEmpty(currentPw, newPw, newPw2)) {
+            if (validateEmpty(currentPw, newPw, newPw2)) {
                 if(validatePasswordLength(newPw, newPw2)){
                     validateAccount(currentPw){ isSuccessful ->
                         if (isSuccessful) {

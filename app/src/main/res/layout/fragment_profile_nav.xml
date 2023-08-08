@@ -55,7 +55,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:fontFamily="@font/lorasemibold"
-            android:text="@{viewModel.getUsername.toString()}"
+            android:text="@{viewModel.getUsername}"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -64,8 +64,8 @@
         <View
             android:id="@+id/splitterView"
             android:layout_width="250dp"
-            android:layout_marginTop="10dp"
             android:layout_height="2dp"
+            android:layout_marginTop="10dp"
             android:background="@color/splitterViewColor"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -100,12 +100,12 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_marginEnd="8dp"
+            android:contentDescription="@string/navigate_arrow"
             android:src="@drawable/baseline_navigate_next_24"
             app:layout_constraintBottom_toBottomOf="@+id/view_navProfileInfo"
             app:layout_constraintEnd_toEndOf="@+id/view_navProfileInfo"
             app:layout_constraintTop_toTopOf="@+id/view_navProfileInfo"
-            app:tint="@color/profileTextColor"
-            android:contentDescription="@string/navigate_arrow" />
+            app:tint="@color/profileTextColor" />
 
         <View
             android:id="@+id/view_navChangePwInfo"
@@ -136,12 +136,12 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_marginEnd="8dp"
+            android:contentDescription="@string/navigate_arrow"
             android:src="@drawable/baseline_navigate_next_24"
             app:layout_constraintBottom_toBottomOf="@+id/view_navChangePwInfo"
             app:layout_constraintEnd_toEndOf="@+id/view_navChangePwInfo"
             app:layout_constraintTop_toTopOf="@+id/view_navChangePwInfo"
-            app:tint="@color/profileTextColor"
-            android:contentDescription="@string/navigate_arrow" />
+            app:tint="@color/profileTextColor" />
 
         <View
             android:id="@+id/view_deleteAccInfo"
@@ -172,12 +172,12 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_marginEnd="8dp"
+            android:contentDescription="@string/navigate_arrow"
             android:src="@drawable/baseline_navigate_next_24"
             app:layout_constraintBottom_toBottomOf="@+id/view_deleteAccInfo"
             app:layout_constraintEnd_toEndOf="@+id/view_deleteAccInfo"
             app:layout_constraintTop_toTopOf="@+id/view_deleteAccInfo"
-            app:tint="@color/profileTextColor"
-            android:contentDescription="@string/navigate_arrow" />
+            app:tint="@color/profileTextColor" />
 
 
         <View
@@ -210,12 +210,13 @@
             android:layout_height="40dp"
 
             android:layout_marginEnd="8dp"
+            android:contentDescription="@string/navigate_arrow"
             android:src="@drawable/baseline_navigate_next_24"
             app:layout_constraintBottom_toBottomOf="@+id/view_signout"
             app:layout_constraintEnd_toEndOf="@+id/view_signout"
             app:layout_constraintTop_toTopOf="@+id/view_signout"
-            app:tint="@color/profileTextColor"
-            android:contentDescription="@string/navigate_arrow" />
+            app:tint="@color/profileTextColor" />
+
 
         <TextView
             android:id="@+id/textview_invitationKey"
@@ -226,6 +227,20 @@
             android:textColor="@color/loginPageTextColor"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/textview_et"
+            app:layout_constraintTop_toBottomOf="@+id/textview_username" />
+
+        <TextView
+            android:id="@+id/textview_et"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/inviteKey_start"
+            android:textColor="@color/loginPageTextColor"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toStartOf="@+id/textview_invitationKey"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textview_username" />
 

@@ -27,12 +27,11 @@ class ProfileFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentProfileBinding.inflate(inflater, container, false)
-
+        binding.viewModel = profileViewModel
+        binding.lifecycleOwner = viewLifecycleOwner
 
         loadProfileImage()
         onNavigateBack()
-        displayMail()
-        displayName()
         changeName()
 
         return binding.root
@@ -67,7 +66,7 @@ class ProfileFragment : Fragment() {
                                 changeSuccess?.let {
                                     if (it) {
                                         binding.edittextName.isEnabled = false
-                                        profileViewModel.fetchUsername(currentUser.uid)
+                                        profileViewModel.fetchUsernameAndInviteKey(currentUser.uid)
                                     }
                                 }
                             }
@@ -96,20 +95,5 @@ class ProfileFragment : Fragment() {
         }
     }
 
-    private fun displayMail(){
-        viewLifecycleOwner.lifecycleScope.launch {
-            profileViewModel.mailFlow.collect{   mail ->
-                binding.edittextMail.setText(mail)
-            }
-        }
-    }
 
-    private fun displayName(){
-        viewLifecycleOwner.lifecycleScope.launch {
-            profileViewModel.usernameFlow.collect{   username ->
-                binding.textviewUsername.text = username
-                binding.edittextName.setText(username)
-            }
-        }
-    }
 }

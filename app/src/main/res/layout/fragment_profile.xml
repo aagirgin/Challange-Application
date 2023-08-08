@@ -57,7 +57,6 @@
             app:layout_constraintTop_toTopOf="@+id/view2" />
 
 
-
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/imageview_profilePicture"
             android:layout_width="200dp"
@@ -78,23 +77,37 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:fontFamily="@font/lorasemibold"
+            android:fontFamily="@font/intersemibold"
+            android:text="@{viewModel.usernameFlow}"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageview_profilePicture" />
+
+        <TextView
+            android:id="@+id/textview_invitationKey"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/loramedium"
+            android:text="@{viewModel.getInviteKey}"
+            android:textColor="@color/loginPageTextColor"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/textview_et"
+            app:layout_constraintTop_toBottomOf="@+id/textview_username" />
 
         <View
             android:id="@+id/splitterView"
             android:layout_width="250dp"
             android:layout_height="2dp"
             android:layout_marginStart="50dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="10dp"
             android:layout_marginEnd="50dp"
             android:background="@color/splitterViewColor"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textview_username" />
+            app:layout_constraintTop_toBottomOf="@+id/textview_invitationKey" />
 
         <TextView
             android:id="@+id/textview_name"
@@ -116,31 +129,31 @@
             android:layout_marginStart="40dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="40dp"
+            android:autofillHints="My Name"
             android:background="@drawable/custom_edittext_border"
+            android:enabled="false"
             android:fontFamily="@font/lorasemibold"
+            android:inputType="text"
             android:paddingStart="16dp"
             android:paddingTop="12dp"
-            android:inputType="text"
             android:paddingEnd="16dp"
             android:paddingBottom="12dp"
             android:text="@string/here_is_my_name"
-            android:enabled="false"
             android:textSize="16sp"
-            android:autofillHints="My Name"
-            tools:ignore="LabelFor"
             app:layout_constraintStart_toStartOf="@+id/textview_name"
-            app:layout_constraintTop_toBottomOf="@+id/textview_name" />
+            app:layout_constraintTop_toBottomOf="@+id/textview_name"
+            tools:ignore="LabelFor" />
 
         <ImageView
             android:id="@+id/icon_changeName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="56dp"
+            android:contentDescription="@string/change_name_icon"
             app:layout_constraintBottom_toBottomOf="@+id/edittext_name"
             app:layout_constraintEnd_toEndOf="@+id/edittext_name"
             app:layout_constraintTop_toTopOf="@+id/edittext_name"
-            app:srcCompat="@drawable/baseline_edit_24"
-            android:contentDescription="@string/change_name_icon" />
+            app:srcCompat="@drawable/baseline_edit_24" />
 
         <TextView
             android:id="@+id/textview_mail"
@@ -162,19 +175,20 @@
             android:layout_marginStart="40dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="40dp"
+            android:autofillHints="My Mail"
             android:background="@drawable/custom_edittext_border"
+            android:enabled="false"
             android:fontFamily="@font/intersemibold"
+            android:inputType="text"
             android:paddingStart="16dp"
             android:paddingTop="12dp"
             android:paddingEnd="16dp"
             android:paddingBottom="12dp"
-            android:inputType="text"
-            android:enabled="false"
+            android:text="@{viewModel.mailFlow}"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="@+id/textview_mail"
             app:layout_constraintTop_toBottomOf="@+id/textview_mail"
-            android:autofillHints="My Mail"
-            tools:ignore="LabelFor"/>
+            tools:ignore="LabelFor" />
 
         <Button
             android:id="@+id/button_applyChanges"
@@ -189,13 +203,27 @@
             android:paddingTop="8dp"
             android:paddingBottom="8dp"
             android:text="@string/apply_changes_button"
-            app:layout_constraintVertical_bias="0.05"
             android:textSize="20sp"
-
             app:layout_constraintBottom_toBottomOf="parent"
+
             app:layout_constraintEnd_toEndOf="@+id/edittext_mail"
             app:layout_constraintStart_toStartOf="@+id/edittext_mail"
-            app:layout_constraintTop_toBottomOf="@+id/edittext_mail" />
+            app:layout_constraintTop_toBottomOf="@+id/edittext_mail"
+            app:layout_constraintVertical_bias="0.05" />
+
+        <TextView
+            android:id="@+id/textview_et"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/inviteKey_start"
+            app:layout_constraintBottom_toBottomOf="@+id/textview_invitationKey"
+            app:layout_constraintEnd_toStartOf="@+id/textview_invitationKey"
+            app:layout_constraintHorizontal_bias="0.5"
+            android:textColor="@color/loginPageTextColor"
+            android:textSize="18sp"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/textview_invitationKey" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
