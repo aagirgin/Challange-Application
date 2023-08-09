@@ -76,9 +76,10 @@
                     android:fontFamily="@font/loramedium"
                     android:text="@string/create_your_group"
                     android:textSize="20sp"
+                    app:layout_constraintHorizontal_bias="0.3"
                     app:layout_constraintBottom_toBottomOf="@+id/imageview_addbutton"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/imageview_addbutton"
                     app:layout_constraintTop_toTopOf="@+id/imageview_addbutton" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -96,17 +97,29 @@
             app:layout_constraintStart_toStartOf="@+id/cardview_creategroup"
             app:layout_constraintTop_toBottomOf="@+id/cardview_creategroup" />
 
+
+        <View
+            android:id="@+id/splitterView"
+            android:layout_width="371dp"
+            android:layout_height="2dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/splitterViewColor"
+            app:layout_constraintEnd_toEndOf="@+id/cardview_creategroup"
+            app:layout_constraintStart_toStartOf="@+id/textview_attendedgroups"
+            app:layout_constraintTop_toBottomOf="@+id/textview_attendedgroups" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerview_groups"
             android:layout_width="match_parent"
             android:layout_height="551dp"
-            android:scrollbars="vertical"
-            android:layout_marginTop="10dp"
             android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
             android:layout_marginEnd="20dp"
+            android:scrollbars="vertical"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textview_attendedgroups" />
+            app:layout_constraintTop_toBottomOf="@+id/splitterView" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

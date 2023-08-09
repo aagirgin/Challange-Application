@@ -42,7 +42,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/loramedium"
-                    android:text="Add Photo"
+                    android:text="@string/add_photo"
                     android:textSize="18sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -104,7 +104,9 @@
             android:layout_marginTop="15dp"
             app:layout_constraintEnd_toEndOf="@+id/textview_currentdate"
             app:layout_constraintStart_toStartOf="@+id/textview_challangedescriptionprompt"
-            app:layout_constraintTop_toBottomOf="@+id/textview_challangedescriptionprompt" />
+            app:layout_constraintTop_toBottomOf="@+id/textview_challangedescriptionprompt"
+            android:autofillHints="No Challenge Description"
+            tools:ignore="LabelFor" />
 
         <TextView
             android:id="@+id/textview_automaticgrpmsg"

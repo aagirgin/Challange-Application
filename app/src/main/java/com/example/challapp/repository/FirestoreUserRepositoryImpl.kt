@@ -5,6 +5,7 @@ import com.example.challapp.domain.models.ApplicationDailyChallenge
 import com.example.challapp.domain.models.ApplicationDailyQuestion
 import com.example.challapp.domain.models.ApplicationGroup
 import com.example.challapp.domain.models.ApplicationUser
+import com.example.challapp.domain.models.GroupFeed
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FieldValue
@@ -74,17 +75,28 @@ class FirestoreUserRepositoryImpl @Inject constructor(
                 val groupName = groupData?.get("groupName") as? String ?: ""
                 val creationDate = groupData?.get("creationDate") as? String ?: ""
                 val groupDescription = groupData?.get("groupDescription") as? String ?: ""
-                val userCount = groupData?.get("userCount") as? Long ?: 0
                 val groupMembers = (groupData?.get("groupMembers") as? List<*>)?.toMutableList()
                     ?: mutableListOf()
+                val groupFeedList = (groupData?.get("groupFeed") as? MutableList<*>)?.mapNotNull { item ->
+                    if (item is Map<*, *>) {
+                        val description = item["description"] as? String
+                        val questionDocumentId = item["questionDocumentId"] as? String
+                        val user = item["user"] as? String
+                        val userName = user?.let { getUsername(it) }
+                        GroupFeed(user!!, userName!! ,description,questionDocumentId!!)
+                        } else {
+                            null
+                        }
+                    }?.toMutableList()
+
                 val groupOwner = groupData?.get("groupOwner") as? String ?: ""
 
                 ApplicationGroup(
                     groupName = groupName,
                     creationDate = creationDate,
                     groupDescription = groupDescription,
-                    userCount = userCount.toInt(),
                     groupMembers = groupMembers,
+                    groupFeed = groupFeedList,
                     groupOwner = groupOwner
                 )
             } else {
@@ -172,8 +184,7 @@ class FirestoreUserRepositoryImpl @Inject constructor(
 
     override suspend fun getUserIncludedGroupIds(userId: String): List<*>? {
         val userDocument = firestore.collection("Users").document(userId).get().await()
-        val includedGroups = userDocument.get("includedGroups") as? List<*>
-        return includedGroups
+        return userDocument.get("includedGroups") as? List<*>
     }
     override suspend fun updateIncludedGroupsForUser(userId: String, groupId: String): Boolean {
         val userCollection = firestore.collection("Users")
@@ -185,6 +196,7 @@ class FirestoreUserRepositoryImpl @Inject constructor(
             false
         }
     }
+
 
     override suspend fun changeUsername(userId: String, newUsername: String): Boolean {
         return try {
@@ -198,6 +210,24 @@ class FirestoreUserRepositoryImpl @Inject constructor(
         }
     }
 
+    override suspend fun addDailyChallengeToAllUserIncludedGroups(groupIds: List<*>?, description: String, documentId: String, userId: String) : Boolean{
+        val groupDocRef = firestore.collection("Groups")
+        return try{
+            groupIds?.forEach { includedGroup ->
+                groupDocRef.document(includedGroup.toString()).update("groupFeed", FieldValue.arrayUnion(
+                    mapOf(
+                        "user" to userId,
+                        "description" to description,
+                        "questionDocumentId" to documentId
+                    )
+                )).await()
+            }
+            true
+        }catch (e: Exception) {
+            Log.e("FirestoreUserRepo", "Error updating daily questions: ${e.message}")
+            false
+        }
+    }
     override suspend fun addDailyChallangeToUser(userId: String, description: String, documentId: String):Boolean {
         val userDocRef = firestore.collection("Users").document(userId)
         return try {
@@ -207,17 +237,14 @@ class FirestoreUserRepositoryImpl @Inject constructor(
                     "questionDocumentId" to documentId
                 )
             )).await()
+            addDailyChallengeToAllUserIncludedGroups(getUserIncludedGroupIds(userId),description,documentId,userId)
             true
-
         }catch (e: Exception) {
             Log.e("FirestoreUserRepo", "Error updating daily questions: ${e.message}")
             false
         }
-
-
     }
     override suspend fun getDailyQuestionInformation(): ApplicationDailyQuestion{
-
 
         val userDocRef = firestore.collection("Questions").document(formattedDate).get().await()
         val dailyQuestion = userDocRef.get("dailyQuestion") as? String

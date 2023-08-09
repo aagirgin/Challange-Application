@@ -7,6 +7,7 @@ import com.example.challapp.repository.FirestoreUserRepository
 import com.google.firebase.auth.FirebaseUser
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -24,13 +25,20 @@ class GroupViewModel @Inject constructor(
 
     private val _appGroupList: MutableStateFlow<MutableList<ApplicationGroup>> = MutableStateFlow(mutableListOf())
 
+    private val _selectedGroup = MutableStateFlow<ApplicationGroup?>(null)
+    val selectedGroup: StateFlow<ApplicationGroup?> = _selectedGroup
+
+
     init {
-        viewModelScope.launch {
-            fetchUserIncludedGroups()
-        }
+    viewModelScope.launch {
+        fetchUserIncludedGroups()
+     }
     }
 
-    suspend fun fetchUserIncludedGroups() {
+    fun setSelectedGroup(group: ApplicationGroup) {
+        _selectedGroup.value = group
+    }
+    private suspend fun fetchUserIncludedGroups() {
         val fetchedGroups = mutableListOf<ApplicationGroup>()
 
         val userIncludedGroupIds = currentUser.value?.let {

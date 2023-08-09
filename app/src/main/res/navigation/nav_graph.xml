@@ -203,6 +203,9 @@
         <action
             android:id="@+id/action_groupFragment_to_createGroupFragment"
             app:destination="@id/createGroupFragment" />
+        <action
+            android:id="@+id/action_groupFragment_to_specificGroupFragment"
+            app:destination="@id/specificGroupFragment" />
     </fragment>
     <fragment
         android:id="@+id/createGroupFragment"
@@ -236,6 +239,15 @@
             app:destination="@id/challangeFragment"
             app:popUpTo="@id/challangeFragment"
             app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/specificGroupFragment"
+        android:name="com.example.challapp.ui.group.specificgroup.SpecificGroupFragment"
+        android:label="fragment_specific_group"
+        tools:layout="@layout/fragment_specific_group" >
+        <action
+            android:id="@+id/action_specificGroupFragment_to_groupFragment"
+            app:destination="@id/groupFragment" />
     </fragment>
 
 

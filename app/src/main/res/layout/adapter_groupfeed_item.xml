@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/imageview_profilePicture"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="#FFFFFF"
+            android:layout_marginTop="10dp"
+            android:padding="5dp"
+            android:src="@drawable/baseline_person_24"
+            app:layout_constraintBottom_toTopOf="@+id/textview_creationdate"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearanceOverlay="@style/circleImageView"
+            app:strokeColor="@color/white"
+            app:strokeWidth="2dp" />
+
+        <TextView
+            android:id="@+id/textview_username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/lorasemibold"
+            android:textColor="@color/loginPageTextColor"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@+id/imageview_profilePicture"
+            app:layout_constraintStart_toEndOf="@+id/imageview_profilePicture"
+            app:layout_constraintTop_toTopOf="@+id/imageview_profilePicture" />
+
+
+        <TextView
+            android:id="@+id/textview_creationdate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/lorasemibold"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:textColor="@color/loginPageTextColor"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toTopOf="@+id/shimmer_image"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageview_profilePicture" />
+
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/shimmer_image"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@+id/textview_descriptionprompt"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textview_creationdate">
+
+            <ImageView
+                android:id="@+id/imageview_completechallange"
+                android:layout_width="411dp"
+
+                android:layout_height="240dp"
+                android:layout_marginBottom="10dp"
+                android:background="#000000"
+                android:contentDescription="@string/personal_challenge_image" />
+        </com.facebook.shimmer.ShimmerFrameLayout>
+
+        <TextView
+            android:id="@+id/textview_descriptionprompt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/lorasemibold"
+            android:text="@string/description"
+            android:textColor="@color/loginPageTextColor"
+
+            android:layout_marginBottom="10dp"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toTopOf="@+id/textview_description"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/shimmer_image" />
+
+        <TextView
+            android:id="@+id/textview_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintHorizontal_bias="0"
+            android:fontFamily="@font/loramedium"
+            android:layout_marginBottom="10dp"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toTopOf="@+id/splitterView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textview_descriptionprompt" />
+
+
+        <View
+            android:id="@+id/splitterView"
+            android:layout_width="411dp"
+            android:layout_height="2dp"
+            android:background="@color/splitterViewColor"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textview_description" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

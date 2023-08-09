@@ -22,18 +22,20 @@ class DailyChallengeAdapter(
     private var downloadImageUrl: String?
 ) :
     RecyclerView.Adapter<DailyChallengeAdapter.ChallengeViewHolder>() {
+
+    private var itemClickListener: OnItemClickListener? = null
+    private var descriptionChangeListener: OnDescriptionChangeListener? = null
     interface OnItemClickListener {
         fun onCardClick()
         fun onButtonClick()
     }
-    private var itemClickListener: OnItemClickListener? = null
-    private var descriptionChangeListener: OnDescriptionChangeListener? = null
+    interface OnDescriptionChangeListener {
+        fun onDescriptionChanged(description: String)
+    }
+
 
     fun setOnItemClickListener(listener: OnItemClickListener) {
         itemClickListener = listener
-    }
-    interface OnDescriptionChangeListener {
-        fun onDescriptionChanged(description: String)
     }
 
     fun setDescriptionChangeListener(listener: DailyChallangeFragment) {
