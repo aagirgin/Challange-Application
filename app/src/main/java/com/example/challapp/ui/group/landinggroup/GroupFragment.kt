@@ -27,9 +27,11 @@ class GroupFragment : Fragment(), GroupAdapter.OnItemClickListener  {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentGroupBinding.inflate(inflater, container, false)
+        binding.viewModel =  groupViewModel
+        binding.lifecycleOwner = viewLifecycleOwner
 
         onClickNavigateCreateGroup()
-        setupViewWithCondition()
+        setupViewWithListener()
 
 
         return binding.root
@@ -41,7 +43,7 @@ class GroupFragment : Fragment(), GroupAdapter.OnItemClickListener  {
         }
     }
 
-    private fun setupViewWithCondition(){
+    private fun setupViewWithListener(){
         viewLifecycleOwner.lifecycleScope.launch {
             groupViewModel.appGroupList.collect { appGroups ->
                 groupAdapter = GroupAdapter(appGroups)
@@ -59,6 +61,7 @@ class GroupFragment : Fragment(), GroupAdapter.OnItemClickListener  {
 
     override fun onGroupItemClick(group: ApplicationGroup) {
         groupViewModel.setSelectedGroup(group)
+
         findNavController().navigate(R.id.action_groupFragment_to_specificGroupFragment)
     }
 }

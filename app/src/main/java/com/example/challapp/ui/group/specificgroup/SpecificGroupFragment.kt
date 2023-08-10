@@ -18,20 +18,15 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class SpecificGroupFragment : Fragment() {
     private lateinit var binding: FragmentSpecificGroupBinding
-    private val groupViewModel: GroupViewModel by activityViewModels()
+    private val sharedViewModel: GroupViewModel by activityViewModels()
     private lateinit var groupFeedAdapter: GroupFeedAdapter
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentSpecificGroupBinding.inflate(inflater, container, false)
-
-
-        val groupFeedData = groupViewModel.selectedGroup.value?.groupFeed
-        groupFeedAdapter = groupFeedData?.let { GroupFeedAdapter(it) }!!
-
-
         navigateBackLandingGroup()
+        navigateGroupInformation()
         setupRecyclerView()
 
         return binding.root
@@ -43,7 +38,18 @@ class SpecificGroupFragment : Fragment() {
         }
     }
 
+    private fun navigateGroupInformation(){
+        binding.cardviewSeeGroupInfo.setOnClickListener {
+            findNavController().navigate(R.id.action_specificGroupFragment_to_groupInfoFragment)
+        }
+    }
+
+    private fun recyclerViewData(){
+        val groupFeedData = sharedViewModel.selectedGroup.value?.groupFeed
+        groupFeedAdapter = groupFeedData?.let { GroupFeedAdapter(it) }!!
+    }
     private fun setupRecyclerView() {
+        recyclerViewData()
         val recyclerView: RecyclerView = binding.recyclerviewGroupFeed
         val layoutManager = LinearLayoutManager(requireContext())
         recyclerView.layoutManager = layoutManager

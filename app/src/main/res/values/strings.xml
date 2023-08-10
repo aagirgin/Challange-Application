@@ -106,5 +106,11 @@
     <string name="group_users_completed_challenges">Group Users Completed Challenges</string>
     <string name="navigate_group_info">Navigate Group Info</string>
     <string name="add_photo">Add Photo</string>
+    <string name="group_information">Group Information</string>
+    <string name="invite_your_friends_with_their_invite_keys">Invite your friends with their 8 digit invite keys.</string>
+    <string name="keys_are_located_in_profile_section">Keys are located in profile section.</string>
+    <string name="group_members">Group Members</string>
+    <string name="add_with_invite_key">Add with Invite Key</string>
+    <string name="group_settings">Group Settings</string>
 
 </resources>

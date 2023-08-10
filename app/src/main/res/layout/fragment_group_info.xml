@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.challapp.ui.group.landinggroup.GroupViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <View
+            android:id="@+id/view2"
+            android:layout_width="wrap_content"
+            android:layout_height="55dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textview_groupInformationBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/loramedium"
+            android:text="@string/group_information"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@+id/imageview_backNavArrow"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/imageview_backNavArrow" />
+
+        <ImageView
+            android:id="@+id/imageview_backNavArrow"
+            android:layout_width="26dp"
+            android:layout_height="26dp"
+            android:layout_marginStart="20dp"
+            android:contentDescription="@string/back_navigation_arrow"
+            android:src="@drawable/baseline_arrow_back_ios_24"
+            app:layout_constraintBottom_toBottomOf="@+id/view2"
+            app:layout_constraintStart_toStartOf="@+id/view2"
+            app:layout_constraintTop_toTopOf="@+id/view2" />
+
+        <ImageView
+            android:id="@+id/imageview_groupPicture"
+            android:layout_width="match_parent"
+            android:layout_height="220dp"
+            android:visibility="visible"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:contentDescription="@string/group_description"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageview_settings"
+            app:srcCompat="@drawable/group"/>
+
+        <TextView
+            android:id="@+id/textview_groupNamePrompt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:fontFamily="@font/lorasemibold"
+            android:text="@string/group_name"
+            android:textColor="@color/profileTextColor"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageview_groupPicture" />
+
+        <TextView
+            android:id="@+id/textview_groupName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:fontFamily="@font/lorasemibold"
+            android:text="@{viewModel.selectedGroup.groupName}"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textview_groupNamePrompt" />
+
+        <TextView
+            android:id="@+id/textview_invitePrompt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:fontFamily="@font/lorasemibold"
+            android:text="@string/invite_your_friends_with_their_invite_keys"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textview_groupName" />
+
+        <TextView
+            android:id="@+id/textview_invitePrompt2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/lorasemibold"
+            android:text="@string/keys_are_located_in_profile_section"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textview_invitePrompt" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            app:layout_constraintEnd_toEndOf="@+id/textview_invitePrompt2"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="@+id/textview_invitePrompt"
+            app:layout_constraintTop_toBottomOf="@+id/textview_invitePrompt2"
+            app:startIconDrawable="@drawable/baseline_alternate_email_24">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLength="8" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <ImageView
+            android:id="@+id/imageView5"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="10dp"
+            android:src="@drawable/baseline_group_add_24"
+            app:layout_constraintBottom_toBottomOf="@+id/textInputLayout"
+            app:layout_constraintEnd_toEndOf="@+id/textview_invitePrompt"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/textInputLayout"
+            app:layout_constraintTop_toTopOf="@+id/textInputLayout"
+            android:contentDescription="@string/add_with_invite_key" />
+
+        <TextView
+            android:id="@+id/textview_groupMembersPrompt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:fontFamily="@font/lorasemibold"
+            android:text="@string/group_members"
+            android:textColor="@color/profileTextColor"
+            app:layout_constraintStart_toStartOf="@+id/imageview_groupPicture"
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerview_groupMembers"
+            android:layout_width="0dp"
+            android:layout_height="239dp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintEnd_toEndOf="@+id/imageview_groupPicture"
+            app:layout_constraintStart_toStartOf="@+id/imageview_groupPicture"
+            app:layout_constraintTop_toBottomOf="@+id/textview_userCount" />
+
+        <ImageView
+            android:id="@+id/imageview_settings"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:src="@drawable/baseline_settings_24"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view2"
+            android:contentDescription="@string/group_settings" />
+
+        <TextView
+            android:id="@+id/textview_userCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/lorasemibold"
+            android:text="@{String.valueOf(viewModel.selectedGroup.groupMembers.size())}"
+
+            app:layout_constraintStart_toStartOf="@+id/textview_groupMembersPrompt"
+            app:layout_constraintTop_toBottomOf="@+id/textview_groupMembersPrompt" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
