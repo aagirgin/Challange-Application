@@ -14,8 +14,8 @@ import javax.inject.Inject
 class ChallangeViewModel @Inject constructor(
     private val userRepository: FirestoreUserRepository
 ):ViewModel() {
-    private val _getUserStreakCount: MutableStateFlow<Long?> = MutableStateFlow(null)
-    val getUserStreakCount: StateFlow<Long?> get() = _getUserStreakCount
+    private val _getUserStreakCount: MutableStateFlow<Int?> = MutableStateFlow(null)
+    val getUserStreakCount: StateFlow<Int?> get() = _getUserStreakCount
 
     val getCurrentUser: MutableStateFlow<FirebaseUser?>
         get() = _getCurrentUser
@@ -24,7 +24,7 @@ class ChallangeViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            _getUserStreakCount.value = _getCurrentUser.value?.let { userRepository.getStreak(it.uid) }!!
+            _getUserStreakCount.value = _getCurrentUser.value?.let { userRepository.getStreak(it.uid) }
         }
     }
 

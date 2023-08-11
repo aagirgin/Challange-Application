@@ -11,7 +11,6 @@ data class ApplicationGroup(
 
 data class GroupFeed(
     val userId: String = "",
-    val userName: String = "",
-    val description: String? = "",
-    val documentId: String = "",
+    val questionDocumentId: String = "",
+    val description: String? = ""
 )

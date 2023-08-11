@@ -47,6 +47,7 @@ class SpecificGroupFragment : Fragment() {
     private fun recyclerViewData(){
         val groupFeedData = sharedViewModel.selectedGroup.value?.groupFeed
         groupFeedAdapter = groupFeedData?.let { GroupFeedAdapter(it) }!!
+        groupFeedAdapter.setCompletedChallenges(groupFeedData)
     }
     private fun setupRecyclerView() {
         recyclerViewData()

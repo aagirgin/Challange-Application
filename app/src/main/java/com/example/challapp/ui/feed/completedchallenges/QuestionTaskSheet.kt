@@ -25,7 +25,7 @@ class QuestionTaskSheet(private val documentId: String):BottomSheetDialogFragmen
             completedChallangeViewModel.getDailyQuestion(documentId)
             completedChallangeViewModel.getSpecificDailyQuestion.collect{
                 binding.textviewDailychallangeQuestion.text = it?.dailyQuestion
-                binding.textviewDailychallangeName.text = it?.dailyQuestionName!!
+                binding.textviewDailychallangeName.text = it?.dailyQuestionName
             }
         }
 
