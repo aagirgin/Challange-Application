@@ -85,6 +85,9 @@
         <action
             android:id="@+id/action_challangeFragment_to_completedChallengeFragment"
             app:destination="@id/completedChallengeFragment" />
+        <action
+            android:id="@+id/action_challangeFragment_to_notificationFragment"
+            app:destination="@id/notificationFragment" />
 
 
     </fragment>
@@ -269,7 +272,11 @@
         android:id="@+id/notificationFragment"
         android:name="com.example.challapp.ui.notification.NotificationFragment"
         android:label="fragment_notification"
-        tools:layout="@layout/fragment_notification" />
+        tools:layout="@layout/fragment_notification" >
+        <action
+            android:id="@+id/action_notificationFragment_to_challangeFragment"
+            app:destination="@id/challangeFragment" />
+    </fragment>
 
 
 </navigation>

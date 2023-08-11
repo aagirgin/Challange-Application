@@ -5,7 +5,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.challapp.R
@@ -27,6 +26,8 @@ class ChallangeFragment : Fragment() {
 
         onClickNavigatePreviousChallenges()
         onClickNavigateDailyChallange()
+        onClickNavigateNotifications()
+
         return binding.root
     }
 
@@ -38,6 +39,11 @@ class ChallangeFragment : Fragment() {
     private fun onClickNavigatePreviousChallenges(){
         binding.cardviewCompletedchallenges.setOnClickListener {
             findNavController().navigate(R.id.action_challangeFragment_to_completedChallengeFragment)
+        }
+    }
+    private fun onClickNavigateNotifications(){
+        binding.imageviewNoticication.setOnClickListener {
+            findNavController().navigate(R.id.action_challangeFragment_to_notificationFragment)
         }
     }
 

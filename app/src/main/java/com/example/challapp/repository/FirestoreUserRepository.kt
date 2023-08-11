@@ -4,6 +4,7 @@ import com.example.challapp.domain.models.ApplicationDailyChallenge
 import com.example.challapp.domain.models.ApplicationDailyQuestion
 import com.example.challapp.domain.models.ApplicationGroup
 import com.example.challapp.domain.models.InviteStatus
+import com.example.challapp.domain.models.UserNotification
 import com.google.firebase.auth.FirebaseUser
 interface FirestoreUserRepository {
 
@@ -12,6 +13,7 @@ interface FirestoreUserRepository {
     suspend fun getGroupNameById(groupId: String): String?
     suspend fun getUserIncludedGroupIds(userId: String): List<*>?
     suspend fun getUsername(userId: String): String?
+    suspend fun getUserNotications(userId: String): MutableList<UserNotification>?
     suspend fun getGroupInformationByDocumentId(documentId: Any?): ApplicationGroup?
     suspend fun getAllDailyChallangesForUser(userId: String): MutableList<ApplicationDailyChallenge>?
     suspend fun getInviteKey(userId: String): String

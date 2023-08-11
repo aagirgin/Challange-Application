@@ -36,6 +36,13 @@ class FirestoreUserRepositoryImpl @Inject constructor(
         }
     }
 
+    override suspend fun getUserNotications(userId: String): MutableList<UserNotification>? {
+        val userDocRef = firestore.collection("Users").document(userId).get().await()
+        val userData = userDocRef.toObject(ApplicationUser::class.java)
+        println(userData?.notifications)
+        return userData?.notifications
+    }
+
     override suspend fun getGroupNameById(groupId: String): String? {
         return try {
             val userDocRef = firestore.collection("Groups").document(groupId).get().await()

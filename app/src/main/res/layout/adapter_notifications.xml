@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout_groupItem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_marginBottom="2dp"
+            android:layout_marginTop="2dp"
+            android:backgroundTint="#F3F0F0"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" >
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingTop="8dp">
+
+                <ImageView
+                    android:id="@+id/imageview_notificationType"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_marginStart="15dp"
+                    android:contentDescription="@string/default_group_image"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/ic_invitation" />
+
+                <TextView
+                    android:id="@+id/textview_message"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/loramedium"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    android:text="@string/user_sent_you_an_invitation_for_you_to_join_group"
+                    android:textSize="15sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/imageview_notificationType"
+                    app:layout_constraintEnd_toStartOf="@+id/imageview_reply"
+                    app:layout_constraintStart_toEndOf="@+id/imageview_notificationType"
+                    app:layout_constraintTop_toTopOf="@+id/imageview_notificationType" />
+
+                <TextView
+                    android:id="@+id/textview_userNameNotifications"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:fontFamily="@font/lorabold"
+                    app:layout_constraintHorizontal_bias="0"
+                    app:layout_constraintBottom_toTopOf="@+id/imageview_notificationType"
+                    app:layout_constraintEnd_toStartOf="@+id/textview_date"
+                    app:layout_constraintStart_toStartOf="@+id/imageview_notificationType"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/imageview_reply"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginEnd="15dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/imageview_notificationType"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/imageview_notificationType"
+                    app:srcCompat="@drawable/reply"
+                    android:contentDescription="@string/notificationtypeimage" />
+
+                <TextView
+                    android:id="@+id/textview_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lorabold"
+                    android:textColor="@color/loginPageTextColor"
+                    app:layout_constraintBottom_toBottomOf="@+id/textview_userNameNotifications"
+                    app:layout_constraintEnd_toEndOf="@+id/imageview_reply" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

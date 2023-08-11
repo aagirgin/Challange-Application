@@ -113,5 +113,7 @@
     <string name="add_with_invite_key">Add with Invite Key</string>
     <string name="group_settings">Group Settings</string>
     <string name="notifications">Notifications</string>
+    <string name="user_sent_you_an_invitation_for_you_to_join_group">User sent you an invitation for you to join group.</string>
+    <string name="notificationtypeimage">notificationTypeImage</string>
 
 </resources>
