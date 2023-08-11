@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.net.Uri
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.challapp.domain.state.StorageException
 import com.example.challapp.domain.state.UiState
 import com.example.challapp.repository.FirestoreUserRepository
 import com.example.challapp.repository.StorageRepository
@@ -75,7 +76,7 @@ class ProfileNavViewModel @Inject constructor(
                 else{
                     _insertIntoStorageFlow.value = UiState.Error("Error occurred while inserting profile picture.")
                 }
-            } catch (e: StorageRepository.StorageException) {
+            } catch (e: StorageException) {
                 _insertIntoStorageFlow.value = e.message?.let { UiState.Error(it) }!!
             }
         }

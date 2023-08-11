@@ -1,6 +1,7 @@
 package com.example.challapp.repository
 
 import android.net.Uri
+import com.example.challapp.domain.state.StorageException
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import kotlinx.coroutines.tasks.await
@@ -20,7 +21,7 @@ class StorageRepositoryImpl  @Inject constructor(
             val downloadUrl = storageRef.downloadUrl.await()
             downloadUrl.toString()
         } catch (e: Exception) {
-            throw StorageRepository.StorageException("Image upload failed: ${e.message}")
+            throw StorageException("Image upload failed: ${e.message}")
         }
     }
     
@@ -31,7 +32,7 @@ class StorageRepositoryImpl  @Inject constructor(
         try {
             storageRef.putFile(imageUri).await()
         } catch (e: Exception) {
-            throw StorageRepository.StorageException("Image upload failed: ${e.message}")
+            throw StorageException("Image upload failed: ${e.message}")
         }
     }
     override suspend fun loadProfileImage(email: String): String? {
@@ -58,8 +59,5 @@ class StorageRepositoryImpl  @Inject constructor(
             "No Picture"
         }
     }
-
-
-
-
 }
+

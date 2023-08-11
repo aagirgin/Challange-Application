@@ -6,6 +6,9 @@ import com.example.challapp.domain.models.ApplicationDailyQuestion
 import com.example.challapp.domain.models.ApplicationGroup
 import com.example.challapp.domain.models.ApplicationUser
 import com.example.challapp.domain.models.GroupFeed
+import com.example.challapp.domain.models.InviteStatus
+import com.example.challapp.domain.models.UserNotification
+import com.example.challapp.utils.DateUtils
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FieldValue
@@ -15,7 +18,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import org.threeten.bp.LocalDate
-import org.threeten.bp.format.DateTimeFormatter
 import javax.inject.Inject
 
 class FirestoreUserRepositoryImpl @Inject constructor(
@@ -24,16 +26,22 @@ class FirestoreUserRepositoryImpl @Inject constructor(
 ) : FirestoreUserRepository {
 
 
-    private val currentDate: LocalDate = LocalDate.now()
-    private val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
-    private val formattedDate = currentDate.format(formatter)
-    private val previousDate = currentDate.minusDays(1).format(formatter)
 
     override suspend fun getUsername(userId: String): String? {
         return try {
             val userDocRef = firestore.collection("Users").document(userId).get().await()
             val userData = userDocRef.data
             userData?.get("username") as? String
+        } catch (e: Exception) {
+            null
+        }
+    }
+
+    override suspend fun getGroupNameById(groupId: String): String? {
+        return try {
+            val userDocRef = firestore.collection("Groups").document(groupId).get().await()
+            val userData = userDocRef.data
+            userData?.get("groupName") as? String
         } catch (e: Exception) {
             null
         }
@@ -67,6 +75,8 @@ class FirestoreUserRepositoryImpl @Inject constructor(
 
     override suspend fun getGroupInformationByDocumentId(documentId: Any?): ApplicationGroup? {
         val groupDocumentRef = firestore.collection("Groups").document(documentId.toString())
+
+
         return try {
             val document = groupDocumentRef.get().await()
             if (document.exists()) {
@@ -121,6 +131,46 @@ class FirestoreUserRepositoryImpl @Inject constructor(
         groupDocumentRefStreak.update("challangeStreak", newStreak).await()
     }
 
+    override suspend fun sendUserInvitationWithInviteKey(inviteKey: String, fromGroup: String, sender: String): String? {
+        val userCollection = firestore.collection("Users")
+        val query = userCollection.whereEqualTo("inviteKey", inviteKey)
+        val querySnapshot = query.get().await()
+        if (!querySnapshot.isEmpty) {
+            for (documentSnapshot in querySnapshot.documents) {
+                val notificationsList = documentSnapshot.toObject(ApplicationUser::class.java)?.notifications
+
+                notificationsList?.forEach {
+                    println( it.notificationFromGroup)
+                    println(fromGroup)
+                    println(it.notificationFromGroup == fromGroup)
+                    println(it.notificationType)
+                    println(InviteStatus.INVITE)
+                    println(it.notificationType == InviteStatus.INVITE)
+                    if(it.notificationType == InviteStatus.INVITE && it.notificationFromGroup == fromGroup){
+                        return "This group is already sent request to this user. Please wait for users response."
+                    }
+                }
+                sendNotificationsToUser(documentSnapshot.id, sender, fromGroup, InviteStatus.INVITE)
+                return "Invitation sent successfully to user."
+            }
+        }
+        return null
+    }
+
+    override suspend fun sendNotificationsToUser(documentId: String, sender: String, fromGroup: String, notificationType: InviteStatus): Boolean {
+        val userDocumentRef = firestore.collection("Users").document(documentId)
+        val document = userDocumentRef.get().await()
+        if (document.exists()) {
+            val notificationsList = document.toObject(ApplicationUser::class.java)?.notifications
+            val newNotification = UserNotification(notificationType = InviteStatus.INVITE,
+                                                    notificationFromGroup =  fromGroup,
+                                                    notificationSenderUser = sender)
+            notificationsList?.add(newNotification)
+            userDocumentRef.update("notifications", notificationsList)
+            return true
+        }
+        return false
+    }
     override suspend fun updateStreakBasedOnDailyQuestions(userId: String) {
         val groupDocumentRef = firestore.collection("Users").document(userId).get().await()
         val userData = groupDocumentRef.data
@@ -128,11 +178,14 @@ class FirestoreUserRepositoryImpl @Inject constructor(
 
         val groupDocumentRefStreak = firestore.collection("Users").document(userId)
 
+        val currentDate = DateUtils.getCurrentFormattedDate()
+        val previousDate = DateUtils.getPreviousFormattedDate()
+
         var consecutiveStreakCounter = 0L
         var lastDate: LocalDate? = null
 
         if (!allDailyQuestions.isNullOrEmpty()) {
-            if ((allDailyQuestions.last() as? HashMap<*, *>)?.get("questionDocumentId") == formattedDate || (allDailyQuestions.last() as? HashMap<*, *>)?.get("questionDocumentId") != previousDate) {
+            if ((allDailyQuestions.last() as? HashMap<*, *>)?.get("questionDocumentId") == currentDate || (allDailyQuestions.last() as? HashMap<*, *>)?.get("questionDocumentId") == previousDate) {
                 for (i in allDailyQuestions.size - 1 downTo 0) {
                     val questionMap = allDailyQuestions[i] as? HashMap<*, *>
                     val questionDateStr = questionMap?.get("questionDocumentId") as? String
@@ -145,14 +198,17 @@ class FirestoreUserRepositoryImpl @Inject constructor(
                         break
                     }
                 }
-
                 groupDocumentRefStreak.update("challangeStreak", consecutiveStreakCounter).await()
+            }
+            else{
+                groupDocumentRefStreak.update("challangeStreak", 0).await()
             }
         } else {
             return
         }
     }
     override suspend fun checkUserAlreadyHaveSubmission(userId: String): Boolean {
+        val currentDate = DateUtils.getCurrentFormattedDate()
         val groupDocumentRef = firestore.collection("Users").document(userId).get().await()
         val userData = groupDocumentRef.data
         val allDailyQuestions = userData?.get("allDailyQuestions") as? List<*>
@@ -161,7 +217,7 @@ class FirestoreUserRepositoryImpl @Inject constructor(
             return allDailyQuestions.any { dailyQuestion ->
                 if (dailyQuestion is HashMap<*, *>) {
                     val questionDocumentId = dailyQuestion["questionDocumentId"] as? String
-                    questionDocumentId == formattedDate
+                    questionDocumentId == currentDate
                 } else {
                     false
                 }
@@ -182,9 +238,9 @@ class FirestoreUserRepositoryImpl @Inject constructor(
         return data?.get("inviteKey") as String
     }
 
-    override suspend fun getUserIncludedGroupIds(userId: String): List<*>? {
+    override suspend fun getUserIncludedGroupIds(userId: String): List<*> {
         val userDocument = firestore.collection("Users").document(userId).get().await()
-        return userDocument.get("includedGroups") as? List<*>
+        return userDocument.get("includedGroups") as List<*>
     }
     override suspend fun updateIncludedGroupsForUser(userId: String, groupId: String): Boolean {
         val userCollection = firestore.collection("Users")
@@ -245,8 +301,8 @@ class FirestoreUserRepositoryImpl @Inject constructor(
         }
     }
     override suspend fun getDailyQuestionInformation(): ApplicationDailyQuestion{
-
-        val userDocRef = firestore.collection("Questions").document(formattedDate).get().await()
+        val currentDate = DateUtils.getCurrentFormattedDate()
+        val userDocRef = firestore.collection("Questions").document(currentDate).get().await()
         val dailyQuestion = userDocRef.get("dailyQuestion") as? String
         val dailyQuestionName = userDocRef.get("dailyQuestionName") as? String
         return ApplicationDailyQuestion(
@@ -366,11 +422,7 @@ class FirestoreUserRepositoryImpl @Inject constructor(
     }
 
     override fun getCurrentUser(): FirebaseUser? {
-        return if (auth.currentUser?.isEmailVerified == false){
-            null
-        }else{
-            auth.currentUser
-        }
+        return auth.currentUser
     }
 }
 

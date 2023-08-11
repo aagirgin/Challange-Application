@@ -3,11 +3,15 @@ package com.example.challapp.repository
 import com.example.challapp.domain.models.ApplicationDailyChallenge
 import com.example.challapp.domain.models.ApplicationDailyQuestion
 import com.example.challapp.domain.models.ApplicationGroup
+import com.example.challapp.domain.models.InviteStatus
 import com.google.firebase.auth.FirebaseUser
+import io.grpc.Context.Key
 
 interface FirestoreUserRepository {
+
     fun getCurrentUser(): FirebaseUser?
     fun getFirebaseErrorMessage(): String?
+    suspend fun getGroupNameById(groupId: String): String?
     suspend fun getUserIncludedGroupIds(userId: String): List<*>?
     suspend fun getUsername(userId: String): String?
     suspend fun getGroupInformationByDocumentId(documentId: Any?): ApplicationGroup?
@@ -25,7 +29,9 @@ interface FirestoreUserRepository {
     suspend fun changeUsername(userId: String,newUsername: String) :Boolean
     suspend fun incrementStreakCountByOne(userId: String)
     suspend fun checkUserAlreadyHaveSubmission(userId: String) : Boolean
+    suspend fun sendUserInvitationWithInviteKey(inviteKey: String, from: String, sender: String ): String?
     suspend fun sendPasswordResetEmail(email: String) : Boolean
+    suspend fun sendNotificationsToUser(documentId: String, message: String, from: String,notificationType: InviteStatus): Boolean
     suspend fun giveInviteKeyIfNull(userId: String)
     suspend fun signUp(email: String, password: String): FirebaseUser?
     suspend fun signIn(email: String, password: String): FirebaseUser?

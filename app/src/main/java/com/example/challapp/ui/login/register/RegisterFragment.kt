@@ -37,14 +37,6 @@ class RegisterFragment : Fragment() {
         }
     }
 
-    private fun emailVerification() {
-        val user = FirebaseAuth.getInstance().currentUser
-        user?.sendEmailVerification()?.addOnCompleteListener { task ->
-            if (task.isSuccessful) {
-                findNavController().navigate(R.id.action_registerFragment_to_mailVerificationFragment)
-            }
-        }
-    }
 
     private fun setupSignUpButton(binding: FragmentRegisterBinding) {
         binding.buttonSignup.setOnClickListener {

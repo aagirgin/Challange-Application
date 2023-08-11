@@ -35,15 +35,10 @@ class LoginViewModel @Inject constructor(
             _loginState.value = LoginState.Loading
             val user = userRepository.signIn(email, password)
             if (user != null) {
-                if(user.isEmailVerified){
-                    _loginState.value = LoginState.Success
-                    _currentUser.value = userRepository.getCurrentUser()
-                    userRepository.giveInviteKeyIfNull(user.uid)
-                }
-                else{
-                    _loginState.value = LoginState.Error("Please verify your email and try again.")
-                    userRepository.signOut()
-                }
+                _loginState.value = LoginState.Success
+                _currentUser.value = userRepository.getCurrentUser()
+                userRepository.giveInviteKeyIfNull(user.uid)
+
             } else {
                 _loginState.value = LoginState.Error("Invalid credentials. Please try again.")
             }

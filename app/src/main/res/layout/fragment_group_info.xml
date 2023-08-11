@@ -119,6 +119,7 @@
             app:startIconDrawable="@drawable/baseline_alternate_email_24">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/textinput_inviteKey"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:maxLength="8" />
@@ -126,7 +127,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <ImageView
-            android:id="@+id/imageView5"
+            android:id="@+id/imageview_inviteButton"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_marginStart="10dp"

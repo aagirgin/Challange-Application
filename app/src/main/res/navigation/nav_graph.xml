@@ -265,6 +265,11 @@
             app:popUpTo="@id/specificGroupFragment"
             app:popUpToInclusive="true"/>
     </fragment>
+    <fragment
+        android:id="@+id/notificationFragment"
+        android:name="com.example.challapp.ui.notification.NotificationFragment"
+        android:label="fragment_notification"
+        tools:layout="@layout/fragment_notification" />
 
 
 </navigation>

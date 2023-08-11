@@ -59,9 +59,9 @@ class GroupFragment : Fragment(), GroupAdapter.OnItemClickListener  {
         recyclerView.adapter = groupAdapter
     }
 
-    override fun onGroupItemClick(group: ApplicationGroup) {
+    override fun onGroupItemClick(group: ApplicationGroup,position: Int) {
         groupViewModel.setSelectedGroup(group)
-
+        groupViewModel.setGroupDocumentId(position)
         findNavController().navigate(R.id.action_groupFragment_to_specificGroupFragment)
     }
 }

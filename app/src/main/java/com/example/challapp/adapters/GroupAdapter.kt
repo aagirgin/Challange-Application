@@ -15,7 +15,7 @@ class GroupAdapter(
     private var itemClickListener: OnItemClickListener? = null
 
     interface OnItemClickListener {
-        fun onGroupItemClick(group: ApplicationGroup)
+        fun onGroupItemClick(group: ApplicationGroup, position: Int)
     }
 
     fun setOnItemClickListener(listener: OnItemClickListener) {
@@ -46,7 +46,7 @@ class GroupAdapter(
             groupItem.setOnClickListener {
                 val position = adapterPosition
                 if (position != RecyclerView.NO_POSITION) {
-                    itemClickListener?.onGroupItemClick(groupList[position])
+                    itemClickListener?.onGroupItemClick(groupList[position],position)
                 }
             }
         }

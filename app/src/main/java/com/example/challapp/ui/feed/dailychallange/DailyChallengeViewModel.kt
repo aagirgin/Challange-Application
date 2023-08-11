@@ -31,7 +31,7 @@ class DailyChallengeViewModel @Inject constructor(
     private val _getDailyQuestion: MutableStateFlow<String?> = MutableStateFlow(null)
     val getDailyQuestion: StateFlow<String?> get() = _getDailyQuestion
 
-        private val _addDailyChallenge: MutableStateFlow<UiState<*>> = MutableStateFlow(UiState.Empty)
+        private val _addDailyChallenge: MutableStateFlow<UiState<String?>> = MutableStateFlow(UiState.Empty)
     val addDailyChallenge: StateFlow<UiState<*>> get() = _addDailyChallenge
 
     private val _submissionExists: MutableStateFlow<Boolean?> = MutableStateFlow(null)

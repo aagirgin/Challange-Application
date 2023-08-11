@@ -112,5 +112,6 @@
     <string name="group_members">Group Members</string>
     <string name="add_with_invite_key">Add with Invite Key</string>
     <string name="group_settings">Group Settings</string>
+    <string name="notifications">Notifications</string>
 
 </resources>

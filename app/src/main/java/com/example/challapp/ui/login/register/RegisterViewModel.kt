@@ -34,17 +34,14 @@ class RegisterViewModel @Inject constructor(
             val user = userRepository.signUp(email, password)
 
             if (user != null) {
-                val emailVerificationResult = emailVerification(user)
-                if (emailVerificationResult) {
-                    val addUserResult = userRepository.addUserToFirestore(user.uid, email, fullName)
-                    if (addUserResult) {
-                        _registerState.value = RegisterState.Success
-                    } else {
-                        _registerState.value = RegisterState.Error("Failed to add user to Firestore.")
-                    }
+                //val emailVerificationResult = emailVerification(user)
+                val addUserResult = userRepository.addUserToFirestore(user.uid, email, fullName)
+                if (addUserResult) {
+                    _registerState.value = RegisterState.Success
                 } else {
-                    _registerState.value = RegisterState.Error("Failed to send email verification.")
+                    _registerState.value = RegisterState.Error("Failed to add user to Firestore.")
                 }
+
             } else {
                 val errorMessage = userRepository.getFirebaseErrorMessage()
                 _registerState.value = RegisterState.Error(errorMessage ?: "Sign-up failed.")
