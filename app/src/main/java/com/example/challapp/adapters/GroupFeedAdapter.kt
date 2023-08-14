@@ -28,7 +28,6 @@ class GroupFeedAdapter(private var itemList: MutableList<*>) : RecyclerView.Adap
         private val shimmerLayout: ShimmerFrameLayout = binding.shimmerImage
 
         fun bind(data: GroupFeed) {
-            println(data)
             userName.text = data.userId
             creationDate.text = data.questionDocumentId
             description.text = data.description

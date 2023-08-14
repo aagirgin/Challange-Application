@@ -22,8 +22,32 @@ class NotificationViewModel @Inject constructor(
 
     private val _userNotificationList: MutableStateFlow<MutableList<UserNotification>?> = MutableStateFlow(null)
 
+    val indexOnDelete: MutableStateFlow<Int?>
+        get() = _getIndexOnDelete
+
+    private val _getIndexOnDelete: MutableStateFlow<Int?> = MutableStateFlow(null)
+    val userNotificationDelete: MutableStateFlow<UserNotification?>
+        get() = _getUserNotificationDelete
+
+    private val _getUserNotificationDelete: MutableStateFlow<UserNotification?> = MutableStateFlow(null)
 
     suspend fun getUserNotifications(){
         _userNotificationList.value = currentUser.value?.let { userRepository.getUserNotications(it.uid) }
+    }
+
+    suspend fun deleteOnRejection() {
+        _getUserNotificationDelete.value?.let { _currentUser.value?.uid?.let { currentUser ->
+            _getIndexOnDelete.value = userRepository.deleteOnRejectInvitation(it,
+               currentUser
+           )!!
+        } }
+    }
+
+    suspend fun addToGroupOnAccept(groupId:String){
+        _currentUser.value?.uid?.let { _getIndexOnDelete.value = userRepository.acceptToGroupInvitation(it,groupId) }
+    }
+
+    fun resetState(){
+        _getUserNotificationDelete.value = null
     }
 }

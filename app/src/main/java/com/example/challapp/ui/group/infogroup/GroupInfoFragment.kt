@@ -13,7 +13,6 @@ import com.example.challapp.databinding.FragmentGroupInfoBinding
 import com.example.challapp.domain.state.UiState
 import com.example.challapp.ui.group.landinggroup.GroupViewModel
 import com.google.android.material.snackbar.Snackbar
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class GroupInfoFragment : Fragment() {
@@ -45,13 +44,13 @@ class GroupInfoFragment : Fragment() {
             viewLifecycleOwner.lifecycleScope.launch {
                 sharedViewModel.selectedGroupId.value?.let { groupId ->
                     sharedViewModel.currentUser.value?.let { senderId ->
-                        sharedViewModel.inviteToGroup(invitationText,senderId.uid, groupId)
+                        sharedViewModel.inviteToGroup(invitationText, groupId,senderId.uid)
                     }
                 }
                 sharedViewModel.invitationState.collect{state->
                     when(state){
                         is UiState.Success -> {
-                            Snackbar.make(binding.root, state.data.toString() , Snackbar.LENGTH_SHORT).show()
+                            Snackbar.make(binding.root, state.data , Snackbar.LENGTH_SHORT).show()
                             sharedViewModel.resetState()
                         }
                         is UiState.Error -> {

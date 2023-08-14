@@ -74,7 +74,6 @@ class LoginFragment : Fragment() {
                     }
                     is LoginState.Success -> {
                         loginViewModel.currentUser.collect{user->
-                            println(user)
                             if (user != null) {
                                 loginViewModel.updateStreakOnNavigate()
                                 findNavController().navigate(R.id.action_loginFragment_to_challangeFragment)

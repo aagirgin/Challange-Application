@@ -39,7 +39,6 @@ class FirestoreUserRepositoryImpl @Inject constructor(
     override suspend fun getUserNotications(userId: String): MutableList<UserNotification>? {
         val userDocRef = firestore.collection("Users").document(userId).get().await()
         val userData = userDocRef.toObject(ApplicationUser::class.java)
-        println(userData?.notifications)
         return userData?.notifications
     }
 
@@ -82,7 +81,7 @@ class FirestoreUserRepositoryImpl @Inject constructor(
     override suspend fun getGroupInformationByDocumentId(documentId: Any?): ApplicationGroup? {
         val groupDocumentRef = firestore.collection("Groups").document(documentId.toString())
         val documentSnapshot = groupDocumentRef.get().await()
-        println(documentSnapshot.toObject(ApplicationGroup::class.java))
+
         return documentSnapshot.toObject(ApplicationGroup::class.java)
     }
 
@@ -111,7 +110,11 @@ class FirestoreUserRepositoryImpl @Inject constructor(
                 val notificationsList = documentSnapshot.toObject(ApplicationUser::class.java)?.notifications
 
                 notificationsList?.forEach {
+                    println(fromGroup)
+                    println(it.notificationFromGroup)
+                    println(fromGroup == it.notificationFromGroup)
                     println(it.notificationType == InviteStatus.INVITE)
+                    println(it.notificationType == InviteStatus.INVITE && it.notificationFromGroup == fromGroup)
                     if(it.notificationType == InviteStatus.INVITE && it.notificationFromGroup == fromGroup){
                         return "This group is already sent request to this user. Please wait for users response."
                     }
@@ -184,6 +187,63 @@ class FirestoreUserRepositoryImpl @Inject constructor(
         }
         return false
     }
+
+    override suspend fun acceptToGroupInvitation(userId: String,groupId: String): Int?{
+        val groupDocumentRef = firestore.collection("Groups").document(groupId)
+        val groupDocument = groupDocumentRef.get().await().toObject(ApplicationGroup::class.java)
+        val groupMembers = groupDocument?.groupMembers
+
+        val userDocumentRef = firestore.collection("Users").document(userId)
+        val userDocument = userDocumentRef.get().await().toObject(ApplicationUser::class.java)
+        val notifications = userDocument?.notifications
+        val includedGroups = userDocument?.includedGroups
+
+        if (groupMembers != null) {
+            groupMembers.add(userId)
+            groupDocumentRef.update("groupMembers", groupMembers).await()
+        }
+
+        includedGroups?.add(groupId)
+        val updatedUserGroups = includedGroups?.let { userDocument.copy(includedGroups = it) }
+        if (updatedUserGroups != null) {
+            userDocumentRef.set(updatedUserGroups).await()
+        }
+
+        if (notifications != null) {
+            val matchingIndex = notifications.indexOfFirst {
+                it.notificationFromGroup == groupId && it.notificationType == InviteStatus.INVITE}
+            if (matchingIndex >= 0) {
+                notifications.removeAt(matchingIndex)
+
+                val updatedUser = userDocument.copy(notifications = notifications)
+                userDocumentRef.set(updatedUser).await()
+                return matchingIndex
+            }
+        }
+        return null
+    }
+
+    override suspend fun deleteOnRejectInvitation(
+        notification: UserNotification,
+        userId: String
+    ): Int? {
+        val userDocumentRef = firestore.collection("Users").document(userId)
+        val userDocument = userDocumentRef.get().await().toObject(ApplicationUser::class.java)
+        val notifications = userDocument?.notifications
+        if (notifications != null) {
+            val matchingIndex = notifications.indexOfFirst { it == notification }
+
+            if (matchingIndex >= 0) {
+                notifications.removeAt(matchingIndex)
+
+                val updatedUser = userDocument.copy(notifications = notifications)
+                userDocumentRef.set(updatedUser).await()
+                return matchingIndex
+            }
+        }
+        return null
+    }
+
 
     override suspend fun getAllDailyChallangesForUser(userId: String): MutableList<ApplicationDailyChallenge>? {
         val groupDocumentRef = firestore.collection("Users").document(userId).get().await()

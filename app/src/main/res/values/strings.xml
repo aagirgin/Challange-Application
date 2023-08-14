@@ -115,5 +115,9 @@
     <string name="notifications">Notifications</string>
     <string name="user_sent_you_an_invitation_for_you_to_join_group">User sent you an invitation for you to join group.</string>
     <string name="notificationtypeimage">notificationTypeImage</string>
+    <string name="join_group_prompt">Do you want to join the group?</string>
+    <string name="accept">Accept</string>
+    <string name="decline">Decline</string>
+    <string name="group_photo_default">Group Photo Default</string>
 
 </resources>

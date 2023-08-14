@@ -31,7 +31,6 @@ class CreateGroupFragment : Fragment() {
         binding.viewModel = createGroupViewModel
         binding.lifecycleOwner = viewLifecycleOwner
         lifecycleScope.launch {
-            println(addGroupToDatabase())
         }
         onNavigateBack()
 
@@ -48,7 +47,7 @@ class CreateGroupFragment : Fragment() {
         return groupName.isNotBlank() && groupDesc.isNotBlank()
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
+
     private suspend fun addGroupToDatabase(){
         binding.buttonCreategroup.setOnClickListener {
             lifecycleScope.launch {

@@ -29,6 +29,8 @@ interface FirestoreUserRepository {
     suspend fun changeUsername(userId: String,newUsername: String) :Boolean
     suspend fun incrementStreakCountByOne(userId: String)
     suspend fun checkUserAlreadyHaveSubmission(userId: String) : Boolean
+    suspend fun acceptToGroupInvitation(userId: String,groupId: String):Int?
+    suspend fun deleteOnRejectInvitation(notification:UserNotification,userId: String):Int?
     suspend fun sendUserInvitationWithInviteKey(inviteKey: String, fromGroup: String, sender: String ): String?
     suspend fun sendPasswordResetEmail(email: String) : Boolean
     suspend fun sendNotificationsToUser(documentId: String, sender: String, fromGroup: String,notificationType: InviteStatus): Boolean

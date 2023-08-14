@@ -62,7 +62,6 @@ class CompletedChallengeFragment : Fragment(),CompletedChallengeAdapter.OnItemCl
                 when (state) {
                     is UiState.Success -> {
                         val data = state.data as MutableList<ApplicationDailyChallenge>
-                        println(data)
                         completedChallengeAdapter.setCompletedChallenges(data)
 
                     }
