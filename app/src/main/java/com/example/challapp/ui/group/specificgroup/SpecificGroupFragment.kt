@@ -5,26 +5,34 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.challapp.R
 import com.example.challapp.adapters.GroupFeedAdapter
 import com.example.challapp.databinding.FragmentSpecificGroupBinding
-import com.example.challapp.ui.group.landinggroup.GroupViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class SpecificGroupFragment : Fragment() {
     private lateinit var binding: FragmentSpecificGroupBinding
-    private val sharedViewModel: GroupViewModel by activityViewModels()
+
+    private val specificGroupViewModel: SpecificGroupViewModel by viewModels()
+
     private lateinit var groupFeedAdapter: GroupFeedAdapter
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentSpecificGroupBinding.inflate(inflater, container, false)
+
+        val bundle = findNavController().previousBackStackEntry?.savedStateHandle?.get<Bundle>("groupBundle")
+        specificGroupViewModel.setBundleValues(bundle)
+
         navigateBackLandingGroup()
         navigateGroupInformation()
         setupRecyclerView()
@@ -40,14 +48,31 @@ class SpecificGroupFragment : Fragment() {
 
     private fun navigateGroupInformation(){
         binding.cardviewSeeGroupInfo.setOnClickListener {
-            findNavController().navigate(R.id.action_specificGroupFragment_to_groupInfoFragment)
+            viewLifecycleOwner.lifecycleScope.launch {
+                val appGroup = specificGroupViewModel.selectedGroup.value
+                val positionGroup = specificGroupViewModel.groupPosition.value
+                val groupId = specificGroupViewModel.selectedGroupId.value
+
+                if (positionGroup != null && appGroup != null) {
+                    val directions = groupId?.let { it1 ->
+                        SpecificGroupFragmentDirections.actionSpecificGroupFragmentToGroupInfoFragment(positionGroup,
+                            it1,appGroup)
+                    }
+                    findNavController().navigate(directions!!)
+                }
+            }
         }
     }
 
     private fun recyclerViewData(){
-        val groupFeedData = sharedViewModel.selectedGroup.value?.groupFeed
-        groupFeedAdapter = groupFeedData?.let { GroupFeedAdapter(it) }!!
-        groupFeedAdapter.setCompletedChallenges(groupFeedData)
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            specificGroupViewModel.selectedGroup.collect {selectedGroup ->
+                groupFeedAdapter = selectedGroup?.groupFeed?.let { GroupFeedAdapter(it) }!!
+                groupFeedAdapter.setCompletedChallenges(selectedGroup.groupFeed)
+            }
+        }
+
     }
     private fun setupRecyclerView() {
         recyclerViewData()

@@ -64,7 +64,7 @@ class NotificationFragment : Fragment(), NotificationsAdapter.OnItemClickListene
 
     @SuppressLint("InflateParams")
     private fun showCustomDialog(notification: UserNotification){
-        val builder = MaterialAlertDialogBuilder(requireContext(),R.style.AlertDialogTheme)
+        val builder = MaterialAlertDialogBuilder(requireContext())
         val customView = LayoutInflater.from(requireContext()).inflate(R.layout.alertdialog_invitenotification, null)
 
         val bindingCustomDialog = AlertdialogInvitenotificationBinding.bind(customView)

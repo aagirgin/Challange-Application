@@ -31,6 +31,7 @@ class CreateGroupFragment : Fragment() {
         binding.viewModel = createGroupViewModel
         binding.lifecycleOwner = viewLifecycleOwner
         lifecycleScope.launch {
+            addGroupToDatabase()
         }
         onNavigateBack()
 
