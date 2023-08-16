@@ -1,6 +1,5 @@
 package com.example.challapp.ui.group.specificgroup
 
-import android.os.Bundle
 import androidx.lifecycle.ViewModel
 import com.example.challapp.domain.models.ApplicationGroup
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -23,11 +22,9 @@ class SpecificGroupViewModel @Inject constructor(
     private val _groupPosition = MutableStateFlow<Int?>(null)
     val groupPosition: StateFlow<Int?> = _groupPosition
 
-    fun setBundleValues(bundle: Bundle?) {
-        bundle?.let {
-            _selectedGroup.value = it.getParcelable("selectedGroup")
-            _groupPosition.value = it.getInt("groupPosition")
-            _selectedGroupId.value = it.getString("selectedGroupId")
-        }
+    fun setGroupData(group:ApplicationGroup,position:Int, groupId: String) {
+        _selectedGroup.value = group
+        _groupPosition.value = position
+        _selectedGroupId.value = groupId
     }
 }

@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.challapp.R
 import com.example.challapp.adapters.GroupFeedAdapter
 import com.example.challapp.databinding.FragmentSpecificGroupBinding
+import com.example.challapp.domain.models.ApplicationGroup
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -24,14 +25,16 @@ class SpecificGroupFragment : Fragment() {
 
     private lateinit var groupFeedAdapter: GroupFeedAdapter
 
+    private lateinit var bundle: Bundle
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentSpecificGroupBinding.inflate(inflater, container, false)
-
-        val bundle = findNavController().previousBackStackEntry?.savedStateHandle?.get<Bundle>("groupBundle")
-        specificGroupViewModel.setBundleValues(bundle)
+        bundle = requireArguments()
+        val args = bundle.let { SpecificGroupFragmentArgs.fromBundle(it) }
+        dataSetGroup(args.selectedGroup,args.groupPosition,args.selectedGroupId)
 
         navigateBackLandingGroup()
         navigateGroupInformation()
@@ -82,4 +85,7 @@ class SpecificGroupFragment : Fragment() {
         recyclerView.adapter = groupFeedAdapter
     }
 
+    private fun dataSetGroup(group: ApplicationGroup,position:Int,groupId:String){
+        specificGroupViewModel.setGroupData(group,position,groupId)
+    }
 }

@@ -59,25 +59,18 @@ class GroupFragment : Fragment(), GroupAdapter.OnItemClickListener  {
         recyclerView.adapter = groupAdapter
     }
 
-    private fun putApplicationGroupIntoBundle(group: ApplicationGroup,position: Int,groupId:String){
-        val bundle = Bundle().apply {
-            putParcelable("selectedGroup", group)
-            putInt("groupPosition", position)
-            putString("selectedGroupId",groupId)
-        }
-        findNavController().currentBackStackEntry?.savedStateHandle?.set("groupBundle", bundle)
 
-    }
     override fun onGroupItemClick(group: ApplicationGroup,position: Int) {
         groupViewModel.userIncludedGroupIds.value?.get(position)?.let {
-            putApplicationGroupIntoBundle(group,position,
-                it.toString())
+            val groupId = it.toString()
+            val action = GroupFragmentDirections.actionGroupFragmentToSpecificGroupFragment(
+                group, position, groupId
+            )
+            println(group)
+            println(position)
+            println(groupId)
+            findNavController().navigate(action)
         }
 
-        println(groupViewModel.appGroupList.value[position])
-
-        findNavController().navigate(R.id.action_groupFragment_to_specificGroupFragment)
     }
-
-
 }
