@@ -1,8 +1,6 @@
 package com.example.challapp.services
 
 import android.net.Uri
-import android.widget.ImageView
-import com.bumptech.glide.Glide
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import kotlinx.coroutines.tasks.await
@@ -25,13 +23,6 @@ object ImageUploadService {
             .addOnFailureListener { exception ->
                 onFailure("Image upload failed: ${exception.message}")
             }
-    }
-
-    fun loadImageIntoImageView(imageUrl: String, imageView: ImageView) {
-        Glide.with(imageView.context)
-            .load(imageUrl)
-            .centerCrop()
-            .into(imageView)
     }
 
     suspend fun getImageWithDocumentId(userId: String, documentId: String): String? {

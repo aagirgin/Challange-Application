@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.challapp.R
 import com.example.challapp.databinding.AdapterGroupfeedItemBinding
 import com.example.challapp.domain.models.GroupFeed
+import com.example.challapp.extensions.load
 import com.example.challapp.services.ImageUploadService
 import com.facebook.shimmer.ShimmerFrameLayout
 import kotlinx.coroutines.CoroutineScope
@@ -42,7 +43,7 @@ class GroupFeedAdapter(private var itemList: MutableList<*>) : RecyclerView.Adap
                         data.questionDocumentId
                     )
                     if (imageUrl != "No Image") {
-                        ImageUploadService.loadImageIntoImageView(imageUrl!!, completedImage)
+                        completedImage.load(imageUrl)
                         shimmerLayout.hideShimmer()
                     } else {
                         completedImage.setBackgroundColor(Color.WHITE)

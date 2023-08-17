@@ -12,7 +12,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.challapp.R
 import com.example.challapp.databinding.FragmentProfileBinding
-import com.example.challapp.services.ImageUploadService
+import com.example.challapp.extensions.load
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -88,7 +88,7 @@ class ProfileFragment : Fragment() {
                 }
                 else {
                     if (imageUrl != null) {
-                        ImageUploadService.loadImageIntoImageView(imageUrl, binding.imageviewProfilePicture)
+                        binding.imageviewProfilePicture.load(imageUrl)
                     }
                 }
             }

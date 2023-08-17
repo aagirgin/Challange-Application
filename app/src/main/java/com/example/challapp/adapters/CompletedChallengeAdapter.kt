@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.challapp.R
 import com.example.challapp.databinding.AdapterCompletedchallengeItemBinding
 import com.example.challapp.domain.models.ApplicationDailyChallenge
+import com.example.challapp.extensions.load
 import com.example.challapp.services.ImageUploadService
 import com.facebook.shimmer.ShimmerFrameLayout
 import kotlinx.coroutines.CoroutineScope
@@ -63,7 +64,7 @@ class CompletedChallengeAdapter(
                         currentChallenge.questionDocumentId
                     )
                     if (imageUrl != "No Image") {
-                        ImageUploadService.loadImageIntoImageView(imageUrl!!, completedImage)
+                        completedImage.load(imageUrl)
                         shimmerLayout.hideShimmer()
                     } else {
                         completedImage.setBackgroundColor(Color.WHITE)

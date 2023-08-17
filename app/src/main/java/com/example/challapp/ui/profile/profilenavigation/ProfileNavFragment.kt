@@ -16,7 +16,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.challapp.R
 import com.example.challapp.databinding.FragmentProfileNavBinding
-import com.example.challapp.services.ImageUploadService
+import com.example.challapp.extensions.load
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -82,7 +82,7 @@ class ProfileNavFragment : Fragment() {
                         binding.shimmerShapableimage.hideShimmer()
                     }
                     else {
-                        ImageUploadService.loadImageIntoImageView(imageUrl, binding.imageviewProfilePicture)
+                        binding.imageviewProfilePicture.load(imageUrl)
                         binding.shimmerShapableimage.hideShimmer()
                     }
                 }
