@@ -5,6 +5,7 @@ import com.example.challapp.domain.models.ApplicationDailyQuestion
 import com.example.challapp.domain.models.ApplicationGroup
 import com.example.challapp.domain.models.InviteStatus
 import com.example.challapp.domain.models.UserNotification
+import com.example.challapp.domain.state.InvitationState
 import com.google.firebase.auth.FirebaseUser
 interface FirestoreUserRepository {
 
@@ -31,7 +32,7 @@ interface FirestoreUserRepository {
     suspend fun checkUserAlreadyHaveSubmission(userId: String) : Boolean
     suspend fun acceptToGroupInvitation(userId: String,groupId: String):Int?
     suspend fun deleteOnRejectInvitation(notification:UserNotification,userId: String):Int?
-    suspend fun sendUserInvitationWithInviteKey(inviteKey: String, fromGroup: String, sender: String ): String?
+    suspend fun sendUserInvitationWithInviteKey(inviteKey: String, fromGroup: String, sender: String ): InvitationState
     suspend fun sendPasswordResetEmail(email: String) : Boolean
     suspend fun sendNotificationsToUser(documentId: String, sender: String, fromGroup: String,notificationType: InviteStatus): Boolean
     suspend fun giveInviteKeyIfNull(userId: String)
