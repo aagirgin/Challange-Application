@@ -6,7 +6,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.challapp.ui.group.landinggroup.GroupViewModel" />
+            type="com.example.challapp.ui.group.infogroup.GroupInfoViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

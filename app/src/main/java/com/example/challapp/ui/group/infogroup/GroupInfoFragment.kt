@@ -5,66 +5,81 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import com.example.challapp.R
+import androidx.navigation.fragment.navArgs
 import com.example.challapp.databinding.FragmentGroupInfoBinding
+import com.example.challapp.domain.models.ApplicationGroup
 import com.example.challapp.domain.state.UiState
-import com.example.challapp.ui.group.landinggroup.GroupViewModel
 import com.google.android.material.snackbar.Snackbar
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-
+@AndroidEntryPoint
 class GroupInfoFragment : Fragment() {
+
     private lateinit var binding: FragmentGroupInfoBinding
-    private val sharedViewModel: GroupViewModel by activityViewModels()
+
+    private val groupInfoViewModel: GroupInfoViewModel by viewModels()
+
+    private val args: GroupInfoFragmentArgs by navArgs()
+
+    private lateinit var bundle: Bundle
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentGroupInfoBinding.inflate(inflater, container, false)
-        binding.viewModel =  sharedViewModel
+        binding.viewModel =  groupInfoViewModel
         binding.lifecycleOwner = viewLifecycleOwner
-
-        inviteUserToGroup()
+        bundle = requireArguments()
+        dataSetGroup(args.group)
+        inviteUserToGroup(args)
         navigateBackSpecificGroupFeed()
 
         return binding.root
     }
 
-    private fun navigateBackSpecificGroupFeed(){
-        binding.imageviewBackNavArrow.setOnClickListener {
-            findNavController().navigate(R.id.action_groupInfoFragment_to_specificGroupFragment)
-        }
-    }
-
-    private fun inviteUserToGroup(){
+    private fun inviteUserToGroup(args:GroupInfoFragmentArgs){
         binding.imageviewInviteButton.setOnClickListener {
             val invitationText = binding.textinputInviteKey.text.toString()
             viewLifecycleOwner.lifecycleScope.launch {
-                sharedViewModel.selectedGroupId.value?.let { groupId ->
-                    sharedViewModel.currentUser.value?.let { senderId ->
-                        sharedViewModel.inviteToGroup(invitationText, groupId,senderId.uid)
-                    }
-                }
-                sharedViewModel.invitationState.collect{state->
+               groupInfoViewModel.currentUser.value?.uid?.let { currentUser ->
+                   groupInfoViewModel.inviteToGroup(invitationText,args.selectedGroupId , currentUser)
+               }
+                groupInfoViewModel.invitationState.collect{state->
                     when(state){
                         is UiState.Success -> {
                             Snackbar.make(binding.root, state.data , Snackbar.LENGTH_SHORT).show()
-                            sharedViewModel.resetState()
+                            groupInfoViewModel.resetState()
                         }
                         is UiState.Error -> {
                             Snackbar.make(binding.root, state.error , Snackbar.LENGTH_SHORT).show()
-                            sharedViewModel.resetState()
+                            groupInfoViewModel.resetState()
                         }
                         else -> {}
                     }
 
                 }
-            }
 
+            }
+        }
+
+    }
+    private fun navigateBackSpecificGroupFeed(){
+        binding.imageviewBackNavArrow.setOnClickListener {
+            val direction = GroupInfoFragmentDirections.actionGroupInfoFragmentToSpecificGroupFragment(
+                args.group,
+                args.position,
+                args.selectedGroupId
+            )
+            findNavController().navigate(direction)
         }
     }
 
+    private fun dataSetGroup(group:ApplicationGroup){
+        groupInfoViewModel.setGroupData(group)
+    }
 
 }

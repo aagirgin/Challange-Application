@@ -110,11 +110,6 @@ class FirestoreUserRepositoryImpl @Inject constructor(
                 val notificationsList = documentSnapshot.toObject(ApplicationUser::class.java)?.notifications
 
                 notificationsList?.forEach {
-                    println(fromGroup)
-                    println(it.notificationFromGroup)
-                    println(fromGroup == it.notificationFromGroup)
-                    println(it.notificationType == InviteStatus.INVITE)
-                    println(it.notificationType == InviteStatus.INVITE && it.notificationFromGroup == fromGroup)
                     if(it.notificationType == InviteStatus.INVITE && it.notificationFromGroup == fromGroup){
                         return "This group is already sent request to this user. Please wait for users response."
                     }

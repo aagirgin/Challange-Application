@@ -208,7 +208,18 @@
             app:destination="@id/createGroupFragment" />
         <action
             android:id="@+id/action_groupFragment_to_specificGroupFragment"
-            app:destination="@id/specificGroupFragment" />
+            app:destination="@id/specificGroupFragment" >
+            <argument
+                android:name="selectedGroup"
+                app:argType="com.example.challapp.domain.models.ApplicationGroup" />
+            <argument
+                android:name="groupPosition"
+                app:argType="integer" />
+            <argument
+                android:name="selectedGroupId"
+                app:argType="string" />
+        </action>
+
     </fragment>
     <fragment
         android:id="@+id/createGroupFragment"
@@ -255,7 +266,26 @@
             app:popUpToInclusive="true"/>
         <action
             android:id="@+id/action_specificGroupFragment_to_groupInfoFragment"
-            app:destination="@id/groupInfoFragment" />
+            app:destination="@id/groupInfoFragment" >
+            <argument
+                android:name="position"
+                app:argType="integer" />
+            <argument
+                android:name="selectedGroupId"
+                app:argType="string" />
+            <argument
+                android:name="group"
+                app:argType="com.example.challapp.domain.models.ApplicationGroup" />
+        </action>
+        <argument
+            android:name="selectedGroup"
+            app:argType="com.example.challapp.domain.models.ApplicationGroup" />
+        <argument
+            android:name="groupPosition"
+            app:argType="integer" />
+        <argument
+            android:name="selectedGroupId"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/groupInfoFragment"
@@ -267,6 +297,15 @@
             app:destination="@id/specificGroupFragment"
             app:popUpTo="@id/specificGroupFragment"
             app:popUpToInclusive="true"/>
+        <argument
+            android:name="position"
+            app:argType="integer" />
+        <argument
+            android:name="group"
+            app:argType="com.example.challapp.domain.models.ApplicationGroup" />
+        <argument
+            android:name="selectedGroupId"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/notificationFragment"

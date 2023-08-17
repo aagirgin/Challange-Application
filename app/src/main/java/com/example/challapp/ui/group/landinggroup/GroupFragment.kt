@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -19,9 +19,13 @@ import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class GroupFragment : Fragment(), GroupAdapter.OnItemClickListener  {
+
     private lateinit var binding: FragmentGroupBinding
-    private val groupViewModel: GroupViewModel by activityViewModels()
+
+    private val groupViewModel: GroupViewModel by viewModels()
+
     private lateinit var groupAdapter: GroupAdapter
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -59,9 +63,18 @@ class GroupFragment : Fragment(), GroupAdapter.OnItemClickListener  {
         recyclerView.adapter = groupAdapter
     }
 
+
     override fun onGroupItemClick(group: ApplicationGroup,position: Int) {
-        groupViewModel.setSelectedGroup(group)
-        groupViewModel.setGroupDocumentId(position)
-        findNavController().navigate(R.id.action_groupFragment_to_specificGroupFragment)
+        groupViewModel.userIncludedGroupIds.value?.get(position)?.let {
+            val groupId = it.toString()
+            val action = GroupFragmentDirections.actionGroupFragmentToSpecificGroupFragment(
+                group, position, groupId
+            )
+            println(group)
+            println(position)
+            println(groupId)
+            findNavController().navigate(action)
+        }
+
     }
 }

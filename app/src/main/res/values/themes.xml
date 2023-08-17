@@ -17,9 +17,4 @@
 
     <style name="Theme.ChallApp" parent="Base.Theme.ChallApp" />
 
-    <style name="AlertDialogTheme" parent="Theme.MaterialComponents.Light.Dialog">
-        <item name="android:windowBackground">@android:color/darker_gray</item>
-        <item name="android:windowIsFloating">true</item>
-
-    </style>
 </resources>

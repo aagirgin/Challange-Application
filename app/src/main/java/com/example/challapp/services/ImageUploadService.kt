@@ -3,8 +3,6 @@ package com.example.challapp.services
 import android.net.Uri
 import android.widget.ImageView
 import com.bumptech.glide.Glide
-import com.example.challapp.R
-import com.google.android.material.imageview.ShapeableImageView
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import kotlinx.coroutines.tasks.await
@@ -37,7 +35,6 @@ object ImageUploadService {
     }
 
     suspend fun getImageWithDocumentId(userId: String, documentId: String): String? {
-        val imageUrl = "documentId"
         val storageRef: StorageReference =
             storageInstance.reference.child("Users").child(userId).child(documentId)
 
