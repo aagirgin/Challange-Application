@@ -119,5 +119,6 @@
     <string name="accept">Accept</string>
     <string name="decline">Decline</string>
     <string name="group_photo_default">Group Photo Default</string>
+    <string name="privacy_policy">Privacy Policy</string>
 
 </resources>

@@ -137,6 +137,7 @@
             android:paddingStart="16dp"
             android:paddingTop="12dp"
             android:paddingEnd="16dp"
+            android:maxLength="32"
             android:paddingBottom="12dp"
             android:text="@string/here_is_my_name"
             android:textSize="16sp"
