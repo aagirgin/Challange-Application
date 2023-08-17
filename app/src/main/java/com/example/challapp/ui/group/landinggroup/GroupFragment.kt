@@ -19,9 +19,13 @@ import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class GroupFragment : Fragment(), GroupAdapter.OnItemClickListener  {
+
     private lateinit var binding: FragmentGroupBinding
+
     private val groupViewModel: GroupViewModel by viewModels()
+
     private lateinit var groupAdapter: GroupAdapter
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

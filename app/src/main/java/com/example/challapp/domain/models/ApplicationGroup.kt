@@ -10,7 +10,7 @@ data class ApplicationGroup(
     val creationDate: String = "",
     val groupDescription:String = "",
     val groupFeed: MutableList<@RawValue GroupFeed>? = mutableListOf(),
-    val groupMembers: MutableList<@RawValue Any?> = mutableListOf(),
+    val groupMembers: MutableList<@RawValue String?> = mutableListOf(),
     val groupOwner: String = ""
     ): Parcelable
 

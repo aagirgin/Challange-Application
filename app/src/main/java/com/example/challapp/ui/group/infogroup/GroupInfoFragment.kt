@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.example.challapp.databinding.FragmentGroupInfoBinding
 import com.example.challapp.domain.models.ApplicationGroup
 import com.example.challapp.domain.state.UiState
@@ -16,10 +17,15 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 @AndroidEntryPoint
 class GroupInfoFragment : Fragment() {
+
     private lateinit var binding: FragmentGroupInfoBinding
+
     private val groupInfoViewModel: GroupInfoViewModel by viewModels()
+
+    private val args: GroupInfoFragmentArgs by navArgs()
+
     private lateinit var bundle: Bundle
-    private lateinit var args: GroupInfoFragmentArgs
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -28,7 +34,6 @@ class GroupInfoFragment : Fragment() {
         binding.viewModel =  groupInfoViewModel
         binding.lifecycleOwner = viewLifecycleOwner
         bundle = requireArguments()
-        args = bundle.let { GroupInfoFragmentArgs.fromBundle(it) }
         dataSetGroup(args.group)
         inviteUserToGroup(args)
         navigateBackSpecificGroupFeed()
@@ -40,8 +45,9 @@ class GroupInfoFragment : Fragment() {
         binding.imageviewInviteButton.setOnClickListener {
             val invitationText = binding.textinputInviteKey.text.toString()
             viewLifecycleOwner.lifecycleScope.launch {
-               groupInfoViewModel.inviteToGroup(invitationText,args.selectedGroupId ,groupInfoViewModel.currentUser.value?.uid!!)
-
+               groupInfoViewModel.currentUser.value?.uid?.let { currentUser ->
+                   groupInfoViewModel.inviteToGroup(invitationText,args.selectedGroupId , currentUser)
+               }
                 groupInfoViewModel.invitationState.collect{state->
                     when(state){
                         is UiState.Success -> {
