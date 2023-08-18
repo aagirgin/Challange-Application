@@ -11,7 +11,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.challapp.databinding.FragmentGroupInfoBinding
 import com.example.challapp.domain.models.ApplicationGroup
-import com.example.challapp.domain.state.UiState
+import com.example.challapp.domain.state.InvitationState
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -50,15 +50,12 @@ class GroupInfoFragment : Fragment() {
                }
                 groupInfoViewModel.invitationState.collect{state->
                     when(state){
-                        is UiState.Success -> {
-                            Snackbar.make(binding.root, state.data , Snackbar.LENGTH_SHORT).show()
-                            groupInfoViewModel.resetState()
+                        is InvitationState.Success -> {
+                            Snackbar.make(binding.root, state.message , Snackbar.LENGTH_SHORT).show()
                         }
-                        is UiState.Error -> {
-                            Snackbar.make(binding.root, state.error , Snackbar.LENGTH_SHORT).show()
-                            groupInfoViewModel.resetState()
+                        else -> {
+                            Snackbar.make(binding.root, state.message , Snackbar.LENGTH_SHORT).show()
                         }
-                        else -> {}
                     }
 
                 }

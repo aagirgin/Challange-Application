@@ -16,9 +16,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.challapp.R
 import com.example.challapp.databinding.FragmentProfileNavBinding
-import com.example.challapp.services.ImageUploadService
-import com.example.challapp.utils.CopyClipboardUtils
-import com.google.android.material.snackbar.Snackbar
+import com.example.challapp.extensions.load
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -48,7 +46,7 @@ class ProfileNavFragment : Fragment() {
         binding.viewModel = profileNavViewModel
         binding.lifecycleOwner = viewLifecycleOwner
 
-        onClickCopyTextToClipboard()
+
         displayImage()
         addProfilePicture()
         onNavigateInProfile()
@@ -84,7 +82,7 @@ class ProfileNavFragment : Fragment() {
                         binding.shimmerShapableimage.hideShimmer()
                     }
                     else {
-                        ImageUploadService.loadImageIntoImageView(imageUrl, binding.imageviewProfilePicture)
+                        binding.imageviewProfilePicture.load(imageUrl)
                         binding.shimmerShapableimage.hideShimmer()
                     }
                 }
@@ -112,13 +110,6 @@ class ProfileNavFragment : Fragment() {
     }
 
 
-    private fun onClickCopyTextToClipboard() {
-        binding.imageviewClipboard.setOnClickListener {
-            val copyText = binding.textviewInvitationKey.text.toString()
-            CopyClipboardUtils.copyTextToClipboard(copyText,requireContext())
-            Snackbar.make(binding.root, getString(R.string.copy_clipboard_text), Snackbar.LENGTH_SHORT).show()
-        }
-    }
 
 
 

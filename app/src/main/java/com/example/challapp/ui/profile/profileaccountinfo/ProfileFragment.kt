@@ -12,8 +12,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.challapp.R
 import com.example.challapp.databinding.FragmentProfileBinding
-import com.example.challapp.services.ImageUploadService
-import com.example.challapp.utils.CopyClipboardUtils
+import com.example.challapp.extensions.load
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -31,7 +30,6 @@ class ProfileFragment : Fragment() {
         binding.viewModel = profileViewModel
         binding.lifecycleOwner = viewLifecycleOwner
 
-        onClickCopyTextToClipboard()
         loadProfileImage()
         onNavigateBack()
         changeName()
@@ -40,20 +38,12 @@ class ProfileFragment : Fragment() {
     }
 
     private fun validationField(): Boolean{
-        return binding.edittextName.text.isNotBlank()
+        return binding.edittextName.text.isNotBlank() && binding.edittextName.text.toString() != "Here is My Name"
     }
 
     private fun onNavigateBack(){
         binding.imageviewBackNavArrow.setOnClickListener {
             findNavController().navigate(R.id.action_profileFragment_to_profileNavFragment)
-        }
-    }
-
-    private fun onClickCopyTextToClipboard() {
-        binding.imageviewClipboard.setOnClickListener {
-            val copyText = binding.textviewInvitationKey.text.toString()
-            CopyClipboardUtils.copyTextToClipboard(copyText,requireContext())
-            Snackbar.make(binding.root, getString(R.string.copy_clipboard_text), Snackbar.LENGTH_SHORT).show()
         }
     }
 
@@ -98,7 +88,7 @@ class ProfileFragment : Fragment() {
                 }
                 else {
                     if (imageUrl != null) {
-                        ImageUploadService.loadImageIntoImageView(imageUrl, binding.imageviewProfilePicture)
+                        binding.imageviewProfilePicture.load(imageUrl)
                     }
                 }
             }

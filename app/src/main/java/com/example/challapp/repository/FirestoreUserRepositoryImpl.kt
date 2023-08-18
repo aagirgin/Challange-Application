@@ -6,7 +6,9 @@ import com.example.challapp.domain.models.ApplicationDailyQuestion
 import com.example.challapp.domain.models.ApplicationGroup
 import com.example.challapp.domain.models.ApplicationUser
 import com.example.challapp.domain.models.InviteStatus
+import com.example.challapp.domain.models.Permission
 import com.example.challapp.domain.models.UserNotification
+import com.example.challapp.domain.state.InvitationState
 import com.example.challapp.utils.DateUtils
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -101,24 +103,44 @@ class FirestoreUserRepositoryImpl @Inject constructor(
         userDocumentRef.update("challangeStreak", newStreak).await()
     }
 
-    override suspend fun sendUserInvitationWithInviteKey(inviteKey: String, fromGroup: String, sender: String): String? {
+    override suspend fun sendUserInvitationWithInviteKey(inviteKey: String, fromGroup: String, sender: String): InvitationState {
         val userCollection = firestore.collection("Users")
+        val groupClass = firestore.collection("Groups").document(fromGroup).get().await().toObject(ApplicationGroup::class.java)
+        val groupInvitePermission =  groupClass?.invitationPermission
+        val groupOwner = groupClass?.groupOwner
         val query = userCollection.whereEqualTo("inviteKey", inviteKey)
         val querySnapshot = query.get().await()
+
         if (!querySnapshot.isEmpty) {
             for (documentSnapshot in querySnapshot.documents) {
-                val notificationsList = documentSnapshot.toObject(ApplicationUser::class.java)?.notifications
+                val docAsAppUser = documentSnapshot.toObject(ApplicationUser::class.java)
+                val notificationsList = docAsAppUser?.notifications
+                val userGroups = docAsAppUser?.includedGroups
 
-                notificationsList?.forEach {
-                    if(it.notificationType == InviteStatus.INVITE && it.notificationFromGroup == fromGroup){
-                        return "This group is already sent request to this user. Please wait for users response."
-                    }
+                if (groupInvitePermission != Permission.USERS_ALL){
+                        if(sender != groupOwner){
+                            return InvitationState.NoInvitationPermission
+                        }
                 }
+
+                if (userGroups?.contains(fromGroup) == true){
+                    return InvitationState.UserAlreadyMember
+                }
+
+                val requestAlreadySent = notificationsList?.any {
+                    it.notificationType == InviteStatus.INVITE && it.notificationFromGroup == fromGroup
+                } ?: false
+
+                if (requestAlreadySent) {
+                    return InvitationState.RequestAlreadySent
+                }
+
                 sendNotificationsToUser(documentSnapshot.id, sender, fromGroup, InviteStatus.INVITE)
-                return "Invitation sent successfully to user."
+                return InvitationState.Success
             }
         }
-        return null
+
+        return InvitationState.UserNotFound
     }
 
     override suspend fun sendNotificationsToUser(documentId: String, sender: String, fromGroup: String, notificationType: InviteStatus): Boolean {
