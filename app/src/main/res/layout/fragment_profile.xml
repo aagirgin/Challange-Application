@@ -228,6 +228,16 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/textview_invitationKey" />
 
+        <ImageView
+            android:id="@+id/imageview_clipboard"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="3dp"
+            app:layout_constraintBottom_toBottomOf="@+id/textview_invitationKey"
+            app:layout_constraintStart_toEndOf="@+id/textview_invitationKey"
+            app:layout_constraintTop_toBottomOf="@+id/textview_username"
+            app:srcCompat="@drawable/baseline_filter_none_24"
+            android:contentDescription="@string/clipboard_image" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
