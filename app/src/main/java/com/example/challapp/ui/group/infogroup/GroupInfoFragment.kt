@@ -37,6 +37,7 @@ class GroupInfoFragment : Fragment() {
         dataSetGroup(args.group)
         inviteUserToGroup(args)
         navigateBackSpecificGroupFeed()
+        onClickNavigateSettings()
 
         return binding.root
     }
@@ -75,8 +76,19 @@ class GroupInfoFragment : Fragment() {
         }
     }
 
+    private fun onClickNavigateSettings(){
+        binding.imageviewSettings.setOnClickListener {
+            val direction = GroupInfoFragmentDirections.actionGroupInfoFragmentToGroupSettinsFragment(
+                args.group,
+                args.position,
+                args.selectedGroupId
+            )
+            findNavController().navigate(direction)
+        }
+    }
     private fun dataSetGroup(group:ApplicationGroup){
         groupInfoViewModel.setGroupData(group)
     }
+
 
 }

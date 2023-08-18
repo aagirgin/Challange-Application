@@ -306,6 +306,9 @@
         <argument
             android:name="selectedGroupId"
             app:argType="string" />
+        <action
+            android:id="@+id/action_groupInfoFragment_to_groupSettinsFragment"
+            app:destination="@id/groupSettinsFragment" />
     </fragment>
     <fragment
         android:id="@+id/notificationFragment"
@@ -315,6 +318,24 @@
         <action
             android:id="@+id/action_notificationFragment_to_challangeFragment"
             app:destination="@id/challangeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/groupSettinsFragment"
+        android:name="com.example.challapp.ui.group.settingsgroup.GroupSettingsFragment"
+        android:label="fragment_group_settings"
+        tools:layout="@layout/fragment_group_settings" >
+        <action
+            android:id="@+id/action_groupSettinsFragment_to_groupInfoFragment"
+            app:destination="@id/groupInfoFragment" />
+        <argument
+            android:name="group"
+            app:argType="com.example.challapp.domain.models.ApplicationGroup" />
+        <argument
+            android:name="position"
+            app:argType="integer" />
+        <argument
+            android:name="selectedGroupId"
+            app:argType="string" />
     </fragment>
 
 

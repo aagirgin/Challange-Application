@@ -70,9 +70,6 @@ class GroupFragment : Fragment(), GroupAdapter.OnItemClickListener  {
             val action = GroupFragmentDirections.actionGroupFragmentToSpecificGroupFragment(
                 group, position, groupId
             )
-            println(group)
-            println(position)
-            println(groupId)
             findNavController().navigate(action)
         }
 

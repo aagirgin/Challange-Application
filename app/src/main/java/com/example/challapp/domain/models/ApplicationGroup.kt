@@ -11,7 +11,7 @@ data class ApplicationGroup(
     val groupDescription:String = "",
     val groupFeed: MutableList<@RawValue GroupFeed>? = mutableListOf(),
     val groupMembers: MutableList<@RawValue String?> = mutableListOf(),
-    val invitationPermission: Permission = Permission.ADMIN_ONLY,
+    val invitationInvitePermission: InvitePermission = InvitePermission.ADMIN_ONLY,
     val groupOwner: String = ""
     ): Parcelable
 
@@ -21,7 +21,7 @@ data class GroupFeed(
     val description: String? = ""
 )
 
-enum class Permission {
+enum class InvitePermission {
     USERS_ALL,
     ADMIN_ONLY
 }

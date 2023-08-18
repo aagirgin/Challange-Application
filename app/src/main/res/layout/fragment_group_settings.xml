@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.group.settingsgroup.GroupSettingsFragment">
+
+
+        <View
+            android:id="@+id/view2"
+            android:layout_width="wrap_content"
+            android:layout_height="55dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textview_groupInformationBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/loramedium"
+            android:text="@string/group_settings"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@+id/imageview_backNavArrow"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/imageview_backNavArrow" />
+
+        <ImageView
+            android:id="@+id/imageview_backNavArrow"
+            android:layout_width="26dp"
+            android:layout_height="26dp"
+            android:layout_marginStart="20dp"
+            android:contentDescription="@string/back_navigation_arrow"
+            android:src="@drawable/baseline_arrow_back_ios_24"
+            app:layout_constraintBottom_toBottomOf="@+id/view2"
+            app:layout_constraintStart_toStartOf="@+id/view2"
+            app:layout_constraintTop_toTopOf="@+id/view2" />
+
+        <View
+            android:id="@+id/view_inviteStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="55dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view2" />
+
+        <TextView
+            android:id="@+id/textview_groupInvitationStatusPrompt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:fontFamily="@font/loramedium"
+            android:text="@string/group_invitation_status"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toBottomOf="@+id/view_inviteStatus"
+            app:layout_constraintEnd_toStartOf="@+id/textview_groupInvitationStatusInfo"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toStartOf="@+id/view_inviteStatus"
+            app:layout_constraintTop_toBottomOf="@+id/view2" />
+
+        <TextView
+            android:id="@+id/textview_groupInvitationStatusInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="5dp"
+            android:fontFamily="@font/lorasemibolditalic"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@+id/imageview_nextPageGroupInvite"
+            app:layout_constraintEnd_toStartOf="@+id/imageview_nextPageGroupInvite"
+            app:layout_constraintTop_toTopOf="@+id/imageview_nextPageGroupInvite" />
+
+        <ImageView
+            android:id="@+id/imageview_nextPageGroupInvite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="15dp"
+            android:src="@drawable/baseline_arrow_forward_ios_24_grey"
+            app:layout_constraintBottom_toBottomOf="@+id/view_inviteStatus"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view2"
+            android:contentDescription="@string/invitationstatus_icon" />
+
+        <View
+            android:id="@+id/view_leave"
+            android:layout_width="wrap_content"
+            android:layout_height="55dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view_inviteStatus" />
+
+        <TextView
+            android:id="@+id/textview_leavePrompt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/leave_group"
+            android:fontFamily="@font/loramedium"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toBottomOf="@+id/view_leave"
+            app:layout_constraintStart_toStartOf="@+id/textview_groupInvitationStatusPrompt"
+            app:layout_constraintTop_toBottomOf="@+id/view_inviteStatus" />
+
+        <ImageView
+            android:id="@+id/imageview_leave"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/baseline_arrow_forward_ios_24_grey"
+            app:layout_constraintBottom_toBottomOf="@+id/view_leave"
+            app:layout_constraintEnd_toEndOf="@+id/imageview_nextPageGroupInvite"
+            app:layout_constraintTop_toBottomOf="@+id/view_inviteStatus"
+            android:contentDescription="@string/leave_group_icon" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

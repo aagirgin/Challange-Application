@@ -6,7 +6,7 @@ import com.example.challapp.domain.models.ApplicationDailyQuestion
 import com.example.challapp.domain.models.ApplicationGroup
 import com.example.challapp.domain.models.ApplicationUser
 import com.example.challapp.domain.models.InviteStatus
-import com.example.challapp.domain.models.Permission
+import com.example.challapp.domain.models.InvitePermission
 import com.example.challapp.domain.models.UserNotification
 import com.example.challapp.domain.state.InvitationState
 import com.example.challapp.utils.DateUtils
@@ -106,7 +106,7 @@ class FirestoreUserRepositoryImpl @Inject constructor(
     override suspend fun sendUserInvitationWithInviteKey(inviteKey: String, fromGroup: String, sender: String): InvitationState {
         val userCollection = firestore.collection("Users")
         val groupClass = firestore.collection("Groups").document(fromGroup).get().await().toObject(ApplicationGroup::class.java)
-        val groupInvitePermission =  groupClass?.invitationPermission
+        val groupInvitePermission =  groupClass?.invitationInvitePermission
         val groupOwner = groupClass?.groupOwner
         val query = userCollection.whereEqualTo("inviteKey", inviteKey)
         val querySnapshot = query.get().await()
@@ -117,7 +117,7 @@ class FirestoreUserRepositoryImpl @Inject constructor(
                 val notificationsList = docAsAppUser?.notifications
                 val userGroups = docAsAppUser?.includedGroups
 
-                if (groupInvitePermission != Permission.USERS_ALL){
+                if (groupInvitePermission != InvitePermission.USERS_ALL){
                         if(sender != groupOwner){
                             return InvitationState.NoInvitationPermission
                         }

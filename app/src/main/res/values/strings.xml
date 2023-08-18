@@ -120,5 +120,9 @@
     <string name="decline">Decline</string>
     <string name="group_photo_default">Group Photo Default</string>
     <string name="privacy_policy">Privacy Policy</string>
-
+    <string name="group_invitation_status">Group Invitation Status</string>
+    <string name="leave_group">Leave / Delete Group</string>
+    <string name="leave_group_icon">Leave Group Icon</string>
+    <string name="invitationstatus_icon">InvitationStatus Icon</string>
+    <string name="clipboard_image">Clipboard Icon</string>
 </resources>
