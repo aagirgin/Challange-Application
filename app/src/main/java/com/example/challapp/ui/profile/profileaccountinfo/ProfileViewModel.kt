@@ -45,7 +45,9 @@ class ProfileViewModel @Inject constructor(
         _currentUser.value = firestoreUserRepository.getCurrentUser()
         val userId = _currentUser.value?.uid
         viewModelScope.launch {
-            fetchUsernameAndInviteKey(userId!!)
+            if (userId != null) {
+                fetchUsernameAndInviteKey(userId)
+            }
             _getMailFlow.value = currentUser.value?.email
         }
     }
