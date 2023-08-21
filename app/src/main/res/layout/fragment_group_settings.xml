@@ -52,7 +52,7 @@
             android:id="@+id/textview_groupInvitationStatusPrompt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
+            android:layout_marginStart="16dp"
             android:fontFamily="@font/loramedium"
             android:text="@string/group_invitation_status"
             android:textSize="15sp"
@@ -98,7 +98,7 @@
             android:layout_height="wrap_content"
             android:text="@string/leave_group"
             android:fontFamily="@font/loramedium"
-            android:textSize="15sp"
+            android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="@+id/view_leave"
             app:layout_constraintStart_toStartOf="@+id/textview_groupInvitationStatusPrompt"
             app:layout_constraintTop_toBottomOf="@+id/view_inviteStatus" />

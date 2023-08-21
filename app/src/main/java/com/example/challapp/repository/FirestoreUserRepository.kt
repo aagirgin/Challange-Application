@@ -3,6 +3,7 @@ package com.example.challapp.repository
 import com.example.challapp.domain.models.ApplicationDailyChallenge
 import com.example.challapp.domain.models.ApplicationDailyQuestion
 import com.example.challapp.domain.models.ApplicationGroup
+import com.example.challapp.domain.models.InvitePermission
 import com.example.challapp.domain.models.InviteStatus
 import com.example.challapp.domain.models.UserNotification
 import com.example.challapp.domain.state.InvitationState
@@ -28,6 +29,7 @@ interface FirestoreUserRepository {
     suspend fun updateIncludedGroupsForUser(userId: String, groupId: String): Boolean
     suspend fun updateStreakBasedOnDailyQuestions(userId: String)
     suspend fun changeUsername(userId: String,newUsername: String) :Boolean
+    suspend fun changeGroupInvitationStatus(groupId: String,changedPermission: InvitePermission) : Boolean
     suspend fun incrementStreakCountByOne(userId: String)
     suspend fun checkUserAlreadyHaveSubmission(userId: String) : Boolean
     suspend fun acceptToGroupInvitation(userId: String,groupId: String):Int?

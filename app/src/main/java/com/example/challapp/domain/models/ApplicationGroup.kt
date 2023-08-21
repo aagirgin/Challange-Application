@@ -11,7 +11,7 @@ data class ApplicationGroup(
     val groupDescription:String = "",
     val groupFeed: MutableList<@RawValue GroupFeed>? = mutableListOf(),
     val groupMembers: MutableList<@RawValue String?> = mutableListOf(),
-    val invitationInvitePermission: InvitePermission = InvitePermission.ADMIN_ONLY,
+    var invitationPermission: InvitePermission = InvitePermission.ADMIN_ONLY,
     val groupOwner: String = ""
     ): Parcelable
 

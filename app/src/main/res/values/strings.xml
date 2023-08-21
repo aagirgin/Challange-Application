@@ -125,4 +125,7 @@
     <string name="leave_group_icon">Leave Group Icon</string>
     <string name="invitationstatus_icon">InvitationStatus Icon</string>
     <string name="clipboard_image">Clipboard Icon</string>
+    <string name="cancel">Cancel</string>
+    <string name="ok">OK</string>
+    <string name="inv_status_change_message">Successfully changed the group invitation status.</string>
 </resources>

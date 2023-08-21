@@ -106,7 +106,7 @@ class FirestoreUserRepositoryImpl @Inject constructor(
     override suspend fun sendUserInvitationWithInviteKey(inviteKey: String, fromGroup: String, sender: String): InvitationState {
         val userCollection = firestore.collection("Users")
         val groupClass = firestore.collection("Groups").document(fromGroup).get().await().toObject(ApplicationGroup::class.java)
-        val groupInvitePermission =  groupClass?.invitationInvitePermission
+        val groupInvitePermission =  groupClass?.invitationPermission
         val groupOwner = groupClass?.groupOwner
         val query = userCollection.whereEqualTo("inviteKey", inviteKey)
         val querySnapshot = query.get().await()
@@ -297,6 +297,17 @@ class FirestoreUserRepositoryImpl @Inject constructor(
 
         } catch (e: Exception) {
             Log.e("FirestoreUserRepo", "Error updating username: ${e.message}")
+            false
+        }
+    }
+
+    override suspend fun changeGroupInvitationStatus(groupId: String,changedPermission: InvitePermission): Boolean {
+        val groupDocRef = firestore.collection("Groups").document(groupId)
+
+        return try {
+            groupDocRef.update("invitationPermission", changedPermission).await()
+            true
+        } catch (e: Exception) {
             false
         }
     }
