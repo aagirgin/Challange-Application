@@ -261,6 +261,43 @@ class FirestoreUserRepositoryImpl @Inject constructor(
         return null
     }
 
+    override suspend fun userLeaveGroup(userId: String, groupId: String): Boolean {
+        val userDocumentRef = firestore.collection("Users").document(userId)
+        val groupDocumentRef = firestore.collection("Groups").document(groupId)
+        return try {
+            val userDocument = userDocumentRef.get().await().toObject(ApplicationUser::class.java)
+            userDocument?.includedGroups?.remove(groupId)
+            userDocumentRef.update("includedGroups", userDocument?.includedGroups).await()
+            val groupDocument = groupDocumentRef.get().await().toObject(ApplicationGroup::class.java)
+            groupDocument?.groupMembers?.remove(userId)
+            groupDocumentRef.update("groupMembers", groupDocument?.groupMembers).await()
+            true
+        } catch (e: Exception) {
+            false
+        }
+    }
+
+    override suspend fun userDeleteGroup(groupId: String): Boolean {
+        val userDocumentRef = firestore.collection("Users")
+        val groupDocumentRef = firestore.collection("Groups").document(groupId)
+
+        return try {
+            val groupDocument = groupDocumentRef.get().await().toObject(ApplicationGroup::class.java)
+            groupDocument?.groupMembers?.forEach { user ->
+                if (user != null) {
+                    val userDoc = userDocumentRef.document(user)
+                    val userGroups = userDoc.get().await().toObject(ApplicationUser::class.java)?.includedGroups
+                    userGroups?.remove(groupId)
+                    userDoc.update("includedGroups", userGroups).await()
+                }
+            }
+            groupDocumentRef.delete().await()
+            true
+        } catch (e: Exception) {
+            false
+        }
+    }
+
 
     override suspend fun getAllDailyChallangesForUser(userId: String): MutableList<ApplicationDailyChallenge>? {
         val groupDocumentRef = firestore.collection("Users").document(userId).get().await()

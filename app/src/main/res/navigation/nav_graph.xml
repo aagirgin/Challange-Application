@@ -336,6 +336,11 @@
         <argument
             android:name="selectedGroupId"
             app:argType="string" />
+        <action
+            android:id="@+id/action_groupSettinsFragment_to_groupFragment"
+            app:destination="@id/groupFragment"
+            app:popUpTo="@id/groupFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 
 

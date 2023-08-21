@@ -34,6 +34,9 @@ interface FirestoreUserRepository {
     suspend fun checkUserAlreadyHaveSubmission(userId: String) : Boolean
     suspend fun acceptToGroupInvitation(userId: String,groupId: String):Int?
     suspend fun deleteOnRejectInvitation(notification:UserNotification,userId: String):Int?
+    suspend fun userLeaveGroup(userId: String,groupId: String): Boolean
+
+    suspend fun userDeleteGroup(groupId: String): Boolean
     suspend fun sendUserInvitationWithInviteKey(inviteKey: String, fromGroup: String, sender: String ): InvitationState
     suspend fun sendPasswordResetEmail(email: String) : Boolean
     suspend fun sendNotificationsToUser(documentId: String, sender: String, fromGroup: String,notificationType: InviteStatus): Boolean

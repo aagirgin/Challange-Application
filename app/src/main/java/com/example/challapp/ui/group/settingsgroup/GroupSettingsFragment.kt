@@ -55,44 +55,109 @@ class GroupSettingsFragment : Fragment() {
 
     private fun onClickOpenAlertDialog(){
         binding.viewLeave.setOnClickListener {
-
-
+            if (args.group.groupOwner == groupSettingsViewModel.currentUser.value?.uid){
+                onClickGroupOwnerDelete()
+            }
+            else {
+                onClickMemberLeave()
+            }
         }
         binding.viewInviteStatus.setOnClickListener {
-            val singleItems = arrayOf("ADMIN_ONLY", "USERS_ALL")
-            var checkedItem = if (args.group.invitationPermission == InvitePermission.ADMIN_ONLY) 0 else 1
+                onClickGroupInviteStatusChange()
+            }
+        }
 
-            context?.let { context ->
-                MaterialAlertDialogBuilder(context)
-                    .setTitle("Group Invite Status")
-                    .setNeutralButton(resources.getString(R.string.cancel)) { dialog, _ ->
-                        dialog.dismiss()
+    private fun onClickGroupOwnerDelete(){
+        context?.let {context->
+            MaterialAlertDialogBuilder(context)
+                .setTitle(resources.getString(R.string.delete_group_title))
+                .setMessage(resources.getString(R.string.delete_group_title_text))
+                .setNegativeButton(resources.getString(R.string.stay)) { dialog, _ ->
+                    dialog.dismiss()
+                }
+                .setPositiveButton(resources.getString(R.string.delete)) { dialog, _ ->
+                    viewLifecycleOwner.lifecycleScope.launch {
+                        groupSettingsViewModel.deleteGroup(args.selectedGroupId)
+                        groupSettingsViewModel.deleteGroupState.collect{state->
+                            when(state){
+                                is UiState.Success -> {
+                                    Snackbar.make(binding.root, getString(R.string.successfully_delete_group), Snackbar.LENGTH_SHORT).show()
+                                    findNavController().navigate(R.id.action_groupSettinsFragment_to_groupFragment)
+                                }
+                                is UiState.Error -> Snackbar.make(binding.root, state.error, Snackbar.LENGTH_SHORT).show()
+                                else -> {}
+                            }
+                        }
                     }
-                    .setPositiveButton(resources.getString(R.string.ok)) { dialog, which ->
-                        if(singleItems[checkedItem] != args.group.invitationPermission.toStringValue()){
-                            groupSettingsViewModel.changePermission(args.selectedGroupId,singleItems[checkedItem].toInvitePermission())
-                            viewLifecycleOwner.lifecycleScope.launch {
-                                groupSettingsViewModel.changedGroupState.collect{state ->
-                                    when(state){
-                                        is UiState.Success ->  {
-                                            args.group.invitationPermission = singleItems[checkedItem].toInvitePermission()
-                                            Snackbar.make(binding.root, getString(R.string.inv_status_change_message), Snackbar.LENGTH_SHORT).show()
-                                        }
-                                        is UiState.Error -> Snackbar.make(binding.root, state.error, Snackbar.LENGTH_SHORT).show()
-                                        else -> {}
+
+                    dialog.dismiss()
+                }
+                .show()
+        }
+    }
+
+    private fun onClickMemberLeave(){
+        context?.let {context->
+            MaterialAlertDialogBuilder(context)
+                .setTitle(resources.getString(R.string.leave_group))
+                .setMessage(resources.getString(R.string.leave_group_title_text))
+                .setNegativeButton(resources.getString(R.string.stay)) { dialog, _ ->
+                    dialog.dismiss()
+                }
+                .setPositiveButton(resources.getString(R.string.leave)) { dialog, _ ->
+                    viewLifecycleOwner.lifecycleScope.launch {
+                        groupSettingsViewModel.currentUser.value?.uid?.let {user-> groupSettingsViewModel.leaveGroup(user,args.selectedGroupId) }
+                        groupSettingsViewModel.leaveGroupState.collect{state->
+                            when(state){
+                                is UiState.Success -> {
+                                    Snackbar.make(binding.root, getString(R.string.successfully_left_group), Snackbar.LENGTH_SHORT).show()
+                                    findNavController().navigate(R.id.action_groupSettinsFragment_to_groupFragment)
+                                }
+                                is UiState.Error -> Snackbar.make(binding.root, state.error, Snackbar.LENGTH_SHORT).show()
+                                else -> {}
+                            }
+                        }
+                    }
+                    dialog.dismiss()
+                }
+                .show()
+        }
+    }
+
+    private fun onClickGroupInviteStatusChange(){
+        val singleItems = arrayOf("ADMIN_ONLY", "USERS_ALL")
+        var checkedItem = if (args.group.invitationPermission == InvitePermission.ADMIN_ONLY) 0 else 1
+
+        context?.let { context ->
+            MaterialAlertDialogBuilder(context)
+                .setTitle(getString(R.string.group_invitation_status))
+                .setNeutralButton(resources.getString(R.string.cancel)) { dialog, _ ->
+                    dialog.dismiss()
+                }
+                .setPositiveButton(resources.getString(R.string.ok)) { dialog, which ->
+                    if(singleItems[checkedItem] != args.group.invitationPermission.toStringValue()){
+                        groupSettingsViewModel.changePermission(args.selectedGroupId,singleItems[checkedItem].toInvitePermission())
+                        viewLifecycleOwner.lifecycleScope.launch {
+                            groupSettingsViewModel.changedGroupState.collect{state ->
+                                when(state){
+                                    is UiState.Success ->  {
+                                        args.group.invitationPermission = singleItems[checkedItem].toInvitePermission()
+                                        Snackbar.make(binding.root, getString(R.string.inv_status_change_message), Snackbar.LENGTH_SHORT).show()
                                     }
+                                    is UiState.Error -> Snackbar.make(binding.root, state.error, Snackbar.LENGTH_SHORT).show()
+                                    else -> {}
                                 }
                             }
                         }
-                        dialog.dismiss()
                     }
-                    .setSingleChoiceItems(singleItems, checkedItem) { _, which ->
-                        checkedItem = when (which) {
-                            0 -> { 0 }
-                            else -> { 1 }
-                        }
-                    }.show()
-            }
-        }
+                    dialog.dismiss()
+                }
+                .setSingleChoiceItems(singleItems, checkedItem) { _, which ->
+                    checkedItem = when (which) {
+                        0 -> { 0 }
+                        else -> { 1 }
+                    }
+                }.show()
     }
+}
 }
