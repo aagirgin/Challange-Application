@@ -61,7 +61,9 @@ class GroupSettingsFragment : Fragment() {
             }
         }
         binding.viewInviteStatus.setOnClickListener {
-                onClickGroupInviteStatusChange()
+                if(args.group.groupOwner == groupSettingsViewModel.currentUser.value?.uid){
+                    onClickGroupInviteStatusChange()
+                }
             }
         }
 

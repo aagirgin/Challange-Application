@@ -55,7 +55,7 @@
             android:layout_marginStart="16dp"
             android:fontFamily="@font/loramedium"
             android:text="@string/group_invitation_status"
-            android:textSize="15sp"
+            android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="@+id/view_inviteStatus"
             app:layout_constraintEnd_toStartOf="@+id/textview_groupInvitationStatusInfo"
             app:layout_constraintHorizontal_bias="0"
