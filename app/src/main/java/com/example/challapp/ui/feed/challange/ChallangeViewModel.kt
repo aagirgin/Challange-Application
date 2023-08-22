@@ -17,6 +17,9 @@ class ChallangeViewModel @Inject constructor(
     private val _getUserStreakCount: MutableStateFlow<Int?> = MutableStateFlow(null)
     val getUserStreakCount: StateFlow<Int?> get() = _getUserStreakCount
 
+    private val _getNotificationCount: MutableStateFlow<Int?> = MutableStateFlow(null)
+    val notificationCount: StateFlow<Int?> get() = _getNotificationCount
+
     val getCurrentUser: MutableStateFlow<FirebaseUser?>
         get() = _getCurrentUser
 
@@ -24,7 +27,8 @@ class ChallangeViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            _getUserStreakCount.value = _getCurrentUser.value?.let { userRepository.getStreak(it.uid) }
+            _getUserStreakCount.value = _getCurrentUser.value?.let { user -> userRepository.getStreak(user.uid) }
+            _getNotificationCount.value = _getCurrentUser.value?.let { user -> userRepository.getUserInviteNotificationCount(user.uid) }
         }
     }
 

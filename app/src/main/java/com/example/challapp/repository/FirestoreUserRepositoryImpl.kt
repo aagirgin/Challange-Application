@@ -299,7 +299,16 @@ class FirestoreUserRepositoryImpl @Inject constructor(
         }
     }
 
-
+    override suspend fun getUserInviteNotificationCount(userId: String): Int {
+        val notificationList = firestore.collection("Users").document(userId).get().await().toObject(ApplicationUser::class.java)?.notifications
+        var count = 0
+        notificationList?.forEach {
+            if(it.notificationType == InviteStatus.INVITE){
+                count++
+            }
+        }
+        return count
+    }
     override suspend fun getAllDailyChallangesForUser(userId: String): MutableList<ApplicationDailyChallenge>? {
         val groupDocumentRef = firestore.collection("Users").document(userId).get().await()
         return groupDocumentRef.toObject(ApplicationUser::class.java)?.allDailyQuestions
