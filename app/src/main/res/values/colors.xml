@@ -6,4 +6,5 @@
     <color name="loginPageTextColor">#7C7979</color>
     <color name="splitterViewColor">#FFE4E2E2</color>
     <color name="profileTextColor">#7A7878</color>
+    <color name="notificationColorInvite">#F3F0F0</color>
 </resources>

@@ -35,6 +35,7 @@ class GroupFragment : Fragment(), GroupAdapter.OnItemClickListener  {
         binding.lifecycleOwner = viewLifecycleOwner
 
         onClickNavigateCreateGroup()
+        onClickNavigateNotifications()
         setupViewWithListener()
 
 
@@ -44,6 +45,12 @@ class GroupFragment : Fragment(), GroupAdapter.OnItemClickListener  {
     private fun onClickNavigateCreateGroup(){
         binding.cardviewCreategroup.setOnClickListener {
             findNavController().navigate(R.id.action_groupFragment_to_createGroupFragment)
+        }
+    }
+
+    private fun onClickNavigateNotifications(){
+        binding.imageviewNoticication.setOnClickListener {
+            findNavController().navigate(R.id.action_groupFragment_to_notificationFragment)
         }
     }
 

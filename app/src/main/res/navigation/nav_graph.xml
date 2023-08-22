@@ -219,6 +219,9 @@
                 android:name="selectedGroupId"
                 app:argType="string" />
         </action>
+        <action
+            android:id="@+id/action_groupFragment_to_notificationFragment"
+            app:destination="@id/notificationFragment" />
 
     </fragment>
     <fragment

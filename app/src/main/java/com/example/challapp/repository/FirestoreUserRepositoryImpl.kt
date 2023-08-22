@@ -149,7 +149,7 @@ class FirestoreUserRepositoryImpl @Inject constructor(
         val document = userDocumentRef.get().await()
         if (document.exists()) {
             val notificationsList = document.toObject(ApplicationUser::class.java)?.notifications
-            val newNotification = UserNotification(notificationType = InviteStatus.INVITE,
+            val newNotification = UserNotification(notificationType = notificationType,
                                                     notificationFromGroup =  fromGroup,
                                                     notificationSenderUser = sender)
             notificationsList?.add(newNotification)
@@ -290,6 +290,7 @@ class FirestoreUserRepositoryImpl @Inject constructor(
                     val userGroups = userDoc.get().await().toObject(ApplicationUser::class.java)?.includedGroups
                     userGroups?.remove(groupId)
                     userDoc.update("includedGroups", userGroups).await()
+                    sendNotificationsToUser(user,groupDocument.groupOwner,groupDocument.groupName,InviteStatus.DELETED_GROUP_INFO)
                 }
             }
             groupDocumentRef.delete().await()

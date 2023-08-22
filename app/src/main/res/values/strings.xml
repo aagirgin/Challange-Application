@@ -143,5 +143,5 @@
     <string name="premium_star">Premium Star</string>
     <string name="navigation_arrow">Navigation Arrow</string>
     <string name="completed_challenges_swoosh">Completed Challenges Swoosh</string>
-
+    <string name="deleted_group_string">The group named %s has been deleted by owner.</string>
 </resources>
