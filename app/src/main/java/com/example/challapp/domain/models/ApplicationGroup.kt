@@ -21,7 +21,13 @@ data class GroupFeed(
     val description: String? = ""
 )
 
-enum class InvitePermission {
-    USERS_ALL,
-    ADMIN_ONLY
+enum class InvitePermission(val permissionUsertype: String) {
+    ADMIN_ONLY("ADMIN_ONLY"),
+    USERS_ALL("USERS_ALL"),
+    UNKOWN("");
+
+    companion object {
+        fun getByValue(value: String) =
+            values().firstOrNull { it.permissionUsertype == value } ?: UNKOWN
+    }
 }

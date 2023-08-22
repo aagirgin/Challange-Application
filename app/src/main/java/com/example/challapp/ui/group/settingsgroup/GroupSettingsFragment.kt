@@ -13,8 +13,6 @@ import com.example.challapp.R
 import com.example.challapp.databinding.FragmentGroupSettingsBinding
 import com.example.challapp.domain.models.InvitePermission
 import com.example.challapp.domain.state.UiState
-import com.example.challapp.extensions.toInvitePermission
-import com.example.challapp.extensions.toStringValue
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
@@ -135,13 +133,13 @@ class GroupSettingsFragment : Fragment() {
                     dialog.dismiss()
                 }
                 .setPositiveButton(resources.getString(R.string.ok)) { dialog, which ->
-                    if(singleItems[checkedItem] != args.group.invitationPermission.toStringValue()){
-                        groupSettingsViewModel.changePermission(args.selectedGroupId,singleItems[checkedItem].toInvitePermission())
+                    if(InvitePermission.getByValue(singleItems[checkedItem]) != args.group.invitationPermission){
+                        groupSettingsViewModel.changePermission(args.selectedGroupId,InvitePermission.getByValue(singleItems[checkedItem]))
                         viewLifecycleOwner.lifecycleScope.launch {
                             groupSettingsViewModel.changedGroupState.collect{state ->
                                 when(state){
                                     is UiState.Success ->  {
-                                        args.group.invitationPermission = singleItems[checkedItem].toInvitePermission()
+                                        args.group.invitationPermission = InvitePermission.getByValue(singleItems[checkedItem])
                                         Snackbar.make(binding.root, getString(R.string.inv_status_change_message), Snackbar.LENGTH_SHORT).show()
                                     }
                                     is UiState.Error -> Snackbar.make(binding.root, state.error, Snackbar.LENGTH_SHORT).show()
