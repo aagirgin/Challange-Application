@@ -9,6 +9,9 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.challapp.adapters.GroupMembersAdapter
 import com.example.challapp.databinding.FragmentGroupInfoBinding
 import com.example.challapp.domain.models.ApplicationGroup
 import com.example.challapp.domain.state.InvitationState
@@ -38,8 +41,20 @@ class GroupInfoFragment : Fragment() {
         inviteUserToGroup(args)
         navigateBackSpecificGroupFeed()
         onClickNavigateSettings()
+        setupRecyclerView()
 
         return binding.root
+    }
+
+    private fun setupRecyclerView(){
+        val recyclerView: RecyclerView = binding.recyclerviewGroupMembers
+        val layoutManager = LinearLayoutManager(requireContext())
+        recyclerView.layoutManager = layoutManager
+        viewLifecycleOwner.lifecycleScope.launch {
+            groupInfoViewModel.getAllUserSorted(args.group.groupMembers)
+            val membersAdapter = groupInfoViewModel.allMembers.value?.let { usersGroup -> GroupMembersAdapter(usersGroup) }
+            recyclerView.adapter = membersAdapter
+        }
     }
 
     private fun inviteUserToGroup(args:GroupInfoFragmentArgs){

@@ -20,9 +20,6 @@ class NotificationsAdapter(
     private val senderNameMap: MutableMap<String, String>
 ): RecyclerView.Adapter<NotificationsAdapter.ViewHolder>() {
 
-
-
-
     private var itemClickListener: OnItemClickListener? = null
 
     interface OnItemClickListener {

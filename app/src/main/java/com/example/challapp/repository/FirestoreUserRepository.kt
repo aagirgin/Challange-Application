@@ -3,6 +3,7 @@ package com.example.challapp.repository
 import com.example.challapp.domain.models.ApplicationDailyChallenge
 import com.example.challapp.domain.models.ApplicationDailyQuestion
 import com.example.challapp.domain.models.ApplicationGroup
+import com.example.challapp.domain.models.ApplicationUser
 import com.example.challapp.domain.models.InvitePermission
 import com.example.challapp.domain.models.InviteStatus
 import com.example.challapp.domain.models.UserNotification
@@ -23,6 +24,7 @@ interface FirestoreUserRepository {
     suspend fun getDailyQuestionInformationByDocumentId(documentId: String): ApplicationDailyQuestion
     suspend fun getDailyQuestionInformation(): ApplicationDailyQuestion
     suspend fun getUserInviteNotificationCount(userId: String): Int
+    suspend fun getApplicationUserById(userId: String): ApplicationUser?
     suspend fun getStreak(userId: String): Int?
     suspend fun addDailyChallengeToAllUserIncludedGroups(groupIds: List<*>?, description: String, documentId: String, userId: String): Boolean
     suspend fun addDailyChallangeToUser(userId: String, description: String, documentId: String): Boolean

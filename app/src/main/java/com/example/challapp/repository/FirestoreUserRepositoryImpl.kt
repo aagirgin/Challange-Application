@@ -310,6 +310,11 @@ class FirestoreUserRepositoryImpl @Inject constructor(
         }
         return count
     }
+
+    override suspend fun getApplicationUserById(userId: String): ApplicationUser? {
+        return firestore.collection("Users").document(userId).get().await().toObject(ApplicationUser::class.java)
+    }
+
     override suspend fun getAllDailyChallangesForUser(userId: String): MutableList<ApplicationDailyChallenge>? {
         val groupDocumentRef = firestore.collection("Users").document(userId).get().await()
         return groupDocumentRef.toObject(ApplicationUser::class.java)?.allDailyQuestions

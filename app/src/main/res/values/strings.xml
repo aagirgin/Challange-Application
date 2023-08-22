@@ -92,6 +92,7 @@
     <string name="see_daily_question_for_that_day">See Daily Question for that day</string>
     <string name="register_succesful">Registration successful.</string>
     <string name="user_count_format"> %d Users</string>
+    <string name="challenge_count_format"> %d Challenges</string>
     <string name="personal_challenge_image">Personal Challenge Image</string>
     <string name="description">Description</string>
     <string name="default_group_image">Default Group Image</string>
