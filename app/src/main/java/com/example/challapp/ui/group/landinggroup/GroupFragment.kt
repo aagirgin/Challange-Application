@@ -47,12 +47,15 @@ class GroupFragment : Fragment(), GroupAdapter.OnItemClickListener  {
         }
     }
 
-    private fun setupViewWithListener(){
+    private fun setupViewWithListener() {
         viewLifecycleOwner.lifecycleScope.launch {
             groupViewModel.appGroupList.collect { appGroups ->
-                groupAdapter = GroupAdapter(appGroups)
-                groupAdapter.setOnItemClickListener(this@GroupFragment)
-                setupRecyclerView()
+                val currentUser = groupViewModel.currentUser.value
+                if (currentUser != null) {
+                    groupAdapter = GroupAdapter(appGroups, currentUser.uid)
+                    groupAdapter.setOnItemClickListener(this@GroupFragment)
+                    setupRecyclerView()
+                }
             }
         }
     }

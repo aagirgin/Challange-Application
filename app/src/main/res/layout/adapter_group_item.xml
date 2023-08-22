@@ -41,7 +41,6 @@
                     android:id="@+id/textview_member"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/member"
                     android:textSize="15sp"
                     android:fontFamily="@font/loramediumitalic"
                     app:layout_constraintBottom_toBottomOf="@+id/imageview_star"
