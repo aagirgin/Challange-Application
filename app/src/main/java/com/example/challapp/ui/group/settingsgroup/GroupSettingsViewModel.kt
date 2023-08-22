@@ -21,8 +21,8 @@ class GroupSettingsViewModel @Inject constructor(
 
     private val _currentUser: MutableStateFlow<FirebaseUser?> = MutableStateFlow(userRepository.getCurrentUser())
 
-    private val _changeGroupState = MutableStateFlow<UiState<Boolean>>(UiState.Empty)
-    val changedGroupState: StateFlow<UiState<Boolean>> get() = _changeGroupState
+    private val _changeGroupState = MutableStateFlow<UiState<String>>(UiState.Empty)
+    val changedGroupState: StateFlow<UiState<String>> get() = _changeGroupState
 
     private val _leaveGroupState = MutableStateFlow<UiState<Boolean>>(UiState.Empty)
     val leaveGroupState: StateFlow<UiState<Boolean>> get() = _leaveGroupState
@@ -33,12 +33,8 @@ class GroupSettingsViewModel @Inject constructor(
     fun changePermission(groupId:String,changedPermission: InvitePermission){
         viewModelScope.launch {
             _changeGroupState.value = UiState.Loading
-            val isChanged = userRepository.changeGroupInvitationStatus(groupId,changedPermission)
-            if(isChanged){
-                _changeGroupState.value = UiState.Success(true)
-            }else{
-                _changeGroupState.value = UiState.Error("Error occurred when changing group state.")
-            }
+            val state = userRepository.changeGroupInvitationStatus(groupId, changedPermission)
+            _changeGroupState.value = state
         }
     }
     suspend fun leaveGroup(userId: String,groupId: String){

@@ -9,6 +9,7 @@ import com.example.challapp.domain.models.InviteStatus
 import com.example.challapp.domain.models.InvitePermission
 import com.example.challapp.domain.models.UserNotification
 import com.example.challapp.domain.state.InvitationState
+import com.example.challapp.domain.state.UiState
 import com.example.challapp.utils.DateUtils
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -338,14 +339,14 @@ class FirestoreUserRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun changeGroupInvitationStatus(groupId: String,changedPermission: InvitePermission): Boolean {
+    override suspend fun changeGroupInvitationStatus(groupId: String,changedPermission: InvitePermission): UiState<String> {
         val groupDocRef = firestore.collection("Groups").document(groupId)
 
         return try {
             groupDocRef.update("invitationPermission", changedPermission).await()
-            true
+            UiState.Success("Successfully changed the group invitation status.")
         } catch (e: Exception) {
-            false
+            UiState.Error("Error occurred while changing invitation state.")
         }
     }
 
@@ -425,7 +426,6 @@ class FirestoreUserRepositoryImpl @Inject constructor(
 
                 CoroutineScope(Dispatchers.IO).launch {
                 if (inviteKey == null) {
-                    // Generate a new invite key and check if it's unique
                     var newInviteKey: String
                     do {
                         newInviteKey = generateInviteKey()

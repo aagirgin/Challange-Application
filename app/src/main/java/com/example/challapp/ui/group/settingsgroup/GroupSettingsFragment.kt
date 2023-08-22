@@ -140,7 +140,7 @@ class GroupSettingsFragment : Fragment() {
                                 when(state){
                                     is UiState.Success ->  {
                                         args.group.invitationPermission = InvitePermission.getByValue(singleItems[checkedItem])
-                                        Snackbar.make(binding.root, getString(R.string.inv_status_change_message), Snackbar.LENGTH_SHORT).show()
+                                        Snackbar.make(binding.root, state.data, Snackbar.LENGTH_SHORT).show()
                                     }
                                     is UiState.Error -> Snackbar.make(binding.root, state.error, Snackbar.LENGTH_SHORT).show()
                                     else -> {}

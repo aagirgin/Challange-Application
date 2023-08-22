@@ -7,6 +7,7 @@ import com.example.challapp.domain.models.InvitePermission
 import com.example.challapp.domain.models.InviteStatus
 import com.example.challapp.domain.models.UserNotification
 import com.example.challapp.domain.state.InvitationState
+import com.example.challapp.domain.state.UiState
 import com.google.firebase.auth.FirebaseUser
 interface FirestoreUserRepository {
 
@@ -29,13 +30,12 @@ interface FirestoreUserRepository {
     suspend fun updateIncludedGroupsForUser(userId: String, groupId: String): Boolean
     suspend fun updateStreakBasedOnDailyQuestions(userId: String)
     suspend fun changeUsername(userId: String,newUsername: String) :Boolean
-    suspend fun changeGroupInvitationStatus(groupId: String,changedPermission: InvitePermission) : Boolean
+    suspend fun changeGroupInvitationStatus(groupId: String,changedPermission: InvitePermission) : UiState<String>
     suspend fun incrementStreakCountByOne(userId: String)
     suspend fun checkUserAlreadyHaveSubmission(userId: String) : Boolean
     suspend fun acceptToGroupInvitation(userId: String,groupId: String):Int?
     suspend fun deleteOnRejectInvitation(notification:UserNotification,userId: String):Int?
     suspend fun userLeaveGroup(userId: String,groupId: String): Boolean
-
     suspend fun userDeleteGroup(groupId: String): Boolean
     suspend fun sendUserInvitationWithInviteKey(inviteKey: String, fromGroup: String, sender: String ): InvitationState
     suspend fun sendPasswordResetEmail(email: String) : Boolean
