@@ -72,7 +72,12 @@ class NotificationsAdapter(
 
 
 
-        init {
+
+
+        fun bind(data: UserNotification) {
+            val invGroup = itemView.context.getString(R.string.user_sent_you_an_invitation_for_you_to_join_group)
+            val deletedGroup = itemView.context.getString(R.string.deleted_group_string,data.notificationFromGroup)
+
             card.setOnClickListener {
                 val position = adapterPosition
                 if (position != RecyclerView.NO_POSITION) {
@@ -82,11 +87,6 @@ class NotificationsAdapter(
                     }
                 }
             }
-        }
-
-        fun bind(data: UserNotification) {
-            val invGroup = itemView.context.getString(R.string.user_sent_you_an_invitation_for_you_to_join_group)
-            val deletedGroup = itemView.context.getString(R.string.deleted_group_string,data.notificationFromGroup)
 
             userName.text = senderNameMap[data.notificationSenderUser]
 

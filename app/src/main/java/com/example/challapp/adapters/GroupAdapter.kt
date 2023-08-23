@@ -43,18 +43,18 @@ class GroupAdapter(
     inner class GroupViewHolder(private val binding: AdapterGroupItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         private val groupItem: ConstraintLayout = binding.constraintLayoutGroupItem
-        init {
+
+        fun bind(group: ApplicationGroup) {
+            val userCountText = itemView.context.getString(R.string.user_count_format, group.groupMembers.size)
+            val ownerText = itemView.context.getString(R.string.owner)
+            val memberText = itemView.context.getString(R.string.member)
+
             groupItem.setOnClickListener {
                 val position = adapterPosition
                 if (position != RecyclerView.NO_POSITION) {
                     itemClickListener?.onGroupItemClick(groupList[position],position)
                 }
             }
-        }
-        fun bind(group: ApplicationGroup) {
-            val userCountText = itemView.context.getString(R.string.user_count_format, group.groupMembers.size)
-            val ownerText = itemView.context.getString(R.string.owner)
-            val memberText = itemView.context.getString(R.string.member)
 
             binding.textviewGroupName.text = group.groupName
             binding.textviewNumberofusersingroup.text = userCountText
