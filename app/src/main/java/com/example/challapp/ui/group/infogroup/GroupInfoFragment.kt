@@ -35,47 +35,54 @@ class GroupInfoFragment : Fragment() {
         binding.viewModel =  groupInfoViewModel
         binding.lifecycleOwner = viewLifecycleOwner
         dataSetGroup(args.group)
-        inviteUserToGroup(args)
         navigateBackSpecificGroupFeed()
         onClickNavigateSettings()
-        setupRecyclerView()
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            bindViewModel()
+        }
+
 
         return binding.root
     }
 
-    private fun setupRecyclerView(){
-        val recyclerView: RecyclerView = binding.recyclerviewGroupMembers
-        val layoutManager = LinearLayoutManager(requireContext())
-        recyclerView.layoutManager = layoutManager
+    private suspend fun bindViewModel(){
         viewLifecycleOwner.lifecycleScope.launch {
-            groupInfoViewModel.getAllUserSorted(args.group.groupMembers)
-            val membersAdapter = groupInfoViewModel.allMembers.value?.let { usersGroup -> GroupMembersAdapter(usersGroup) }
-            recyclerView.adapter = membersAdapter
-        }
-    }
-
-    private fun inviteUserToGroup(args:GroupInfoFragmentArgs){
-        binding.imageviewInviteButton.setOnClickListener {
-            val invitationText = binding.textinputInviteKey.text.toString()
-            viewLifecycleOwner.lifecycleScope.launch {
-               groupInfoViewModel.currentUser.value?.uid?.let { currentUser ->
-                   groupInfoViewModel.inviteToGroup(invitationText,args.selectedGroupId , currentUser)
-               }
-                groupInfoViewModel.invitationState.collect{state->
-                    when(state){
-                        is InvitationState.Success -> {
-                            Snackbar.make(binding.root, state.message , Snackbar.LENGTH_SHORT).show()
-                        }
-                        else -> {
-                            Snackbar.make(binding.root, state.message , Snackbar.LENGTH_SHORT).show()
-                        }
-                    }
-
-                }
+            groupInfoViewModel.allMembers.collect{userGroups->
+                val recyclerView: RecyclerView = binding.recyclerviewGroupMembers
+                val layoutManager = LinearLayoutManager(requireContext())
+                recyclerView.layoutManager = layoutManager
+                groupInfoViewModel.getAllUserSorted(args.group.groupMembers)
+                val membersAdapter = userGroups?.let { allGroups -> GroupMembersAdapter(allGroups) }
+                recyclerView.adapter = membersAdapter
 
             }
         }
 
+        viewLifecycleOwner.lifecycleScope.launch {
+            groupInfoViewModel.currentUser.collect{ currentUser->
+                if (currentUser != null) {
+                    inviteUserToGroup(currentUser.uid)
+                }
+            }
+        }
+    }
+
+    private fun inviteUserToGroup(currentUser: String){
+        binding.imageviewInviteButton.setOnClickListener {
+            val invitationText = binding.textinputInviteKey.text.toString()
+            viewLifecycleOwner.lifecycleScope.launch {
+                groupInfoViewModel.inviteToGroup(invitationText, args.selectedGroupId, currentUser)
+                when(val state = groupInfoViewModel.invitationState.value){
+                    is InvitationState.Success -> {
+                        Snackbar.make(binding.root, state.message , Snackbar.LENGTH_SHORT).show()
+                    }
+                    else -> {
+                        Snackbar.make(binding.root, state.message , Snackbar.LENGTH_SHORT).show()
+                    }
+                }
+            }
+        }
     }
     private fun navigateBackSpecificGroupFeed(){
         binding.imageviewBackNavArrow.setOnClickListener {
@@ -101,6 +108,4 @@ class GroupInfoFragment : Fragment() {
     private fun dataSetGroup(group:ApplicationGroup){
         groupInfoViewModel.setGroupData(group)
     }
-
-
 }
