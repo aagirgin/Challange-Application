@@ -89,10 +89,13 @@ class FirestoreUserRepositoryImpl @Inject constructor(
     }
 
 
-    override suspend fun getStreak(userId: String): Int? {
+    override suspend fun getStreak(userId: String): Int {
         val userDocRef = firestore.collection("Users").document(userId).get().await()
         val userData = userDocRef.toObject(ApplicationUser::class.java)
-        return userData?.challangeStreak
+        if (userData != null) {
+            return userData.challangeStreak
+        }
+        return 0
     }
 
     override suspend fun incrementStreakCountByOne(userId: String) {

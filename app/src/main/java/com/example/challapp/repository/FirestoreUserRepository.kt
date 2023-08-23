@@ -25,7 +25,7 @@ interface FirestoreUserRepository {
     suspend fun getDailyQuestionInformation(): ApplicationDailyQuestion
     suspend fun getUserInviteNotificationCount(userId: String): Int
     suspend fun getApplicationUserById(userId: String): ApplicationUser?
-    suspend fun getStreak(userId: String): Int?
+    suspend fun getStreak(userId: String): Int
     suspend fun addDailyChallengeToAllUserIncludedGroups(groupIds: List<*>?, description: String, documentId: String, userId: String): Boolean
     suspend fun addDailyChallangeToUser(userId: String, description: String, documentId: String): Boolean
     suspend fun addUserToFirestore(userId: String, email: String, fullName: String): Boolean
