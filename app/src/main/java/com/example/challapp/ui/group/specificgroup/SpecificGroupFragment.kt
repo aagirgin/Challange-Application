@@ -26,8 +26,6 @@ class SpecificGroupFragment : Fragment() {
 
     private lateinit var groupFeedAdapter: GroupFeedAdapter
 
-    private lateinit var bundle: Bundle
-
     private val args: SpecificGroupFragmentArgs by navArgs()
 
     override fun onCreateView(
@@ -35,7 +33,6 @@ class SpecificGroupFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentSpecificGroupBinding.inflate(inflater, container, false)
-        bundle = requireArguments()
         dataSetGroup(args.selectedGroup,args.groupPosition,args.selectedGroupId)
         navigateBackLandingGroup()
         navigateGroupInformation()

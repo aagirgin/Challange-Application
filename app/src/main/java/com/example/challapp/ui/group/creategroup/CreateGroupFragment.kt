@@ -21,6 +21,7 @@ import kotlinx.coroutines.launch
 class CreateGroupFragment : Fragment() {
 
     private val createGroupViewModel: CreateGroupViewModel by viewModels()
+
     private lateinit var binding: FragmentCreateGroupBinding
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(

@@ -27,8 +27,6 @@ class GroupInfoFragment : Fragment() {
 
     private val args: GroupInfoFragmentArgs by navArgs()
 
-    private lateinit var bundle: Bundle
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -36,7 +34,6 @@ class GroupInfoFragment : Fragment() {
         binding = FragmentGroupInfoBinding.inflate(inflater, container, false)
         binding.viewModel =  groupInfoViewModel
         binding.lifecycleOwner = viewLifecycleOwner
-        bundle = requireArguments()
         dataSetGroup(args.group)
         inviteUserToGroup(args)
         navigateBackSpecificGroupFeed()

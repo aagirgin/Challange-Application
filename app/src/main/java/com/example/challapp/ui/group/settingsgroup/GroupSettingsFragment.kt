@@ -25,14 +25,12 @@ class GroupSettingsFragment : Fragment() {
 
     private val groupSettingsViewModel: GroupSettingsViewModel by viewModels()
 
-    private lateinit var bundle: Bundle
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentGroupSettingsBinding.inflate(inflater, container, false)
-        bundle = requireArguments()
 
         onClickOpenAlertDialog()
         onClickNavigateBack()
