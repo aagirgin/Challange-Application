@@ -1,6 +1,5 @@
 package com.example.challapp.ui.notification
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -39,11 +38,16 @@ class NotificationFragment : Fragment(), NotificationsAdapter.OnItemClickListene
         return binding.root
     }
 
-    private fun setupViewWithListener(){
+    private fun setupViewWithListener() {
         viewLifecycleOwner.lifecycleScope.launch {
             notificationViewModel.getUserNotifications()
-            notificationViewModel.userNotificationList.collect { notifications ->
-                notificationsAdapter = notifications?.let { NotificationsAdapter(it) }!!
+            notificationViewModel.getSenderNames()
+
+            val senderNamesMap = notificationViewModel.senderNamesMap
+            val currentNotifications = notificationViewModel.userNotificationList.value
+
+            if (currentNotifications != null) {
+                notificationsAdapter = NotificationsAdapter(currentNotifications, senderNamesMap)
                 notificationsAdapter.setOnItemClickListener(this@NotificationFragment)
                 setupRecyclerView()
             }
@@ -62,13 +66,15 @@ class NotificationFragment : Fragment(), NotificationsAdapter.OnItemClickListene
         recyclerView.adapter = notificationsAdapter
     }
 
-    @SuppressLint("InflateParams")
-    private fun showCustomDialog(notification: UserNotification){
+
+    private fun showCustomDialog(notification: UserNotification) {
         val builder = MaterialAlertDialogBuilder(requireContext())
         val customView = LayoutInflater.from(requireContext()).inflate(R.layout.alertdialog_invitenotification, null)
 
         val bindingCustomDialog = AlertdialogInvitenotificationBinding.bind(customView)
-        bindingCustomDialog.textviewGroupname.text =  notification.notificationFromGroup
+        viewLifecycleOwner.lifecycleScope.launch {
+            bindingCustomDialog.textviewGroupname.text = notificationViewModel.getGroupName(notification.notificationFromGroup)
+        }
         builder.setView(customView)
         val dialog = builder.create()
 
@@ -77,8 +83,10 @@ class NotificationFragment : Fragment(), NotificationsAdapter.OnItemClickListene
                 notificationViewModel.userNotificationDelete.value = notification
                 notificationViewModel.addToGroupOnAccept(notification.notificationFromGroup)
                 notificationViewModel.resetState()
-                if (notificationViewModel.indexOnDelete.value!! >= 0) {
-                    notificationsAdapter.removeNotification(notificationViewModel.indexOnDelete.value!!)
+                notificationViewModel.indexOnDelete.value?.let { index ->
+                    if (index >= 0) {
+                        notificationsAdapter.removeNotification(index)
+                    }
                 }
                 notificationViewModel.getUserNotifications()
             }
@@ -92,8 +100,10 @@ class NotificationFragment : Fragment(), NotificationsAdapter.OnItemClickListene
                 notificationViewModel.deleteOnRejection()
                 notificationViewModel.resetState()
                 notificationViewModel.getUserNotifications()
-                if (notificationViewModel.indexOnDelete.value!! >= 0) {
-                    notificationsAdapter.removeNotification(notificationViewModel.indexOnDelete.value!!)
+                notificationViewModel.indexOnDelete.value?.let { index ->
+                    if (index >= 0) {
+                        notificationsAdapter.removeNotification(index)
+                    }
                 }
             }
             dialog.dismiss()

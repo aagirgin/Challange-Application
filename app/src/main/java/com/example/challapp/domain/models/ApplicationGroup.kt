@@ -11,7 +11,7 @@ data class ApplicationGroup(
     val groupDescription:String = "",
     val groupFeed: MutableList<@RawValue GroupFeed>? = mutableListOf(),
     val groupMembers: MutableList<@RawValue String?> = mutableListOf(),
-    val invitationPermission: Permission = Permission.ADMIN_ONLY,
+    var invitationPermission: InvitePermission = InvitePermission.ADMIN_ONLY,
     val groupOwner: String = ""
     ): Parcelable
 
@@ -21,7 +21,13 @@ data class GroupFeed(
     val description: String? = ""
 )
 
-enum class Permission {
-    USERS_ALL,
-    ADMIN_ONLY
+enum class InvitePermission(val permissionUsertype: String) {
+    ADMIN_ONLY("ADMIN_ONLY"),
+    USERS_ALL("USERS_ALL"),
+    UNKOWN("");
+
+    companion object {
+        fun getByValue(value: String) =
+            values().firstOrNull { it.permissionUsertype == value } ?: UNKOWN
+    }
 }

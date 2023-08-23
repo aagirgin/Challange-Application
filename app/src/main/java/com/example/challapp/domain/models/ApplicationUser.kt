@@ -21,5 +21,6 @@ data class UserNotification(
 
 enum class InviteStatus {
     INVITE,
-    INFO
+    INFO,
+    DELETED_GROUP_INFO
 }
