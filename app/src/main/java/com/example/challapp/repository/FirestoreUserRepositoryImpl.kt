@@ -6,9 +6,10 @@ import com.example.challapp.domain.models.ApplicationDailyQuestion
 import com.example.challapp.domain.models.ApplicationGroup
 import com.example.challapp.domain.models.ApplicationUser
 import com.example.challapp.domain.models.InviteStatus
-import com.example.challapp.domain.models.Permission
+import com.example.challapp.domain.models.InvitePermission
 import com.example.challapp.domain.models.UserNotification
 import com.example.challapp.domain.state.InvitationState
+import com.example.challapp.domain.state.UiState
 import com.example.challapp.utils.DateUtils
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -88,10 +89,13 @@ class FirestoreUserRepositoryImpl @Inject constructor(
     }
 
 
-    override suspend fun getStreak(userId: String): Int? {
+    override suspend fun getStreak(userId: String): Int {
         val userDocRef = firestore.collection("Users").document(userId).get().await()
         val userData = userDocRef.toObject(ApplicationUser::class.java)
-        return userData?.challangeStreak
+        if (userData != null) {
+            return userData.challangeStreak
+        }
+        return 0
     }
 
     override suspend fun incrementStreakCountByOne(userId: String) {
@@ -117,7 +121,7 @@ class FirestoreUserRepositoryImpl @Inject constructor(
                 val notificationsList = docAsAppUser?.notifications
                 val userGroups = docAsAppUser?.includedGroups
 
-                if (groupInvitePermission != Permission.USERS_ALL){
+                if (groupInvitePermission != InvitePermission.USERS_ALL){
                         if(sender != groupOwner){
                             return InvitationState.NoInvitationPermission
                         }
@@ -148,7 +152,7 @@ class FirestoreUserRepositoryImpl @Inject constructor(
         val document = userDocumentRef.get().await()
         if (document.exists()) {
             val notificationsList = document.toObject(ApplicationUser::class.java)?.notifications
-            val newNotification = UserNotification(notificationType = InviteStatus.INVITE,
+            val newNotification = UserNotification(notificationType = notificationType,
                                                     notificationFromGroup =  fromGroup,
                                                     notificationSenderUser = sender)
             notificationsList?.add(newNotification)
@@ -261,6 +265,58 @@ class FirestoreUserRepositoryImpl @Inject constructor(
         return null
     }
 
+    override suspend fun userLeaveGroup(userId: String, groupId: String): Boolean {
+        val userDocumentRef = firestore.collection("Users").document(userId)
+        val groupDocumentRef = firestore.collection("Groups").document(groupId)
+        return try {
+            val userDocument = userDocumentRef.get().await().toObject(ApplicationUser::class.java)
+            userDocument?.includedGroups?.remove(groupId)
+            userDocumentRef.update("includedGroups", userDocument?.includedGroups).await()
+            val groupDocument = groupDocumentRef.get().await().toObject(ApplicationGroup::class.java)
+            groupDocument?.groupMembers?.remove(userId)
+            groupDocumentRef.update("groupMembers", groupDocument?.groupMembers).await()
+            true
+        } catch (e: Exception) {
+            false
+        }
+    }
+
+    override suspend fun userDeleteGroup(groupId: String): Boolean {
+        val userDocumentRef = firestore.collection("Users")
+        val groupDocumentRef = firestore.collection("Groups").document(groupId)
+
+        return try {
+            val groupDocument = groupDocumentRef.get().await().toObject(ApplicationGroup::class.java)
+            groupDocument?.groupMembers?.forEach { user ->
+                if (user != null) {
+                    val userDoc = userDocumentRef.document(user)
+                    val userGroups = userDoc.get().await().toObject(ApplicationUser::class.java)?.includedGroups
+                    userGroups?.remove(groupId)
+                    userDoc.update("includedGroups", userGroups).await()
+                    sendNotificationsToUser(user,groupDocument.groupOwner,groupDocument.groupName,InviteStatus.DELETED_GROUP_INFO)
+                }
+            }
+            groupDocumentRef.delete().await()
+            true
+        } catch (e: Exception) {
+            false
+        }
+    }
+
+    override suspend fun getUserInviteNotificationCount(userId: String): Int {
+        val notificationList = firestore.collection("Users").document(userId).get().await().toObject(ApplicationUser::class.java)?.notifications
+        var count = 0
+        notificationList?.forEach {
+            if(it.notificationType == InviteStatus.INVITE){
+                count++
+            }
+        }
+        return count
+    }
+
+    override suspend fun getApplicationUserById(userId: String): ApplicationUser? {
+        return firestore.collection("Users").document(userId).get().await().toObject(ApplicationUser::class.java)
+    }
 
     override suspend fun getAllDailyChallangesForUser(userId: String): MutableList<ApplicationDailyChallenge>? {
         val groupDocumentRef = firestore.collection("Users").document(userId).get().await()
@@ -298,6 +354,17 @@ class FirestoreUserRepositoryImpl @Inject constructor(
         } catch (e: Exception) {
             Log.e("FirestoreUserRepo", "Error updating username: ${e.message}")
             false
+        }
+    }
+
+    override suspend fun changeGroupInvitationStatus(groupId: String,changedPermission: InvitePermission): UiState<String> {
+        val groupDocRef = firestore.collection("Groups").document(groupId)
+
+        return try {
+            groupDocRef.update("invitationPermission", changedPermission).await()
+            UiState.Success("Successfully changed the group invitation status.")
+        } catch (e: Exception) {
+            UiState.Error("Error occurred while changing invitation state.")
         }
     }
 
@@ -377,7 +444,6 @@ class FirestoreUserRepositoryImpl @Inject constructor(
 
                 CoroutineScope(Dispatchers.IO).launch {
                 if (inviteKey == null) {
-                    // Generate a new invite key and check if it's unique
                     var newInviteKey: String
                     do {
                         newInviteKey = generateInviteKey()

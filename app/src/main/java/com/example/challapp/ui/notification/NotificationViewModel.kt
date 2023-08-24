@@ -31,16 +31,31 @@ class NotificationViewModel @Inject constructor(
 
     private val _getUserNotificationDelete: MutableStateFlow<UserNotification?> = MutableStateFlow(null)
 
+    private val _senderNamesMap: MutableMap<String, String> = mutableMapOf()
+    val senderNamesMap: MutableMap<String, String>
+        get() = _senderNamesMap
+
+
+
+    suspend fun getGroupName(groupId: String): String? {
+        return userRepository.getGroupNameById(groupId)
+    }
+    suspend fun getSenderNames(){
+        val senderIds = _userNotificationList.value?.map { it.notificationSenderUser } ?: emptyList()
+
+        for (senderId in senderIds) {
+            val senderName = userRepository.getUsername(senderId).toString()
+            _senderNamesMap[senderId] = senderName
+        }
+    }
     suspend fun getUserNotifications(){
         _userNotificationList.value = currentUser.value?.let { userRepository.getUserNotications(it.uid) }
     }
 
     suspend fun deleteOnRejection() {
         _getUserNotificationDelete.value?.let { _currentUser.value?.uid?.let { currentUser ->
-            _getIndexOnDelete.value = userRepository.deleteOnRejectInvitation(it,
-               currentUser
-           )!!
-        } }
+            _getIndexOnDelete.value = userRepository.deleteOnRejectInvitation(it, currentUser) }
+        }
     }
 
     suspend fun addToGroupOnAccept(groupId:String){

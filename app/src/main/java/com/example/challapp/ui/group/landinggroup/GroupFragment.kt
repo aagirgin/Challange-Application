@@ -35,6 +35,7 @@ class GroupFragment : Fragment(), GroupAdapter.OnItemClickListener  {
         binding.lifecycleOwner = viewLifecycleOwner
 
         onClickNavigateCreateGroup()
+        onClickNavigateNotifications()
         setupViewWithListener()
 
 
@@ -47,12 +48,21 @@ class GroupFragment : Fragment(), GroupAdapter.OnItemClickListener  {
         }
     }
 
-    private fun setupViewWithListener(){
+    private fun onClickNavigateNotifications(){
+        binding.imageviewNoticication.setOnClickListener {
+            findNavController().navigate(R.id.action_groupFragment_to_notificationFragment)
+        }
+    }
+
+    private fun setupViewWithListener() {
         viewLifecycleOwner.lifecycleScope.launch {
             groupViewModel.appGroupList.collect { appGroups ->
-                groupAdapter = GroupAdapter(appGroups)
-                groupAdapter.setOnItemClickListener(this@GroupFragment)
-                setupRecyclerView()
+                val currentUser = groupViewModel.currentUser.value
+                if (currentUser != null) {
+                    groupAdapter = GroupAdapter(appGroups, currentUser.uid)
+                    groupAdapter.setOnItemClickListener(this@GroupFragment)
+                    setupRecyclerView()
+                }
             }
         }
     }
@@ -70,9 +80,6 @@ class GroupFragment : Fragment(), GroupAdapter.OnItemClickListener  {
             val action = GroupFragmentDirections.actionGroupFragmentToSpecificGroupFragment(
                 group, position, groupId
             )
-            println(group)
-            println(position)
-            println(groupId)
             findNavController().navigate(action)
         }
 

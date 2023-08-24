@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:tools="http://schemas.android.com/tools"
+<layout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
@@ -38,7 +38,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="20dp"
-            android:text="0"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="@+id/imageview_noticication"
             app:layout_constraintEnd_toEndOf="parent"
@@ -90,14 +89,14 @@
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
                             app:layout_constraintVertical_bias="0.15"
-                            app:srcCompat="@drawable/circle" />
+                            app:srcCompat="@drawable/circle"
+                            android:contentDescription="@string/circle_streak_view" />
 
                         <TextView
-                            android:id="@+id/textview_numberofdays"
+                            android:id="@+id/textview_streakCount"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/loramediumitalic"
-                            android:text="@{String.valueOf(viewModel.getUserStreakCount)}"
                             android:textSize="54sp"
                             app:layout_constraintBottom_toTopOf="@+id/textview_daysprompt"
                             app:layout_constraintEnd_toEndOf="@+id/imageview_circle"
@@ -115,7 +114,7 @@
                             app:layout_constraintBottom_toTopOf="@+id/imageview_circle"
                             app:layout_constraintEnd_toEndOf="@+id/imageview_circle"
                             app:layout_constraintStart_toStartOf="@+id/imageview_circle"
-                            app:layout_constraintTop_toBottomOf="@+id/textview_numberofdays" />
+                            app:layout_constraintTop_toBottomOf="@+id/textview_streakCount" />
 
                         <TextView
                             android:id="@+id/textview_dailychallange"
@@ -223,7 +222,8 @@
                             app:layout_constraintBottom_toBottomOf="@+id/textview_startpremium"
                             app:layout_constraintStart_toEndOf="@+id/textview_startpremium"
                             app:layout_constraintTop_toTopOf="@+id/textview_startpremium"
-                            app:srcCompat="@drawable/baseline_star_rate_24_orange" />
+                            app:srcCompat="@drawable/baseline_star_rate_24_orange"
+                            android:contentDescription="@string/premium_star" />
 
                         <ImageView
                             android:id="@+id/imageview_gotopremiumpage"
@@ -233,7 +233,8 @@
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
-                            app:srcCompat="@drawable/baseline_navigate_next_24" />
+                            app:srcCompat="@drawable/baseline_navigate_next_24"
+                            android:contentDescription="@string/navigation_arrow" />
 
                         <TextView
                             android:id="@+id/textview_startpremiumprompt"
@@ -286,6 +287,7 @@
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
+                            android:contentDescription="@string/navigation_arrow"
                             app:srcCompat="@drawable/baseline_navigate_next_24" />
 
                         <TextView
@@ -311,7 +313,8 @@
                             app:layout_constraintStart_toEndOf="@+id/textview_completedchallenges"
 
                             app:layout_constraintTop_toTopOf="@+id/textview_completedchallenges"
-                            app:srcCompat="@drawable/baseline_check_24" />
+                            app:srcCompat="@drawable/baseline_check_24"
+                            android:contentDescription="@string/completed_challenges_swoosh" />
 
                         <TextView
                             android:id="@+id/textview_completedchallangeprompt"

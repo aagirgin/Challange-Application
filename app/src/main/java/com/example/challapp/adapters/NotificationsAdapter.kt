@@ -1,20 +1,24 @@
 package com.example.challapp.adapters
 
+
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
+import com.example.challapp.R
 import com.example.challapp.databinding.AdapterNotificationsBinding
+import com.example.challapp.domain.models.InviteStatus
 import com.example.challapp.domain.models.UserNotification
 import com.example.challapp.utils.DateUtils
 
 class NotificationsAdapter(
-    private val notificationList: MutableList<UserNotification>
+    private val notificationList: MutableList<UserNotification>,
+    private val senderNameMap: MutableMap<String, String>
 ): RecyclerView.Adapter<NotificationsAdapter.ViewHolder>() {
-
-
-
 
     private var itemClickListener: OnItemClickListener? = null
 
@@ -59,21 +63,46 @@ class NotificationsAdapter(
     inner class ViewHolder(binding: AdapterNotificationsBinding) :
         RecyclerView.ViewHolder(binding.root) {
         private val userName: TextView = binding.textviewUserNameNotifications
-        //private val notificationTypeImage: ImageView = binding.imageviewNotificationType
+        private val notificationTypeImage: ImageView = binding.imageviewNotificationType
         private val date : TextView = binding.textviewDate
         private val card: CardView = binding.cardviewNotificationitem
+        private val notificationText: TextView = binding.textviewMessage
+        private val imageReply: ImageView = binding.imageviewReply
+        private val cardConstraintLayout: ConstraintLayout = binding.cardConstraintLayout
 
-        init {
+
+
+
+
+        fun bind(data: UserNotification) {
+            val invGroup = itemView.context.getString(R.string.user_sent_you_an_invitation_for_you_to_join_group)
+            val deletedGroup = itemView.context.getString(R.string.deleted_group_string,data.notificationFromGroup)
+
             card.setOnClickListener {
                 val position = adapterPosition
                 if (position != RecyclerView.NO_POSITION) {
-                    itemClickListener?.onItemClick(notificationList[position])
+                    val clickedNotification = notificationList[position]
+                    if (clickedNotification.notificationType != InviteStatus.DELETED_GROUP_INFO) {
+                        itemClickListener?.onItemClick(clickedNotification)
+                    }
                 }
             }
-        }
-        fun bind(data: UserNotification) {
-            userName.text = data.notificationSenderUser
+
+            userName.text = senderNameMap[data.notificationSenderUser]
+
             date.text = DateUtils.getCurrentFormattedDateAsDayMonth()
+
+            if (data.notificationType == InviteStatus.INVITE){
+                notificationText.text = invGroup
+                cardConstraintLayout.setBackgroundResource(R.color.notificationColorInvite)
+                notificationTypeImage.setImageResource(R.drawable.ic_invitation)
+                imageReply.visibility = View.VISIBLE
+            }
+            else if(data.notificationType == InviteStatus.DELETED_GROUP_INFO){
+                notificationText.text = deletedGroup
+                notificationTypeImage.setImageResource(R.drawable.ic_info)
+                imageReply.visibility = View.GONE
+            }
         }
     }
 }
