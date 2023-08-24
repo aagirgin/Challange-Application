@@ -32,8 +32,6 @@ class ChallangeViewModel @Inject constructor(
             if (currentUser != null) {
                 _getUserStreakCount.value = userRepository.getStreak(currentUser.uid)
                 _getNotificationCount.value = userRepository.getUserInviteNotificationCount(currentUser.uid)
-                println(_getUserStreakCount.value)
-                println(_getNotificationCount.value)
             }
         }
     }

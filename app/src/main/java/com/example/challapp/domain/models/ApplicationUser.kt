@@ -4,7 +4,7 @@ import androidx.annotation.Keep
 
 @Keep
 data class ApplicationUser(
-    val username: String = "None",
+    val username: String? = null,
     val isAdmin: Boolean = false,
     val challangeStreak: Int = 0,
     val inviteKey: String? = null,
@@ -15,8 +15,8 @@ data class ApplicationUser(
 
 data class UserNotification(
     val notificationType: InviteStatus = InviteStatus.INFO,
-    val notificationFromGroup: String = "None",
-    val notificationSenderUser: String = "None"
+    val notificationFromGroup: String = "",
+    val notificationSenderUser: String = ""
 )
 
 enum class InviteStatus {

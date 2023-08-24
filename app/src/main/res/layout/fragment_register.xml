@@ -216,7 +216,7 @@
             android:layout_marginEnd="20dp"
             android:text="@string/sign_up_registerpagebutton"
             android:textSize="24sp"
-            app:layout_constraintBottom_toTopOf="@+id/cardview_signInGoogle"
+            app:layout_constraintBottom_toTopOf="@+id/textview_alreadyhaveacc"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textview_tos1" />
@@ -237,7 +237,7 @@
             android:layout_marginTop="10dp"
             app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cardview_signInGoogle" />
+            app:layout_constraintTop_toBottomOf="@+id/button_signup" />
 
         <TextView
             android:id="@+id/button_backtologin"
@@ -255,51 +255,6 @@
             app:layout_constraintStart_toEndOf="@+id/textview_alreadyhaveacc"
             app:layout_constraintTop_toTopOf="@+id/textview_alreadyhaveacc" />
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cardview_signInGoogle"
-            android:layout_width="0dp"
-            android:layout_height="50dp"
-            app:cardCornerRadius="5dp"
-            android:layout_marginTop="10dp"
-            app:layout_constraintBottom_toTopOf="@+id/textview_alreadyhaveacc"
-            app:layout_constraintEnd_toEndOf="@+id/button_signup"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="@+id/button_signup"
-            app:layout_constraintTop_toBottomOf="@+id/button_signup">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <ImageView
-                    android:id="@+id/imageview_googleIcon"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:layout_marginStart="25dp"
-                    android:contentDescription="@string/google_icon"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/googleg_standard_color_18" />
-
-                <TextView
-                    android:id="@+id/textview_signInWithGoogle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginEnd="25dp"
-                    android:fontFamily="@font/intersemibold"
-                    android:text="@string/sign_up_with_google"
-                    android:textSize="18sp"
-                    app:layout_constraintBottom_toBottomOf="@+id/imageview_googleIcon"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/imageview_googleIcon"
-                    app:layout_constraintTop_toTopOf="@+id/imageview_googleIcon" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-        </androidx.cardview.widget.CardView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

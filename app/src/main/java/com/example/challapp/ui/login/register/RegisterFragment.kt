@@ -11,7 +11,6 @@ import androidx.navigation.fragment.findNavController
 import com.example.challapp.R
 import com.example.challapp.databinding.FragmentRegisterBinding
 import com.google.android.material.snackbar.Snackbar
-import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 @AndroidEntryPoint
@@ -55,7 +54,7 @@ class RegisterFragment : Fragment() {
                             state ->
                         when (state) {
                             is RegisterState.Success -> {
-                                Snackbar.make(binding.root, "Registration successful.", Snackbar.LENGTH_SHORT).show()
+                                Snackbar.make(binding.root, getString(R.string.successful_register), Snackbar.LENGTH_SHORT).show()
                                 findNavController().navigate(R.id.action_registerFragment_to_mailVerificationFragment)
                                 registerViewModel.resetState()
                             }
@@ -73,7 +72,6 @@ class RegisterFragment : Fragment() {
             binding.buttonSignup.isEnabled = true
         }
     }
-
 
 
     private fun validationFields(email:String?,password:String?,fullName:String?): Boolean{

@@ -46,7 +46,9 @@ class ProfileNavViewModel @Inject constructor(
         if (_currentUser.value != null){
             val userId = _currentUser.value?.uid
             viewModelScope.launch {
-                fetchUsernameAndInviteKey(userId!!)
+                if (userId != null) {
+                    fetchUsernameAndInviteKey(userId)
+                }
             }
         }
     }

@@ -13,6 +13,7 @@ import com.example.challapp.domain.state.UiState
 import com.example.challapp.utils.DateUtils
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.CoroutineScope
@@ -55,14 +56,16 @@ class FirestoreUserRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun addUserToFirestore(userId: String, email: String, fullName: String): Boolean {
+    override suspend fun addUserToFirestore(userId: String, email: String, fullName: String?): Boolean {
         val userCollection = firestore.collection("Users")
         val userDocument = userCollection.document(userId)
         return try {
-            val applicationUser = ApplicationUser(
-                username = fullName,
-            )
+            val applicationUser =
+                ApplicationUser(
+                    username = fullName,
+                )
             userDocument.set(applicationUser).await()
+
             true
         } catch (e: Exception) {
             Log.e("FirestoreUserRepo", "Error adding user to Firestore: ${e.message}")
@@ -105,6 +108,16 @@ class FirestoreUserRepositoryImpl @Inject constructor(
         val currentStreak = userData?.challangeStreak
         val newStreak = currentStreak?.plus(1)
         userDocumentRef.update("challangeStreak", newStreak).await()
+    }
+
+    override suspend fun checkDocumentExistsForUser(userId: String): Boolean {
+        val userDocRef = firestore.collection("Users").document(userId)
+        val userDoc = userDocRef.get().await()
+
+        if (!userDoc.exists()) {
+            return false
+        }
+        return true
     }
 
     override suspend fun sendUserInvitationWithInviteKey(inviteKey: String, fromGroup: String, sender: String): InvitationState {
@@ -161,6 +174,8 @@ class FirestoreUserRepositoryImpl @Inject constructor(
         }
         return false
     }
+
+
     override suspend fun updateStreakBasedOnDailyQuestions(userId: String) {
         val groupDocumentRef = firestore.collection("Users").document(userId)
         //val userData = groupDocumentRef.data
@@ -491,6 +506,17 @@ class FirestoreUserRepositoryImpl @Inject constructor(
             authResult.user
         } catch (e: Exception) {
             _firebaseErrorMessage = e.message ?: "Unknown error occurred."
+            null
+        }
+    }
+
+    override suspend fun loginWithGoogle(idToken: String?): FirebaseUser? {
+        return try {
+            val credential = GoogleAuthProvider.getCredential(idToken, null)
+            val result = auth.signInWithCredential(credential).await()
+            val user = result.user
+            user
+        } catch (e: Exception) {
             null
         }
     }

@@ -26,6 +26,9 @@ class ChallangeFragment : Fragment() {
         binding.viewModel = challangeViewModel
         binding.lifecycleOwner = viewLifecycleOwner
 
+
+        println(challangeViewModel.getCurrentUser.value?.uid)
+
         showDataOnScreen()
         onClickNavigatePreviousChallenges()
         onClickNavigateDailyChallange()

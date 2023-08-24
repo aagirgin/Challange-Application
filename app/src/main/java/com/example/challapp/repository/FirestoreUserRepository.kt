@@ -28,13 +28,14 @@ interface FirestoreUserRepository {
     suspend fun getStreak(userId: String): Int
     suspend fun addDailyChallengeToAllUserIncludedGroups(groupIds: List<*>?, description: String, documentId: String, userId: String): Boolean
     suspend fun addDailyChallangeToUser(userId: String, description: String, documentId: String): Boolean
-    suspend fun addUserToFirestore(userId: String, email: String, fullName: String): Boolean
+    suspend fun addUserToFirestore(userId: String, email: String, fullName: String?): Boolean
     suspend fun addGroupToFirestore(appGroup:ApplicationGroup): String?
     suspend fun updateIncludedGroupsForUser(userId: String, groupId: String): Boolean
     suspend fun updateStreakBasedOnDailyQuestions(userId: String)
     suspend fun changeUsername(userId: String,newUsername: String) :Boolean
     suspend fun changeGroupInvitationStatus(groupId: String,changedPermission: InvitePermission) : UiState<String>
     suspend fun incrementStreakCountByOne(userId: String)
+    suspend fun checkDocumentExistsForUser(userId: String): Boolean
     suspend fun checkUserAlreadyHaveSubmission(userId: String) : Boolean
     suspend fun acceptToGroupInvitation(userId: String,groupId: String):Int?
     suspend fun deleteOnRejectInvitation(notification:UserNotification,userId: String):Int?
@@ -44,6 +45,7 @@ interface FirestoreUserRepository {
     suspend fun sendPasswordResetEmail(email: String) : Boolean
     suspend fun sendNotificationsToUser(documentId: String, sender: String, fromGroup: String,notificationType: InviteStatus): Boolean
     suspend fun giveInviteKeyIfNull(userId: String)
+    suspend fun loginWithGoogle(idToken: String?): FirebaseUser?
     suspend fun signUp(email: String, password: String): FirebaseUser?
     suspend fun signIn(email: String, password: String): FirebaseUser?
     fun signOut()

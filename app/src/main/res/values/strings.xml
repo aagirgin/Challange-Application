@@ -145,7 +145,15 @@
     <string name="navigation_arrow">Navigation Arrow</string>
     <string name="completed_challenges_swoosh">Completed Challenges Swoosh</string>
     <string name="deleted_group_string">The group named %s has been deleted by owner.</string>
-    <string name="sign_in_with_google">Sign in with Google</string>
+    <string name="continue_with_google">Continue with Google</string>
     <string name="google_icon">Google Icon</string>
     <string name="sign_up_with_google">Sign up with Google</string>
+    <string name="successful_register">Registration successful.</string>
+    <string name="default_web_client_id">546035071552-rjrhvc5nujqpdu43nhdjamtttt0arvh4.apps.googleusercontent.com</string>
+    <string name="last_step">Last Step</string>
+    <string name="submit">Submit</string>
+    <string name="fill_name_promt">Fill the name and you are good to go.</string>
+    <string name="last_step_picture">Last Step Picture</string>
+    <string name="submit_name_error">Error occurred while submitting your name.</string>
+
 </resources>
