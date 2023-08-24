@@ -138,9 +138,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/interextrabold"
+            android:layout_marginTop="10dp"
             android:text="@string/don_t_have_an_account"
             android:textColor="@color/loginPageTextColor"
             android:textSize="16sp"
+            android:layout_marginEnd="2dp"
             android:layout_marginBottom="40dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/button_backtosignup"
@@ -165,12 +167,13 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardview_signInGoogle"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="50dp"
             app:cardCornerRadius="5dp"
             app:layout_constraintBottom_toTopOf="@+id/textview_nothaveacc"
             app:layout_constraintEnd_toEndOf="@+id/button_login"
             app:layout_constraintHorizontal_bias="0.5"
+            android:layout_marginTop="10dp"
 
             app:layout_constraintStart_toStartOf="@+id/button_login"
             app:layout_constraintTop_toBottomOf="@+id/button_login">
@@ -197,7 +200,6 @@
                     android:layout_marginStart="10dp"
                     android:layout_marginEnd="25dp"
                     android:fontFamily="@font/intersemibold"
-
                     android:text="@string/sign_in_with_google"
                     android:textSize="18sp"
                     app:layout_constraintBottom_toBottomOf="@+id/imageview_googleIcon"

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+<layout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
     <data>
 
@@ -12,32 +13,28 @@
     <androidx.constraintlayout.widget.ConstraintLayout
 
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
->
+        android:layout_height="match_parent">
 
         <ImageView
             android:id="@+id/imageview_registerimage"
             android:layout_width="200dp"
             android:layout_height="200dp"
+            android:layout_marginTop="50dp"
             android:contentDescription="@string/registerpageimage"
             android:src="@drawable/registerpic"
-            app:layout_constraintBottom_toTopOf="@+id/textview_signupnow"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_chainStyle="packed" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/textview_signupnow"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
             android:fontFamily="@font/intersemibold"
             android:text="@string/sign_up_now"
             android:textSize="24sp"
             app:layout_constraintBottom_toTopOf="@+id/textview_signupnowbottom"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageview_registerimage" />
 
@@ -45,13 +42,11 @@
             android:id="@+id/textview_signupnowbottom"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
             android:fontFamily="@font/interlight"
             android:text="@string/signup_prompt"
             android:textSize="16sp"
-            app:layout_constraintBottom_toTopOf="@+id/textinput_fullname"
+            app:layout_constraintBottom_toTopOf="@+id/textview_tos1"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textview_signupnow" />
 
@@ -80,9 +75,9 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="61dp"
-                android:maxLength="32"
+                android:hint="@string/full_name"
                 android:inputType="text"
-                android:hint="@string/full_name" />
+                android:maxLength="32" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -109,8 +104,8 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="text"
-                android:hint="@string/email_textfield" />
+                android:hint="@string/email_textfield"
+                android:inputType="text" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -138,37 +133,39 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:maxLength="24"
                 android:hint="@string/password_logintext"
-                android:inputType="textPassword" />
+                android:inputType="textPassword"
+                android:maxLength="24" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
             android:id="@+id/textview_tos1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="3dp"
             android:fontFamily="@font/interextrabold"
             android:text="@string/you_agree_to_our"
             android:textColor="@color/loginPageTextColor"
+            android:paddingTop="5dp"
+            android:layout_marginEnd="2dp"
             android:textSize="14sp"
             app:layout_constraintBottom_toTopOf="@+id/button_signup"
             app:layout_constraintEnd_toStartOf="@+id/textvirew_termsofservice"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textinput_password" />
+            app:layout_constraintTop_toBottomOf="@+id/textview_signupnowbottom" />
 
         <TextView
             android:id="@+id/textvirew_termsofservice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="3dp"
             android:fontFamily="@font/interextrabold"
+            android:paddingTop="5dp"
             android:text="@string/terms_of_service"
+            android:layout_marginEnd="2dp"
             android:textColor="@color/primaryApplicationColor"
             android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@+id/textview_tos1"
             app:layout_constraintEnd_toStartOf="@+id/textview_and"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/textview_tos1"
@@ -178,11 +175,14 @@
             android:id="@+id/textview_and"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="3dp"
+            android:paddingTop="5dp"
             android:fontFamily="@font/interextrabold"
             android:text="@string/and"
+            android:layout_marginEnd="2dp"
+            android:layout_marginStart="2dp"
             android:textColor="@color/loginPageTextColor"
             android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@+id/textview_tos1"
             app:layout_constraintEnd_toStartOf="@+id/textview_privacypolicy"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/textvirew_termsofservice"
@@ -193,9 +193,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/interextrabold"
+            android:paddingTop="5dp"
             android:text="@string/privacy_policy"
             android:textColor="@color/primaryApplicationColor"
             android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@+id/textview_tos1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/textview_and"
@@ -205,18 +207,17 @@
             android:id="@+id/button_signup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
             android:backgroundTint="@color/primaryApplicationColor"
             android:fontFamily="@font/intersemibold"
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
+
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
             android:text="@string/sign_up_registerpagebutton"
             android:textSize="24sp"
-            app:layout_constraintBottom_toTopOf="@+id/textview_alreadyhaveacc"
+            app:layout_constraintBottom_toTopOf="@+id/cardview_signInGoogle"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textview_tos1" />
 
@@ -224,34 +225,81 @@
             android:id="@+id/textview_alreadyhaveacc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="1dp"
             android:fontFamily="@font/interextrabold"
             android:text="@string/already_have_an_account"
+            android:layout_marginEnd="2dp"
             android:textColor="@color/loginPageTextColor"
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/button_backtologin"
+            android:layout_marginBottom="40dp"
             app:layout_constraintHorizontal_bias="0.5"
+            android:layout_marginTop="10dp"
             app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/button_signup" />
+            app:layout_constraintTop_toBottomOf="@+id/cardview_signInGoogle" />
 
         <TextView
             android:id="@+id/button_backtologin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="1dp"
             android:clickable="true"
             android:focusable="true"
             android:fontFamily="@font/interextrabold"
             android:text="@string/log_in_textbutton"
             android:textColor="@color/primaryApplicationColor"
             android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@+id/textview_alreadyhaveacc"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/textview_alreadyhaveacc"
             app:layout_constraintTop_toTopOf="@+id/textview_alreadyhaveacc" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardview_signInGoogle"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            app:cardCornerRadius="5dp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintBottom_toTopOf="@+id/textview_alreadyhaveacc"
+            app:layout_constraintEnd_toEndOf="@+id/button_signup"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="@+id/button_signup"
+            app:layout_constraintTop_toBottomOf="@+id/button_signup">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/imageview_googleIcon"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginStart="25dp"
+                    android:contentDescription="@string/google_icon"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/googleg_standard_color_18" />
+
+                <TextView
+                    android:id="@+id/textview_signInWithGoogle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="25dp"
+                    android:fontFamily="@font/intersemibold"
+                    android:text="@string/sign_up_with_google"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/imageview_googleIcon"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/imageview_googleIcon"
+                    app:layout_constraintTop_toTopOf="@+id/imageview_googleIcon" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </androidx.cardview.widget.CardView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

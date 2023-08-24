@@ -145,4 +145,7 @@
     <string name="navigation_arrow">Navigation Arrow</string>
     <string name="completed_challenges_swoosh">Completed Challenges Swoosh</string>
     <string name="deleted_group_string">The group named %s has been deleted by owner.</string>
+    <string name="sign_in_with_google">Sign in with Google</string>
+    <string name="google_icon">Google Icon</string>
+    <string name="sign_up_with_google">Sign up with Google</string>
 </resources>
