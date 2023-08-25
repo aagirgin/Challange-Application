@@ -233,6 +233,9 @@ At some point, we may wish to update the app. The app is currently available on 
     <string name="premium_feature_will_be_added_with_newer_updates">Premium feature will be added with newer updates</string>
     <string name="if_you_have_any_suggestions_feel_free_to_contact_us">If you have any suggestions feel free to contact us</string>
     <string name="commonMail">challengerdailychallenge@gmail.com</string>
+    <string name="challenger">Challenger</string>
+    <string name="daily_challenge_application">Daily Challenge Application</string>
+    <string name="challenger_image">Challenger Image</string>
 
 
 </resources>
