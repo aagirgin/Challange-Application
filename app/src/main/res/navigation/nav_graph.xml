@@ -40,7 +40,8 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"
-            app:popUpToInclusive="false" />
+            app:popUpTo="@id/splashScreenFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/registerFragment"
@@ -187,6 +188,15 @@
             app:popExitAnim="@anim/slide_out_right"
             app:popUpToInclusive="true"
             app:popUpTo="@id/splashScreenFragment"/>
+        <action
+            android:id="@+id/action_splashScreenFragment_to_provideNameFragment"
+            app:destination="@id/provideNameFragment"
+            app:popUpTo="@id/splashScreenFragment"
+            app:popUpToInclusive="true"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
 
     </fragment>
     <fragment
@@ -479,6 +489,7 @@
         android:name="com.example.challapp.ui.login.providename.ProvideNameFragment"
         android:label="fragment_provide_name"
         tools:layout="@layout/fragment_provide_name" >
+
         <action
             android:id="@+id/action_provideNameFragment_to_challangeFragment"
             app:destination="@id/challangeFragment"
@@ -486,6 +497,11 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_provideNameFragment_to_splashScreenFragment"
+            app:destination="@id/splashScreenFragment"
+            app:popUpTo="@id/splashScreenFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/termsOfServiceFragment"

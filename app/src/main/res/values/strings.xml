@@ -236,6 +236,7 @@ At some point, we may wish to update the app. The app is currently available on 
     <string name="challenger">Challenger</string>
     <string name="daily_challenge_application">Daily Challenge Application</string>
     <string name="challenger_image">Challenger Image</string>
+    <string name="fill_name_error">Please fill the name field and try again.</string>
 
 
 </resources>
