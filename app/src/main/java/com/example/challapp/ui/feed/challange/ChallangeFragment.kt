@@ -32,6 +32,7 @@ class ChallangeFragment : Fragment() {
         showDataOnScreen()
         onClickNavigatePreviousChallenges()
         onClickNavigateDailyChallange()
+        onClickNavigatePremium()
         onClickNavigateNotifications()
 
         return binding.root
@@ -52,6 +53,12 @@ class ChallangeFragment : Fragment() {
     private fun onClickNavigateDailyChallange(){
         binding.buttonSeedailychallange.setOnClickListener {
             findNavController().navigate(R.id.action_challangeFragment_to_dailyChallangeFragment)
+        }
+    }
+
+    private fun onClickNavigatePremium(){
+        binding.cardviewPremium.setOnClickListener {
+            findNavController().navigate(R.id.action_challangeFragment_to_premiumFragment)
         }
     }
     private fun onClickNavigatePreviousChallenges(){

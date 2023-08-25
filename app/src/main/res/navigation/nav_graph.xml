@@ -97,6 +97,9 @@
         <action
             android:id="@+id/action_challangeFragment_to_notificationFragment"
             app:destination="@id/notificationFragment" />
+        <action
+            android:id="@+id/action_challangeFragment_to_premiumFragment"
+            app:destination="@id/premiumFragment" />
 
 
     </fragment>
@@ -382,6 +385,15 @@
             android:id="@+id/action_privacyPolicyFragment_to_registerFragment"
             app:destination="@id/registerFragment"
             app:popUpTo="@id/registerFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/premiumFragment"
+        android:name="com.example.challapp.ui.feed.premium.PremiumFragment"
+        android:label="fragment_premium"
+        tools:layout="@layout/fragment_premium" >
+        <action
+            android:id="@+id/action_premiumFragment_to_challangeFragment"
+            app:destination="@id/challangeFragment" />
     </fragment>
 
 
