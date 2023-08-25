@@ -20,6 +20,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
+import kotlinx.parcelize.RawValue
 import org.threeten.bp.LocalDate
 import javax.inject.Inject
 
@@ -40,10 +41,22 @@ class FirestoreUserRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun getUserNotications(userId: String): MutableList<UserNotification>? {
+    override suspend fun getUserNotifications(userId: String): MutableList<UserNotification>? {
         val userDocRef = firestore.collection("Users").document(userId).get().await()
         val userData = userDocRef.toObject(ApplicationUser::class.java)
         return userData?.notifications
+    }
+
+    override suspend fun getUsersNameAsMap(userList: MutableList<@RawValue String?>): Map<String, String> {
+        val resultMap = mutableMapOf<String, String>()
+
+        userList.forEach { userId ->
+            val userName = userId?.let { uid -> getUsername(uid) }
+            if (userName != null) {
+                resultMap[userId] = userName
+            }
+        }
+        return resultMap
     }
 
     override suspend fun getGroupNameById(groupId: String): String? {

@@ -10,6 +10,8 @@ import com.example.challapp.domain.models.UserNotification
 import com.example.challapp.domain.state.InvitationState
 import com.example.challapp.domain.state.UiState
 import com.google.firebase.auth.FirebaseUser
+import kotlinx.parcelize.RawValue
+
 interface FirestoreUserRepository {
 
     fun getCurrentUser(): FirebaseUser?
@@ -17,7 +19,8 @@ interface FirestoreUserRepository {
     suspend fun getGroupNameById(groupId: String): String?
     suspend fun getUserIncludedGroupIds(userId: String): List<*>?
     suspend fun getUsername(userId: String): String?
-    suspend fun getUserNotications(userId: String): MutableList<UserNotification>?
+    suspend fun getUserNotifications(userId: String): MutableList<UserNotification>?
+    suspend fun getUsersNameAsMap(userList: MutableList<@RawValue String?>): Map<String,String>
     suspend fun getGroupInformationByDocumentId(documentId: Any?): ApplicationGroup?
     suspend fun getAllDailyChallangesForUser(userId: String): MutableList<ApplicationDailyChallenge>?
     suspend fun getInviteKey(userId: String): String
