@@ -21,7 +21,7 @@
             android:contentDescription="@string/challenger_image" />
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/textview_challenger"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/challenger"
@@ -32,13 +32,15 @@
             app:layout_constraintTop_toBottomOf="@+id/imageview_challenger" />
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/textview_dailyChallengeApplication"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/daily_challenge_application"
             android:fontFamily="@font/loramediumitalic"
+            android:text="@string/daily_challenge_application"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView" />
+            app:layout_constraintVertical_bias="0"
+            app:layout_constraintTop_toBottomOf="@+id/textview_challenger" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

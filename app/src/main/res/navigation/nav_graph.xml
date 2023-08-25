@@ -16,7 +16,7 @@
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
+            app:popExitAnim="@anim/slide_out_right"/>
         <action
             android:id="@+id/action_loginFragment_to_challangeFragment"
             app:destination="@id/challangeFragment"
@@ -35,7 +35,12 @@
             app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_loginFragment_to_provideNameFragment"
-            app:destination="@id/provideNameFragment" />
+            app:destination="@id/provideNameFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:popUpToInclusive="false" />
     </fragment>
     <fragment
         android:id="@+id/registerFragment"
@@ -61,10 +66,18 @@
             app:popUpTo="@id/registerFragment"/>
         <action
             android:id="@+id/action_registerFragment_to_termsOfServiceFragment"
-            app:destination="@id/termsOfServiceFragment" />
+            app:destination="@id/termsOfServiceFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
         <action
             android:id="@+id/action_registerFragment_to_privacyPolicyFragment"
-            app:destination="@id/privacyPolicyFragment" />
+            app:destination="@id/privacyPolicyFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
     <fragment
         android:id="@+id/challangeFragment"
@@ -87,19 +100,39 @@
             app:popExitAnim="@anim/slide_out_right"/>
         <action
             android:id="@+id/action_challangeFragment_to_profileNavFragment"
-            app:destination="@id/profileNavFragment"/>
+            app:destination="@id/profileNavFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
         <action
             android:id="@+id/action_challangeFragment_to_dailyChallangeFragment"
-            app:destination="@id/dailyChallangeFragment" />
+            app:destination="@id/dailyChallangeFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
         <action
             android:id="@+id/action_challangeFragment_to_completedChallengeFragment"
-            app:destination="@id/completedChallengeFragment" />
+            app:destination="@id/completedChallengeFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
         <action
             android:id="@+id/action_challangeFragment_to_notificationFragment"
-            app:destination="@id/notificationFragment" />
+            app:destination="@id/notificationFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
         <action
             android:id="@+id/action_challangeFragment_to_premiumFragment"
-            app:destination="@id/premiumFragment" />
+            app:destination="@id/premiumFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
 
 
     </fragment>
@@ -171,10 +204,18 @@
             />
         <action
             android:id="@+id/action_profileFragment_to_profileNavFragment"
-            app:destination="@id/profileNavFragment" />
+            app:destination="@id/profileNavFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_right"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
         <action
             android:id="@+id/action_profileFragment_to_profileChangePwFragment"
-            app:destination="@id/profileChangePwFragment" />
+            app:destination="@id/profileChangePwFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
     <fragment
         android:id="@+id/profileChangePwFragment"
@@ -183,10 +224,18 @@
         tools:layout="@layout/fragment_profile_change_pw" >
         <action
             android:id="@+id/action_profileChangePwFragment_to_profileNavFragment"
-            app:destination="@id/profileNavFragment" />
+            app:destination="@id/profileNavFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_right"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
         <action
             android:id="@+id/action_profileChangePwFragment_to_profileFragment"
-            app:destination="@id/profileFragment" />
+            app:destination="@id/profileFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
     <fragment
         android:id="@+id/profileNavFragment"
@@ -195,18 +244,34 @@
         tools:layout="@layout/fragment_profile_nav" >
         <action
             android:id="@+id/action_profileNavFragment_to_profileFragment"
-            app:destination="@id/profileFragment" />
+            app:destination="@id/profileFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
         <action
             android:id="@+id/action_profileNavFragment_to_profileChangePwFragment"
-            app:destination="@id/profileChangePwFragment" />
+            app:destination="@id/profileChangePwFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
         <action
             android:id="@+id/action_profileNavFragment_to_loginFragment"
             app:destination="@id/loginFragment"
             app:popUpTo="@id/loginFragment"
-            app:popUpToInclusive="true"/>
+            app:popUpToInclusive="true"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
         <action
             android:id="@+id/action_profileNavFragment_to_challangeFragment"
-            app:destination="@id/challangeFragment" />
+            app:destination="@id/challangeFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
 
 
     </fragment>
@@ -217,10 +282,18 @@
         tools:layout="@layout/fragment_group" >
         <action
             android:id="@+id/action_groupFragment_to_createGroupFragment"
-            app:destination="@id/createGroupFragment" />
+            app:destination="@id/createGroupFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
         <action
             android:id="@+id/action_groupFragment_to_specificGroupFragment"
-            app:destination="@id/specificGroupFragment" >
+            app:destination="@id/specificGroupFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right">
             <argument
                 android:name="selectedGroup"
                 app:argType="com.example.challapp.domain.models.ApplicationGroup" />
@@ -233,7 +306,11 @@
         </action>
         <action
             android:id="@+id/action_groupFragment_to_notificationFragment"
-            app:destination="@id/notificationFragment" />
+            app:destination="@id/notificationFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
 
     </fragment>
     <fragment
@@ -245,7 +322,11 @@
             android:id="@+id/action_createGroupFragment_to_groupFragment"
             app:destination="@id/groupFragment"
             app:popUpTo="@id/groupFragment"
-            app:popUpToInclusive="true" />
+            app:popUpToInclusive="true"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
     <fragment
         android:id="@+id/dailyChallangeFragment"
@@ -256,7 +337,11 @@
             android:id="@+id/action_dailyChallangeFragment_to_challangeFragment"
             app:destination="@id/challangeFragment"
             app:popUpTo="@id/dailyChallangeFragment"
-            app:popUpToInclusive="true" />
+            app:popUpToInclusive="true"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
     <fragment
         android:id="@+id/completedChallengeFragment"
@@ -267,7 +352,11 @@
             android:id="@+id/action_completedChallengeFragment_to_challangeFragment"
             app:destination="@id/challangeFragment"
             app:popUpTo="@id/challangeFragment"
-            app:popUpToInclusive="true" />
+            app:popUpToInclusive="true"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_right"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
     <fragment
         android:id="@+id/specificGroupFragment"
@@ -278,10 +367,18 @@
             android:id="@+id/action_specificGroupFragment_to_groupFragment"
             app:destination="@id/groupFragment"
             app:popUpTo="@id/groupFragment"
-            app:popUpToInclusive="true"/>
+            app:popUpToInclusive="true"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_right"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
         <action
             android:id="@+id/action_specificGroupFragment_to_groupInfoFragment"
-            app:destination="@id/groupInfoFragment" >
+            app:destination="@id/groupInfoFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right">
             <argument
                 android:name="position"
                 app:argType="integer" />
@@ -311,7 +408,11 @@
             android:id="@+id/action_groupInfoFragment_to_specificGroupFragment"
             app:destination="@id/specificGroupFragment"
             app:popUpTo="@id/specificGroupFragment"
-            app:popUpToInclusive="true"/>
+            app:popUpToInclusive="true"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_right"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
         <argument
             android:name="position"
             app:argType="integer" />
@@ -323,7 +424,11 @@
             app:argType="string" />
         <action
             android:id="@+id/action_groupInfoFragment_to_groupSettinsFragment"
-            app:destination="@id/groupSettinsFragment" />
+            app:destination="@id/groupSettinsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
     <fragment
         android:id="@+id/notificationFragment"
@@ -332,7 +437,11 @@
         tools:layout="@layout/fragment_notification" >
         <action
             android:id="@+id/action_notificationFragment_to_challangeFragment"
-            app:destination="@id/challangeFragment" />
+            app:destination="@id/challangeFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
     <fragment
         android:id="@+id/groupSettinsFragment"
@@ -341,7 +450,11 @@
         tools:layout="@layout/fragment_group_settings" >
         <action
             android:id="@+id/action_groupSettinsFragment_to_groupInfoFragment"
-            app:destination="@id/groupInfoFragment" />
+            app:destination="@id/groupInfoFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_right"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
         <argument
             android:name="group"
             app:argType="com.example.challapp.domain.models.ApplicationGroup" />
@@ -355,7 +468,11 @@
             android:id="@+id/action_groupSettinsFragment_to_groupFragment"
             app:destination="@id/groupFragment"
             app:popUpTo="@id/groupFragment"
-            app:popUpToInclusive="true" />
+            app:popUpToInclusive="true"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
     <fragment
         android:id="@+id/provideNameFragment"
@@ -364,7 +481,11 @@
         tools:layout="@layout/fragment_provide_name" >
         <action
             android:id="@+id/action_provideNameFragment_to_challangeFragment"
-            app:destination="@id/challangeFragment" />
+            app:destination="@id/challangeFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
     <fragment
         android:id="@+id/termsOfServiceFragment"
@@ -374,7 +495,11 @@
         <action
             android:id="@+id/action_termsOfServiceFragment_to_registerFragment"
             app:destination="@id/registerFragment"
-            app:popUpTo="@id/registerFragment" />
+            app:popUpTo="@id/registerFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
     <fragment
         android:id="@+id/privacyPolicyFragment"
@@ -384,7 +509,11 @@
         <action
             android:id="@+id/action_privacyPolicyFragment_to_registerFragment"
             app:destination="@id/registerFragment"
-            app:popUpTo="@id/registerFragment" />
+            app:popUpTo="@id/registerFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
     <fragment
         android:id="@+id/premiumFragment"
@@ -393,7 +522,11 @@
         tools:layout="@layout/fragment_premium" >
         <action
             android:id="@+id/action_premiumFragment_to_challangeFragment"
-            app:destination="@id/challangeFragment" />
+            app:destination="@id/challangeFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
 
 
