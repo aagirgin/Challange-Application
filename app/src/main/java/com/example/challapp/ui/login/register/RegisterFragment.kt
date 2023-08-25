@@ -15,29 +15,42 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 @AndroidEntryPoint
 class RegisterFragment : Fragment() {
+    private lateinit var binding: FragmentRegisterBinding
+
     private val registerViewModel: RegisterViewModel by viewModels()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
 
-        val binding = FragmentRegisterBinding.inflate(inflater,container,false)
+        binding = FragmentRegisterBinding.inflate(inflater,container,false)
 
-
-        onPressedBackLoginPage(binding)
-        setupSignUpButton(binding)
+        onClickNavigatePrivacyPolicy()
+        onClickNavigateTermsOfService()
+        onPressedBackLoginPage()
+        setupSignUpButton()
 
         return binding.root
     }
 
-    private fun onPressedBackLoginPage(binding: FragmentRegisterBinding) {
+    private fun onPressedBackLoginPage() {
         binding.buttonBacktologin.setOnClickListener {
             findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
         }
     }
+    private fun onClickNavigatePrivacyPolicy(){
+        binding.textviewPrivacypolicy.setOnClickListener {
+            findNavController().navigate(R.id.action_registerFragment_to_privacyPolicyFragment)
+        }
+    }
 
+    private fun onClickNavigateTermsOfService(){
+        binding.textvirewTermsofservice.setOnClickListener {
+            findNavController().navigate(R.id.action_registerFragment_to_termsOfServiceFragment)
+        }
+    }
 
-    private fun setupSignUpButton(binding: FragmentRegisterBinding) {
+    private fun setupSignUpButton() {
         binding.buttonSignup.setOnClickListener {
             binding.buttonSignup.isEnabled = false
 

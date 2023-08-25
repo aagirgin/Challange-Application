@@ -59,6 +59,12 @@
             app:popExitAnim="@anim/slide_out_right"
             app:popUpToInclusive="true"
             app:popUpTo="@id/registerFragment"/>
+        <action
+            android:id="@+id/action_registerFragment_to_termsOfServiceFragment"
+            app:destination="@id/termsOfServiceFragment" />
+        <action
+            android:id="@+id/action_registerFragment_to_privacyPolicyFragment"
+            app:destination="@id/privacyPolicyFragment" />
     </fragment>
     <fragment
         android:id="@+id/challangeFragment"
@@ -356,6 +362,26 @@
         <action
             android:id="@+id/action_provideNameFragment_to_challangeFragment"
             app:destination="@id/challangeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/termsOfServiceFragment"
+        android:name="com.example.challapp.ui.login.register.TermsOfServiceFragment"
+        android:label="fragment_terms_of_service"
+        tools:layout="@layout/fragment_terms_of_service" >
+        <action
+            android:id="@+id/action_termsOfServiceFragment_to_registerFragment"
+            app:destination="@id/registerFragment"
+            app:popUpTo="@id/registerFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/privacyPolicyFragment"
+        android:name="com.example.challapp.ui.login.register.PrivacyPolicyFragment"
+        android:label="fragment_privacy_policy"
+        tools:layout="@layout/fragment_privacy_policy" >
+        <action
+            android:id="@+id/action_privacyPolicyFragment_to_registerFragment"
+            app:destination="@id/registerFragment"
+            app:popUpTo="@id/registerFragment" />
     </fragment>
 
 
