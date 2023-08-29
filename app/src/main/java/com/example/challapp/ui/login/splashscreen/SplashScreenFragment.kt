@@ -39,7 +39,7 @@ class SplashScreenFragment : Fragment() {
                 if (state != null){
                     splashScreenViewModel.getName()
                     splashScreenViewModel.getCurrentUserName.collect{ userName ->
-                        if(userName == null){
+                        if(userName == null && splashScreenViewModel.getCurrentUser.value?.uid != null){
                             findNavController().navigate(R.id.action_splashScreenFragment_to_provideNameFragment)
                         }
                         else{

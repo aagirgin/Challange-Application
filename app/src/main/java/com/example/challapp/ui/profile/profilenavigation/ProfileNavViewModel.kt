@@ -85,7 +85,11 @@ class ProfileNavViewModel @Inject constructor(
     }
 
 
-    fun signoutUser(){
+    fun signOutUser(){
         firestoreUserRepository.signOut()
+    }
+
+    suspend fun deleteAccount(){
+        _currentUser.value?.let { firestoreUserRepository.deleteAccount(it.uid) }
     }
 }

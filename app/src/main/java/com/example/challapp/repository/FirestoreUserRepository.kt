@@ -51,6 +51,8 @@ interface FirestoreUserRepository {
     suspend fun loginWithGoogle(idToken: String?): FirebaseUser?
     suspend fun signUp(email: String, password: String): FirebaseUser?
     suspend fun signIn(email: String, password: String): FirebaseUser?
+
+    suspend fun deleteAccount(userId: String): Boolean
     fun signOut()
 
 

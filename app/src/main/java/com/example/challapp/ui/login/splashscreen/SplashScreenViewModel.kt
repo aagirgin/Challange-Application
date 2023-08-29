@@ -21,7 +21,9 @@ class SplashScreenViewModel @Inject constructor(
 
     private val _getCurrentUserName: MutableStateFlow<String?> = MutableStateFlow(null)
 
+
     suspend fun getName(){
+        println(getCurrentUser.value?.uid)
         _getCurrentUserName.value = _getCurrentUser.value?.let { userRepository.getUsername(it.uid) }
     }
     suspend fun updateStreakOnNavigate(){

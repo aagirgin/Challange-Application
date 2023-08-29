@@ -9,7 +9,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -17,6 +16,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.challapp.R
 import com.example.challapp.databinding.FragmentProfileNavBinding
 import com.example.challapp.extensions.load
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -114,32 +114,35 @@ class ProfileNavFragment : Fragment() {
 
 
     private fun showDeleteAccountDialog() {
-        val alertDialogBuilder = AlertDialog.Builder(requireContext())
+        val alertDialogBuilder = MaterialAlertDialogBuilder(requireContext())
         alertDialogBuilder.apply {
-            setTitle("Delete Account")
-            setMessage("Are you sure you want to delete your account?")
-            setPositiveButton("Delete") { _, _ ->
-                // Handle account deletion here
-                // You can call a function to delete the account or perform any other actions
-                // Example: profileViewModel.deleteAccount()
+            setTitle(getString(R.string.delete_account))
+            setMessage(getString(R.string.delete_account_text))
+            setPositiveButton(getString(R.string.delete)) { _, _ ->
+                viewLifecycleOwner.lifecycleScope.launch {
+                    profileNavViewModel.deleteAccount()
+                    profileNavViewModel.signOutUser()
+                    findNavController().navigate(R.id.action_profileNavFragment_to_loginFragment)
+                }
             }
-            setNegativeButton("Cancel") { dialog, _ ->
+            setNegativeButton(getString(R.string.cancel)) { dialog, _ ->
                 dialog.dismiss()
             }
         }
         alertDialogBuilder.create().show()
+
     }
 
     private fun showSignOutAccountDialog() {
-        val alertDialogBuilder = AlertDialog.Builder(requireContext())
+        val alertDialogBuilder = MaterialAlertDialogBuilder(requireContext())
         alertDialogBuilder.apply {
-            setTitle("Sign Out")
-            setMessage("Are you sure you want to sign out your account?")
-            setPositiveButton("Sign out") { _, _ ->
-                profileNavViewModel.signoutUser()
+            setTitle(getString(R.string.sign_out))
+            setMessage(getString(R.string.signout_account_text))
+            setPositiveButton(getString(R.string.sign_out)) { _, _ ->
+                profileNavViewModel.signOutUser()
                 findNavController().navigate(R.id.action_profileNavFragment_to_loginFragment)
             }
-            setNegativeButton("Cancel") { dialog, _ ->
+            setNegativeButton(getString(R.string.cancel)) { dialog, _ ->
                 dialog.dismiss()
             }
         }

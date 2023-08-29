@@ -36,7 +36,7 @@
     <string name="apply_changes_button">Apply Changes</string>
     <string name="account_information">Account Information</string>
     <string name="change_password_text">Change Password</string>
-    <string name="delete_account_text">Delete Account</string>
+    <string name="delete_account">Delete Account</string>
     <string name="current_password">Current Password</string>
     <string name="new_password">New Password</string>
     <string name="confirm_password">Confirm Password</string>
@@ -237,6 +237,7 @@ At some point, we may wish to update the app. The app is currently available on 
     <string name="daily_challenge_application">Daily Challenge Application</string>
     <string name="challenger_image">Challenger Image</string>
     <string name="fill_name_error">Please fill the name field and try again.</string>
-
-
+    <string name="delete_account_text">Are you sure you want to delete your account?\nIf you are owner of a group, the group will be disbanded!</string>
+    <string name="signout_account_text">Are you sure you want to sign out your account?</string>
+    <string name="deleted_user">Deleted User</string>
 </resources>

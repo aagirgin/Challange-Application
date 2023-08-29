@@ -547,6 +547,33 @@ class FirestoreUserRepositoryImpl @Inject constructor(
         }
     }
 
+    override suspend fun deleteAccount(userId: String): Boolean {
+        val userDocRef = firestore.collection("Users").document(userId)
+        val userGroups = userDocRef.get().await().toObject(ApplicationUser::class.java)?.includedGroups
+        val groupDocumentRef = firestore.collection("Groups")
+
+        try {
+            userGroups?.forEach { groupId ->
+                val groupDoc = groupDocumentRef.document(groupId)
+                val group = groupDoc.get().await().toObject(ApplicationGroup::class.java)
+                val groupMembers = group?.groupMembers
+                val groupOwner = group?.groupOwner
+
+                if (userId == groupOwner) {
+                    userDeleteGroup(groupId)
+                } else {
+                    groupMembers?.remove(userId)
+                    groupDoc.update("groupMembers", groupMembers).await()
+                }
+            }
+            userDocRef.delete().await()
+            getCurrentUser()?.delete()
+            return true
+        } catch (e: Exception) {
+            return false
+        }
+    }
+
     override suspend fun sendPasswordResetEmail(email: String): Boolean {
         return try {
             auth.sendPasswordResetEmail(email).await()

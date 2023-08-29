@@ -161,7 +161,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:fontFamily="@font/lorabold"
-            android:text="@string/delete_account_text"
+            android:text="@string/delete_account"
             android:textColor="@color/profileTextColor"
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="@+id/view_deleteAccInfo"
