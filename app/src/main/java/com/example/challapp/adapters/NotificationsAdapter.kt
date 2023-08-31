@@ -1,6 +1,7 @@
 package com.example.challapp.adapters
 
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,7 +18,8 @@ import com.example.challapp.utils.DateUtils
 
 class NotificationsAdapter(
     private val notificationList: MutableList<UserNotification>,
-    private val senderNameMap: MutableMap<String, String>
+    private val senderNameMap: MutableMap<String, String>,
+    private val context: Context
 ): RecyclerView.Adapter<NotificationsAdapter.ViewHolder>() {
 
     private var itemClickListener: OnItemClickListener? = null
@@ -88,7 +90,15 @@ class NotificationsAdapter(
                 }
             }
 
-            userName.text = senderNameMap[data.notificationSenderUser]
+            val sender = senderNameMap[data.notificationSenderUser]
+            if (sender == "null"){
+                userName.text = context.getString(R.string.deleted_user)
+            }
+            else{
+                userName.text = senderNameMap[data.notificationSenderUser]
+            }
+
+
 
             date.text = DateUtils.getCurrentFormattedDateAsDayMonth()
 

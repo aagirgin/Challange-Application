@@ -13,12 +13,14 @@ import com.example.challapp.domain.state.UiState
 import com.example.challapp.utils.DateUtils
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
+import kotlinx.parcelize.RawValue
 import org.threeten.bp.LocalDate
 import javax.inject.Inject
 
@@ -39,10 +41,22 @@ class FirestoreUserRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun getUserNotications(userId: String): MutableList<UserNotification>? {
+    override suspend fun getUserNotifications(userId: String): MutableList<UserNotification>? {
         val userDocRef = firestore.collection("Users").document(userId).get().await()
         val userData = userDocRef.toObject(ApplicationUser::class.java)
         return userData?.notifications
+    }
+
+    override suspend fun getUsersNameAsMap(userList: MutableList<@RawValue String?>): Map<String, String> {
+        val resultMap = mutableMapOf<String, String>()
+
+        userList.forEach { userId ->
+            val userName = userId?.let { uid -> getUsername(uid) }
+            if (userName != null) {
+                resultMap[userId] = userName
+            }
+        }
+        return resultMap
     }
 
     override suspend fun getGroupNameById(groupId: String): String? {
@@ -55,14 +69,16 @@ class FirestoreUserRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun addUserToFirestore(userId: String, email: String, fullName: String): Boolean {
+    override suspend fun addUserToFirestore(userId: String, email: String, fullName: String?): Boolean {
         val userCollection = firestore.collection("Users")
         val userDocument = userCollection.document(userId)
         return try {
-            val applicationUser = ApplicationUser(
-                username = fullName,
-            )
+            val applicationUser =
+                ApplicationUser(
+                    username = fullName,
+                )
             userDocument.set(applicationUser).await()
+
             true
         } catch (e: Exception) {
             Log.e("FirestoreUserRepo", "Error adding user to Firestore: ${e.message}")
@@ -105,6 +121,16 @@ class FirestoreUserRepositoryImpl @Inject constructor(
         val currentStreak = userData?.challangeStreak
         val newStreak = currentStreak?.plus(1)
         userDocumentRef.update("challangeStreak", newStreak).await()
+    }
+
+    override suspend fun checkDocumentExistsForUser(userId: String): Boolean {
+        val userDocRef = firestore.collection("Users").document(userId)
+        val userDoc = userDocRef.get().await()
+
+        if (!userDoc.exists()) {
+            return false
+        }
+        return true
     }
 
     override suspend fun sendUserInvitationWithInviteKey(inviteKey: String, fromGroup: String, sender: String): InvitationState {
@@ -161,6 +187,8 @@ class FirestoreUserRepositoryImpl @Inject constructor(
         }
         return false
     }
+
+
     override suspend fun updateStreakBasedOnDailyQuestions(userId: String) {
         val groupDocumentRef = firestore.collection("Users").document(userId)
         //val userData = groupDocumentRef.data
@@ -494,6 +522,17 @@ class FirestoreUserRepositoryImpl @Inject constructor(
             null
         }
     }
+
+    override suspend fun loginWithGoogle(idToken: String?): FirebaseUser? {
+        return try {
+            val credential = GoogleAuthProvider.getCredential(idToken, null)
+            val result = auth.signInWithCredential(credential).await()
+            val user = result.user
+            user
+        } catch (e: Exception) {
+            null
+        }
+    }
     override fun getFirebaseErrorMessage(): String? {
         return _firebaseErrorMessage
     }
@@ -505,6 +544,33 @@ class FirestoreUserRepositoryImpl @Inject constructor(
         } catch (e: Exception) {
             Log.e("FirestoreUserRepo", "Error signing in: ${e.message}")
             null
+        }
+    }
+
+    override suspend fun deleteAccount(userId: String): Boolean {
+        val userDocRef = firestore.collection("Users").document(userId)
+        val userGroups = userDocRef.get().await().toObject(ApplicationUser::class.java)?.includedGroups
+        val groupDocumentRef = firestore.collection("Groups")
+
+        try {
+            userGroups?.forEach { groupId ->
+                val groupDoc = groupDocumentRef.document(groupId)
+                val group = groupDoc.get().await().toObject(ApplicationGroup::class.java)
+                val groupMembers = group?.groupMembers
+                val groupOwner = group?.groupOwner
+
+                if (userId == groupOwner) {
+                    userDeleteGroup(groupId)
+                } else {
+                    groupMembers?.remove(userId)
+                    groupDoc.update("groupMembers", groupMembers).await()
+                }
+            }
+            userDocRef.delete().await()
+            getCurrentUser()?.delete()
+            return true
+        } catch (e: Exception) {
+            return false
         }
     }
 

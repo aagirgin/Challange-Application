@@ -36,7 +36,7 @@ class SpecificGroupFragment : Fragment() {
         dataSetGroup(args.selectedGroup,args.groupPosition,args.selectedGroupId)
         navigateBackLandingGroup()
         navigateGroupInformation()
-        setupRecyclerView()
+        recyclerViewData()
 
         return binding.root
     }
@@ -67,19 +67,18 @@ class SpecificGroupFragment : Fragment() {
 
     private fun recyclerViewData() {
         viewLifecycleOwner.lifecycleScope.launch {
+            specificGroupViewModel.fetchUserMap(args.selectedGroup.groupMembers)
             specificGroupViewModel.selectedGroup.collect { selectedGroup ->
                 val groupFeed = selectedGroup?.groupFeed ?: return@collect
-                groupFeedAdapter = GroupFeedAdapter(groupFeed)
+                val usersMap = specificGroupViewModel.usersMap.value
+                groupFeedAdapter = GroupFeedAdapter(groupFeed,usersMap)
                 groupFeedAdapter.setCompletedChallenges(groupFeed)
+                val recyclerView: RecyclerView = binding.recyclerviewGroupFeed
+                val layoutManager = LinearLayoutManager(requireContext())
+                recyclerView.layoutManager = layoutManager
+                recyclerView.adapter = groupFeedAdapter
             }
         }
-    }
-    private fun setupRecyclerView() {
-        recyclerViewData()
-        val recyclerView: RecyclerView = binding.recyclerviewGroupFeed
-        val layoutManager = LinearLayoutManager(requireContext())
-        recyclerView.layoutManager = layoutManager
-        recyclerView.adapter = groupFeedAdapter
     }
 
     private fun dataSetGroup(group: ApplicationGroup,position:Int,groupId:String){

@@ -47,7 +47,7 @@ class NotificationFragment : Fragment(), NotificationsAdapter.OnItemClickListene
             val currentNotifications = notificationViewModel.userNotificationList.value
 
             if (currentNotifications != null) {
-                notificationsAdapter = NotificationsAdapter(currentNotifications, senderNamesMap)
+                notificationsAdapter = NotificationsAdapter(currentNotifications, senderNamesMap, requireContext())
                 notificationsAdapter.setOnItemClickListener(this@NotificationFragment)
                 setupRecyclerView()
             }
@@ -56,7 +56,7 @@ class NotificationFragment : Fragment(), NotificationsAdapter.OnItemClickListene
 
     private fun onClickNavigateBack(){
         binding.imageviewBackNavArrow.setOnClickListener {
-            findNavController().navigate(R.id.action_notificationFragment_to_challangeFragment)
+            findNavController().popBackStack()
         }
     }
     private fun setupRecyclerView() {

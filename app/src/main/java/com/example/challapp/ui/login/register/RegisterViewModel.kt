@@ -2,11 +2,7 @@ package com.example.challapp.ui.login.register
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.challapp.domain.models.ApplicationUser
 import com.example.challapp.repository.FirestoreUserRepository
-import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -34,7 +30,6 @@ class RegisterViewModel @Inject constructor(
             val user = userRepository.signUp(email, password)
 
             if (user != null) {
-                //val emailVerificationResult = emailVerification(user)
                 val addUserResult = userRepository.addUserToFirestore(user.uid, email, fullName)
                 if (addUserResult) {
                     _registerState.value = RegisterState.Success
@@ -51,15 +46,6 @@ class RegisterViewModel @Inject constructor(
 
     fun resetState(){
         _registerState.value = RegisterState.Empty
-    }
-
-    private fun emailVerification(user: FirebaseUser): Boolean {
-        return try {
-            user.sendEmailVerification()
-            true
-        } catch (e: Exception) {
-            false
-        }
     }
 
 }

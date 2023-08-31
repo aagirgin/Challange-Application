@@ -11,34 +11,46 @@ import androidx.navigation.fragment.findNavController
 import com.example.challapp.R
 import com.example.challapp.databinding.FragmentRegisterBinding
 import com.google.android.material.snackbar.Snackbar
-import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 @AndroidEntryPoint
 class RegisterFragment : Fragment() {
+    private lateinit var binding: FragmentRegisterBinding
+
     private val registerViewModel: RegisterViewModel by viewModels()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
 
-        val binding = FragmentRegisterBinding.inflate(inflater,container,false)
+        binding = FragmentRegisterBinding.inflate(inflater,container,false)
 
-
-        onPressedBackLoginPage(binding)
-        setupSignUpButton(binding)
+        onClickNavigatePrivacyPolicy()
+        onClickNavigateTermsOfService()
+        onPressedBackLoginPage()
+        setupSignUpButton()
 
         return binding.root
     }
 
-    private fun onPressedBackLoginPage(binding: FragmentRegisterBinding) {
+    private fun onPressedBackLoginPage() {
         binding.buttonBacktologin.setOnClickListener {
             findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
         }
     }
+    private fun onClickNavigatePrivacyPolicy(){
+        binding.textviewPrivacypolicy.setOnClickListener {
+            findNavController().navigate(R.id.action_registerFragment_to_privacyPolicyFragment)
+        }
+    }
 
+    private fun onClickNavigateTermsOfService(){
+        binding.textvirewTermsofservice.setOnClickListener {
+            findNavController().navigate(R.id.action_registerFragment_to_termsOfServiceFragment)
+        }
+    }
 
-    private fun setupSignUpButton(binding: FragmentRegisterBinding) {
+    private fun setupSignUpButton() {
         binding.buttonSignup.setOnClickListener {
             binding.buttonSignup.isEnabled = false
 
@@ -55,7 +67,7 @@ class RegisterFragment : Fragment() {
                             state ->
                         when (state) {
                             is RegisterState.Success -> {
-                                Snackbar.make(binding.root, "Registration successful.", Snackbar.LENGTH_SHORT).show()
+                                Snackbar.make(binding.root, getString(R.string.successful_register), Snackbar.LENGTH_SHORT).show()
                                 findNavController().navigate(R.id.action_registerFragment_to_mailVerificationFragment)
                                 registerViewModel.resetState()
                             }
@@ -73,7 +85,6 @@ class RegisterFragment : Fragment() {
             binding.buttonSignup.isEnabled = true
         }
     }
-
 
 
     private fun validationFields(email:String?,password:String?,fullName:String?): Boolean{

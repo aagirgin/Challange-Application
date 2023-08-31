@@ -17,7 +17,9 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class GroupFeedAdapter(private var itemList: MutableList<*>) : RecyclerView.Adapter<GroupFeedAdapter.ViewHolder>() {
+class GroupFeedAdapter(private var itemList: MutableList<GroupFeed>,
+                       private val memberNames: Map<String, String>?
+) : RecyclerView.Adapter<GroupFeedAdapter.ViewHolder>() {
 
     inner class ViewHolder(binding: AdapterGroupfeedItemBinding) :
         RecyclerView.ViewHolder(binding.root)  {
@@ -29,7 +31,7 @@ class GroupFeedAdapter(private var itemList: MutableList<*>) : RecyclerView.Adap
         private val shimmerLayout: ShimmerFrameLayout = binding.shimmerImage
 
         fun bind(data: GroupFeed) {
-            userName.text = data.userId
+            userName.text = memberNames?.get(data.userId)
             creationDate.text = data.questionDocumentId
             description.text = data.description
 
@@ -73,10 +75,10 @@ class GroupFeedAdapter(private var itemList: MutableList<*>) : RecyclerView.Adap
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val currentData = itemList[position]
-        holder.bind(currentData as GroupFeed)
+        holder.bind(currentData)
     }
 
-    fun setCompletedChallenges(challenges: MutableList<*>) {
+    fun setCompletedChallenges(challenges: MutableList<GroupFeed>) {
         itemList = challenges
         notifyDataSetChanged()
     }

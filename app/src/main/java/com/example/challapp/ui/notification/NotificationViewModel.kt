@@ -49,7 +49,7 @@ class NotificationViewModel @Inject constructor(
         }
     }
     suspend fun getUserNotifications(){
-        _userNotificationList.value = currentUser.value?.let { userRepository.getUserNotications(it.uid) }
+        _userNotificationList.value = currentUser.value?.let { userRepository.getUserNotifications(it.uid) }
     }
 
     suspend fun deleteOnRejection() {

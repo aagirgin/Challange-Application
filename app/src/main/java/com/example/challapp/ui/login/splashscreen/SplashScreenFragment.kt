@@ -37,8 +37,16 @@ class SplashScreenFragment : Fragment() {
 
             splashScreenViewModel.getCurrentUser.collect{ state ->
                 if (state != null){
-                    splashScreenViewModel.updateStreakOnNavigate()
-                    findNavController().navigate(R.id.action_splashScreenFragment_to_challangeFragment)
+                    splashScreenViewModel.getName()
+                    splashScreenViewModel.getCurrentUserName.collect{ userName ->
+                        if(userName == null && splashScreenViewModel.getCurrentUser.value?.uid != null){
+                            findNavController().navigate(R.id.action_splashScreenFragment_to_provideNameFragment)
+                        }
+                        else{
+                            splashScreenViewModel.updateStreakOnNavigate()
+                            findNavController().navigate(R.id.action_splashScreenFragment_to_challangeFragment)
+                        }
+                    }
                 }
                 else{
                     findNavController().navigate(R.id.action_splashScreenFragment_to_loginFragment)

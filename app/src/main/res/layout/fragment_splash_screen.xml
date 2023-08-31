@@ -9,16 +9,38 @@
         tools:context=".ui.login.splashscreen.SplashScreenFragment">
 
         <ImageView
-            android:id="@+id/medalImageJPG"
-            android:layout_width="310dp"
-            android:layout_height="367dp"
-            android:src="@drawable/medalpic"
+            android:id="@+id/imageview_challenger"
+            android:layout_width="300dp"
+            android:layout_height="400dp"
+            app:layout_constraintVertical_bias="0.3"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/challenger"
+            android:contentDescription="@string/challenger_image" />
 
+        <TextView
+            android:id="@+id/textview_challenger"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/challenger"
+            android:textSize="45sp"
+            android:fontFamily="@font/loramediumitalic"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageview_challenger" />
 
-
+        <TextView
+            android:id="@+id/textview_dailyChallengeApplication"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/loramediumitalic"
+            android:text="@string/daily_challenge_application"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintVertical_bias="0"
+            app:layout_constraintTop_toBottomOf="@+id/textview_challenger" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
