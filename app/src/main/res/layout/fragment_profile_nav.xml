@@ -6,7 +6,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.challengerdaily.challenge.ui.profile.profilenavigation.ProfileNavViewModel" />
+            type="com.example.challapp.ui.profile.profilenavigation.ProfileNavViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

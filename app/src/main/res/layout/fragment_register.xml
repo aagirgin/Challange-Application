@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.challengerdaily.challenge.ui.login.register.RegisterViewModel" />
+            type="com.example.challapp.ui.login.register.RegisterViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -246,7 +246,7 @@
             android:clickable="true"
             android:focusable="true"
             android:fontFamily="@font/interextrabold"
-            android:text="@string/common_signin_button_text"
+            android:text="@string/log_in_textbutton"
             android:textColor="@color/primaryApplicationColor"
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="@+id/textview_alreadyhaveacc"

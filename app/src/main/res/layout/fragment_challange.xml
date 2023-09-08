@@ -5,7 +5,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.challengerdaily.challenge.ui.feed.challange.ChallangeViewModel" />
+            type="com.example.challapp.ui.feed.challange.ChallangeViewModel" />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

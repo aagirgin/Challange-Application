@@ -61,11 +61,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/loramedium"
-                    android:text="@string/group_information"
+                    android:text="@string/see_this_group_s_information"
                     android:textSize="18sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/imageView"
-                    app:layout_constraintHorizontal_bias="0.65"
+                    app:layout_constraintHorizontal_bias="0.7"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 

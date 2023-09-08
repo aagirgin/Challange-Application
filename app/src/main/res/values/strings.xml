@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Challenger Daily</string>
+    <string name="app_name">ChallApp</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="log_in_now">Log In Now</string>
@@ -104,6 +104,7 @@
     <string name="navigate_arrow">Navigate Arrow</string>
     <string name="inviteKey_start">\@</string>
     <string name="group_feed">Group Feed</string>
+    <string name="see_this_group_s_information">See This Group\'s Information</string>
     <string name="group_users_completed_challenges">Group Users Completed Challenges</string>
     <string name="navigate_group_info">Navigate Group Info</string>
     <string name="add_photo">Add Photo</string>
