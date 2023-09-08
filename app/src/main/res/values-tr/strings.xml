@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Challenger Daily</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Merhaba boş fragman</string>
+    <string name="log_in_now">Şimdi Giriş Yap</string>
+    <string name="login_prompt">Uygulamaya devam etmek için giriş yapın</string>
+    <string name="email_textfield">E-posta</string>
+    <string name="password_logintext">Şifre</string>
+    <string name="forgot_password">Şifremi Unuttum?</string>
+    <string name="log_in_textbutton">Giriş Yap</string>
+    <string name="don_t_have_an_account">Hesabınız yok mu?</string>
+    <string name="sign_up_loginpagetext">Üye Ol</string>
+    <string name="loginpageimage">girisSayfaResim</string>
+    <string name="registerpageimage">kayitSayfaResim</string>
+    <string name="sign_up_now">Şimdi Üye Ol</string>
+    <string name="signup_prompt">Lütfen bilgileri doldurun ve hesap oluşturun</string>
+    <string name="full_name">Ad Soyad</string>
+    <string name="you_agree_to_our">Şunları kabul ediyorsunuz:</string>
+    <string name="and">ve</string>
+    <string name="terms_of_service">Hizmet Koşulları</string>
+    <string name="sign_up_registerpagebutton">Üye Ol</string>
+    <string name="already_have_an_account">Zaten bir hesabınız var mı?</string>
+    <string name="forgotpageimage">sifremiUnuttumResim</string>
+    <string name="forgot_your_password">Şifrenizi mi unuttunuz?</string>
+    <string name="forgotbottomPrompt">Şifrenizi kurtarmak için e-postanızı girin</string>
+    <string name="recoverButtonText">Kurtar</string>
+    <string name="verify_now">E-postanızı Şimdi Doğrulayın</string>
+    <string name="verifynowpromtbottomtext">Hesabınızı doğrulayın ve yolculuğunuza başlayın</string>
+    <string name="verifypageimage">dogrulamaSayfaResim</string>
+    <string name="verifynowbottomPrompt">E-postanızı doğruladıktan sonra uygulamayı kullanmaya başlayabilirsiniz</string>
+    <string name="verifying_your_mail">e-postanızı doğruluyoruz.</string>
+    <string name="wish_great_exp">Deneyiminizin keyfini çıkarmanızı dileriz</string>
+    <string name="back_to_login">Girişe Dön</string>
+    <string name="profilePageNamePromt">Ad</string>
+    <string name="profilePageMailPrompt">E-posta</string>
+    <string name="apply_changes_button">Değişiklikleri Uygula</string>
+    <string name="account_information">Hesap Bilgileri</string>
+    <string name="change_password_text">Şifreyi Değiştir</string>
+    <string name="delete_account">Hesabı Sil</string>
+    <string name="current_password">Geçerli Şifre</string>
+    <string name="new_password">Yeni Şifre</string>
+    <string name="confirm_password">Şifreyi Onayla</string>
+    <string name="notification_image">Bildirim Resmi</string>
+    <string name="days">Gün</string>
+    <string name="daily_challenge">Günlük Meydan Okuma</string>
+    <string name="daily_chall_history">Günlük meydan okuma geçmişinize göz atın</string>
+    <string name="btn_see_your_daily_challenge">Günlük Meydan Okumanızı Görüntüleyin</string>
+    <string name="share_and_compete_with_your_friends">Arkadaşlarınızla paylaşın ve yarışın.</string>
+    <string name="complete_your_given_daily_challelenge">Verilen günlük meydan okumayı tamamlayın</string>
+    <string name="current_groups">Mevcut Gruplar</string>
+    <string name="create_your_group">Grubunuzu Oluşturun</string>
+    <string name="add_image">Resim Ekle</string>
+    <string name="profile">Profil</string>
+    <string name="community">Topluluk</string>
+    <string name="home">Ana Sayfa</string>
+    <string name="group_details">Grup Detayları</string>
+    <string name="group_owner">Grup Sahibi</string>
+    <string name="create_group">Grup Oluştur</string>
+    <string name="group_name">Grup Adı</string>
+    <string name="group_description">Grup Açıklaması</string>
+    <string name="invite_your_friends_and_share_your_challenges">Arkadaşlarınızı davet edin ve meydan okumalarınızı paylaşın</string>
+    <string name="create_your_group_in_under_a_minute">Grubunuzu bir dakika içinde oluşturun</string>
+    <string name="back_navigation_arrow">Geri Dön Oku</string>
+    <string name="member">Üye</string>
+    <string name="owner">Kurucu</string>
+    <string name="see_your_daily_challenge">Günlük Meydan Okumanızı Görüntüleyin</string>
+    <string name="fill_forms_error">"Lütfen tüm alanları doldurun."</string>
+    <string name="email_Sent_succesful">"Şifrenizi sıfırlamak için e-posta başarıyla gönderildi."</string>
+    <string name="email_Sent_unsuccesful">"Sıfırlama e-postası gönderilemedi."</string>
+    <string name="sign_out">Çıkış Yap</string>
+    <string name="challenge_date">Meydan Okuma Tarihi</string>
+    <string name="automatic_group_msg">Bu meydan okuma otomatik olarak gruplarınızla paylaşılacaktır.</string>
+    <string name="mark_challenge_as_complete">Meydan Okumayı Tamamlandı Olarak İşaretle</string>
+    <string name="challange_description">Meydan Okuma Açıklaması</string>
+    <string name="add_photo_image">Resim Ekle</string>
+    <string name="login_failed">Giriş başarısız oldu: Lütfen kimlik bilgilerinizi kontrol edin.</string>
+    <string name="fill_namefield">Lütfen ad alanını doldurun.</string>
+    <string name="password_didnot_match">Şifreler uyuşmuyor.</string>
+    <string name="check_current_password">Lütfen geçerli şifrenizi kontrol edin.</string>
+    <string name="check_password_length">Şifre uzunluğu 6 karakterden uzun olmalıdır.</string>
+    <string name="password_change_success">Şifre başarıyla değiştirildi</string>
+    <string name="password_change_fail">Şifre değiştirme başarısız oldu</string>
+    <string name="picture_or_description">Açıklamayı doldurmalısınız veya bir resim yüklemelisiniz.</string>
+    <string name="change_password">Şifre Değiştir</string>
+    <string name="start_premium">Premium\'a Başla</string>
+    <string name="premium_adventages_prompt">Premium\'un avantajlarını keşfedin ve deneyiminizi daha da geliştirin.</string>
+    <string name="completed_challenges">Meydan Okumalar</string>
+    <string name="completed_challenge_prompt">Şimdiye kadar tamamladığınız tüm meydan okumalarınızı görüntülemek için dokunun.</string>
+    <string name="all_challenges_you_completed">Tamamladığınız tüm meydan okumalar</string>
+    <string name="creation_date">Oluşturma Tarihi</string>
+    <string name="ali_arda_girgin">Ali Arda Girgin</string>
+    <string name="see_daily_question_for_that_day">O günün Günlük Sorusunu Görüntüle</string>
+    <string name="register_succesful">Kayıt başarılı.</string>
+    <string name="user_count_format"> %d Kullanıcı</string>
+    <string name="challenge_count_format"> %d Meydan Okuma</string>
+    <string name="personal_challenge_image">Kişisel Meydan Okuma Resmi</string>
+    <string name="description">Açıklama</string>
+    <string name="default_group_image">Varsayılan Grup Resmi</string>
+    <string name="group_member_sign">Grup Üyesi İmzası</string>
+    <string name="info_image">Bilgi Resmi</string>
+    <string name="info_onClickCompletedChallenge">Tamamlanan meydan okumaları için özel olarak tıklayarak o günün günlük sorularını görebilirsiniz.</string>
+    <string name="here_is_my_name">İşte Benim Adım</string>
+    <string name="change_name_icon">Ad Değiştirme İkonu</string>
+    <string name="navigate_arrow">Yol Gösterici Ok</string>
+    <string name="inviteKey_start">\@</string>
+    <string name="group_feed">Grup</string>
+    <string name="group_users_completed_challenges">Grup Kullanıcıları Meydan Okumalar</string>
+    <string name="navigate_group_info">Grup Bilgilerini Gez</string>
+    <string name="add_photo">Fotoğraf Ekle</string>
+    <string name="group_information">Grup Bilgileri</string>
+    <string name="invite_your_friends_with_their_invite_keys">Arkadaşlarınızı 8 haneli davet anahtarlarıyla davet edin.</string>
+    <string name="keys_are_located_in_profile_section">Anahtarlar profil bölümünde bulunmaktadır.</string>
+    <string name="group_members">Grup Üyeleri</string>
+    <string name="add_with_invite_key">Davet Anahtarı ile Ekle</string>
+    <string name="group_settings">Grup Ayarları</string>
+    <string name="notifications">Bildirimler</string>
+    <string name="user_sent_you_an_invitation_for_you_to_join_group">Kullanıcı sizi gruba katılmak için davet etti.</string>
+    <string name="notificationtypeimage">Bildirim Türü Resmi</string>
+    <string name="join_group_prompt">Gruba katılmak istiyor musunuz?</string>
+    <string name="accept">Kabul Et</string>
+    <string name="decline">Reddet</string>
+    <string name="group_photo_default">Varsayılan Grup Resmi</string>
+    <string name="privacy_policy">Gizlilik Politikası</string>
+    <string name="group_invitation_status">Grup Daveti Durumu</string>
+    <string name="leave_group">Grubu Terk Et / Sil</string>
+    <string name="leave_group_icon">Grubu Terk Et İkonu</string>
+    <string name="invitationstatus_icon">Daveti Durumu İkonu</string>
+    <string name="clipboard_image">Pano İkonu</string>
+    <string name="cancel">İptal</string>
+    <string name="ok">Tamam</string>
+    <string name="stay">Kal</string>
+    <string name="leave">Terk Et</string>
+    <string name="leave_group_title">Grubu Terk Et</string>
+    <string name="leave_group_title_text">Bu grubun sahibisiniz!
+Bu grubu silmek istediğinizden emin misiniz?</string>
+    <string name="inv_status_change_message">Grup daveti durumu başarıyla değiştirildi.</string>
+    <string name="delete">Sil</string>
+    <string name="delete_group_title">Grubu Sil</string>
+    <string name="delete_group_title_text">Bu grubun sahibisiniz!
+Bu grubu silmek istediğinizden emin misiniz?</string>
+    <string name="successfully_left_group">Grubu terk ettiniz.</string>
+    <string name="successfully_delete_group">Grubu başarıyla sildiniz ve terk ettiniz.</string>
+    <string name="circle_streak_view">Daire Çizgi Görünümü</string>
+    <string name="premium_star">Premium Yıldız</string>
+    <string name="navigation_arrow">Navigasyon Oku</string>
+    <string name="completed_challenges_swoosh">Meydan Okumalar Swoosh</string>
+    <string name="deleted_group_string">%s adlı grup sahibi tarafından silindi.</string>
+    <string name="continue_with_google">Google ile Devam Et</string>
+    <string name="google_icon">Google İkonu</string>
+    <string name="sign_up_with_google">Google ile Kaydol</string>
+    <string name="successful_register">Kayıt başarılı.</string>
+    <string name="default_web_client_id">546035071552-rjrhvc5nujqpdu43nhdjamtttt0arvh4.apps.googleusercontent.com</string>
+    <string name="last_step">Son Adım</string>
+    <string name="submit">Gönder</string>
+    <string name="fill_name_promt">Adı doldurun ve işte gidiyorsunuz.</string>
+    <string name="last_step_picture">Son Adım Resmi</string>
+    <string name="submit_name_error">Adınızı gönderirken bir hata oluştu.</string>
+    <string name="privacy_policy_text">Ali Girgin, Challenger Daily Challenge uygulamasını Ücretsiz bir uygulama olarak sunar. Bu HİZMET, Ali Girgin tarafından ücretsiz olarak sağlanmaktadır ve kullanım amacı budur.
+
+Bu sayfa, ziyaretçilere HİZMETimi kullanmaya karar verenlerin kişisel bilgilerinin toplanması, kullanılması ve açıklanması ile ilgili politikalarım hakkında bilgi vermek için kullanılır.
+
+HİZMETİmi kullanmayı seçerseniz, bu politika ile ilgili olarak bilgilerin toplanmasını ve kullanılmasını kabul edersiniz. Topladığım Kişisel Bilgiler, hizmeti sağlamak ve geliştirmek amacıyla kullanılır. Bu Gizlilik Politikası\'nda aksi belirtilmedikçe, topladığımız bilgileri bu Gizlilik Politikası\nda açıklanan dışında hiçbir şekilde kullanmayız veya paylaşmayız.
+
+Bu Gizlilik Politikasında kullanılan terimler, Challenger Daily Challengedaki Kullanım Koşullarında aynı anlama gelir ve aksi belirtilmediği sürece aynı anlama gelir.</string>
+    <string name="privacy_policy_information_use">HİZMETİmizi kullanırken daha iyi bir deneyim için sizden belirli kişisel kimlik bilgilerinizi sağlamanızı isteyebilirim. İstediğim bilgiler cihazınızda saklanır ve hiçbir şekilde tarafımca toplanmaz.
+
+Uygulama, sizi tanımlamak için kullanılan bilgileri toplayabilecek üçüncü taraf hizmetlerini kullanır.
+
+Uygulama tarafından kullanılan üçüncü taraf hizmet sağlayıcılarının gizlilik politikasına bağlantı
+
+\t* Google Play Hizmetleri\n
+\t* Google Firebase için Google Analytics</string>
+    <string name="privacy_policy_log_data">Siz HİZMETİmizi kullanırken, uygulamada bir hata oluştuğunda (üçüncü taraf ürünler aracılığıyla) telefonunuzda Log Verileri olarak adlandırılan verileri ve bilgileri toplarım. Bu Log Verileri, cihazınızın İnternet Protokolü ("IP") adresi, cihaz adı, işletim sistemi sürümü, HİZMETİmizi kullanırken uygulamanın yapılandırması, HİZMETİmizi kullanımınızın zamanı ve tarihi ve diğer istatistikler gibi bilgileri içerebilir.</string>
+    <string name="privacy_policy_cookies">Çerezler, genellikle anonim benzersiz tanımlayıcılar olarak kullanılan küçük veri miktarına sahip dosyalardır. Bu, ziyaret ettiğiniz web sitelerinden tarayıcınıza gönderilir ve cihazınızın dahili hafızasına kaydedilir.
+
+Bu HİZMET açıkça bu "çerezleri" kullanmaz. Ancak, uygulama, bilgileri toplamak ve hizmetlerini geliştirmek için "çerezleri" kullanan üçüncü taraf kod ve kütüphaneleri kullanabilir. Bu çerezleri kabul etmeyi veya reddetmeyi seçme seçeneğiniz vardır ve birçok tarayıcı bu çerezleri otomatik olarak kabul eder.
+
+Eğer çerezleri tercih etmezseniz, uygulama üzerinden bazı özellikleri kullanamayabilirsiniz.</string>
+    <string name="privacy_policy_service_providers">Hizmetim, üçüncü taraf hizmetleri kullanabilir ki bunlar, HİZMETİmizi daha iyi anlamamıza yardımcı olur ve HİZMETİmizi nasıl ve ne zaman kullanıldığını izlememize yardımcı olur.
+
+\t* Google Play Hizmetleri\n
+\t* Google Analytics for Firebase</string>
+    <string name="privacy_policy_security">HİZMETİmizi kullanırken bize güvendiğinizi bilmek istiyoruz, bu yüzden kişisel bilgileri koruma konusunda en iyi çabalarımızı sarf ediyoruz. Ancak, İnternet üzerinden veri iletiminin veya elektronik depolamanın %100 güvenli olmadığını unutmayın. Bu nedenle, kişisel verilerinizi bize ilettiğinizde, bu verilerin İnternet üzerinden iletilmesini veya depolanmasını garanti etmemekteyiz ve bu tür iletimlerin veya depolamaların güvenliğini sağlama konusundaki sorumluluğu kabul etmemekteyiz.
+
+HİZMETİmizi kullanarak bu Gizlilik Politikasını kabul edersiniz. Bu politikadaki değişiklikler hakkında size bilgi vermek veya bu politikadaki değişiklikleri güncellemek için bu sayfayı düzenli olarak gözden geçirmenizi öneririz. Bu politikadaki herhangi bir değişiklikler, bu sayfada yayınlandığı tarihte yürürlüğe girecektir.</string>
+    <string name="privacy_policy_links">Bu Hizmet, diğer sitelere bağlantılar içerebilir. Üçüncü taraf bir bağlantıya tıklarsanız, o siteye yönlendirilirsiniz. Bu harici sitelerin tarafımca işletilmediğini unutmayın. Bu nedenle, bu web sitelerinin Gizlilik Politikalarını gözden geçirmenizi şiddetle tavsiye ederim. Üçüncü taraf sitelerin veya hizmetlerin içeriğinden, gizlilik politikalarından veya uygulamalarından sorumlu olmadığımı ve üzerinde hiçbir kontrolüm olmadığını kabul ediyorum.</string>
+    <string name="privacy_policy_children">Bu Hizmetler 13 yaşın altındaki kişilere yönelik değildir. Bilerek 13 yaşın altındaki çocuklardan kişisel kimlik bilgilerini toplamam. 13 yaşın altındaki bir çocuğun bana kişisel bilgi sağladığını tespit edersem, bu bilgiyi hemen sunucularımızdan sileceğim. Eğer bir ebeveyn veya vasiseniz ve çocuğunuzun bize kişisel bilgi sağladığını biliyorsanız, lütfen gerekli işlemleri yapabilmemiz için benimle iletişime geçin.</string>
+    <string name="privacy_policy_changes">Gizlilik Politikamızı zaman zaman güncelleyebilirim. Bu nedenle, herhangi bir değişiklik için bu sayfayı periyodik olarak gözden geçirmeniz önerilir. Herhangi bir değişiklikleri size yeni Gizlilik Politikasını bu sayfada yayınlayarak bildireceğim.
+
+Bu politika 2023-08-25 tarihinden itibaren geçerlidir.</string>
+    <string name="privacy_policy_contactus">Gizlilik Politikam hakkında herhangi bir sorunuz veya öneriniz varsa, lütfen challengerdailychallenge@gmail.com adresinden benimle iletişime geçmekten çekinmeyin.
+
+Bu gizlilik politikası sayfası privacypolicytemplate.net adresinde oluşturulmuş ve App Privacy Policy Generator tarafından düzenlenmiştir/oluşturulmuştur.</string>
+    <string name="information_collection_and_use">Bilgi Toplama ve Kullanım</string>
+    <string name="log_data">Log Verileri</string>
+    <string name="cookies">Çerezler</string>
+    <string name="service_providers">Hizmet Sağlayıcıları</string>
+    <string name="security">Güvenlik</string>
+    <string name="links_to_other_sites">Diğer Sitelere Bağlantılar</string>
+    <string name="children_s_privacy">Çocukların Gizliliği</string>
+    <string name="changes_to_this_terms_and_conditions_text">Kullanım Koşullarımızı zaman zaman güncelleyebilirim. Bu nedenle, herhangi bir değişiklik için bu sayfayı periyodik olarak gözden geçirmeniz önerilir. Yeni Kullanım Koşullarını bu sayfada yayınlayarak herhangi bir değişiklikleri size bildireceğim.
+
+Bu kullanım koşulları 2023-08-25 tarihinden itibaren geçerlidir.</string>
+    <string name="contactus_terms_and_conditions">Eğer Kullanım Koşullarım hakkında herhangi bir sorunuz veya öneriniz varsa, lütfen challengerdailychallenge@gmail.com adresinden benimle iletişime geçmekten çekinmeyin.
+
+Bu Kullanım Koşulları sayfası App Privacy Policy Generator tarafından oluşturulmuştur.</string>
+
+    <string name="premium_advantages">Premium Avantajları</string>
+    <string name="premium_feature_will_be_added_with_newer_updates">Premium özellikler, daha yeni güncellemelerle eklenecektir</string>
+    <string name="if_you_have_any_suggestions_feel_free_to_contact_us">Herhangi bir öneriniz varsa, bizimle iletişime geçmekten çekinmeyin</string>
+    <string name="commonMail">challengerdailychallenge@gmail.com</string>
+    <string name="challenger">Challenger</string>
+    <string name="daily_challenge_application">Günlük Meydan Okuma Uygulaması</string>
+    <string name="challenger_image">Challenger Resmi</string>
+    <string name="fill_name_error">Lütfen ad alanını doldurun ve tekrar deneyin.</string>
+    <string name="delete_account_text">Hesabınızı silmek istediğinizden emin misiniz?\nEğer bir grup sahibiyseniz, grup dağıtılacaktır!</string>
+    <string name="signout_account_text">Hesabınızdan çıkmak istediğinizden emin misiniz?</string>
+    <string name="deleted_user">Silinmiş Kullanıcı</string>
+    <string name="changes_to_this_privacy_policy">Gizlilik Politikası Değişiklikleri</string>
+    <string name="contact_us">Bize Ulaşın</string>
+    <string name="terms_amp_conditions"><![CDATA[Şartlar ve Koşullar]]></string>
+    <string name="terms_and_conditions_text">Uygulamayı indirerek veya kullanarak, bu şartlar otomatik olarak size uygulanır - bu nedenle uygulamayı kullanmadan önce bunları dikkatlice okuduğunuzdan emin olmalısınız. Uygulamanın kendisini, tüm ticari markaları, telif hakkı, veritabanı hakları ve diğer bunlarla ilgili fikri mülkiyet hakları hala Ali Girgin\'e aittir.
+
+Ali Girgin, uygulamanın mümkün olduğunca kullanışlı ve verimli olmasını sağlama taahhüdündedir. Bu nedenle, uygulamada değişiklik yapma veya hizmetlerini ücretlendirme hakkını her zaman ve herhangi bir nedenle saklı tutarız. Size uygulamayı veya hizmetlerini ödemeden açıkça ne için ödeme yaptığınızı belirtmeden asla ücretlendirmeyeceğiz.
+
+Challenger Daily Challenge uygulaması, bize sağladığınız kişisel verileri sağlamak için saklar ve işler. Telefonunuzu ve uygulamaya erişiminizi güvende tutmak sizin sorumluluğunuzdadır. Bu nedenle telefonunuzu jailbreak yapmamanız veya köklememeniz, cihazınızın resmi işletim sistemince uygulanan yazılım kısıtlamalarını ve sınırlamalarını kaldırma işlemidir. Bu, telefonunuzu kötü amaçlı yazılımlara, virüslere ve zararlı programlara karşı savunmasız hale getirebilir, telefonunuzun güvenlik özelliklerini tehlikeye atabilir ve Challenger Daily Challenge uygulamasının düzgün çalışmamasına veya hiç çalışmamasına neden olabilir.
+
+Uygulama, üçüncü taraf hizmetlerini kullandığını beyan eden üçüncü taraf hizmet sağlayıcılarını kullanır.
+
+Uygulama tarafından kullanılan üçüncü taraf hizmet sağlayıcılarının Şartları ve Koşullarının bağlantısı
+
+\t *Google Play Services\n
+\t *Google Analytics for Firebase\n
+
+Ali Girgin\'in sorumlu olmayacağı bazı konular olduğunu unutmayın. Uygulamanın bazı işlevleri, uygulamanın aktif bir internet bağlantısına sahip olmasını gerektirecektir. Bağlantı Wi-Fi ile olabilir veya mobil ağ sağlayıcınız tarafından sağlanabilir, ancak Wi-Fi erişiminiz yoksa veya veri kotası kalmamışsa uygulamanın tam işlevsellikte çalışmaması için Ali Girgin sorumlu tutulamaz. Uygulamayı Wi-Fi erişimi olmadan kullanıyorsanız, mobil ağ sağlayıcınızla olan anlaşma koşullarının hala geçerli olduğunu unutmalısınız. Sonuç olarak, uygulamaya erişirken bağlantı süresince mobil sağlayıcınız tarafından veri maliyeti için ücretlendirilebilirsiniz veya diğer üçüncü taraf ücretleri olabilir. Uygulamayı kullanarak, böyle bir ücret dahil olmak üzere bu tür ücretlerin sorumluluğunu üstleniyorsunuz, veri dolaşımını kapatmadan ev dışında (bölge veya ülke) uygulamayı kullanıyorsanız dolaşım verisi ücretlerini içerir. Uygulamayı kullandığınız cihazın fatura ödeyici olmadığınızı varsaydığımızı unutmayın.
+
+Aynı çizgide, Ali Girgin her zaman uygulamayı nasıl kullandığınızdan sorumlu olamaz, yani cihazınızın daima şarjlı olduğundan emin olmanız gerekmektedir - eğer pil bitmişse ve Servisi kullanamıyorsanız, Ali Girgin sorumluluk kabul edemez.
+
+Ali Girgin\'in uygulamanızı kullanımınıza ilişkin sorumluluğu açısından, uygulamayı kullandığınızda, bunun her zaman güncellendiğinden ve doğru olduğundan emin olmaya çalışsak da, size sunulabilmesi için üçüncü taraflardan bilgi almamıza dayandığınızı unutmamak önemlidir. Ali Girgin, uygulamanın bu işlevselliğine tamamen dayandığınız için deneyimlediğiniz herhangi bir kayıp için doğrudan veya dolaylı herhangi bir sorumluluk kabul etmez.
+
+Bir noktada, uygulamayı güncellemek isteyebiliriz. Uygulama şu anda Androidde mevcut - sistem için gereksinimler (ve uygulamanın erişilebilirliğini genişletmeye karar verirsek ek sistemler için) değişebilir ve uygulamayı kullanmaya devam etmek istiyorsanız güncellemeleri indirmeniz gerekebilir. Ali Girgin, uygulamayı her zaman size uygun ve/veya cihazınıza yüklediğiniz Android sürümü ile çalışacak şekilde güncelleyeceğini vaat etmez. Bununla birlikte, size uygulama güncellemeleri sunulduğunda bunları her zaman kabul etmeyi taahhüt edersiniz. Ayrıca, uygulamanın sunulmasını durdurmayı ve kullanımınızı herhangi bir zamanda bildirim yapmadan sonlandırmayı isteyebiliriz. Size başka bir şey söylemezsek, herhangi bir sonlandırma sonrası (a) size bu şartlarda size verilen haklar ve lisanslar sona erecektir; (b) uygulamayı kullanmayı bırakmalısınız ve (gerekiyorsa) cihazınızdan silmelisiniz.</string>
+    <string name="changes_to_this_terms_and_conditions">Şartlar ve Koşullar Değişiklikleri</string>
+</resources>
