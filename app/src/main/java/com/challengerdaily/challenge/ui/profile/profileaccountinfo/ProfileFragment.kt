@@ -13,6 +13,7 @@ import androidx.navigation.fragment.findNavController
 import com.challengerdaily.challenge.R
 import com.challengerdaily.challenge.databinding.FragmentProfileBinding
 import com.challengerdaily.challenge.extensions.load
+import com.challengerdaily.challenge.utils.CopyClipboardUtils
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -33,6 +34,10 @@ class ProfileFragment : Fragment() {
         loadProfileImage()
         onNavigateBack()
         changeName()
+
+        binding.imageviewClipboard.setOnClickListener {
+            copyInviteKeyToClipboard()
+        }
 
         return binding.root
     }
@@ -77,6 +82,12 @@ class ProfileFragment : Fragment() {
                 Snackbar.make(binding.root, getString(R.string.fill_namefield), Snackbar.LENGTH_SHORT).show()
             }
         }
+    }
+
+    private fun copyInviteKeyToClipboard(){
+        val invKey = binding.textviewInvitationKey.text
+        CopyClipboardUtils.copyTextToClipboard(invKey,requireContext())
+        Snackbar.make(binding.root, getString(R.string.invkey_clipboard), Snackbar.LENGTH_SHORT).show()
     }
 
     private fun loadProfileImage() {

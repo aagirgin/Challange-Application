@@ -16,7 +16,9 @@ import androidx.navigation.fragment.findNavController
 import com.challengerdaily.challenge.R
 import com.challengerdaily.challenge.databinding.FragmentProfileNavBinding
 import com.challengerdaily.challenge.extensions.load
+import com.challengerdaily.challenge.utils.CopyClipboardUtils
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -107,6 +109,10 @@ class ProfileNavFragment : Fragment() {
         binding.viewSignout.setOnClickListener {
             showSignOutAccountDialog()
         }
+        binding.imageviewClipboard.setOnClickListener {
+            copyInviteKeyToClipboard()
+
+        }
     }
 
 
@@ -149,4 +155,9 @@ class ProfileNavFragment : Fragment() {
         alertDialogBuilder.create().show()
     }
 
+    private fun copyInviteKeyToClipboard(){
+        val invKey = binding.textviewInvitationKey.text
+        CopyClipboardUtils.copyTextToClipboard(invKey,requireContext())
+        Snackbar.make(binding.root, getString(R.string.invkey_clipboard), Snackbar.LENGTH_SHORT).show()
+    }
 }

@@ -150,7 +150,6 @@ Bu grubu silmek istediğinizden emin misiniz?</string>
     <string name="google_icon">Google İkonu</string>
     <string name="sign_up_with_google">Google ile Kaydol</string>
     <string name="successful_register">Kayıt başarılı.</string>
-    <string name="default_web_client_id">546035071552-rjrhvc5nujqpdu43nhdjamtttt0arvh4.apps.googleusercontent.com</string>
     <string name="last_step">Son Adım</string>
     <string name="submit">Gönder</string>
     <string name="fill_name_promt">Adı doldurun ve işte gidiyorsunuz.</string>
@@ -241,4 +240,5 @@ Ali Girgin\'in uygulamanızı kullanımınıza ilişkin sorumluluğu açısında
 
 Bir noktada, uygulamayı güncellemek isteyebiliriz. Uygulama şu anda Androidde mevcut - sistem için gereksinimler (ve uygulamanın erişilebilirliğini genişletmeye karar verirsek ek sistemler için) değişebilir ve uygulamayı kullanmaya devam etmek istiyorsanız güncellemeleri indirmeniz gerekebilir. Ali Girgin, uygulamayı her zaman size uygun ve/veya cihazınıza yüklediğiniz Android sürümü ile çalışacak şekilde güncelleyeceğini vaat etmez. Bununla birlikte, size uygulama güncellemeleri sunulduğunda bunları her zaman kabul etmeyi taahhüt edersiniz. Ayrıca, uygulamanın sunulmasını durdurmayı ve kullanımınızı herhangi bir zamanda bildirim yapmadan sonlandırmayı isteyebiliriz. Size başka bir şey söylemezsek, herhangi bir sonlandırma sonrası (a) size bu şartlarda size verilen haklar ve lisanslar sona erecektir; (b) uygulamayı kullanmayı bırakmalısınız ve (gerekiyorsa) cihazınızdan silmelisiniz.</string>
     <string name="changes_to_this_terms_and_conditions">Şartlar ve Koşullar Değişiklikleri</string>
+    <string name="invkey_clipboard">Davet Anahtarı kopyalandı</string>
 </resources>
