@@ -6,7 +6,7 @@
 
         <variable
             name="viewModel"
-            type="com.example.challapp.ui.login.loginpage.LoginViewModel" />
+            type="com.challengerdaily.challenge.ui.login.loginpage.LoginViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -42,6 +42,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/interlight"
+            android:textAlignment="center"
             android:text="@string/login_prompt"
             android:textSize="16sp"
             app:layout_constraintBottom_toTopOf="@+id/inputtext_email"

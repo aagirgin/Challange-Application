@@ -6,7 +6,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.challapp.ui.profile.profilechangepassword.ProfileChangePwViewModel" />
+            type="com.challengerdaily.challenge.ui.profile.profilechangepassword.ProfileChangePwViewModel" />
     </data>
 
 

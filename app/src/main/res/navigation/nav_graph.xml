@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.example.challapp.ui.login.loginpage.LoginFragment"
+        android:name="com.challengerdaily.challenge.ui.login.loginpage.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" >
         <action
@@ -45,7 +45,7 @@
     </fragment>
     <fragment
         android:id="@+id/registerFragment"
-        android:name="com.example.challapp.ui.login.register.RegisterFragment"
+        android:name="com.challengerdaily.challenge.ui.login.register.RegisterFragment"
         android:label="fragment_register"
         tools:layout="@layout/fragment_register" >
         <action
@@ -83,7 +83,7 @@
     </fragment>
     <fragment
         android:id="@+id/challangeFragment"
-        android:name="com.example.challapp.ui.feed.challange.ChallangeFragment"
+        android:name="com.challengerdaily.challenge.ui.feed.challange.ChallangeFragment"
         android:label="fragment_challange"
         tools:layout="@layout/fragment_challange" >
         <action
@@ -140,7 +140,7 @@
     </fragment>
     <fragment
         android:id="@+id/forgotpasswordFragment"
-        android:name="com.example.challapp.ui.login.forgotpassword.ForgotpasswordFragment"
+        android:name="com.challengerdaily.challenge.ui.login.forgotpassword.ForgotpasswordFragment"
         android:label="fragment_forgotpassword"
         tools:layout="@layout/fragment_forgotpassword" >
         <action
@@ -155,7 +155,7 @@
     </fragment>
     <fragment
         android:id="@+id/mailVerificationFragment"
-        android:name="com.example.challapp.ui.login.register.MailVerificationFragment"
+        android:name="com.challengerdaily.challenge.ui.login.register.MailVerificationFragment"
         android:label="fragment_mail_verification"
         tools:layout="@layout/fragment_mail_verification" >
         <action
@@ -169,7 +169,7 @@
     </fragment>
     <fragment
         android:id="@+id/splashScreenFragment"
-        android:name="com.example.challapp.ui.login.splashscreen.SplashScreenFragment"
+        android:name="com.challengerdaily.challenge.ui.login.splashscreen.SplashScreenFragment"
         android:label="fragment_splash_screen"
         tools:layout="@layout/fragment_splash_screen" >
         <action
@@ -204,7 +204,7 @@
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.example.challapp.ui.profile.profileaccountinfo.ProfileFragment"
+        android:name="com.challengerdaily.challenge.ui.profile.profileaccountinfo.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" >
         <action
@@ -234,7 +234,7 @@
     </fragment>
     <fragment
         android:id="@+id/profileChangePwFragment"
-        android:name="com.example.challapp.ui.profile.profilechangepassword.ProfileChangePwFragment"
+        android:name="com.challengerdaily.challenge.ui.profile.profilechangepassword.ProfileChangePwFragment"
         android:label="fragment_profile_change_pw"
         tools:layout="@layout/fragment_profile_change_pw" >
         <action
@@ -256,7 +256,7 @@
     </fragment>
     <fragment
         android:id="@+id/profileNavFragment"
-        android:name="com.example.challapp.ui.profile.profilenavigation.ProfileNavFragment"
+        android:name="com.challengerdaily.challenge.ui.profile.profilenavigation.ProfileNavFragment"
         android:label="fragment_profile_nav"
         tools:layout="@layout/fragment_profile_nav" >
         <action
@@ -294,7 +294,7 @@
     </fragment>
     <fragment
         android:id="@+id/groupFragment"
-        android:name="com.example.challapp.ui.group.landinggroup.GroupFragment"
+        android:name="com.challengerdaily.challenge.ui.group.landinggroup.GroupFragment"
         android:label="fragment_group"
         tools:layout="@layout/fragment_group" >
         <action
@@ -313,7 +313,7 @@
             app:popExitAnim="@anim/slide_out_right">
             <argument
                 android:name="selectedGroup"
-                app:argType="com.example.challapp.domain.models.ApplicationGroup" />
+                app:argType="com.challengerdaily.challenge.domain.models.ApplicationGroup" />
             <argument
                 android:name="groupPosition"
                 app:argType="integer" />
@@ -332,7 +332,7 @@
     </fragment>
     <fragment
         android:id="@+id/createGroupFragment"
-        android:name="com.example.challapp.ui.group.creategroup.CreateGroupFragment"
+        android:name="com.challengerdaily.challenge.ui.group.creategroup.CreateGroupFragment"
         android:label="fragment_create_group"
         tools:layout="@layout/fragment_create_group" >
         <action
@@ -347,7 +347,7 @@
     </fragment>
     <fragment
         android:id="@+id/dailyChallangeFragment"
-        android:name="com.example.challapp.ui.feed.dailychallange.DailyChallangeFragment"
+        android:name="com.challengerdaily.challenge.ui.feed.dailychallange.DailyChallangeFragment"
         android:label="fragment_daily_challange"
         tools:layout="@layout/fragment_daily_challange" >
         <action
@@ -362,7 +362,7 @@
     </fragment>
     <fragment
         android:id="@+id/completedChallengeFragment"
-        android:name="com.example.challapp.ui.feed.completedchallenges.CompletedChallengeFragment"
+        android:name="com.challengerdaily.challenge.ui.feed.completedchallenges.CompletedChallengeFragment"
         android:label="fragment_completed_challenge"
         tools:layout="@layout/fragment_completed_challenge" >
         <action
@@ -377,7 +377,7 @@
     </fragment>
     <fragment
         android:id="@+id/specificGroupFragment"
-        android:name="com.example.challapp.ui.group.specificgroup.SpecificGroupFragment"
+        android:name="com.challengerdaily.challenge.ui.group.specificgroup.SpecificGroupFragment"
         android:label="fragment_specific_group"
         tools:layout="@layout/fragment_specific_group" >
         <action
@@ -404,11 +404,11 @@
                 app:argType="string" />
             <argument
                 android:name="group"
-                app:argType="com.example.challapp.domain.models.ApplicationGroup" />
+                app:argType="com.challengerdaily.challenge.domain.models.ApplicationGroup" />
         </action>
         <argument
             android:name="selectedGroup"
-            app:argType="com.example.challapp.domain.models.ApplicationGroup" />
+            app:argType="com.challengerdaily.challenge.domain.models.ApplicationGroup" />
         <argument
             android:name="groupPosition"
             app:argType="integer" />
@@ -418,7 +418,7 @@
     </fragment>
     <fragment
         android:id="@+id/groupInfoFragment"
-        android:name="com.example.challapp.ui.group.infogroup.GroupInfoFragment"
+        android:name="com.challengerdaily.challenge.ui.group.infogroup.GroupInfoFragment"
         android:label="fragment_group_info"
         tools:layout="@layout/fragment_group_info" >
         <action
@@ -435,7 +435,7 @@
             app:argType="integer" />
         <argument
             android:name="group"
-            app:argType="com.example.challapp.domain.models.ApplicationGroup" />
+            app:argType="com.challengerdaily.challenge.domain.models.ApplicationGroup" />
         <argument
             android:name="selectedGroupId"
             app:argType="string" />
@@ -449,7 +449,7 @@
     </fragment>
     <fragment
         android:id="@+id/notificationFragment"
-        android:name="com.example.challapp.ui.notification.NotificationFragment"
+        android:name="com.challengerdaily.challenge.ui.notification.NotificationFragment"
         android:label="fragment_notification"
         tools:layout="@layout/fragment_notification" >
         <action
@@ -469,7 +469,7 @@
     </fragment>
     <fragment
         android:id="@+id/groupSettinsFragment"
-        android:name="com.example.challapp.ui.group.settingsgroup.GroupSettingsFragment"
+        android:name="com.challengerdaily.challenge.ui.group.settingsgroup.GroupSettingsFragment"
         android:label="fragment_group_settings"
         tools:layout="@layout/fragment_group_settings" >
         <action
@@ -483,7 +483,7 @@
             app:popUpToInclusive="true" />
         <argument
             android:name="group"
-            app:argType="com.example.challapp.domain.models.ApplicationGroup" />
+            app:argType="com.challengerdaily.challenge.domain.models.ApplicationGroup" />
         <argument
             android:name="position"
             app:argType="integer" />
@@ -502,7 +502,7 @@
     </fragment>
     <fragment
         android:id="@+id/provideNameFragment"
-        android:name="com.example.challapp.ui.login.providename.ProvideNameFragment"
+        android:name="com.challengerdaily.challenge.ui.login.providename.ProvideNameFragment"
         android:label="fragment_provide_name"
         tools:layout="@layout/fragment_provide_name" >
 
@@ -521,7 +521,7 @@
     </fragment>
     <fragment
         android:id="@+id/termsOfServiceFragment"
-        android:name="com.example.challapp.ui.login.register.TermsOfServiceFragment"
+        android:name="com.challengerdaily.challenge.ui.login.register.TermsOfServiceFragment"
         android:label="fragment_terms_of_service"
         tools:layout="@layout/fragment_terms_of_service" >
         <action
@@ -536,7 +536,7 @@
     </fragment>
     <fragment
         android:id="@+id/privacyPolicyFragment"
-        android:name="com.example.challapp.ui.login.register.PrivacyPolicyFragment"
+        android:name="com.challengerdaily.challenge.ui.login.register.PrivacyPolicyFragment"
         android:label="fragment_privacy_policy"
         tools:layout="@layout/fragment_privacy_policy" >
         <action
@@ -551,7 +551,7 @@
     </fragment>
     <fragment
         android:id="@+id/premiumFragment"
-        android:name="com.example.challapp.ui.feed.premium.PremiumFragment"
+        android:name="com.challengerdaily.challenge.ui.feed.premium.PremiumFragment"
         android:label="fragment_premium"
         tools:layout="@layout/fragment_premium" >
         <action
