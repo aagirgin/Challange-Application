@@ -260,7 +260,7 @@
                     android:layout_marginStart="20dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="20dp"
-                    android:layout_marginBottom="80dp"
+                    android:layout_marginBottom="95dp"
                     android:backgroundTint="#E1F2F4"
                     android:elevation="20dp"
                     android:shadowColor="#000000"

@@ -15,7 +15,7 @@ import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class ChallangeFragment : Fragment() {
-    private lateinit var binding:FragmentChallangeBinding
+    private lateinit var binding: FragmentChallangeBinding
     private val challangeViewModel: ChallangeViewModel by viewModels()
 
     override fun onCreateView(
