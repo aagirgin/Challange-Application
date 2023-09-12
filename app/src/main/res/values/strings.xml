@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ChallApp</string>
+    <string name="app_name">Challenger Daily</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="log_in_now">Log In Now</string>
@@ -104,7 +104,6 @@
     <string name="navigate_arrow">Navigate Arrow</string>
     <string name="inviteKey_start">\@</string>
     <string name="group_feed">Group Feed</string>
-    <string name="see_this_group_s_information">See This Group\'s Information</string>
     <string name="group_users_completed_challenges">Group Users Completed Challenges</string>
     <string name="navigate_group_info">Navigate Group Info</string>
     <string name="add_photo">Add Photo</string>
@@ -149,7 +148,6 @@
     <string name="google_icon">Google Icon</string>
     <string name="sign_up_with_google">Sign up with Google</string>
     <string name="successful_register">Registration successful.</string>
-    <string name="default_web_client_id">546035071552-rjrhvc5nujqpdu43nhdjamtttt0arvh4.apps.googleusercontent.com</string>
     <string name="last_step">Last Step</string>
     <string name="submit">Submit</string>
     <string name="fill_name_promt">Fill the name and you are good to go.</string>
@@ -240,4 +238,5 @@ At some point, we may wish to update the app. The app is currently available on 
     <string name="delete_account_text">Are you sure you want to delete your account?\nIf you are owner of a group, the group will be disbanded!</string>
     <string name="signout_account_text">Are you sure you want to sign out your account?</string>
     <string name="deleted_user">Deleted User</string>
+    <string name="invkey_clipboard">Invite Key copied to clipboard</string>
 </resources>

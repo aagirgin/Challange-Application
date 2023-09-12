@@ -1,20 +1,29 @@
 {
   "project_info": {
     "project_number": "546035071552",
+    "firebase_url": "https://challapp-74aaa-default-rtdb.europe-west1.firebasedatabase.app",
     "project_id": "challapp-74aaa",
     "storage_bucket": "challapp-74aaa.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:546035071552:android:3e165178b770c645007da5",
+        "mobilesdk_app_id": "1:546035071552:android:bccd9511d3e65256007da5",
         "android_client_info": {
-          "package_name": "com.example.challapp"
+          "package_name": "com.challengerdaily.challenge"
         }
       },
       "oauth_client": [
         {
-          "client_id": "546035071552-rv5rt5t98tg93ehk4p44pkmss8icaeq2.apps.googleusercontent.com",
+          "client_id": "546035071552-1m8sfa8qqu40q3bifmd2vvrbqvc3edd2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.challengerdaily.challenge",
+            "certificate_hash": "59c666cf6b1df2f4160d95d1a1071d0957a99ef9"
+          }
+        },
+        {
+          "client_id": "546035071552-rjrhvc5nujqpdu43nhdjamtttt0arvh4.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
@@ -27,7 +36,7 @@
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "546035071552-rv5rt5t98tg93ehk4p44pkmss8icaeq2.apps.googleusercontent.com",
+              "client_id": "546035071552-rjrhvc5nujqpdu43nhdjamtttt0arvh4.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
